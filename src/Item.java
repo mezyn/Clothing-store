@@ -26,6 +26,7 @@ public class Item {
                 case 5 : System.out.println("6");
                 case 6 : System.out.println("7");
                 default : System.out.println("Please enter a valid option");
+                 break;
                 }
             } while (counter >= 5) ;
         itemMenu.close();

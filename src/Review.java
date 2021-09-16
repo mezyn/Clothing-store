@@ -25,16 +25,27 @@ public class Review {
 
             switch (option) {
                 case 0 : System.out.println("Option 1");
+                    break;
                 case 1 : System.out.println("Option 2");
+                    break;
                 case 2 : System.out.println("Option 3");
+                    break;
                 case 3 : System.out.println("Option 4");
+                    break;
                 case 4 : System.out.println("Option 5");
+                    break;
                 case 5 : System.out.println("Option 6");
+                    break;
                 case 6 : System.out.println("Option 7");
+                    break;
                 case 7 : System.out.println("Option 8");
+                    break;
                 case 8 : System.out.println("Option 9");
+                    break;
                 case 9 : System.out.println("Option 10");
+                    break;
                 default : System.out.println("Please enter a valid option");
+                    break;
             }
         } while (counter >= 5) ;
         ReviewMenu.close();
