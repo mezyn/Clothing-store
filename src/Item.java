@@ -1,22 +1,27 @@
 import java.util.Scanner;
-//do you see this
+
 public class Item {
     static void itemOption() {
-        Scanner itemMenu = new Scanner(System.in);
 
-        System.out.println("Item options menu: \n" +
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Item options menu:\n" +
                 "0. Return to Main Menu.\n" +
                 "1. Create an Item.\n" +
                 "2. Remove an Item.\n" +
                 "3. Print all registered Items.\n" +
                 "4. Buy an Item.\n" +
                 "5. Update an item’s name.\n" +
-                "6. Update an item’s price.\n" +
-                "Type a option");
+                "6. Update an item’s price.\n\n" +
+                "Type an option number: ");
 
-        int counter = 0;
-        do {
-            int option = itemMenu.nextInt();
+        int option = scanner.nextInt();
+
+        while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+
+            System.out.println("Type an option number between 0 and 6: ");
+            option = scanner.nextInt();
+        }
 
             switch (option) {
                 case 0 : System.out.println("1");
@@ -34,11 +39,9 @@ public class Item {
                     break;
                 case 6 : System.out.println("7");
                     break;
-                default : System.out.println("Please enter a valid option");
-                    break;
                 }
-            } while (counter >= 5) ;
-        itemMenu.close();
+
+        scanner.close();
     }
 
 }

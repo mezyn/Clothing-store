@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class MainMenu {
     public static void main(String[] args) {
 
-        Scanner OptionScan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println(
                 "Main Menu: Please choose among the options below. \n\n" +
@@ -11,14 +11,14 @@ public class MainMenu {
                         "1. Open Item options.\n" +
                         "2. Open Review options.\n" +
                         "3. Open Transaction History options.\n\n" +
-                        "Type an option number:");
+                        "Type an option number: ");
 
-        int option = OptionScan.nextInt();
+        int option = scanner.nextInt();
 
         while (option != 0 && option != 1 && option != 2 && option != 3) {
 
-            System.out.println("Type an option number between 0 and 3.\nType any option number: ");
-            option = OptionScan.nextInt();
+            System.out.println("Type an option number between 0 and 3: ");
+            option = scanner.nextInt();
         }
 
             switch (option) {
@@ -32,12 +32,11 @@ public class MainMenu {
                     Review.ReviewMenu();
                     break;
                 case 3:
-                    System.out.println("Transaction History");
+                    TransactionHistory.transactionHistoryMenu();
                     break;
-
             }
 
-            OptionScan.close();
+            scanner.close();
 
         }
     }
