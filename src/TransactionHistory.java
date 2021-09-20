@@ -22,7 +22,7 @@ public class TransactionHistory {
 
         while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option != 7 && option != 8) {
 
-            System.out.println("Type an option number between 0 and 8: ");
+            System.out.println("Invalid menu option. Please type another option");
             option = scanner.nextInt();
         }
 

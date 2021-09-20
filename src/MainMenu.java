@@ -17,14 +17,14 @@ public class MainMenu {
 
         while (option != 0 && option != 1 && option != 2 && option != 3) {
 
-            System.out.println("Type an alternative between 0 and 3.\nType any option number: ");
+            System.out.println("Invalid menu option. Please type another option"); // Changed the text to match assignment / Carl
             option = OptionScan.nextInt();
         }
 
             switch (option) {
                 case 0:
                     System.out.println("Closed");
-                    break;// create method
+                    break;// create method, need help from TA with this / Carl
                 case 1:
                     Item.itemOption();
                     break;
@@ -32,8 +32,9 @@ public class MainMenu {
                     Review.ReviewMenu();
                     break;
                 case 3:
-                    System.out.println("Transaction History");
-                    break;
+                    TransactionHistory.transactionHistoryMenu();
+                    break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
+
 
             }
 
