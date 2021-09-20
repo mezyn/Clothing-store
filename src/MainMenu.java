@@ -22,13 +22,17 @@ public class MainMenu {
         }
 
             switch (option) {
-                case 0: System.out.println("Closed");
+                case 0:
+                    System.out.println("Closed");
                     break;// create method
-                case 1: Item.itemOption();
+                case 1:
+                    Item.itemOption();
                     break;
-                case 2: Review.ReviewMenu();
+                case 2:
+                    Review.ReviewMenu();
                     break;
-                case 3: System.out.println("Transaction History");
+                case 3:
+                    System.out.println("Transaction History");
                     break;
 
             }
