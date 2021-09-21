@@ -24,7 +24,7 @@ public class Item {
         }
 
             switch (option) {
-                case 0 : System.out.println("1");
+                case 0 : Menu.MenuMain();
                         break;
                 // all println below are temporary.
                 case 1 : System.out.println("2");

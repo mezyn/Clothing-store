@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class MainMenu {
+
     public static void main(String[] args) {
 
         Scanner OptionScan = new Scanner(System.in);
@@ -15,7 +16,7 @@ public class MainMenu {
 
         int option = OptionScan.nextInt();
 
-        while (option != 0 && option != 1 && option != 2 && option != 3) {
+        while (option != 0 && option != 1 && option != 2 && option != 3) { // I think we can replace it with? = (option <0) || (option > 3) // Carl
 
             System.out.println("Invalid menu option. Please type another option"); // Changed the text to match assignment / Carl
             option = OptionScan.nextInt();

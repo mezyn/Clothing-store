@@ -27,7 +27,7 @@ public class TransactionHistory {
         }
 
         switch (option) {
-            case 0 : System.out.println("Option 1");
+            case 0 : Menu.MenuMain();
                 break;
             case 1 : System.out.println("Option 2");
                 break;
