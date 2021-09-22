@@ -27,6 +27,7 @@ public class Item {
                 case 0 : System.out.println("1");
                         break;
                 // all println below are temporary.
+                // case 1: User story 2.1 - create items
                 case 1 : System.out.println("2");
                     break;
                 case 2 : System.out.println("3");
