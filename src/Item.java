@@ -1,11 +1,9 @@
-import java.util.Scanner;
 
 public class Item {
     static void itemOption() {
 
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Item options menu:\n" +
+        int option = UserInput.readInt("Item options menu:\n" +
                 "0. Return to Main Menu.\n" +
                 "1. Create an Item.\n" +
                 "2. Remove an Item.\n" +
@@ -15,12 +13,9 @@ public class Item {
                 "6. Update an item’s price.\n\n" +
                 "Type an option number: ");
 
-        int option = scanner.nextInt();
-
         while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
 
-            System.out.println("Invalid menu option. Please type another option");
-            option = scanner.nextInt();
+            option = UserInput.readInt("Invalid menu option. Please type another option");
         }
 
             switch (option) {
@@ -42,7 +37,7 @@ public class Item {
                     break;
                 }
 
-        scanner.close();
+        UserInput.scanner.close();
     }
 
 }

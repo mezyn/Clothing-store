@@ -1,11 +1,8 @@
-import java.util.Scanner;
 
 public class Review {
     static void ReviewMenu() {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Reviews options menu:\n" +
+        int option = UserInput.readInt("Reviews options menu:\n" +
                 "0. Return to Main Menu.\n" +
                 "1. Create a review for an Item.\n" +
                 "2. Print a specific review of an Item.\n" +
@@ -19,12 +16,9 @@ public class Review {
                 "10. Print item(s) with worst mean review grade.\n\n" +
                 "Type an option number: ");
 
-        int option = scanner.nextInt();
-
         while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option != 7 && option != 8 && option != 9 && option != 10) {
 
-            System.out.println("Invalid menu option. Please type another option");
-            option = scanner.nextInt();
+            option = UserInput.readInt("Invalid menu option. Please type another option");
         }
 
             switch (option) {
@@ -51,7 +45,7 @@ public class Review {
                 default : System.out.println("Please enter a valid option");
                     break;
             }
-        scanner.close();
+        UserInput.scanner.close();
     }
 
 }
