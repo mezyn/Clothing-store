@@ -15,9 +15,9 @@ public class MainMenu {
 
         int option = OptionScan.nextInt();
 
-        while (option != 0 && option != 1 && option != 2 && option != 3) { // I think we can replace it with? = (option <0) || (option > 3) // Carl
+        while (option < 0 || option > 3) {
 
-            System.out.println("Invalid menu option. Please type another option"); // Changed the text to match assignment / Carl
+            System.out.println("Invalid menu option. Please type another option");
             option = OptionScan.nextInt();
         }
 

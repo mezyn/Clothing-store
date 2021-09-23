@@ -17,7 +17,7 @@ public class Item {
 
         int option = scanner.nextInt();
 
-        while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+        while (option < 0 || option > 6) {
 
             System.out.println("Invalid menu option. Please type another option");
             option = scanner.nextInt();
