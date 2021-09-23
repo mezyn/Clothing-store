@@ -2,7 +2,7 @@ import java.util.Scanner;
 // THIS IS MAIN
 public class MainMenu {
 
-    public static void MainMenu(){
+    public static void MainMenuPage(){
         Scanner OptionScan = new Scanner(System.in);
 
         System.out.println(
@@ -46,7 +46,7 @@ public class MainMenu {
 
     public static void main(String[] args) {
 
-        MainMenu();
+        MainMenuPage();
 
 
         }

@@ -23,7 +23,7 @@ public class Review {
         }
 
             switch (option) {
-                case 0 : Menu.MenuMain();
+                case 0 : MainMenu.MainMenuPage();
                     break;
                 case 1 : System.out.println("Option 2");
                     break;
