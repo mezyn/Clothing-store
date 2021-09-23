@@ -1,9 +1,8 @@
 import java.util.Scanner;
-
+// THIS IS MAIN
 public class MainMenu {
 
-    public static void main(String[] args) {
-
+    public static void MainMenu(){
         Scanner OptionScan = new Scanner(System.in);
 
         System.out.println(
@@ -22,25 +21,33 @@ public class MainMenu {
             option = OptionScan.nextInt();
         }
 
-            switch (option) {
-                case 0:
-                    System.out.println("Closed");
-                    break;// create method, need help from TA with this / Carl
-                case 1:
-                    Item.itemOption();
-                    break;
-                case 2:
-                    Review.ReviewMenu();
-                    break;
-                case 3:
-                    TransactionHistory.transactionHistoryMenu();
-                    break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
+        switch (option) {
+            case 0:
+                System.out.println("Closed");
+                break;// create method, need help from TA with this / Carl
+            case 1:
+                Item.itemOption();
+                break;
+            case 2:
+                Review.ReviewMenu();
+                break;
+            case 3:
+                TransactionHistory.transactionHistoryMenu();
+                break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
 
 
 
-            }
+        }
 
-            OptionScan.close();
+        OptionScan.close();
+
+
+    }
+
+    public static void main(String[] args) {
+
+        MainMenu();
+
 
         }
     }
