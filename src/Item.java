@@ -13,13 +13,16 @@ public class Item {
                 "6. Update an item’s price.\n\n" +
                 "Type an option number: ");
 
-        while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6) {
+        while (option < 0 || option >6)  {
 
             option = UserInput.readInt("Invalid menu option. Please type another option");
         }
 
             switch (option) {
-                case 0 : System.out.println("1");
+                case 0 :
+                    System.out.println("1");
+
+                    MainMenu.mainMenu();
                         break;
                 // all println below are temporary.
                 // case 1: User story 2.1 - create items
