@@ -1,11 +1,8 @@
-import java.util.Scanner;
 
 public class TransactionHistory {
     static void transactionHistoryMenu() {
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Transaction History options menu:\n" +
+        int option = UserInput.readInt("Transaction History options menu:\n" +
                 "0. Return to Main Menu.\n" +
                 "1. Print total profit from all item purchases\n" +
                 "2. Print total units sold from all item purchases\n" +
@@ -15,15 +12,11 @@ public class TransactionHistory {
                 "6. Print the number of units sold of a specific item.\n" +
                 "7. Print all transactions of a specific item.\n" +
                 "8. Print item with highest profit.\n\n" +
-                "Type an option number:\n"
-        );
-
-        int option = scanner.nextInt();
+                "Type an option number:\n");
 
         while (option != 0 && option != 1 && option != 2 && option != 3 && option != 4 && option != 5 && option != 6 && option != 7 && option != 8) {
 
-            System.out.println("Invalid menu option. Please type another option");
-            option = scanner.nextInt();
+            option = UserInput.readInt("Invalid menu option. Please type another option");
         }
 
         switch (option) {
@@ -46,7 +39,7 @@ public class TransactionHistory {
             case 8 : System.out.println("Option 9");
                 break;
         }
-        scanner.close();
+        UserInput.scanner.close();
     }
 
 }
