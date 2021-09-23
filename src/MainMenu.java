@@ -37,6 +37,7 @@ public class MainMenu {
                     break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
 
 
+
             }
 
             OptionScan.close();
