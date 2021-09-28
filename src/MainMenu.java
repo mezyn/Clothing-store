@@ -11,7 +11,6 @@ public class MainMenu {
                         "3. Open Transaction History Options.\n\n" +
                         "Type any Option Number:");
 
-
         while (option < 0 || option > 3) {
 
             option = UserInput.readInt("Invalid menu option. Please type another option");
@@ -22,7 +21,7 @@ public class MainMenu {
                 System.out.println("Closed");
                 break;// create method, need help from TA with this / Carl
             case 1:
-                Item.itemOption();
+                ItemMenu.itemOption();
                 break;
             case 2:
                 Review.ReviewMenu();
@@ -31,19 +30,15 @@ public class MainMenu {
                 TransactionHistory.transactionHistoryMenu();
                 break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
 
-
-
         }
 
         UserInput.scanner.close();
-
 
     }
 
     public static void main(String[] args) {
 
         MainMenuPage();
-
 
         }
     }

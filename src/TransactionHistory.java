@@ -39,6 +39,7 @@ public class TransactionHistory {
             case 8 : System.out.println("Option 9");
                 break;
         }
+
         UserInput.scanner.close();
     }
 
