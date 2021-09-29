@@ -25,7 +25,7 @@ public class Review {
             switch (option) {
                 case 0 : MainMenu.MainMenuPage();
                     break;
-                case 1 : CreateReview.CreateReview();
+                case 1 : CreateReview.reviewer();
                     break;
                 case 2 : System.out.println("Option 3");
                     break;
