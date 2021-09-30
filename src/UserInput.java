@@ -8,7 +8,7 @@ public class UserInput {
         System.out.println(message);
         double doubleValue = scanner.nextDouble();
 
-        while (doubleValue < 0 || doubleValue == 0) {
+        while (doubleValue < 0 || doubleValue == 0) { // think we need to move this "while" to the file where it's going to be used.
 
             System.out.println("Invalid data for item.");
             System.out.println(message);

@@ -20,6 +20,7 @@ public class CreateReview { // we need to import the arraylist from item to be a
             String Id = UserInput.readLine("ID number: "); // I guess here we want to add an attribute for the ID: X ? ASK TA
             String notation = UserInput.readLine("What did you like or dislike about this item?: ");
             double ranking = UserInput.readDouble("Enter a grade: ");
+            // reason why we can enter grade over 5 is becuse the scanner has while statement
 
 
                 CreateReview newReview = new CreateReview(Id, notation, ranking);
@@ -28,7 +29,7 @@ public class CreateReview { // we need to import the arraylist from item to be a
 
                 System.out.println("ID: " + Id + " Comment: " + notation + " Grade: " + ranking);
 
-                System.out.println("Returning to Item Menu....");
+                System.out.println("Returning to Review Menu....");
                 Review.ReviewMenu();
 
                 return newReview;
