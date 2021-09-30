@@ -5,6 +5,7 @@ public class ItemScanner {
     public static Scanner scanner = new Scanner(System.in);
 
     public static double readDouble(String message) {
+
         System.out.println(message);
         double doubleValue = scanner.nextDouble();
 

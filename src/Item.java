@@ -33,7 +33,7 @@ public class Item {
         }
 
         String newName = ItemScanner.readLine("Type a new name for the item: ");{
-        //Working on it
+        //Working on it, should fix
 
         }
 

@@ -15,7 +15,7 @@ public class ItemMenu {
         System.out.println(name + " " + ID + " was registered successfully.");
 /*
         itemList = new ArrayList<Item>();
-        itemList.add(newItem);
+        itemList.add(newItem); //fixing now
 */
         //Question to TA: where should we close the scanner?
 
