@@ -13,6 +13,7 @@ public class UserInput {
         return doubleValue;
     }
 
+
     public static int readInt(String message) {
         System.out.println(message);
         int intValue = scanner.nextInt();

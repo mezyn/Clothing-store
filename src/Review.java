@@ -8,5 +8,4 @@ public Review(int r, String c){
     this.comment= c;
 }
 
-
 }

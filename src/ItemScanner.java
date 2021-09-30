@@ -39,5 +39,4 @@ public class ItemScanner {
         }
         return input;
     }
-
 }
