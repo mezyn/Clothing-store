@@ -6,23 +6,18 @@ public class Item {
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
-     //for review
-     private double grade;
-     private String comment;
+    ArrayList<Review> reviews = new ArrayList<Review>();
 
-     //private ArrayList<Item> itemList = new ArrayList<Item>();
 
      //where should I put this?
 
 
     //constructor
-    public Item(String ID, String name, double pricePerUnit, double grade, String comment) {
+    public Item(String ID, String name, double pricePerUnit) {
 
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
-        this.grade = grade;
-        this.comment = comment;
 
     }
 
@@ -66,14 +61,17 @@ public class Item {
     public void setItemPricePerUnit(double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
-
-    public double getGrade(){
-        return this.grade;
-    }
-
-    public String getComment () {
-        return this.comment;
-    }
-
 }
+
+//+toString
+/*
+1. Main menu user interface -> select options, enter values for attributes
+2. Facade -> middle man between BL and controller
+3. Controller: all methods
+4. Item, Review, Trancation: attributes, constructors. getters, setters, toString.
+
+*/
+
+
+
 

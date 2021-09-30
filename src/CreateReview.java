@@ -30,7 +30,7 @@ public class CreateReview { // we need to import the arraylist from item to be a
                 System.out.println("ID: " + Id + " Comment: " + notation + " Grade: " + ranking);
 
                 System.out.println("Returning to Review Menu....");
-                Review.ReviewMenu();
+                //Review.ReviewMenu();
 
                 return newReview;
 
