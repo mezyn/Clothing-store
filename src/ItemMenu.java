@@ -46,7 +46,7 @@ public class ItemMenu {
             // all println below are temporary.
             case 1 : //create an item
                 ItemMenu.createItem();
-                itemOption();
+                itemOption(); //can be moved at the end of createItem()
                 break;
             case 2 : System.out.println("3");
                 break;
