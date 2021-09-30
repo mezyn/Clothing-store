@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class Item {
 
     //attributes of Item class
-     private final String ID; //I'll put this as String for now
+     private String ID; //I'll put this as String for now + only have getter
      private String name;
      private double pricePerUnit;
+
+     private ArrayList<Item> itemList; //should be initialized somewhere
 
 
     //constructor
@@ -17,45 +19,29 @@ public class Item {
 
     }
 
-    //ArrayList for items
-    //Declare in the attribute, initialize in the method
-    public static ArrayList<Item> itemList = new ArrayList<>();
-
-
-    //method for creating items
-    public static void createItem(){
-
-        String ID = UserInput.readLine("Type ID of item: ");
-        String name = UserInput.readLine("Type name of item: ");
-        double pricePerUnit = UserInput.readDouble("Type unit price of item: ");
-
-        Item newItem = new Item(ID, name, pricePerUnit);
-        System.out.println(name + " " + ID + " was registered successfully.");
-
-        itemList.add(newItem);
-
-        //Question to TA: where should we close the scanner?
-
-    }
-
+/*
     public void modifyItem() {
 
-        String itemToModify = UserInput.readLine("Type ID to change item name: ");
+        String itemToModify = ItemScanner.readLine("Type ID to change item name: ");
 
         while (!itemList.contains(itemToModify)) {
 
             System.out.println("There is no item called " + itemToModify + " in the list.");
         }
 
-        String newName = UserInput.readLine("Type a new name for the item: ");
+        String newName = ItemScanner.readLine("Type a new name for the item: ");{
         //Working on it
 
         }
 
+    }*/
 
 
 
 // Getters and setters
+
+    public String getID() { return ID;}
+
     public String getItemName() {
         return name;
     }

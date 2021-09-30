@@ -1,7 +1,25 @@
 //System.lineSeparator
 
+import java.util.ArrayList;
+
 public class ItemMenu {
 
+    //method for creating items
+    public static void createItem(){
+
+        String ID = ItemScanner.readLine("Type ID of item: ");
+        String name = ItemScanner.readLine("Type name of item: ");
+        double pricePerUnit = ItemScanner.readDouble("Type unit price of item: ");
+
+        Item newItem = new Item(ID, name, pricePerUnit);
+        System.out.println(name + " " + ID + " was registered successfully.");
+/*
+        itemList = new ArrayList<Item>();
+        itemList.add(newItem);
+*/
+        //Question to TA: where should we close the scanner?
+
+    }
 
     //item menu
     public static void itemOption() {
@@ -26,7 +44,7 @@ public class ItemMenu {
                 break;
             // all println below are temporary.
             case 1 : //create an item
-                Item.createItem();
+                ItemMenu.createItem();
                 itemOption();
                 break;
             case 2 : System.out.println("3");
