@@ -10,12 +10,15 @@ public class Item {
      private ArrayList<Item> itemList; //should be initialized somewhere
 
 
+
+
     //constructor
     public Item(String ID, String name, double pricePerUnit) {
 
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
+
 
     }
 
