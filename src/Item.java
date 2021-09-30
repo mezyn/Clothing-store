@@ -3,13 +3,11 @@ import java.util.ArrayList;
 public class Item {
 
     //attributes of Item class
-     private String ID; //I'll put this as String for now + only have getter
+     private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
 
-     private ArrayList<Item> itemList; //should be initialized somewhere
-
-
+     private ArrayList<Item> itemList; //where should I put this?
 
 
     //constructor
@@ -18,7 +16,6 @@ public class Item {
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
-
 
     }
 

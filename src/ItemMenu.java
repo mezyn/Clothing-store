@@ -1,4 +1,4 @@
-//System.lineSeparator
+//System.lineSeparator() - how to use?
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ public class ItemMenu {
         double pricePerUnit = ItemScanner.readDouble("Type unit price of item: ");
 
         Item newItem = new Item(ID, name, pricePerUnit);
+
         System.out.println(name + " " + ID + " was registered successfully.");
 /*
         itemList = new ArrayList<Item>();
