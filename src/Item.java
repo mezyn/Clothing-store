@@ -6,16 +6,23 @@ public class Item {
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
+     //for review
+     private double grade;
+     private String comment;
 
-     private ArrayList<Item> itemList; //where should I put this?
+     //private ArrayList<Item> itemList = new ArrayList<Item>();
+
+     //where should I put this?
 
 
     //constructor
-    public Item(String ID, String name, double pricePerUnit) {
+    public Item(String ID, String name, double pricePerUnit, double grade, String comment) {
 
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
+        this.grade = grade;
+        this.comment = comment;
 
     }
 
@@ -40,25 +47,33 @@ public class Item {
 
 // Getters and setters
 
-    public String getID() { return ID;}
+    public String getID() {
+        return ID;
+    }
 
     public String getItemName() {
         return name;
-    }
-
-    public double getItemPricePerUnit() {
-        return pricePerUnit;
     }
 
     public void setItemName(String name) {
         this.name = name;
     }
 
+    public double getItemPricePerUnit() {
+        return pricePerUnit;
+    }
+
     public void setItemPricePerUnit(double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
 
+    public double getGrade(){
+        return this.grade;
+    }
 
+    public String getComment () {
+        return this.comment;
+    }
 
 }
 

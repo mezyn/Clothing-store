@@ -10,14 +10,16 @@ public class ItemMenu {
         String ID = ItemScanner.readLine("Type ID of item: ");
         String name = ItemScanner.readLine("Type name of item: ");
         double pricePerUnit = ItemScanner.readDouble("Type unit price of item: ");
+        double grade = 0.0;
+        String comment = " ";
 
-        Item newItem = new Item(ID, name, pricePerUnit);
+        Item newItem = new Item(ID, name, pricePerUnit, grade, comment);
 
         System.out.println(name + " " + ID + " was registered successfully.");
-/*
-        itemList = new ArrayList<Item>();
-        itemList.add(newItem); //fixing now
-*/
+
+
+       // Item.add(newItem); //fixing now
+
         //Question to TA: where should we close the scanner?
 
     }
