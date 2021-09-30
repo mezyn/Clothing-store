@@ -1,5 +1,5 @@
 
-public class MainMenu {
+public class MenuClass {
 
     //item menu
 
@@ -12,10 +12,26 @@ public class MainMenu {
         while(obj.checkForDuplicates(ID)== true) ID = ItemScanner.readLine("Type ID of item: ");
         String name = ItemScanner.readLine("Type name of item: ");
         double pricePerUnit = ItemScanner.readDouble("Type unit price of item: ");
-        double grade = 0.0;
-        String comment = " ";
 
         obj.createItem(ID,name,pricePerUnit);
+    }
+    public void createReview() {
+
+        System.out.println("To create a review for a item please enter ID of the item:");
+
+        String ID = UserInput.readLine("ID number: "); // I guess here we want to add an attribute for the ID: X ? ASK TA
+        String comment = UserInput.readLine("What did you like or dislike about this item?: ");
+        double grade = UserInput.readDouble("Enter a grade: ");
+        // reason why we can enter grade over 5 is becuse the scanner has while statement
+
+        obj.createReview(ID, comment, grade);
+
+        System.out.println("Your item review was registered successfully.");
+
+        //System.out.println("ID: " + ID + " Comment: " + comment + " Grade: " + grade);
+
+        //System.out.println("Returning to Review Menu....");
+
     }
     public void itemOption() {
 
@@ -35,7 +51,7 @@ public class MainMenu {
         }
 
         switch (option) {
-            case 0 : MainMenuPage();
+            case 0 : MainMenu();
                 break;
             // all println below are temporary.
             case 1 : //create an item
@@ -82,9 +98,9 @@ public class MainMenu {
         }
 
         switch (option) {
-            case 0 : MainMenuPage();
+            case 0 : MainMenu();
                 break;
-            case 1 : CreateReview.reviewer();
+            case 1 : createReview();
                 break;
             case 2 : System.out.println("Option 3");
                 break;
@@ -127,7 +143,7 @@ public class MainMenu {
         }
 
         switch (option) {
-            case 0 : MainMenuPage();
+            case 0 : MainMenu();
                 break;
             case 1 : System.out.println("Option 2");
                 break;
@@ -150,7 +166,7 @@ public class MainMenu {
         UserInput.scanner.close();
     }
 
-    public void MainMenuPage(){
+    public void MainMenu(){
 
         int option = UserInput.readInt(
                 "Main Menu: Please chose among the options below \n" +
@@ -187,8 +203,8 @@ public class MainMenu {
 
     public static void main(String[] args) {
 
-        MainMenu mainmenu = new MainMenu();
-        mainmenu.MainMenuPage();
+        MenuClass mainmenu = new MenuClass();
+        mainmenu.MainMenu();
 
         }
     }
