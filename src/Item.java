@@ -1,10 +1,13 @@
+import java.util.ArrayList;
 
 public class Item {
 
     //attributes of Item class
-    private String ID; //I'll put this as String for now /Mijin
-    String name;
-    double pricePerUnit;
+     private String ID; //I'll put this as String for now + only have getter
+     private String name;
+     private double pricePerUnit;
+
+     private ArrayList<Item> itemList; //should be initialized somewhere
 
 
 
@@ -19,22 +22,46 @@ public class Item {
 
     }
 
-    //method for creating items
-    public static Item createItem(){
+/*
+    public void modifyItem() {
 
-        String ID = UserInput.readLine("Type ID of item: ");
-        String name = UserInput.readLine("Type name of item: ");
-        double pricePerUnit = UserInput.readDouble("Type unit price of item: ");
+        String itemToModify = ItemScanner.readLine("Type ID to change item name: ");
 
-        Item newItem = new Item(ID, name, pricePerUnit);
-        System.out.println(name + " " + ID + " was registered successfully.");
+        while (!itemList.contains(itemToModify)) {
 
-        return newItem;
+            System.out.println("There is no item called " + itemToModify + " in the list.");
+        }
 
-        //Question to TA: where should we close the scanner?
+        String newName = ItemScanner.readLine("Type a new name for the item: ");{
+        //Working on it, should fix
+
+        }
+
+    }*/
 
 
+
+// Getters and setters
+
+    public String getID() { return ID;}
+
+    public String getItemName() {
+        return name;
     }
+
+    public double getItemPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setItemName(String name) {
+        this.name = name;
+    }
+
+    public void setItemPricePerUnit(double pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
+
 
 }
 
