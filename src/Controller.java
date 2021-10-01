@@ -14,13 +14,14 @@ public class Controller {
         return false;
     }
 
-    public void createItem(String id, String name, double price){
-        Item item = new Item(id,name,price);
+    public void createItem(String ID, String name, double pricePerUnit){
+        Item item = new Item(ID,name,pricePerUnit);
         itemList.add(item);
 }
 
 
     private ArrayList<Review> reviewList = new ArrayList<Review>();
+
 
     public void createReview(String ID, String comment, double grade) {
         Review review = new Review(ID, comment, grade);

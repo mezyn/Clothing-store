@@ -6,8 +6,8 @@ public class Item {
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
-    ArrayList<Review> reviews = new ArrayList<Review>();
 
+     //private ArrayList<Item> itemList = new ArrayList<Item>();
 
      //where should I put this?
 
@@ -39,6 +39,7 @@ public class Item {
     }*/
 
 
+
 // Getters and setters
 
     public String getID() {
@@ -60,17 +61,6 @@ public class Item {
     public void setItemPricePerUnit(double pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
     }
+
 }
-
-//+toString
-/*
-1. Main menu user interface -> select options, enter values for attributes
-2. Facade -> middle man between BL and controller
-3. Controller: all methods
-4. Item, Review, Trancation: attributes, constructors. getters, setters, toString.
-
-*/
-
-
-
 

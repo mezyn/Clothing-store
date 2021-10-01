@@ -19,16 +19,16 @@ public class MenuClass {
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
-        String ID = UserInput.readLine("ID number: "); // I guess here we want to add an attribute for the ID: X ? ASK TA
+        String ID = UserInput.readLine("ID number: ");
         String comment = UserInput.readLine("What did you like or dislike about this item?: ");
         double grade = UserInput.readDouble("Enter a grade: ");
-        // reason why we can enter grade over 5 is becuse the scanner has while statement
+
 
         obj.createReview(ID, comment, grade);
 
         System.out.println("Your item review was registered successfully.");
 
-        //System.out.println("ID: " + ID + " Comment: " + comment + " Grade: " + grade);
+        // System.out.println("ID: " + ID + " Comment: " + comment + " Grade: " + grade);
 
         //System.out.println("Returning to Review Menu....");
 

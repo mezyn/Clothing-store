@@ -19,9 +19,4 @@ public class PrintReview {
     //
 
 
-
-
 }
-
-//Print a specific review of an Item
-//If we decide that id = i in arrayList[i] then we write a method that gets the arrayList[i]

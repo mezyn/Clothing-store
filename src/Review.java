@@ -12,4 +12,24 @@ public class Review {
         this.comment= comment;
     }
 
+    public String getID() {
+
+        return ID;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setGrade(double grade) {
+        this.grade = grade;
+    }
+
+
 }
+
+
