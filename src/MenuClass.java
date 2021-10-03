@@ -26,7 +26,6 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
-
         obj.createItem(ID,name,pricePerUnit);
     }
     public void createReview() {
@@ -74,7 +73,9 @@ public class MenuClass {
                 break;
             case 2 : System.out.println("3");
                 break;
-            case 3 : System.out.println("4");
+            case 3 :
+                obj.printAllItems();
+                //itemOption();
                 break;
             case 4 : System.out.println("5");
                 break;

@@ -17,7 +17,12 @@ public class Item {
 
     }
 
-/*
+    @Override
+    public String toString() {
+        return  "<" + this.ID + ">: <" + this.name + ">. <" + this.pricePerUnit + "> SEK.";
+    }
+
+    /*
     public void modifyItem() {
 
         String itemToModify = ItemScanner.readLine("Type ID to change item name: ");
