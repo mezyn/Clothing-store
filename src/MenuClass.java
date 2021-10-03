@@ -43,6 +43,19 @@ public class MenuClass {
          foundItem.setItemName(newNameInput);
         }
 
+    public void updateItemPrice(){
+
+        String itemID = UserInput.readLine("Type current ID of the item: ");
+        Item foundItem = obj.findItem(itemID);
+        double newPriceInput = UserInput.readDouble("Type new price for the item: ");
+
+        while (newPriceInput < 0 || newPriceInput == 0) {
+            System.out.println("Invalid data for item.");
+            newPriceInput = UserInput.readDouble("Type new price for the item: ");
+        }
+        foundItem.setItemPrice(newPriceInput);
+    }
+
 
 
     public void createReview() {
@@ -101,7 +114,9 @@ public class MenuClass {
                 itemOption();
                 break;
             //6. Update an item’s price.
-            case 6 : System.out.println("7");
+            case 6 :
+                updateItemPrice();
+                itemOption();
                 break;
         }
 

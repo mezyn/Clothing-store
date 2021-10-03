@@ -56,12 +56,12 @@ public class Item {
         this.name = newNameInput;
     }
 
-    public double getItemPricePerUnit() {
+    public double getItemPrice() {
         return pricePerUnit;
     }
 
-    public void setItemPricePerUnit(double pricePerUnit) {
-        this.pricePerUnit = pricePerUnit;
+    public void setItemPrice(double newPriceInput) {
+        this.pricePerUnit = newPriceInput;
     }
 
 }
