@@ -27,8 +27,10 @@ public class MenuClass {
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
         obj.createItem(ID,name,pricePerUnit);
+
     }
-    public void createReview() {
+
+     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
@@ -73,9 +75,7 @@ public class MenuClass {
                 break;
             case 2 : System.out.println("3");
                 break;
-            case 3 :
-                obj.printAllItems();
-                //itemOption();
+            case 3 ://itemOption();
                 break;
             case 4 : System.out.println("5");
                 break;
