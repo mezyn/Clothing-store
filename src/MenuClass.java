@@ -9,7 +9,7 @@ public class MenuClass {
     public void createItem(){
 
         String ID = UserInput.readLine("Type ID for item: ");
-        while(obj.isDuplicate(ID)) {
+        while(obj.containsItem(ID)) {
             ID = UserInput.readLine("The ID is already taken." + System.lineSeparator() + "Type another ID for item: ");
         }
         while (ID.isBlank()) {
@@ -29,34 +29,58 @@ public class MenuClass {
         obj.createItem(ID,name,pricePerUnit);
     }
 
-    //2.3 - Update item name and price
-    public void updateItemName(){
 
-        String itemID = UserInput.readLine("Type current ID of the item: ");
-        Item foundItem = obj.findItem(itemID);
+    //2.3 - Update item name and price
+    public String updateItemName() { //(String itemID, String newName)
+
+        String IDInput = UserInput.readLine("Type current ID of the item: ");
+        Item foundItem = obj.findItem(IDInput);
         String newNameInput = UserInput.readLine("Type new name for the item: ");
 
-        while (newNameInput.isBlank() || newNameInput.equals(itemID)) {
+        while (newNameInput.isBlank() || newNameInput.equals(IDInput)) {
             System.out.println("Invalid data for item.");
             newNameInput = UserInput.readLine("Type new name for the item: ");
         }
          foundItem.setItemName(newNameInput);
+        return "";
         }
 
-    public void updateItemPrice(){
 
-        String itemID = UserInput.readLine("Type current ID of the item: ");
-        Item foundItem = obj.findItem(itemID);
+    public String updateItemPrice(){ //(String itemID, double newPrice)
+
+        String IDInput = UserInput.readLine("Type current ID of the item: ");
+        Item foundItem = obj.findItem(IDInput);
         double newPriceInput = UserInput.readDouble("Type new price for the item: ");
 
         while (newPriceInput < 0 || newPriceInput == 0) {
             System.out.println("Invalid data for item.");
             newPriceInput = UserInput.readDouble("Type new price for the item: ");
         }
-        foundItem.setItemPrice(newPriceInput);
+
+        return "";
     }
 
+    //2.4-Buy items
+    public double buyItem() { //(String itemID, int amount)
 
+        double totalPrice = 0.0;
+        String IDInput = UserInput.readLine("Type ID of item you want to purchase: ");
+
+        if (obj.findItem(IDInput).equals(null)) {
+            return -1;
+
+        } else {
+            int itemAmount = UserInput.readInt("Type the amount of items you want to purchase: ");
+            double itemPrice = obj.findItem(IDInput).getItemPrice();
+
+            if (itemAmount < 4 || itemAmount == 4) {
+                totalPrice = itemPrice * itemAmount;
+            } else {
+                totalPrice = 4 * itemPrice + ((itemAmount - 4) * (itemPrice * (1.0 - 0.3)));
+            }
+            return totalPrice;
+        }
+    }
 
     public void createReview() {
 
@@ -255,3 +279,4 @@ public class MenuClass {
 
         }
     }
+

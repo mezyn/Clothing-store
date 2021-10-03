@@ -18,14 +18,14 @@ public class Controller {
                 return itemList.get(i);
             }
         }
-        return itemList.get(-1);
+        return null;
     }
 
     //Check duplicate item ID
-    public boolean isDuplicate(String userID){
+    public boolean containsItem(String itemID){
 
         for(int i = 0; i < itemList.size(); i++){
-            if(itemList.get(i).getID().equals(userID)){
+            if(itemList.get(i).getID().equals(itemID)){
                 return true;
             }
         }
@@ -33,12 +33,13 @@ public class Controller {
     }
 
     //Create a new item and add it to itemList
-    public void createItem(String ID, String name, double pricePerUnit){
-        Item item = new Item(ID,name,pricePerUnit);
+    public String createItem(String itemID, String itemName, double unitPrice){
+        Item item = new Item(itemID,itemName,unitPrice);
         itemList.add(item);
+        return "";
     }
 
-    public void printAllItems() {
+    public String printAllItems() {
 
         if (itemList.size() == 0) {
             System.out.println("No items registered yet.");
@@ -48,7 +49,7 @@ public class Controller {
                 System.out.println(item);
             }
         }
-
+        return "";
     }
 
     private ArrayList<Review> reviewList = new ArrayList<Review>();
