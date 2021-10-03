@@ -84,7 +84,6 @@ public class MenuClass {
                 break;
             // all println below are temporary.
             case 1 : //create an item
-
                 createItem();
                 itemOption(); //can be moved at the end of createItem()
                 break;
