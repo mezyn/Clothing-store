@@ -9,7 +9,7 @@ public class Review {
 
         this.ID = ID;
         this.grade = grade;
-        this.comment= comment;
+        this.comment= comment; //Should it be set as null? -M
     }
 
     public String getID() {

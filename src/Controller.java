@@ -6,7 +6,7 @@ public class Controller {
 
     public boolean checkForDuplicates(String userID){
 
-        for(int i = 0;i<itemList.size();i++){
+        for(int i = 0; i < itemList.size(); i++){
             if(itemList.get(i).getID().equals(userID)){
                 return true;
             }
@@ -18,7 +18,6 @@ public class Controller {
         Item item = new Item(ID,name,pricePerUnit);
         itemList.add(item);
 }
-
 
     private ArrayList<Review> reviewList = new ArrayList<Review>();
 

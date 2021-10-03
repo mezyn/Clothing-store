@@ -8,10 +8,24 @@ public class MenuClass {
 
     public void createItem(){
 
-        String ID = ItemScanner.readLine("Type ID of item: ");
-        while(obj.checkForDuplicates(ID)== true) ID = ItemScanner.readLine("Type ID of item: ");
-        String name = ItemScanner.readLine("Type name of item: ");
-        double pricePerUnit = ItemScanner.readDouble("Type unit price of item: ");
+        String ID = UserInput.readLine("Type ID for item: ");
+        while(obj.checkForDuplicates(ID)== true) {
+            ID = UserInput.readLine("The ID is already taken." + System.lineSeparator() + "Type another ID for item: ");
+        }
+        while (ID.isBlank()) {
+            System.out.println("Invalid data for item.");
+            ID = UserInput.readLine("Type ID for item: ");
+        }
+        String name = UserInput.readLine("Type name for item: ");
+        while (name.isBlank()) {
+            System.out.println("Invalid data for item.");
+            name = UserInput.readLine("Type name for item: ");
+        }
+        double pricePerUnit = UserInput.readDouble("Type unit price of item: ");
+        while (pricePerUnit == 0 || pricePerUnit < 0) {
+            System.out.println("Invalid data for item.");
+            pricePerUnit = UserInput.readDouble("Type unit price of item: ");
+        }
 
         obj.createItem(ID,name,pricePerUnit);
     }
@@ -21,8 +35,7 @@ public class MenuClass {
 
         String ID = UserInput.readLine("ID number: ");
         String comment = UserInput.readLine("What did you like or dislike about this item?: ");
-        double grade = UserInput.readDouble("Enter a grade: ");
-
+        double grade = UserInput.readDouble("Enter a grade 1 to 5: ");
 
         obj.createReview(ID, comment, grade);
 

@@ -7,10 +7,6 @@ public class Item {
      private String name;
      private double pricePerUnit;
 
-     //private ArrayList<Item> itemList = new ArrayList<Item>();
-
-     //where should I put this?
-
 
     //constructor
     public Item(String ID, String name, double pricePerUnit) {
