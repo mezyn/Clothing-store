@@ -6,9 +6,23 @@ public class Controller {
     //For Item Lists
     private ArrayList<Item> itemList = new ArrayList<>();
 
+    /*public ArrayList<Item> getItemList() {
+        return itemList;
+    }*/
+
+    //Find index for user typed ID
+    public Item findItem(String userID) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(userID)) {
+                return itemList.get(i);
+            }
+        }
+        return itemList.get(-1);
+    }
 
     //Check duplicate item ID
-    public boolean checkForDuplicates(String userID){
+    public boolean isDuplicate(String userID){
 
         for(int i = 0; i < itemList.size(); i++){
             if(itemList.get(i).getID().equals(userID)){

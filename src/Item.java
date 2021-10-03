@@ -51,8 +51,8 @@ public class Item {
         return name;
     }
 
-    public void setItemName(String name) {
-        this.name = name;
+    public void setItemName(String newNameInput) {
+        this.name = newNameInput;
     }
 
     public double getItemPricePerUnit() {

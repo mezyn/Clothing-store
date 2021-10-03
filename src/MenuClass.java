@@ -9,7 +9,7 @@ public class MenuClass {
     public void createItem(){
 
         String ID = UserInput.readLine("Type ID for item: ");
-        while(obj.checkForDuplicates(ID)== true) {
+        while(obj.isDuplicate(ID)) {
             ID = UserInput.readLine("The ID is already taken." + System.lineSeparator() + "Type another ID for item: ");
         }
         while (ID.isBlank()) {
@@ -28,6 +28,23 @@ public class MenuClass {
         }
         obj.createItem(ID,name,pricePerUnit);
     }
+
+    //2.3 - Update item name and price
+    public void updateItemName(){
+
+        String itemID = UserInput.readLine("Type current ID of the item: ");
+        Item foundItem = obj.findItem(itemID);
+        String newNameInput = UserInput.readLine("Type new name for the item: ");
+
+        while (newNameInput.isBlank() || newNameInput.equals(itemID)) {
+            System.out.println("Invalid data for item.");
+            newNameInput = UserInput.readLine("Type new name for the item: ");
+        }
+         foundItem.setItemName(newNameInput);
+        }
+
+
+
     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -75,12 +92,14 @@ public class MenuClass {
                 break;
             case 3 :
                 obj.printAllItems();
-                //itemOption();
+                itemOption();
                 break;
             case 4 : System.out.println("5");
                 break;
             //5. Update an item’s name.
-            case 5 : System.out.println("6");
+            case 5 : //Update an item’s name.
+                updateItemName();
+                itemOption();
                 break;
             //6. Update an item’s price.
             case 6 : System.out.println("7");
