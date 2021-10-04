@@ -62,13 +62,19 @@ public class Controller {
         // No need to check for duplicate review since different reviewers can enter same values.
     }
 
+    /*public String printSpecificReview(){ }
+    * We need to search for a review with the same ID number in the reviewList.
+    * If ID is not in List print text:
+    * if item exits but have no review print text:
+    * */
+
     public String printAllReview() {
         if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added:");
+            System.out.println("No reviews have been added:"+ System.lineSeparator());
         } else {
-            System.out.println("All reviews of items: ");
+            System.out.println("All registered reviews: ");
             for (Review review : reviewList) {
-                System.out.print(review + System.lineSeparator());
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
 
             }
         }return "";

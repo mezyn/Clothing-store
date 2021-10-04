@@ -90,18 +90,21 @@ public class MenuClass {
         System.out.println("To create a review for a item please enter ID of the item:");
 
         String ID = UserInput.readLine("Enter the ID number: ");
-        while(ID.isEmpty()){
+        while(ID.isEmpty()) {
             System.out.println("ID needed to review item: ");
             ID = UserInput.readLine("Enter ID number: ");
+        } while (!obj.containsItem(ID)){          // Checks if there are a obj with ID number
+            System.out.println("Item <ID> was not registered yet.");
+            ID = UserInput.readLine("Enter a valid ID number: ");
+
         }
         String comment = UserInput.readLine("What did you like or dislike about this item?: ");
+       
+        double grade = UserInput.readDouble("Enter a grade between 1 to 5: ");
+         while (grade < 1.0 || grade > 5.0){ // Have to fix this // Carl
 
-        double grade = UserInput.readDouble("Enter a grade 1 to 5: ");
-        if (grade >= 1.0 && grade <= 5.0){ // Have to fix this // Carl
-
-            System.out.println("Invalid data for item.");
-            grade = UserInput.readDouble("Enter a grade 1 to 5: ");
-        }
+            grade = UserInput.readDouble("Grade values must be between 1 and 5.");
+        }   
 
         obj.createReview(ID, comment, grade);
 
