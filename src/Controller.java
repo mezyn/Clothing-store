@@ -6,9 +6,6 @@ public class Controller {
     //For Item Lists
     private ArrayList<Item> itemList = new ArrayList<>();
 
-    /*public ArrayList<Item> getItemList() {
-        return itemList;
-    }*/
 
     //Find index for user typed ID
     public Item findItem(String userID) {
@@ -21,7 +18,7 @@ public class Controller {
         return null;
     }
 
-    //Check duplicate item ID
+    //Check if item is already in the list by using ID
     public boolean containsItem(String itemID) {
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -41,10 +38,24 @@ public class Controller {
 
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
+
+        unitPrice = changeDecimal(unitPrice, 2);
         Item item = new Item(itemID, itemName, unitPrice);
         itemList.add(item);
         return "";
     }
+
+    //To change decimal numbers
+    public double changeDecimal(double value, int decimalpoint)
+    {
+        // Using the pow() method
+        value = value * Math.pow(10, decimalpoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalpoint);
+
+        return value;
+    }
+
 
     public String printAllItems() {
 

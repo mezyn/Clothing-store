@@ -99,6 +99,19 @@ public class MenuClass {
         return "";
     }
 
+    //2.6 - print an specific item
+    public String printItem() {
+
+        String itemID = UserInput.readLine("Type ID of item to be printed: ");
+        if (obj.containsItem(itemID)) {
+            Item foundItem = obj.findItem(itemID);
+            System.out.println(foundItem);
+        } else {
+            System.out.println("Item <" + itemID + " > was not registered yet.");
+        }
+        return "";
+    }
+
     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -136,10 +149,11 @@ public class MenuClass {
                 "3. Print all registered Items.\n" +
                 "4. Buy an Item.\n" +
                 "5. Update an item’s name.\n" +
-                "6. Update an item’s price.\n\n" +
+                "6. Update an item’s price.\n" +
+                "7. Print an specific Item.\n\n" + //It's for User Story 2.6, but not in the menu option? I put it here temporarily anyway\n"
                 "Type an option number: ");
 
-        while (option < 0 || option > 6) {
+        while (option < 0 || option > 7) { // 7 instead of 6 (temporarily)
 
             option = UserInput.readInt("Invalid menu option. Please type another option");
         }
@@ -174,6 +188,9 @@ public class MenuClass {
                 updateItemPrice();
                 itemOption();
                 break;
+            case 7 :
+                printItem();
+                itemOption();
         }
 
         UserInput.scanner.close();
