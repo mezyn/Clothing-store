@@ -80,11 +80,6 @@ public class Controller {
         // No need to check for duplicate review since different reviewers can enter same values.
     }
 
-    /*public String printSpecificReview(){ }
-    * We need to search for a review with the same ID number in the reviewList.
-    * If ID is not in List print text:
-    * if item exits but have no review print text:
-    * */
 
     public String printAllReview() {
         if (reviewList.size() == 0) {
@@ -96,5 +91,24 @@ public class Controller {
 
             }
         }return "";
+    }
+
+    public boolean containsReview(String reviewID) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Review findReview(String reviewID) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewID)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
     }
 }

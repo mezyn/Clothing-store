@@ -112,6 +112,19 @@ public class MenuClass {
         return "";
     }
 
+    public String specificReview () {
+        String reviewID = UserInput.readLine("Enter the ID of Item");
+        if (obj.containsReview(reviewID));
+        {
+            Review foundReview = obj.findReview(reviewID);
+            System.out.println(foundReview);
+        }
+            System.out.println("Item <" + reviewID + " > was not registered yet.");
+
+        return "";
+
+    }
+
     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -128,7 +141,7 @@ public class MenuClass {
         String comment = UserInput.readLine("What did you like or dislike about this item?: ");
        
         double grade = UserInput.readDouble("Enter a grade between 1 to 5: ");
-         while (grade < 1.0 || grade > 5.0){ // Have to fix this // Carl
+         while (grade < 1.0 || grade > 5.0){
 
             grade = UserInput.readDouble("Grade values must be between 1 and 5.");
         }   
@@ -139,6 +152,9 @@ public class MenuClass {
         System.out.println("Returning to Review Menu....");
 
     }
+
+
+
 
     public void itemOption() {
 
@@ -223,7 +239,8 @@ public class MenuClass {
             case 1 : createReview();
                 ReviewMenu();
                 break;
-            case 2 : System.out.println("Option 3");
+            case 2 : specificReview ();
+                ReviewMenu();
                 break;
             case 3 : System.out.println("Option 4");
                 break;
