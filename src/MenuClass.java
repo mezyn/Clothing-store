@@ -114,8 +114,7 @@ public class MenuClass {
 
     public String specificReview () {
         String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID));
-        {
+        if (obj.containsReview(reviewID)){
             Review foundReview = obj.findReview(reviewID);
             System.out.println(foundReview);
         }
@@ -125,6 +124,14 @@ public class MenuClass {
 
     }
 
+    /*public void meanReview(){
+        String reviewID = UserInput.readLine("Enter the ID of Item");
+        if (obj.containsReview(reviewID)){
+            Review foundReview = obj.findReview(reviewGrade)
+        }
+
+    }*/
+
     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -133,7 +140,7 @@ public class MenuClass {
         while(ID.isEmpty()) {
             System.out.println("ID needed to review item: ");
             ID = UserInput.readLine("Enter ID number: ");
-        } while (!obj.containsItem(ID)){          // Checks if there are a obj with ID number
+        } while (!obj.containsItem(ID)){          // Checks if there are obj with ID number
             System.out.println("Item <ID> was not registered yet.");
             ID = UserInput.readLine("Enter a valid ID number: ");
 
@@ -166,7 +173,7 @@ public class MenuClass {
                 "4. Buy an Item.\n" +
                 "5. Update an item’s name.\n" +
                 "6. Update an item’s price.\n" +
-                "7. Print an specific Item.\n\n" + //It's for User Story 2.6, but not in the menu option? I put it here temporarily anyway\n"
+                "7. Print an specific Item.\n\n" + //It's for User Story 2.6, but not in the menu option? I put it here temporarily anyway.
                 "Type an option number: ");
 
         while (option < 0 || option > 7) { // 7 instead of 6 (temporarily)

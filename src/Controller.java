@@ -111,4 +111,12 @@ public class Controller {
         }
         return null;
     }
+
+     /*public String meanReview(){
+        if (reviewList.size() == 0) {
+             System.out.println("No reviews have been added:"+ System.lineSeparator());
+         }else {
+
+        }
+     }*/
 }

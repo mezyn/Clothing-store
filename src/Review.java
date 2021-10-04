@@ -31,6 +31,8 @@ public class Review {
         this.grade = grade;
     }
 
+    public void getGrade(double grade) {this.grade = grade; }
+
 
 
 }
