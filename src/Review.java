@@ -11,11 +11,13 @@ public class Review {
         this.grade = grade;
         this.comment= comment; //Should it be set as null? -M
     }
-
-    public String getID() {
-
-        return ID;
+    @Override
+    public String toString() {
+        return  "<" + this.ID + ">: <" + this.comment + ">. <" + this.grade + ">";
     }
+
+
+    public String getID() {return ID;}
 
     public String getComment() {
         return comment;

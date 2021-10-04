@@ -27,7 +27,9 @@ public class MenuClass {
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
         obj.createItem(ID,name,pricePerUnit);
+
     }
+
 
 
     //2.3 - Update item name and price
@@ -86,19 +88,27 @@ public class MenuClass {
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
-        String ID = UserInput.readLine("ID number: ");
+        String ID = UserInput.readLine("Enter the ID number: ");
+        while(ID.isEmpty()){
+            System.out.println("ID needed to review item: ");
+            ID = UserInput.readLine("Enter ID number: ");
+        }
         String comment = UserInput.readLine("What did you like or dislike about this item?: ");
+
         double grade = UserInput.readDouble("Enter a grade 1 to 5: ");
+        if (grade >= 1.0 && grade <= 5.0){ // Have to fix this // Carl
+
+            System.out.println("Invalid data for item.");
+            grade = UserInput.readDouble("Enter a grade 1 to 5: ");
+        }
 
         obj.createReview(ID, comment, grade);
 
         System.out.println("Your item review was registered successfully.");
-
-        // System.out.println("ID: " + ID + " Comment: " + comment + " Grade: " + grade);
-
-        //System.out.println("Returning to Review Menu....");
+        System.out.println("Returning to Review Menu....");
 
     }
+
     public void itemOption() {
 
         int option = UserInput.readInt("Item options menu:\n" +
@@ -172,6 +182,7 @@ public class MenuClass {
             case 0 : MainMenu();
                 break;
             case 1 : createReview();
+                ReviewMenu();
                 break;
             case 2 : System.out.println("Option 3");
                 break;
@@ -181,7 +192,8 @@ public class MenuClass {
                 break;
             case 5 : System.out.println("Option 6");
                 break;
-            case 6 : System.out.println("Option 7");
+            case 6 : obj.printAllReview();
+                ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");
                 break;
