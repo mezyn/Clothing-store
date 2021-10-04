@@ -4,8 +4,8 @@ public class MenuClass {
     //item menu
 
     Controller obj = new Controller();
-    //method for creating items
 
+    //method for creating items
     public void createItem(){
 
         String ID = UserInput.readLine("Type ID for item: ");
@@ -29,7 +29,6 @@ public class MenuClass {
         obj.createItem(ID,name,pricePerUnit);
 
     }
-
 
 
     //2.3 - Update item name and price
@@ -85,6 +84,21 @@ public class MenuClass {
         }
     }
 
+    //2.5 - Remove items
+    public String removeItem() {
+
+        String itemID = UserInput.readLine("Type ID of item you would like to remove: ");
+        if (obj.containsItem(itemID)) {
+            Item itemToRemove = obj.findItem(itemID);
+            obj.removeItem(itemToRemove);
+            System.out.println("Item <" + itemID + "> was successfully removed.");
+        } else {
+            System.out.println("Item <" + itemID + "> could not be removed.");
+        }
+
+        return "";
+    }
+
     public void createReview() {
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -135,13 +149,17 @@ public class MenuClass {
                 createItem();
                 itemOption(); //can be moved at the end of createItem()
                 break;
-            case 2 : System.out.println("3");
+            case 2 :
+                removeItem();
+                itemOption();
                 break;
             case 3 :
                 obj.printAllItems();
                 itemOption();
                 break;
-            case 4 : System.out.println("5");
+            case 4 :
+                buyItem();
+                itemOption();
                 break;
             //5. Update an item’s name.
             case 5 : //Update an item’s name.

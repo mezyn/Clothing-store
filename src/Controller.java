@@ -32,6 +32,13 @@ public class Controller {
         return false;
     }
 
+    //Remove item
+    public void removeItem(Item itemToRemove) {
+
+        itemList.remove(itemToRemove);
+
+    }
+
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
         Item item = new Item(itemID, itemName, unitPrice);
