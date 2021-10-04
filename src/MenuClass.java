@@ -56,6 +56,7 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             newPriceInput = UserInput.readDouble("Type new price for the item: ");
         }
+        foundItem.setItemPrice(newPriceInput);
 
         return "";
     }
@@ -63,7 +64,7 @@ public class MenuClass {
     //2.4-Buy items
     public double buyItem() { //(String itemID, int amount)
 
-        double totalPrice = 0.0;
+        double totalPrice;
         String IDInput = UserInput.readLine("Type ID of item you want to purchase: ");
 
         if (obj.findItem(IDInput).equals(null)) {
