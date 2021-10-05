@@ -66,19 +66,19 @@ public class MenuClass {
     public double buyItem() { //(String itemID, int amount)
 
         double totalPrice;
-        String IDInput = UserInput.readLine("Type ID of item you want to purchase: ");
+        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
 
-        if (obj.findItem(IDInput).equals(null)) {
+        if (!obj.containsItem(itemID)) {
             return -1;
 
         } else {
-            int itemAmount = UserInput.readInt("Type the amount of items you want to purchase: ");
-            double itemPrice = obj.findItem(IDInput).getItemPrice();
+            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+            double itemPrice = obj.findItem(itemID).getItemPrice();
 
-            if (itemAmount < 4 || itemAmount == 4) {
-                totalPrice = itemPrice * itemAmount;
+            if (amount < 4 || amount == 4) {
+                totalPrice = itemPrice * amount;
             } else {
-                totalPrice = 4 * itemPrice + ((itemAmount - 4) * (itemPrice * (1.0 - 0.3)));
+                totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
             }
 
             return totalPrice;
