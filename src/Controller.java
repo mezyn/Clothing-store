@@ -44,6 +44,32 @@ public class Controller {
         return "";
     }
 
+    public double buyItem() { //(String itemID, int amount)
+
+        double totalPrice;
+        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+
+        if (!containsItem(itemID)) {
+            return -1;
+
+        } else {
+            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+            double itemPrice = findItem(itemID).getItemPrice();
+
+            if (amount < 4 || amount == 4) {
+                totalPrice = itemPrice * amount;
+            } else {
+                totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
+            }
+
+            Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
+            transactionHistoryList.add(newTransaction);
+
+            return totalPrice;
+
+        }
+    }
+
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.

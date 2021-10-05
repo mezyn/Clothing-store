@@ -62,8 +62,8 @@ public class MenuClass {
         return "";
     }
 
-    //2.4-Buy items
-    public double buyItem() { //(String itemID, int amount)
+    //2.4-Buy items // I'll move this to obj for now to fix TransactionHistory
+/*    public double buyItem() { //(String itemID, int amount)
 
         double totalPrice;
         String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
@@ -81,11 +81,14 @@ public class MenuClass {
                 totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
             }
 
+            Transaction newTransaction = new Transaction(itemID, amount, itemPrice);
+
+
             return totalPrice;
 
         }
     }
-
+*/
     //2.5 - Remove items
     public String removeItem() {
 
@@ -214,7 +217,7 @@ public class MenuClass {
                 itemOption();
                 break;
             case 4 :
-                buyItem();
+                obj.buyItem(); //as for now buyItem is in obj
                 itemOption();
                 break;
             //5. Update an item’s name.
