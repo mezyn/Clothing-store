@@ -44,13 +44,16 @@ public class Controller {
         return "";
     }
 
-    //To change decimal numbers
-    public double changeDecimal(double value, int decimalpoint)
+    //To change the number of decimal digits
+    //How to use: 'value' is your original number input with all decimal digits,
+    //and 'decimalPoint' is the number of decimal digits you would like to have.
+    // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
+    public double changeDecimal(double value, int decimalPoint)
     {
         // Using the pow() method
-        value = value * Math.pow(10, decimalpoint);
+        value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
-        value = value / Math.pow(10, decimalpoint);
+        value = value / Math.pow(10, decimalPoint);
 
         return value;
     }
@@ -111,12 +114,45 @@ public class Controller {
         return null;
     }
 
+    public String printAnReview() { // Prints a review for one item
+        if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added:"+ System.lineSeparator());
+        } else {
+            System.out.println("All registered   of review: ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }return "";
+    }
+// _______________________________Mean Grade of Review____________________________________________
+    public boolean containsGrade(String reviewGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewGrade)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Review findGrade(String reviewGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewGrade)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
+
      /*public String meanReview(){
         if (reviewList.size() == 0) {
              System.out.println("No reviews have been added:"+ System.lineSeparator());
          }else {
 
         }
+
+
      }*/
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...

@@ -119,20 +119,23 @@ public class MenuClass {
         if (obj.containsReview(reviewID)){
             Review foundReview = obj.findReview(reviewID);
             System.out.println(foundReview);
-        }
+        }else {
             System.out.println("Item <" + reviewID + " > was not registered yet.");
 
+        }
         return "";
 
     }
 
-    /*public void meanReview(){
+    public void meanReview(){
         String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID)){
-            Review foundReview = obj.findReview(reviewGrade)
+        if (obj.containsReview(reviewID)){ // Checks if there are a review with that ID.
+            Review foundReview = obj.findReview(reviewID);
+
+
         }
 
-    }*/
+    }
 
     public void createReview() {
 
@@ -264,7 +267,8 @@ public class MenuClass {
                 break;
             case 3 : System.out.println("Option 4");
                 break;
-            case 4 : System.out.println("Option 5");
+            case 4 : meanReview();
+                ReviewMenu();
                 break;
             case 5 : System.out.println("Option 6");
                 break;
