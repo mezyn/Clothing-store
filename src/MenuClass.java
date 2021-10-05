@@ -80,7 +80,9 @@ public class MenuClass {
             } else {
                 totalPrice = 4 * itemPrice + ((itemAmount - 4) * (itemPrice * (1.0 - 0.3)));
             }
+
             return totalPrice;
+
         }
     }
 
@@ -159,7 +161,18 @@ public class MenuClass {
         System.out.println("Returning to Review Menu....");
 
     }
-
+    // 4.3 print transaction for specific item
+    /*public String printTransactionSpecificItem() {
+            String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");
+       if (obj.containsTransaction(itemID)) {
+            Item foundItem = obj.findItem(itemID);
+            System.out.println(foundItem);
+    } else {
+        System.out.println("Item <" + itemID + " > was not registered yet.");
+       }
+       return "";
+    }
+     */
 
 
 
@@ -297,13 +310,15 @@ public class MenuClass {
                 break;
             case 3 : System.out.println("Option 4");
                 break;
-            case 4 : System.out.println("Option 5");
+            case 4 : obj.printAllTransactions();
+                transactionHistoryMenu();
                 break;
             case 5 : System.out.println("Option 6");
                 break;
             case 6 : System.out.println("Option 7");
                 break;
-            case 7 : System.out.println("Option 8");
+            case 7 : //printTransactionSpecificItem();
+                transactionHistoryMenu();
                 break;
             case 8 : System.out.println("Option 9");
                 break;

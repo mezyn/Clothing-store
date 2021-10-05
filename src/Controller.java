@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Controller {
 
@@ -119,4 +118,43 @@ public class Controller {
 
         }
      }*/
+
+    //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
+    private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+
+    public void createTransaction( String ID, int amount, double purchasePrice){
+
+        Transaction transaction = new Transaction(ID, amount, purchasePrice);
+        transactionHistoryList.add(transaction);
+    }
+
+
+
+    //to contain transaction for specific item ... (4.3)
+    public boolean containsTransaction(String itemID) {
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    //   4.5 - Print all transactions
+    public String printAllTransactions() {
+
+        if (transactionHistoryList.size() ==0) {
+            System.out.println("No registered transactions.");
+        } else {
+            System.out.println("All registered transactions:");
+            for (Transaction transaction : transactionHistoryList) {
+                System.out.println(transaction);
+            }
+        }
+        return "";
+
+    }
+
 }
+
