@@ -45,13 +45,16 @@ public class Controller {
         return "";
     }
 
-    //To change decimal numbers
-    public double changeDecimal(double value, int decimalpoint)
+    //To change the number of decimal digits
+    //How to use: 'value' is your original number input with all decimal digits,
+    //and 'decimalPoint' is the number of decimal digits you would like to have.
+    // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
+    public double changeDecimal(double value, int decimalPoint)
     {
         // Using the pow() method
-        value = value * Math.pow(10, decimalpoint);
+        value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
-        value = value / Math.pow(10, decimalpoint);
+        value = value / Math.pow(10, decimalPoint);
 
         return value;
     }
