@@ -115,11 +115,44 @@ public class Controller {
         return null;
     }
 
+    public String printAnReview() { // Prints a review for one item
+        if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added:"+ System.lineSeparator());
+        } else {
+            System.out.println("All registered   of review: ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }return "";
+    }
+// _______________________________Mean Grade of Review____________________________________________
+    public boolean containsGrade(String reviewGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewGrade)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Review findGrade(String reviewGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewGrade)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
+
      /*public String meanReview(){
         if (reviewList.size() == 0) {
              System.out.println("No reviews have been added:"+ System.lineSeparator());
          }else {
 
         }
+
+
      }*/
 }
