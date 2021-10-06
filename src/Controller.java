@@ -111,7 +111,7 @@ public class Controller {
 
     public String printAllReview() {
         if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added:"+ System.lineSeparator());
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
             System.out.println("All registered reviews: ");
             for (Review review : reviewList) {
@@ -140,11 +140,12 @@ public class Controller {
         return null;
     }
 
-    public String printAnReview() { // Prints a review for one item
+
+    public String printAnReview() { // User Story 3.3
         if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added:"+ System.lineSeparator());
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
-            System.out.println("All registered   of review: ");
+            System.out.println("Reviews of item: ");
             for (Review review : reviewList) {
                 System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
 
@@ -178,8 +179,7 @@ public class Controller {
 
         }
 
-
-     }*/
+    } */
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
     private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();

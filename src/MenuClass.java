@@ -117,7 +117,8 @@ public class MenuClass {
         return "";
     }
 
-    public String specificReview () {
+
+    public String specificItemReviews () { // User Story 3.2 |NOT DONE| have to get name of item as well.
         String reviewID = UserInput.readLine("Enter the ID of Item");
         if (obj.containsReview(reviewID)){
             Review foundReview = obj.findReview(reviewID);
@@ -140,7 +141,7 @@ public class MenuClass {
 
     }
 
-    public void createReview() {
+    public void createReview() { // User Story 3.1 |DONE|
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
@@ -265,10 +266,10 @@ public class MenuClass {
             case 1 : createReview();
                 ReviewMenu();
                 break;
-            case 2 : specificReview ();
-                ReviewMenu();
+            case 2 : System.out.println("Option 3");
                 break;
-            case 3 : System.out.println("Option 4");
+            case 3 : specificItemReviews (); // User Story 3.3
+                ReviewMenu();
                 break;
             case 4 : meanReview();
                 ReviewMenu();
