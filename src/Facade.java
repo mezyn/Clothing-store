@@ -35,6 +35,7 @@ Controller controller = new Controller();
         return controller.containsItem(reviewID);
     }
     /*public String getItemName(String itemName) { // added by Carl, used in getPrintedReviews line 164 in main
+    //Can you move this to another class? 'getItemName()' is not a part of facade file Francisco uploaded. Don't think it should be under Facade - Mijin
         return controller.getItemName(itemID);
     }*/
 
