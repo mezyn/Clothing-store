@@ -16,16 +16,39 @@ public class Controller {
         return reviewList;
     }
 
+    //Create a new item and add it to itemList
+    public String createItem(String itemID, String itemName, double unitPrice) {
 
-    //Find index for user typed ID
-    public Item findItem(String userID) {
+        unitPrice = changeDecimal(unitPrice, 2);
+        Item item = new Item(itemID, itemName, unitPrice);
+        itemList.add(item);
+        return "";
+    }
 
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(userID)) {
-                return itemList.get(i);
-            }
+    public String updateItemName(String IDInput, String newNameInput) {
+
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemName(newNameInput);
+        return "";
+    }
+
+    public String updateItemPrice(String IDInput, double newPriceInput) {
+
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemPrice(newPriceInput);
+        return "";
+    }
+
+    //Remove item
+    public String removeItem(String itemID) {
+
+        if (this.containsItem(itemID)) {
+            Item itemToRemove = this.findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item <" + itemID + "> was successfully removed.";
+        } else {
+            return "Item <" + itemID + "> could not be removed.";
         }
-        return null;
     }
 
     //Check if item is already in the list by using ID
@@ -39,46 +62,27 @@ public class Controller {
         return false;
     }
 
-    //Remove item
-    public String removeItem(String itemID) {
+    //Find index for user typed ID
+    public Item findItem(String userID) {
 
-        if (this.containsItem(itemID)) {
-            Item itemToRemove = this.findItem(itemID);
-            itemList.remove(itemToRemove);
-            return "Item <" + itemID + "> was successfully removed.";
-        } else {
-           return "Item <" + itemID + "> could not be removed.";
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(userID)) {
+                return itemList.get(i);
+            }
         }
-
-
+        return null;
     }
 
-    public String createReview(String ID, String reviewComment, double reviewGrade) {
-        Review review = new Review(ID, reviewComment, reviewGrade);
-        reviewList.add(review);
-        return "";
 
-        // No need to check for duplicate review since different reviewers can enter same values.
-    }
-    //Create a new item and add it to itemList
-    public String createItem(String itemID, String itemName, double unitPrice) {
-
-        unitPrice = changeDecimal(unitPrice, 2);
-        Item item = new Item(itemID, itemName, unitPrice);
-        itemList.add(item);
-        return "";
-    }
-
-    public double buyItem() { //(String itemID, int amount)
+    public double buyItem(String itemID, int amount) {
 
         double totalPrice;
-        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
 
         if (!containsItem(itemID)) {
             return -1;
 
         } else {
-            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+
             double itemPrice = findItem(itemID).getItemPrice();
 
             if (amount < 4 || amount == 4) {
@@ -95,7 +99,30 @@ public class Controller {
         }
     }
 
+    public String printItem(String itemID) {
 
+        if (containsItem(itemID)) {
+            Item foundItem = findItem(itemID);
+            System.out.println(foundItem);
+        } else {
+            System.out.println("Item <" + itemID + " > was not registered yet.");
+        }
+        return "";
+    }
+
+
+    public String printAllItems() {
+
+        if (itemList.size() == 0) {
+            System.out.println("No items registered yet.");
+        } else {
+            System.out.println("All registered items:");
+            for (Item item : itemList) {
+                System.out.println(item);
+            }
+        }
+        return "";
+    }
 
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
@@ -111,25 +138,18 @@ public class Controller {
         return value;
     }
 
-    public String updateItemName(String IDInput, String newNameInput) {
-
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemName(newNameInput);
+    public String createReview(String ID, String reviewComment, double reviewGrade) {
+        Review review = new Review(ID, reviewComment, reviewGrade);
+        reviewList.add(review);
         return "";
+
+        // No need to check for duplicate review since different reviewers can enter same values.
     }
 
-    public String printAllItems() {
 
-        if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else {
-            System.out.println("All registered items:");
-            for (Item item : itemList) {
-                System.out.println(item);
-            }
-        }
-        return "";
-    }
+
+
+
 
 
 
