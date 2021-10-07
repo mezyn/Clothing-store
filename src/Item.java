@@ -24,23 +24,6 @@ public class Item {
         return  "<" + this.ID + ">: <" + this.name + ">. <" + this.pricePerUnit + "> SEK.";
     }
 
-    /*
-    public void modifyItem() {
-
-        String itemToModify = ItemScanner.readLine("Type ID to change item name: ");
-
-        while (!itemList.contains(itemToModify)) {
-
-            System.out.println("There is no item called " + itemToModify + " in the list.");
-        }
-
-        String newName = ItemScanner.readLine("Type a new name for the item: ");{
-        //Working on it, should fix
-
-        }
-
-    }*/
-
 
 
 // Getters and setters

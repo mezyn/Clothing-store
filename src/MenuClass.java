@@ -46,48 +46,20 @@ public class MenuClass {
         }
 
 
-    public String updateItemPrice(){ //(String itemID, double newPrice)
+    public String updateItemPrice(){
 
         String IDInput = UserInput.readLine("Type current ID of the item: ");
-        Item foundItem = facade.findItem(IDInput);
         double newPriceInput = UserInput.readDouble("Type new price for the item: ");
 
         while (newPriceInput < 0 || newPriceInput == 0) {
             System.out.println("Invalid data for item.");
             newPriceInput = UserInput.readDouble("Type new price for the item: ");
         }
-        foundItem.setItemPrice(newPriceInput);
+        facade.updateItemPrice(IDInput, newPriceInput);
 
         return "";
     }
 
-    //2.4-Buy items // I'll move this to obj for now to fix TransactionHistory
-/*    public double buyItem() { //(String itemID, int amount)
-
-        double totalPrice;
-        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
-
-        if (!obj.containsItem(itemID)) {
-            return -1;
-
-        } else {
-            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
-            double itemPrice = obj.findItem(itemID).getItemPrice();
-
-            if (amount < 4 || amount == 4) {
-                totalPrice = itemPrice * amount;
-            } else {
-                totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
-            }
-
-            Transaction newTransaction = new Transaction(itemID, amount, itemPrice);
-
-
-            return totalPrice;
-
-        }
-    }
-*/
     //2.5 - Remove items
     public String removeItem() {
 
@@ -97,16 +69,29 @@ public class MenuClass {
         return "";
     }
 
+    public double buyItem() {
+
+        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+        int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+        facade.buyItem(itemID, amount);
+
+        return 0.0;
+    }
+
+
     //2.6 - print an specific item
     public String printItem() {
 
         String itemID = UserInput.readLine("Type ID of item to be printed: ");
-        if (facade.containsItem(itemID)) {
-            Item foundItem = facade.findItem(itemID);
-            System.out.println(foundItem);
-        } else {
-            System.out.println("Item <" + itemID + " > was not registered yet.");
-        }
+        facade.printItem(itemID);
+
+        return "";
+    }
+
+    public String printAllItems() {
+
+        facade.printAllItems();
+
         return "";
     }
 
@@ -214,7 +199,7 @@ public class MenuClass {
                 itemOption();
                 break;
             case 4 :
-                facade.buyItem(); //as for now buyItem is in obj
+                buyItem(); //as for now buyItem is in obj
                 itemOption();
                 break;
             //5. Update an item’s name.

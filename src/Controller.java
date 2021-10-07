@@ -3,34 +3,46 @@ import java.util.ArrayList;
 public class Controller {
 
     //For Item Lists
-    ArrayList<Item> itemList = new ArrayList<>();
+    private ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
     }
 
-    /*
-    public String getItemName(String ID) {
-        Item foundItem = findItem(ID);
+    //Create a new item and add it to itemList
+    public String createItem(String itemID, String itemName, double unitPrice) {
 
-        return foundItem.getItemName();
+        unitPrice = changeDecimal(unitPrice, 2);
+        Item item = new Item(itemID, itemName, unitPrice);
+        itemList.add(item);
+        return "";
     }
 
-    public double getItemPrice(String ID) {
-        Item foundItem = findItem(ID);
+    public String updateItemName(String IDInput, String newNameInput) {
 
-        return foundItem.getItemPrice();
-    }*///redundant
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemName(newNameInput);
+        return "";
+    }
 
-    //Find index for user typed ID
-    public Item findItem(String userID) {
 
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(userID)) {
-                return itemList.get(i);
-            }
+    public String updateItemPrice(String IDInput, double newPriceInput) {
+
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemPrice(newPriceInput);
+        return "";
+    }
+
+    //Remove item
+    public String removeItem(String itemID) {
+
+        if (this.containsItem(itemID)) {
+            Item itemToRemove = this.findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item <" + itemID + "> was successfully removed.";
+        } else {
+            return "Item <" + itemID + "> could not be removed.";
         }
-        return null;
     }
 
     //Check if item is already in the list by using ID
@@ -44,39 +56,27 @@ public class Controller {
         return false;
     }
 
-    //Remove item
-    public String removeItem(String itemID) {
+    //Find index for user typed ID
+    public Item findItem(String userID) {
 
-        if (this.containsItem(itemID)) {
-            Item itemToRemove = this.findItem(itemID);
-            itemList.remove(itemToRemove);
-            return "Item <" + itemID + "> was successfully removed.";
-        } else {
-           return "Item <" + itemID + "> could not be removed.";
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(userID)) {
+                return itemList.get(i);
+            }
         }
-
-
+        return null;
     }
 
-    //Create a new item and add it to itemList
-    public String createItem(String itemID, String itemName, double unitPrice) {
 
-        unitPrice = changeDecimal(unitPrice, 2);
-        Item item = new Item(itemID, itemName, unitPrice);
-        itemList.add(item);
-        return "";
-    }
-
-    public double buyItem() { //(String itemID, int amount)
+    public double buyItem(String itemID, int amount) {
 
         double totalPrice;
-        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
 
         if (!containsItem(itemID)) {
             return -1;
 
         } else {
-            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+
             double itemPrice = findItem(itemID).getItemPrice();
 
             if (amount < 4 || amount == 4) {
@@ -91,6 +91,31 @@ public class Controller {
             return totalPrice;
 
         }
+    }
+
+    public String printItem(String itemID) {
+
+        if (containsItem(itemID)) {
+            Item foundItem = findItem(itemID);
+            System.out.println(foundItem);
+        } else {
+            System.out.println("Item <" + itemID + " > was not registered yet.");
+        }
+        return "";
+    }
+
+
+    public String printAllItems() {
+
+        if (itemList.size() == 0) {
+            System.out.println("No items registered yet.");
+        } else {
+            System.out.println("All registered items:");
+            for (Item item : itemList) {
+                System.out.println(item);
+            }
+        }
+        return "";
     }
 
 
@@ -109,25 +134,9 @@ public class Controller {
         return value;
     }
 
-    public String updateItemName(String IDInput, String newNameInput) {
 
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemName(newNameInput);
-        return "";
-    }
 
-    public String printAllItems() {
 
-        if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else {
-            System.out.println("All registered items:");
-            for (Item item : itemList) {
-                System.out.println(item);
-            }
-        }
-        return "";
-    }
 
     private ArrayList<Review> reviewList = new ArrayList<Review>();
 

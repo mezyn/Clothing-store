@@ -4,6 +4,8 @@ public class Facade {
 Controller controller = new Controller();
 
 
+//For items
+
     public String createItem(String itemID, String itemName, double unitPrice){
         return controller.createItem(itemID, itemName, unitPrice);
     }
@@ -13,7 +15,8 @@ Controller controller = new Controller();
         return "";
     }
 
-    public String printItem(String itemID) {
+    public String updateItemPrice(String itemID, double newPrice) {
+        controller.updateItemPrice(itemID, newPrice);
         return "";
     }
 
@@ -27,8 +30,26 @@ Controller controller = new Controller();
     }
 
     public double buyItem(String itemID, int amount) {
+        controller.buyItem(itemID, amount);
         return 0.0;
     }
+
+    public String printItem(String itemID) {
+
+        controller.printItem(itemID);
+        return "";
+    }
+
+    public String printAllItems() {
+
+        controller.printAllItems();
+
+        return "";
+    }
+
+
+
+    //For reviews
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
         return "";
@@ -78,6 +99,30 @@ Controller controller = new Controller();
         return "";
     }
 
+    public String printWorseReviewedItems() {
+        return "";
+    }
+
+    public String printBestReviewedItems() {
+        return "";
+    }
+
+    public List<String> getWorseReviewedItems() {
+        return null;
+    }
+
+    public List<String> getBestReviewedItems() {
+        return null;
+    }
+
+    public String printAllReviews() {
+        return "";
+    }
+
+
+
+    //for transactions
+
     public double getTotalProfit() {
         return -1.0;
     }
@@ -106,35 +151,6 @@ Controller controller = new Controller();
         return "";
     }
 
-    public String printWorseReviewedItems() {
-        return "";
-    }
-
-    public String printBestReviewedItems() {
-        return "";
-    }
-
-    public List<String> getWorseReviewedItems() {
-        return null;
-    }
-
-    public List<String> getBestReviewedItems() {
-        return null;
-    }
-
-    public String printAllReviews() {
-        return "";
-    }
-
-
-
-    public String updateItemPrice(String itemID, double newPrice) {
-        return "";
-    }
-
-    public String printAllItems() {
-        return "";
-    }
 
     public String printMostProfitableItems() {
         return "";
