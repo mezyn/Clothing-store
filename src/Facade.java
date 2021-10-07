@@ -26,8 +26,17 @@ Controller controller = new Controller();
     }
 
     public boolean containsItem(String itemID) {
+        controller.findReview(itemID);
         return controller.containsItem(itemID);
     }
+
+    public boolean containsReview(String reviewID) { // added by Carl,
+        controller.findReview(reviewID);
+        return controller.containsItem(reviewID);
+    }
+    /*public String getItemName(String itemName) { // added by Carl, used in getPrintedReviews line 164 in main
+        return controller.getItemName(itemID);
+    }*/
 
     public double buyItem(String itemID, int amount) {
         controller.buyItem(itemID, amount);
@@ -52,10 +61,12 @@ Controller controller = new Controller();
     //For reviews
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
-        return "";
+
+
+        return controller.createReview(itemID, reviewComment, reviewGrade);
     }
 
-    public String reviewItem(String itemID, int reviewGrade) {
+    public String reviewItem(String itemID, int reviewGrade) { // Think we don't need this one since we have comment?
         return "";
     }
 
@@ -79,7 +90,8 @@ Controller controller = new Controller();
         return "";
     }
 
-    public String getPrintedReviews(String itemID) {
+    public String getPrintedReviews(String itemID) { // 3.3 user story
+
         return "";
     }
 
@@ -155,5 +167,7 @@ Controller controller = new Controller();
     public String printMostProfitableItems() {
         return "";
     }
+
+
 
 }

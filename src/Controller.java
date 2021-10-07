@@ -3,46 +3,41 @@ import java.util.ArrayList;
 public class Controller {
 
     //For Item Lists
-    private ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
     }
 
-    //Create a new item and add it to itemList
-    public String createItem(String itemID, String itemName, double unitPrice) {
+    static ArrayList<Review> reviewList = new ArrayList<>();
 
-        unitPrice = changeDecimal(unitPrice, 2);
-        Item item = new Item(itemID, itemName, unitPrice);
-        itemList.add(item);
-        return "";
-    }
-
-    public String updateItemName(String IDInput, String newNameInput) {
-
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemName(newNameInput);
-        return "";
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
     }
 
 
-    public String updateItemPrice(String IDInput, double newPriceInput) {
+    /*
+    public String getItemName(String ID) {
+        Item foundItem = findItem(ID);
 
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemPrice(newPriceInput);
-        return "";
+        return foundItem.getItemName();
     }
 
-    //Remove item
-    public String removeItem(String itemID) {
+    public double getItemPrice(String ID) {
+        Item foundItem = findItem(ID);
 
-        if (this.containsItem(itemID)) {
-            Item itemToRemove = this.findItem(itemID);
-            itemList.remove(itemToRemove);
-            return "Item <" + itemID + "> was successfully removed.";
-        } else {
-            return "Item <" + itemID + "> could not be removed.";
+        return foundItem.getItemPrice();
+    }*///redundant
+
+    //Find index for user typed ID
+    public Item findItem(String userID) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(userID)) {
+                return itemList.get(i);
+            }
         }
+        return null;
     }
 
     //Check if item is already in the list by using ID
@@ -56,27 +51,46 @@ public class Controller {
         return false;
     }
 
-    //Find index for user typed ID
-    public Item findItem(String userID) {
+    //Remove item
+    public String removeItem(String itemID) {
 
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(userID)) {
-                return itemList.get(i);
-            }
+        if (this.containsItem(itemID)) {
+            Item itemToRemove = this.findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item <" + itemID + "> was successfully removed.";
+        } else {
+           return "Item <" + itemID + "> could not be removed.";
         }
-        return null;
+
+
     }
 
+    public String createReview(String ID, String reviewComment, double reviewGrade) {
+        Review review = new Review(ID, reviewComment, reviewGrade);
+        reviewList.add(review);
+        return "";
 
-    public double buyItem(String itemID, int amount) {
+        // No need to check for duplicate review since different reviewers can enter same values.
+    }
+    //Create a new item and add it to itemList
+    public String createItem(String itemID, String itemName, double unitPrice) {
+
+        unitPrice = changeDecimal(unitPrice, 2);
+        Item item = new Item(itemID, itemName, unitPrice);
+        itemList.add(item);
+        return "";
+    }
+
+    public double buyItem() { //(String itemID, int amount)
 
         double totalPrice;
+        String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
 
         if (!containsItem(itemID)) {
             return -1;
 
         } else {
-
+            int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
             double itemPrice = findItem(itemID).getItemPrice();
 
             if (amount < 4 || amount == 4) {
@@ -91,31 +105,6 @@ public class Controller {
             return totalPrice;
 
         }
-    }
-
-    public String printItem(String itemID) {
-
-        if (containsItem(itemID)) {
-            Item foundItem = findItem(itemID);
-            System.out.println(foundItem);
-        } else {
-            System.out.println("Item <" + itemID + " > was not registered yet.");
-        }
-        return "";
-    }
-
-
-    public String printAllItems() {
-
-        if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else {
-            System.out.println("All registered items:");
-            for (Item item : itemList) {
-                System.out.println(item);
-            }
-        }
-        return "";
     }
 
 
@@ -134,22 +123,29 @@ public class Controller {
         return value;
     }
 
+    public String updateItemName(String IDInput, String newNameInput) {
 
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemName(newNameInput);
+        return "";
+    }
 
+    public String printAllItems() {
 
-
-    private ArrayList<Review> reviewList = new ArrayList<Review>();
-
-
-    public void createReview(String ID, String comment, double grade) {
-        Review review = new Review(ID, comment, grade);
-        reviewList.add(review);
-
-        // No need to check for duplicate review since different reviewers can enter same values.
+        if (itemList.size() == 0) {
+            System.out.println("No items registered yet.");
+        } else {
+            System.out.println("All registered items:");
+            for (Item item : itemList) {
+                System.out.println(item);
+            }
+        }
+        return "";
     }
 
 
-    public String printAllReview() {
+
+    public static String printAllReview() {
         if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
@@ -161,16 +157,17 @@ public class Controller {
         }return "";
     }
 
+
     public boolean containsReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewID)) {
+            if (getReviewList().get(i).getID().equals(reviewID)) {
                 return true;
             }
         }
         return false;
     }
-    public Review findReview(String reviewID) {
+    public static Review findReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getID().equals(reviewID)) {
@@ -182,17 +179,17 @@ public class Controller {
 
 
     public String printAnReview() { // User Story 3.3
-        if (reviewList.size() == 0) {
+        { if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
             System.out.println("Reviews of item: ");
             for (Review review : reviewList) {
                 System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
-
             }
         }return "";
     }
-  //_______________________________Mean Grade of Review____________________________________________
+
+  /*_______________________________Mean Grade of Review____________________________________________
 /*    public boolean containsGrade(String reviewGrade) {
 
         for (int i = 0; i < reviewList.size(); i++) {
@@ -223,7 +220,7 @@ public class Controller {
 
           }
           return "";
-      }
+      } */
 */
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
