@@ -1,15 +1,13 @@
 
 public class MenuClass {
 
-    //item menu
-
-    Controller obj = new Controller();
+    Facade facade = new Facade();
 
     //method for creating items
     public void createItem(){
 
         String ID = UserInput.readLine("Type ID for item: ");
-        while(obj.containsItem(ID)) {
+        while(facade.containsItem(ID)) {
             ID = UserInput.readLine("The ID is already taken." + System.lineSeparator() + "Type another ID for item: ");
         }
         while (ID.isBlank()) {
@@ -26,7 +24,7 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
-        obj.createItem(ID,name,pricePerUnit);
+        String item = facade.createItem(ID, name, pricePerUnit);
 
     }
 
@@ -35,14 +33,15 @@ public class MenuClass {
     public String updateItemName() { //(String itemID, String newName)
 
         String IDInput = UserInput.readLine("Type current ID of the item: ");
-        Item foundItem = obj.findItem(IDInput);
+        while (IDInput.isBlank() || IDInput.equals(IDInput)) {
+            System.out.println("Invalid data for item.");
+            IDInput = UserInput.readLine("Type new name for the item: ");
+        }
         String newNameInput = UserInput.readLine("Type new name for the item: ");
 
-        while (newNameInput.isBlank() || newNameInput.equals(IDInput)) {
-            System.out.println("Invalid data for item.");
-            newNameInput = UserInput.readLine("Type new name for the item: ");
-        }
-         foundItem.setItemName(newNameInput);
+        facade.updateItemName(IDInput,newNameInput);
+        
+       
         return "";
         }
 
@@ -50,7 +49,7 @@ public class MenuClass {
     public String updateItemPrice(){ //(String itemID, double newPrice)
 
         String IDInput = UserInput.readLine("Type current ID of the item: ");
-        Item foundItem = obj.findItem(IDInput);
+        Item foundItem = facade.findItem(IDInput);
         double newPriceInput = UserInput.readDouble("Type new price for the item: ");
 
         while (newPriceInput < 0 || newPriceInput == 0) {
@@ -93,13 +92,7 @@ public class MenuClass {
     public String removeItem() {
 
         String itemID = UserInput.readLine("Type ID of item you would like to remove: ");
-        if (obj.containsItem(itemID)) {
-            Item itemToRemove = obj.findItem(itemID);
-            obj.removeItem(itemToRemove);
-            System.out.println("Item <" + itemID + "> was successfully removed.");
-        } else {
-            System.out.println("Item <" + itemID + "> could not be removed.");
-        }
+        facade.removeItem(itemID);
 
         return "";
     }
@@ -108,8 +101,8 @@ public class MenuClass {
     public String printItem() {
 
         String itemID = UserInput.readLine("Type ID of item to be printed: ");
-        if (obj.containsItem(itemID)) {
-            Item foundItem = obj.findItem(itemID);
+        if (facade.containsItem(itemID)) {
+            Item foundItem = facade.findItem(itemID);
             System.out.println(foundItem);
         } else {
             System.out.println("Item <" + itemID + " > was not registered yet.");
@@ -120,9 +113,9 @@ public class MenuClass {
 
     public String getPrintedReviews () { //User story 3.3
         String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID)){
-            System.out.println("Review(s) for <" + reviewID + ">: <" + obj.getItemName(reviewID) + ">. <" + obj.getItemPrice(reviewID) + "> SEK.");
-            Review foundReview = obj.findReview(reviewID);
+        if (facade.containsReview(reviewID)){
+            System.out.println("Review(s) for <" + reviewID + ">: <" + facade.getItemName(reviewID) + ">. <" + facade.getItemPrice(reviewID) + "> SEK.");
+            Review foundReview = facade.findReview(reviewID);
             System.out.println(foundReview);
         }else {
             System.out.println("Item <" + reviewID + " > was not registered yet.");
@@ -152,7 +145,7 @@ public class MenuClass {
         while(ID.isEmpty()) {
             System.out.println("ID needed to review item: ");
             ID = UserInput.readLine("Enter ID number: ");
-        } while (!obj.containsItem(ID)){          // Checks if there are obj with ID number
+        } while (!facade.containsItem(ID)){          // Checks if there are obj with ID number
             System.out.println("Item <ID> was not registered yet.");
             ID = UserInput.readLine("Enter a valid ID number: ");
 
@@ -165,7 +158,7 @@ public class MenuClass {
             grade = UserInput.readDouble("Grade values must be between 1 and 5.");
         }   
 
-        obj.createReview(ID, comment, grade);
+        facade.createReview(ID, comment, grade);
 
         System.out.println("Your item review was registered successfully.");
         System.out.println("Returning to Review Menu....");
@@ -217,11 +210,11 @@ public class MenuClass {
                 itemOption();
                 break;
             case 3 :
-                obj.printAllItems();
+                facade.printAllItems();
                 itemOption();
                 break;
             case 4 :
-                obj.buyItem(); //as for now buyItem is in obj
+                facade.buyItem(); //as for now buyItem is in obj
                 itemOption();
                 break;
             //5. Update an item’s name.
@@ -279,7 +272,7 @@ public class MenuClass {
                 break;
             case 5 : System.out.println("Option 6");
                 break;
-            case 6 : obj.printAllReview();
+            case 6 : facade.printAllReview();
                 ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");
@@ -321,7 +314,7 @@ public class MenuClass {
                 break;
             case 3 : System.out.println("Option 4");
                 break;
-            case 4 : obj.printAllTransactions();
+            case 4 : facade.printAllTransactions();
                 transactionHistoryMenu();
                 break;
             case 5 : System.out.println("Option 6");

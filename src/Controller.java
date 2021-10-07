@@ -3,8 +3,13 @@ import java.util.ArrayList;
 public class Controller {
 
     //For Item Lists
-    private ArrayList<Item> itemList = new ArrayList<>();
+    ArrayList<Item> itemList = new ArrayList<>();
 
+    public ArrayList<Item> getItemList() {
+        return itemList;
+    }
+
+    /*
     public String getItemName(String ID) {
         Item foundItem = findItem(ID);
 
@@ -15,7 +20,7 @@ public class Controller {
         Item foundItem = findItem(ID);
 
         return foundItem.getItemPrice();
-    }
+    }*///redundant
 
     //Find index for user typed ID
     public Item findItem(String userID) {
@@ -31,8 +36,8 @@ public class Controller {
     //Check if item is already in the list by using ID
     public boolean containsItem(String itemID) {
 
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(itemID)) {
+        for (int i = 0; i < getItemList().size(); i++) {
+            if (getItemList().get(i).getID().equals(itemID)) {
                 return true;
             }
         }
@@ -40,9 +45,16 @@ public class Controller {
     }
 
     //Remove item
-    public void removeItem(Item itemToRemove) {
+    public String removeItem(String itemID) {
 
-        itemList.remove(itemToRemove);
+        if (this.containsItem(itemID)) {
+            Item itemToRemove = this.findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item <" + itemID + "> was successfully removed.";
+        } else {
+           return "Item <" + itemID + "> could not be removed.";
+        }
+
 
     }
 
@@ -81,6 +93,8 @@ public class Controller {
         }
     }
 
+
+
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
@@ -95,6 +109,12 @@ public class Controller {
         return value;
     }
 
+    public String updateItemName(String IDInput, String newNameInput) {
+
+        Item foundItem = findItem(IDInput);
+        foundItem.setItemName(newNameInput);
+        return "";
+    }
 
     public String printAllItems() {
 
