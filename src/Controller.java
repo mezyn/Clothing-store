@@ -9,7 +9,7 @@ public class Controller {
         return itemList;
     }
 
-    ArrayList<Review> reviewList = new ArrayList<>();
+    static ArrayList<Review> reviewList = new ArrayList<>();
 
     public ArrayList<Review> getReviewList() {
         return reviewList;
@@ -145,7 +145,7 @@ public class Controller {
 
 
 
-    public String printAllReview() {
+    public static String printAllReview() {
         if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
@@ -167,7 +167,7 @@ public class Controller {
         }
         return false;
     }
-    public Review findReview(String reviewID) {
+    public static Review findReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getID().equals(reviewID)) {
@@ -179,7 +179,7 @@ public class Controller {
 
 
     public String printAnReview() { // User Story 3.3
-        if (reviewList.size() == 0) {
+        { if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
             System.out.println("Reviews of item: ");
@@ -188,6 +188,7 @@ public class Controller {
             }
         }return "";
     }
+
   /*_______________________________Mean Grade of Review____________________________________________
 /*    public boolean containsGrade(String reviewGrade) {
 

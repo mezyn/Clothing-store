@@ -111,25 +111,6 @@ public class MenuClass {
         return "";
     }
 
-    public String  getPrintedItemReview(){ // User story 3.2
-
-    }
-
-
-    public String getPrintedReviews () { //User story 3.3
-        String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (facade.containsReview(reviewID)){
-            System.out.println("Review(s) for <" + reviewID + ">: <" + Item.getItemName(reviewID) + ">. <" + Item.getItemPrice(reviewID) + "> SEK.");
-            Review foundReview = Controller.findReview(reviewID);
-            System.out.println(foundReview);
-        }else {
-            System.out.println("Item <" + reviewID + " > was not registered yet.");
-
-        }
-        return "";
-
-    }
-    
 
      /*public String meanReview(){
         String reviewID = UserInput.readLine("Enter the ID of Item");
@@ -141,18 +122,18 @@ public class MenuClass {
         }
 
     }*/
-
+//____________________________________________Reviews___________________________________________________
     public void createReview() { //User Story 3.1
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
-        String reviewID = UserInput.readLine("Enter the ID number: ");
-        while(reviewID.isEmpty()) {
+        String itemID = UserInput.readLine("Enter the ID number: ");
+        while(itemID.isEmpty()) {
             System.out.println("ID needed to review item: ");
-            reviewID = UserInput.readLine("Enter ID number: ");
-        } while (!facade.containsItem(reviewID)){
+            itemID = UserInput.readLine("Enter ID number: ");
+        } while (!facade.containsItem(itemID)){
             System.out.println("Item <ID> was not registered yet.");
-            reviewID = UserInput.readLine("Enter a valid ID number: ");
+            itemID = UserInput.readLine("Enter a valid ID number: ");
 
         }
         String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
@@ -163,7 +144,7 @@ public class MenuClass {
              reviewGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
         }
 
-        String review = facade.createItem(reviewID, reviewComment, reviewGrade);
+        String review = facade.createItem(itemID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
         System.out.println("Returning to Review Menu....");
@@ -181,7 +162,7 @@ public class MenuClass {
         String reviewID = UserInput.readLine("Enter the ID of Item: ");
         if (facade.containsReview(reviewID)){
             System.out.println("Review(s) for <" + reviewID + ">: <" + facade.getItemName(reviewID) + ">. " +
-                    "<" + facade.getItemPrice(reviewID) + "> SEK.");
+                    "<" + facade.getItemPrice(reviewID) + "> SEK."); // Need add a getItemName & getItemPrice, but then we change the facade?
             Review foundReview = Controller.findReview(reviewID);
             System.out.println(foundReview);
         }else {
@@ -300,7 +281,7 @@ public class MenuClass {
                 break;
             case 5 : System.out.println("Option 6");
                 break;
-            case 6 : facade.printAllReview();
+            case 6 : Controller.printAllReview();
                 ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");
