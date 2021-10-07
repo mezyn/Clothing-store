@@ -152,11 +152,11 @@ public class Controller {
             }
         }return "";
     }
-// _______________________________Mean Grade of Review____________________________________________
+  //_______________________________Mean Grade of Review____________________________________________
     public boolean containsGrade(String reviewGrade) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewGrade)) {
+            if (reviewList.get(i).getGrade(double).equals(reviewGrade)) {
                 return true;
             }
         }
@@ -165,21 +165,26 @@ public class Controller {
     public Review findGrade(String reviewGrade) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewGrade)) {
+            if (reviewList.get(i).getGrade().equals(reviewGrade)) {
                 return reviewList.get(i);
             }
         }
         return null;
     }
 
-     /*public String meanReview(){
-        if (reviewList.size() == 0) {
-             System.out.println("No reviews have been added:"+ System.lineSeparator());
-         }else {
+      public String meanReview() {
+          if (reviewList.size() == 0) {
+              System.out.println("No reviews have been added:" + System.lineSeparator());
+          } else {
+              System.out.println("Reviews of item: ");
+          }
+          for (Review reviewGrade : reviewList) {
+              System.out.print("____________________________" + System.lineSeparator() + reviewGrade + System.lineSeparator());
 
-        }
+          }
+          return "";
+      }
 
-    } */
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
     private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();

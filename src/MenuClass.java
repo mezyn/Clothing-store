@@ -130,16 +130,18 @@ public class MenuClass {
         return "";
 
     }
+    
 
-    public void meanReview(){
+     /*public String meanReview(){
         String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID)){ // Checks if there are a review with that ID.
+        if (obj.containsReview(reviewID) && obj.containsItem(itemID) ){ // Checks if there are a review with that ID.
             Review foundReview = obj.findReview(reviewID);
-
+            Item foundItem = obj.findItem(itemID);
+            System.out.println(foundReview);
 
         }
 
-    }
+    }*/
 
     public void createReview() { // User Story 3.1 |DONE|
 
@@ -271,7 +273,7 @@ public class MenuClass {
             case 3 : specificItemReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
-            case 4 : meanReview();
+            case 4 : //meanReview();
                 ReviewMenu();
                 break;
             case 5 : System.out.println("Option 6");

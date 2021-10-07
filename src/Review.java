@@ -1,9 +1,9 @@
 
 public class Review {
 
-    String ID; //attribute
-    String comment; //attribute
-    double grade; //attribute
+    private String ID; //attribute
+    private String comment; //attribute
+    private double grade; //attribute
 
     public Review(String ID, String comment, double grade){
 
