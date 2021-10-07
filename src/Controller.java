@@ -2,18 +2,28 @@ import java.util.ArrayList;
 
 public class Controller {
 
-    //For Item Lists
+    // -----------------------------COMMON METHODS----------------------------------
+
+    //To change the number of decimal digits
+    //How to use: 'value' is your original number input with all decimal digits,
+    //and 'decimalPoint' is the number of decimal digits you would like to have.
+    // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
+    public double changeDecimal(double value, int decimalPoint)
+    {
+        // Using the pow() method
+        value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);
+
+        return value;
+    }
+
+    //-----------------------------------FOR ITEMS-----------------------------------
 
     private ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
-    }
-//does it have to be static? I know TA mentioned about this but I didn't get why -M
-    static ArrayList<Review> reviewList = new ArrayList<>();
-
-    public ArrayList<Review> getReviewList() {
-        return reviewList;
     }
 
     //Create a new item and add it to itemList
@@ -124,18 +134,13 @@ public class Controller {
         return "";
     }
 
-    //To change the number of decimal digits
-    //How to use: 'value' is your original number input with all decimal digits,
-    //and 'decimalPoint' is the number of decimal digits you would like to have.
-    // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
-    public double changeDecimal(double value, int decimalPoint)
-    {
-        // Using the pow() method
-        value = value * Math.pow(10, decimalPoint);
-        value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);
+// -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
-        return value;
+    //does it have to be static? I know TA mentioned about this but I didn't get why -M
+    static ArrayList<Review> reviewList = new ArrayList<>();
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
     }
 
     public String createReview(String ID, String reviewComment, double reviewGrade) {
@@ -145,11 +150,6 @@ public class Controller {
 
         // No need to check for duplicate review since different reviewers can enter same values.
     }
-
-
-
-
-
 
 
 
@@ -187,14 +187,17 @@ public class Controller {
 
 
     public String printAnReview() { // User Story 3.3
-        { if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added: "+ System.lineSeparator());
-        } else {
-            System.out.println("Reviews of item: ");
-            for (Review review : reviewList) {
-                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+        {
+            if (reviewList.size() == 0) {
+                System.out.println("No reviews have been added: " + System.lineSeparator());
+            } else {
+                System.out.println("Reviews of item: ");
+                for (Review review : reviewList) {
+                    System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
+                }
             }
-        }return "";
+            return "";
+        }
     }
 
   /*_______________________________Mean Grade of Review____________________________________________
@@ -229,10 +232,12 @@ public class Controller {
           }
           return "";
       } */
-*/
 
+// --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
     private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+
+
 
     public void createTransaction( String ID, int amount, double purchasePrice){
 
