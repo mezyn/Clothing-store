@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 
 public class MenuClass {
 
@@ -110,12 +111,16 @@ public class MenuClass {
         return "";
     }
 
+    public String  getPrintedItemReview(){ // User story 3.2
+
+    }
+
 
     public String getPrintedReviews () { //User story 3.3
         String reviewID = UserInput.readLine("Enter the ID of Item");
         if (facade.containsReview(reviewID)){
-            System.out.println("Review(s) for <" + reviewID + ">: <" + facade.getItemName(reviewID) + ">. <" + facade.getItemPrice(reviewID) + "> SEK.");
-            Review foundReview = facade.findReview(reviewID);
+            System.out.println("Review(s) for <" + reviewID + ">: <" + Item.getItemName(reviewID) + ">. <" + Item.getItemPrice(reviewID) + "> SEK.");
+            Review foundReview = Controller.findReview(reviewID);
             System.out.println(foundReview);
         }else {
             System.out.println("Item <" + reviewID + " > was not registered yet.");
@@ -137,33 +142,56 @@ public class MenuClass {
 
     }*/
 
-    public void createReview() { // User Story 3.1 |DONE|
+    public void createReview() { //User Story 3.1
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
-        String ID = UserInput.readLine("Enter the ID number: ");
-        while(ID.isEmpty()) {
+        String reviewID = UserInput.readLine("Enter the ID number: ");
+        while(reviewID.isEmpty()) {
             System.out.println("ID needed to review item: ");
-            ID = UserInput.readLine("Enter ID number: ");
-        } while (!facade.containsItem(ID)){          // Checks if there are obj with ID number
+            reviewID = UserInput.readLine("Enter ID number: ");
+        } while (!facade.containsItem(reviewID)){
             System.out.println("Item <ID> was not registered yet.");
-            ID = UserInput.readLine("Enter a valid ID number: ");
+            reviewID = UserInput.readLine("Enter a valid ID number: ");
 
         }
-        String comment = UserInput.readLine("What did you like or dislike about this item?: ");
+        String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
        
-        double grade = UserInput.readDouble("Enter a grade between 1 to 5: ");
-         while (grade < 1.0 || grade > 5.0){
+        double reviewGrade = UserInput.readDouble("Enter a grade between 1 to 5: ");
+         while (reviewGrade < 1.0 || reviewGrade > 5.0){
 
-            grade = UserInput.readDouble("Grade values must be between 1 and 5.");
-        }   
+             reviewGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
+        }
 
-        facade.createReview(ID, comment, grade);
+        String review = facade.createItem(reviewID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
         System.out.println("Returning to Review Menu....");
 
     }
+
+    public String  getPrintedItemReview(){ // User story 3.2
+        String reviewID = UserInput.readLine("Enter ID of Item: ");
+
+
+    }
+
+
+    public String getPrintedReviews () { //User story 3.3
+        String reviewID = UserInput.readLine("Enter the ID of Item: ");
+        if (facade.containsReview(reviewID)){
+            System.out.println("Review(s) for <" + reviewID + ">: <" + facade.getItemName(reviewID) + ">. " +
+                    "<" + facade.getItemPrice(reviewID) + "> SEK.");
+            Review foundReview = Controller.findReview(reviewID);
+            System.out.println(foundReview);
+        }else {
+            System.out.println("Item <" + reviewID + " > was not registered yet.");
+
+        }
+        return "";
+
+    }
+
     // 4.3 print transaction for specific item
     /*public String printTransactionSpecificItem() {
             String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");

@@ -9,6 +9,13 @@ public class Controller {
         return itemList;
     }
 
+    ArrayList<Review> reviewList = new ArrayList<>();
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
+    }
+
+
     /*
     public String getItemName(String ID) {
         Item foundItem = findItem(ID);
@@ -58,6 +65,13 @@ public class Controller {
 
     }
 
+    public String createReview(String ID, String reviewComment, double reviewGrade) {
+        Review review = new Review(ID, reviewComment, reviewGrade);
+        reviewList.add(review);
+        return "";
+
+        // No need to check for duplicate review since different reviewers can enter same values.
+    }
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
 
@@ -129,15 +143,6 @@ public class Controller {
         return "";
     }
 
-    private ArrayList<Review> reviewList = new ArrayList<Review>();
-
-
-    public void createReview(String ID, String comment, double grade) {
-        Review review = new Review(ID, comment, grade);
-        reviewList.add(review);
-
-        // No need to check for duplicate review since different reviewers can enter same values.
-    }
 
 
     public String printAllReview() {
@@ -152,10 +157,11 @@ public class Controller {
         }return "";
     }
 
+
     public boolean containsReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewID)) {
+            if (getReviewList().get(i).getID().equals(reviewID)) {
                 return true;
             }
         }
@@ -179,11 +185,10 @@ public class Controller {
             System.out.println("Reviews of item: ");
             for (Review review : reviewList) {
                 System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
-
             }
         }return "";
     }
-  //_______________________________Mean Grade of Review____________________________________________
+  /*_______________________________Mean Grade of Review____________________________________________
 /*    public boolean containsGrade(String reviewGrade) {
 
         for (int i = 0; i < reviewList.size(); i++) {
@@ -214,7 +219,7 @@ public class Controller {
 
           }
           return "";
-      }
+      } */
 */
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...

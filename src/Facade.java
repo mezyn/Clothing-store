@@ -23,7 +23,13 @@ Controller controller = new Controller();
     }
 
     public boolean containsItem(String itemID) {
+        controller.findReview(itemID);
         return controller.containsItem(itemID);
+    }
+
+    public boolean containsReview(String reviewID) { // added by Carl
+        controller.findReview(reviewID);
+        return controller.containsItem(reviewID);
     }
 
     public double buyItem(String itemID, int amount) {
@@ -31,11 +37,13 @@ Controller controller = new Controller();
     }
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
+
+
         return "";
     }
 
-    public String reviewItem(String itemID, int reviewGrade) {
-        return "";
+    public String reviewItem(String ID, String reviewComment, double reviewGrade) { // (String itemID, int reviewGrade) before change
+        return controller.createReview(ID, reviewComment, reviewGrade);
     }
 
     public String getItemCommentsPrinted(String itemID) {
@@ -58,7 +66,8 @@ Controller controller = new Controller();
         return "";
     }
 
-    public String getPrintedReviews(String itemID) {
+    public String getPrintedReviews(String itemID) { // 3.3 user story
+
         return "";
     }
 
