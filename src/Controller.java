@@ -3,31 +3,19 @@ import java.util.ArrayList;
 public class Controller {
 
     //For Item Lists
-    ArrayList<Item> itemList = new ArrayList<>();
+
+    private ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
     }
-
+//does it have to be static? I know TA mentioned about this but I didn't get why -M
     static ArrayList<Review> reviewList = new ArrayList<>();
 
     public ArrayList<Review> getReviewList() {
         return reviewList;
     }
 
-
-    /*
-    public String getItemName(String ID) {
-        Item foundItem = findItem(ID);
-
-        return foundItem.getItemName();
-    }
-
-    public double getItemPrice(String ID) {
-        Item foundItem = findItem(ID);
-
-        return foundItem.getItemPrice();
-    }*///redundant
 
     //Find index for user typed ID
     public Item findItem(String userID) {
