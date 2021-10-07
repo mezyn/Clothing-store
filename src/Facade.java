@@ -4,7 +4,7 @@ public class Facade {
 Controller controller = new Controller();
 
 
-//For items
+//----------------------------- For items --------------------------------------------
 
     public String createItem(String itemID, String itemName, double unitPrice){
         return controller.createItem(itemID, itemName, unitPrice);
@@ -58,7 +58,7 @@ Controller controller = new Controller();
 
 
 
-    //For reviews
+    // ------------------------------- For reviews ------------------------------------
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
 
@@ -67,6 +67,7 @@ Controller controller = new Controller();
     }
 
     public String reviewItem(String itemID, int reviewGrade) { // Think we don't need this one since we have comment?
+        //We need to keep this. We need two 'reviewItem()' which have difference in arguments.This one doesn't take 'comment' as an argument
         return "";
     }
 
@@ -133,7 +134,7 @@ Controller controller = new Controller();
 
 
 
-    //for transactions
+    // ------------------------------- for transaction history ---------------------------------
 
     public double getTotalProfit() {
         return -1.0;

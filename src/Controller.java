@@ -136,7 +136,7 @@ public class Controller {
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
-    //does it have to be static? I know TA mentioned about this but I didn't get why -M
+    //does it have to be static? I know TA mentioned about this but I didn't get why -Mijin
     static ArrayList<Review> reviewList = new ArrayList<>();
 
     public ArrayList<Review> getReviewList() {
