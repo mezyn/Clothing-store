@@ -5,6 +5,17 @@ public class Controller {
     //For Item Lists
     private ArrayList<Item> itemList = new ArrayList<>();
 
+    public String getItemName(String ID) {
+        Item foundItem = findItem(ID);
+
+        return foundItem.getItemName();
+    }
+
+    public double getItemPrice(String ID) {
+        Item foundItem = findItem(ID);
+
+        return foundItem.getItemPrice();
+    }
 
     //Find index for user typed ID
     public Item findItem(String userID) {
@@ -153,7 +164,7 @@ public class Controller {
         }return "";
     }
   //_______________________________Mean Grade of Review____________________________________________
-    public boolean containsGrade(String reviewGrade) {
+/*    public boolean containsGrade(String reviewGrade) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getGrade(double).equals(reviewGrade)) {
@@ -184,7 +195,7 @@ public class Controller {
           }
           return "";
       }
-
+*/
 
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
     private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();

@@ -13,7 +13,7 @@ public class Review {
     }
     @Override
     public String toString() {
-        return  "<" + this.ID + ">: <" + this.grade +">. <" + this.comment + ">";
+        return  "Grade: <" + this.grade +">. <" + this.comment + ">";
     }
 
 
