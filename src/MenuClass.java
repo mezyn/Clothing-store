@@ -97,16 +97,7 @@ public class MenuClass {
     }
 
 
-     /*public String meanReview(){
-        String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID) && obj.containsItem(itemID) ){ // Checks if there are a review with that ID.
-            Review foundReview = obj.findReview(reviewID);
-            Item foundItem = obj.findItem(itemID);
-            System.out.println(foundReview);
 
-        }
-
-    }*/
 //____________________________________________Reviews___________________________________________________
     public void createReview() { //User Story 3.1
 
@@ -136,11 +127,19 @@ public class MenuClass {
 
     }
 
-    /*public String  getPrintedItemReview(){ // User story 3.2
+    /* public String getPrintedItemReview(){ // User story 3.2
         String reviewID = UserInput.readLine("Enter ID of Item: ");
 
+        if (Controller.reviewList == null ) {
+            System.out.println("Nothing in list ");
 
-    }*/
+        }if (reviewID == ){
+
+            }
+
+        return String.valueOf(Controller.reviewList.get(Integer.parseInt(reviewID)));
+
+    } */
 
 
     public String getPrintedReviews () { //User story 3.3
@@ -159,6 +158,21 @@ public class MenuClass {
         }
         return "";
     }
+
+    /* public String getItemMeanGrade(){ //3.4
+        String reviewID = UserInput.readLine("Enter the ID of Item");
+        if (obj.containsReview(reviewID) && obj.containsItem(itemID) ){ // Checks if there are a review with that ID.
+            Review foundReview = obj.findReview(reviewID);
+            Item foundItem = obj.findItem(itemID);
+            System.out.println(foundReview);
+
+        }
+
+    } */
+
+    /* public String getItemComments() { 3.5
+
+    } */
 //___________________________________________________________________________________________________________
 
     // 4.3 print transaction for specific item
@@ -259,7 +273,8 @@ public class MenuClass {
             case 1 : createReview();
                 ReviewMenu();
                 break;
-            case 2 : System.out.println("Option 3");
+            case 2 : //getPrintedItemReview();
+                ReviewMenu();
                 break;
             case 3 : getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
