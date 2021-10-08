@@ -58,7 +58,6 @@ Controller controller = new Controller();
     }
 
 
-
     // ------------------------------- For reviews ------------------------------------
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
@@ -67,8 +66,8 @@ Controller controller = new Controller();
         return controller.createReview(itemID, reviewComment, reviewGrade);
     }
 
-    public String reviewItem(String itemID, int reviewGrade) { // Think we don't need this one since we have comment?
-        //We need to keep this. We need two 'reviewItem()' which have difference in arguments.This one doesn't take 'comment' as an argument
+    public String reviewItem(String itemID, int reviewGrade) {
+        reviewItem(itemID, "", reviewGrade);
         return "";
     }
 
@@ -88,7 +87,7 @@ Controller controller = new Controller();
         return -1;
     }
 
-    public String getPrintedItemReview(String itemID, int reviewNumber) {
+    public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story?
         return "";
     }
 

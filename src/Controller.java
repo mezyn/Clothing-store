@@ -20,7 +20,7 @@ public class Controller {
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    private ArrayList<Item> itemList = new ArrayList<>();
+    private static ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
@@ -133,6 +133,63 @@ public class Controller {
         }
         return "";
     }
+    // ----------------------------------------------------------------------------------------
+    public static String getItemName(String itemID) {
+
+        String itemName = findItemName(itemID).getItemName();
+
+            return itemName;
+    }
+    public boolean containsItemName(String itemName) {
+
+        for (int i = 0; i < getItemList().size(); i++) {
+            if (getReviewList().get(i).getID().equals(itemName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Item findItemName(String itemName) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(itemName)) {
+                return itemList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static String getItemPrice(String itemID) {
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(itemID)) {
+                return String.valueOf(itemList.get(i).getItemPrice()); // Valueof
+            }
+        }
+        return "Can't find"; //change later
+
+
+    }
+
+    public boolean containsItemPrice(String itemPrice) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (getReviewList().get(i).getID().equals(itemPrice)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Item findItemPrice (String itemPrice) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(itemPrice)) {
+                return itemList.get(i);
+            }
+        }
+        return null;
+    }
+
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
@@ -143,7 +200,7 @@ public class Controller {
         return reviewList;
     }
 
-    public String createReview(String ID, String reviewComment, double reviewGrade) {
+    public static String createReview(String ID, String reviewComment, double reviewGrade) {
         Review review = new Review(ID, reviewComment, reviewGrade);
         reviewList.add(review);
         return "";
@@ -272,6 +329,8 @@ public class Controller {
         return "";
 
     }
+
+
 
 }
 

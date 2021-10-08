@@ -129,33 +129,33 @@ public class MenuClass {
              reviewGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
         }
 
-        String review = facade.createItem(itemID, reviewComment, reviewGrade);
+        String review = Controller.createReview(itemID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
         System.out.println("Returning to Review Menu....");
 
     }
 
-    public String  getPrintedItemReview(){ // User story 3.2
+    /*public String  getPrintedItemReview(){ // User story 3.2
         String reviewID = UserInput.readLine("Enter ID of Item: ");
 
 
-    }
+    } */
 
 
     public String getPrintedReviews () { //User story 3.3
         String reviewID = UserInput.readLine("Enter the ID of Item: ");
         if (facade.containsReview(reviewID)){
-            System.out.println("Review(s) for <" + reviewID + ">: <" + facade.getItemName(reviewID) + ">. " +
-                    "<" + facade.getItemPrice(reviewID) + "> SEK."); // Need add a getItemName & getItemPrice, but then we change the facade?
+            System.out.println("Review(s) for <" + reviewID + ">: <" + Controller.getItemName(reviewID) + ">. " +
+                    "<" + Controller.getItemPrice(reviewID) + "> SEK."); // Need add a getItemName & getItemPrice, but then we change the facade?
             Review foundReview = Controller.findReview(reviewID);
             System.out.println(foundReview);
+
         }else {
             System.out.println("Item <" + reviewID + " > was not registered yet.");
 
         }
         return "";
-
     }
 
     // 4.3 print transaction for specific item
