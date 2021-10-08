@@ -140,23 +140,26 @@ public class MenuClass {
         String reviewID = UserInput.readLine("Enter ID of Item: ");
 
 
-    } */
+    }*/
 
 
     public String getPrintedReviews () { //User story 3.3
         String reviewID = UserInput.readLine("Enter the ID of Item: ");
-        if (facade.containsReview(reviewID)){
+        if (facade.containsReview(reviewID)) {
+
             System.out.println("Review(s) for <" + reviewID + ">: <" + Controller.getItemName(reviewID) + ">. " +
-                    "<" + Controller.getItemPrice(reviewID) + "> SEK."); // Need add a getItemName & getItemPrice, but then we change the facade?
+                    "<" + Controller.getItemPrice(reviewID) + "> SEK.");
             Review foundReview = Controller.findReview(reviewID);
+
             System.out.println(foundReview);
 
-        }else {
+        } else {
             System.out.println("Item <" + reviewID + " > was not registered yet.");
 
         }
         return "";
     }
+//___________________________________________________________________________________________________________
 
     // 4.3 print transaction for specific item
     /*public String printTransactionSpecificItem() {
