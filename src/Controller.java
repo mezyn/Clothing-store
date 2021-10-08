@@ -8,8 +8,7 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
-    public double changeDecimal(double value, int decimalPoint)
-    {
+    public double changeDecimal(double value, int decimalPoint) {
         // Using the pow() method
         value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
@@ -133,13 +132,15 @@ public class Controller {
         }
         return "";
     }
+
     // ----------------------------------------------------------------------------------------
     public static String getItemName(String itemID) {
 
         String itemName = findItemName(itemID).getItemName();
 
-            return itemName;
+        return itemName;
     }
+
     public boolean containsItemName(String itemName) {
 
         for (int i = 0; i < getItemList().size(); i++) {
@@ -180,7 +181,8 @@ public class Controller {
         }
         return false;
     }
-    public Item findItemPrice (String itemPrice) {
+
+    public Item findItemPrice(String itemPrice) {
 
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getID().equals(itemPrice)) {
@@ -204,13 +206,27 @@ public class Controller {
         Review review = new Review(ID, reviewComment, reviewGrade);
         reviewList.add(review);
         return "";
+    }
 
-        // No need to check for duplicate review since different reviewers can enter same values.
+
+    public String getPrintedItemReview(String itemID, int reviewNumber) {
+        if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
+            System.out.println("Index ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }
+        return "";
     }
 
 
 
-    public static String printAllReview() {
+
+
+    public static String printAllReviews() {
         if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
@@ -219,7 +235,8 @@ public class Controller {
                 System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
 
             }
-        }return "";
+        }
+        return "";
     }
 
 

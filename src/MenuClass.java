@@ -123,23 +123,20 @@ public class MenuClass {
         String review = Controller.createReview(itemID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
-        System.out.println("Returning to Review Menu....");
 
     }
 
-    /* public String getPrintedItemReview(){ // User story 3.2
-        String reviewID = UserInput.readLine("Enter ID of Item: ");
+     /*public String getPrintedItemReview() { // User story 3.2
+         String reviewNumber = UserInput.readLine("Enter ID of Item: ");
 
-        if (Controller.reviewList == null ) {
-            System.out.println("Nothing in list ");
+         String reviewNumber = Controller.reviewList.get(0);
 
-        }if (reviewID == ){
 
-            }
+         return String.valueOf(Controller.reviewList.get(Integer.parseInt(reviewNumber)));
 
-        return String.valueOf(Controller.reviewList.get(Integer.parseInt(reviewID)));
+     } */
 
-    } */
+
 
 
     public String getPrintedReviews () { //User story 3.3
@@ -284,7 +281,7 @@ public class MenuClass {
                 break;
             case 5 : System.out.println("Option 6");
                 break;
-            case 6 : Controller.printAllReview();
+            case 6 : Controller.printAllReviews();
                 ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");

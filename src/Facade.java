@@ -34,10 +34,7 @@ Controller controller = new Controller();
         controller.findReview(reviewID);
         return controller.containsItem(reviewID);
     }
-    /*public String getItemName(String itemName) { // added by Carl, used in getPrintedReviews line 164 in main
-    //Can you move this to another class? 'getItemName()' is not a part of facade file Francisco uploaded. Don't think it should be under Facade - Mijin
-        return controller.getItemName(itemID);
-    }*/
+
 
     public double buyItem(String itemID, int amount) {
         controller.buyItem(itemID, amount);
@@ -60,13 +57,12 @@ Controller controller = new Controller();
 
     // ------------------------------- For reviews ------------------------------------
 
-    public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
-
+    public String reviewItem(String itemID, String reviewComment, int reviewGrade) { // 3.1 user story
 
         return controller.createReview(itemID, reviewComment, reviewGrade);
     }
 
-    public String reviewItem(String itemID, int reviewGrade) {
+    public String reviewItem(String itemID, int reviewGrade) { // 3.1 user story
         reviewItem(itemID, "", reviewGrade);
         return "";
     }
@@ -88,7 +84,9 @@ Controller controller = new Controller();
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story?
-        return "";
+
+
+        return controller.getPrintedItemReview(itemID, reviewNumber);
     }
 
     public String getPrintedReviews(String itemID) { // 3.3 user story
