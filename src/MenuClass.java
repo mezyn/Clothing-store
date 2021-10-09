@@ -1,4 +1,5 @@
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 
 public class MenuClass {
 
@@ -98,6 +99,8 @@ public class MenuClass {
 
 
 
+
+
 //____________________________________________Reviews___________________________________________________
     public void createReview() { //User Story 3.1
 
@@ -126,13 +129,19 @@ public class MenuClass {
 
     }
 
-     /*public String getPrintedItemReview() { // User story 3.2
-         String reviewNumber = UserInput.readLine("Enter ID of Item: ");
+     /* public String getPrintedItemReview() { // User story 3.2
+        String ID = UserInput.readLine("Enter ID");
+        if(facade.containsReview(ID))
 
-         String reviewNumber = Controller.reviewList.get(0);
+            int i = UserInput.readint();
+        UserInput.nextLine();
+
+            for (int i )
 
 
-         return String.valueOf(Controller.reviewList.get(Integer.parseInt(reviewNumber)));
+
+
+         return String.valueOf(Controller.reviewList.get(Integer.parseInt(reviewID)));
 
      } */
 
@@ -143,8 +152,10 @@ public class MenuClass {
         String reviewID = UserInput.readLine("Enter the ID of Item: ");
         if (facade.containsReview(reviewID)) {
 
+
             System.out.println("Review(s) for <" + reviewID + ">: <" + Controller.getItemName(reviewID) + ">. " +
                     "<" + Controller.getItemPrice(reviewID) + "> SEK.");
+
             Review foundReview = Controller.findReview(reviewID);
 
             System.out.println(foundReview);
@@ -156,20 +167,26 @@ public class MenuClass {
         return "";
     }
 
-    /* public String getItemMeanGrade(){ //3.4
+     /* public String getItemMeanGrade(){ //3.4
         String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (obj.containsReview(reviewID) && obj.containsItem(itemID) ){ // Checks if there are a review with that ID.
-            Review foundReview = obj.findReview(reviewID);
-            Item foundItem = obj.findItem(itemID);
+        if (facade.containsReview(reviewID)){ // Checks if there are a review with that ID.
+            Review foundReview = Controller.findReview(reviewID);
             System.out.println(foundReview);
 
-        }
+        }for (reviewID)
 
-    } */
+    }*/
 
     /* public String getItemComments() { 3.5
 
     } */
+
+    public String printAllReviews() {
+
+        facade.printAllReviews();
+
+        return "";
+    }
 //___________________________________________________________________________________________________________
 
     // 4.3 print transaction for specific item
@@ -281,7 +298,7 @@ public class MenuClass {
                 break;
             case 5 : System.out.println("Option 6");
                 break;
-            case 6 : Controller.printAllReviews();
+            case 6 : printAllReviews();
                 ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");

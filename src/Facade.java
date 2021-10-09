@@ -127,6 +127,8 @@ Controller controller = new Controller();
     }
 
     public String printAllReviews() {
+        controller.printAllReviews();
+
         return "";
     }
 

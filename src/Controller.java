@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Controller {
 
@@ -141,15 +142,18 @@ public class Controller {
         return itemName;
     }
 
+
     public boolean containsItemName(String itemName) {
 
-        for (int i = 0; i < getItemList().size(); i++) {
+        for (int i = 0; i < getReviewList().size(); i++) {
             if (getReviewList().get(i).getID().equals(itemName)) {
                 return true;
             }
         }
         return false;
     }
+
+
 
     public static Item findItemName(String itemName) {
 
@@ -164,7 +168,7 @@ public class Controller {
     public static String getItemPrice(String itemID) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getID().equals(itemID)) {
-                return String.valueOf(itemList.get(i).getItemPrice()); // Valueof
+                return String.valueOf(itemList.get(i).getItemPrice()); //
             }
         }
         return "Can't find"; //change later
@@ -192,7 +196,15 @@ public class Controller {
         return null;
     }
 
+    public Review findIndex(String reviewID) {
 
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewID)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned about this but I didn't get why -Mijin
@@ -221,9 +233,6 @@ public class Controller {
         }
         return "";
     }
-
-
-
 
 
     public static String printAllReviews() {
@@ -259,20 +268,6 @@ public class Controller {
         return null;
     }
 
-
-    public String printAnReview() { // User Story 3.3
-        {
-            if (reviewList.size() == 0) {
-                System.out.println("No reviews have been added: " + System.lineSeparator());
-            } else {
-                System.out.println("Reviews of item: ");
-                for (Review review : reviewList) {
-                    System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
-                }
-            }
-            return "";
-        }
-    }
 
   /*_______________________________Mean Grade of Review____________________________________________
 /*    public boolean containsGrade(String reviewGrade) {
