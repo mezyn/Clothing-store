@@ -135,6 +135,57 @@ public class Controller {
     }
 
     // ----------------------------------------------------------------------------------------
+    public static  String getReviewComment (String reviewID){
+        String reviewComment = findReviewComment(reviewID).getReviewComment();
+        return String.valueOf(reviewComment);
+    }
+
+    public static Review findReviewComment(String reviewComment) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewComment)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean containsReviewComment(String reviewComment) {
+
+        for (int i = 0; i < getReviewList().size(); i++) {
+            if (getReviewList().get(i).getID().equals(reviewComment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static  String getReviewGrade (String reviewID){
+        double reviewGrade = findReviewGrade(reviewID).getReviewGrade();
+        return String.valueOf(reviewGrade);
+   }
+
+    public static Review findReviewGrade(String reviewGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(reviewGrade)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean containsReviewGrade(String reviewGrade) {
+
+        for (int i = 0; i < getReviewList().size(); i++) {
+            if (getReviewList().get(i).getID().equals(reviewGrade)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public static String getItemName(String itemID) {
 
         String itemName = findItemName(itemID).getItemName();
@@ -207,7 +258,7 @@ public class Controller {
     }
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
-    //does it have to be static? I know TA mentioned about this but I didn't get why -Mijin
+    //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
     static ArrayList<Review> reviewList = new ArrayList<>();
 
     public ArrayList<Review> getReviewList() {
@@ -241,7 +292,7 @@ public class Controller {
         } else {
             System.out.println("All registered reviews: ");
             for (Review review : reviewList) {
-                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+                System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
 
             }
         }

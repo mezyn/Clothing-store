@@ -19,7 +19,7 @@ public class Review {
 
     public String getID() {return ID;}
 
-    public String getComment() {
+    public String getReviewComment() {
         return comment;
     }
 
@@ -31,7 +31,7 @@ public class Review {
         this.grade = grade;
     }
 
-    public void getGrade(double grade) {this.grade = grade; }
+    public double getReviewGrade() { return grade; }
 
 
 
