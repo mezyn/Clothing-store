@@ -59,7 +59,7 @@ Controller controller = new Controller();
 
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) { // 3.1 user story
 
-        return controller.createReview(itemID, reviewComment, reviewGrade);
+        return controller.reviewItem(itemID, reviewComment, reviewGrade);
     }
 
     public String reviewItem(String itemID, int reviewGrade) { // 3.1 user story

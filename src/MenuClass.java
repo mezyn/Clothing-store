@@ -116,13 +116,13 @@ public class MenuClass {
         }
         String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
        
-        double itemGrade = UserInput.readDouble("Enter a grade between 1 to 5: ");
-         while (itemGrade < 1.0 || itemGrade > 5.0){
+        int reviewGrade = UserInput.readInt("Enter a grade between 1 to 5: ");
+         while (reviewGrade < 1.0 || reviewGrade > 5.0){
 
-             itemGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
+             reviewGrade = UserInput.readInt("Grade values must be between 1 and 5.");
         }
 
-        String review = Controller.createReview(itemID, reviewComment, itemGrade);
+        String review = facade.reviewItem(itemID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
 
@@ -212,9 +212,11 @@ public class MenuClass {
         return "";
     }
 
-    /* public String getItemComments() { //User Story 3.5
+     //public String getItemComments() { //User Story 3.5
 
-    } */
+
+
+   // }
 
     public String printAllReviews() { //User Story 3.6
         if (Controller.reviewList.size() == 0) {
@@ -233,6 +235,8 @@ public class MenuClass {
         return "";
 
     }
+
+
 
 //___________________________________________________________________________________________________________
 

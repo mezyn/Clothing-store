@@ -291,8 +291,8 @@ public class Controller {
     public ArrayList<Review> getReviewList() {
         return reviewList;
     }
-
-    public static String createReview(String ID, String reviewComment, double reviewGrade) {
+//Create Review 3.1
+    public String reviewItem(String ID, String reviewComment, int reviewGrade) {
         Review review = new Review(ID, reviewComment, reviewGrade);
         reviewList.add(review);
         return "";
