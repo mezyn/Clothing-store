@@ -17,9 +17,10 @@ public class Review {
     }
 
 
+
     public String getID() {return ID;}
 
-    public String getReviewComment() {
+    public String getItemComment() {
         return comment;
     }
 
@@ -31,7 +32,7 @@ public class Review {
         this.grade = grade;
     }
 
-    public double getReviewGrade() { return grade; }
+    public double getItemGrade() { return grade; }
 
 
 

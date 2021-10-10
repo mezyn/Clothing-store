@@ -1,5 +1,4 @@
-import java.sql.SQLOutput;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MenuClass {
 
@@ -117,13 +116,13 @@ public class MenuClass {
         }
         String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
        
-        double reviewGrade = UserInput.readDouble("Enter a grade between 1 to 5: ");
-         while (reviewGrade < 1.0 || reviewGrade > 5.0){
+        double itemGrade = UserInput.readDouble("Enter a grade between 1 to 5: ");
+         while (itemGrade < 1.0 || itemGrade > 5.0){
 
-             reviewGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
+             itemGrade = UserInput.readDouble("Grade values must be between 1 and 5.");
         }
 
-        String review = Controller.createReview(itemID, reviewComment, reviewGrade);
+        String review = Controller.createReview(itemID, reviewComment, itemGrade);
 
         System.out.println("Your item review was registered successfully.");
 
@@ -131,25 +130,25 @@ public class MenuClass {
 
       public String getPrintedItemReview() { // User story 3.2
 
-          String reviewID = UserInput.readLine("Enter the ID of Item: ");
+          String itemID = UserInput.readLine("Enter the ID of Item: ");
 
-          /* if (!facade.containsItem(reviewID)) { // Check if item exists
+          /* if (!facade.containsItem(itemID)) { // Check if item exists
 
-              System.out.println("Item <" + reviewID + "> was not registered yet.");
-              reviewID = UserInput.readLine("Enter a valid ID number: ");
+              System.out.println("Item <" + itemID + "> was not registered yet.");
+              itemID = UserInput.readLine("Enter a valid ID number: ");
 
-          } else if (facade.containsItem(reviewID) && !facade.containsReview(reviewID)) { // checks if there is a review of item
-              System.out.println("Item < " + Controller.getItemName(reviewID) + "> has not been reviewed yet.");
+          } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)) { // checks if there is a review of item
+              System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
 
-          } else if (facade.containsReview(reviewID)) {
+          } else if (facade.containsReview(itemID)) {
 
-              //System.out.println("Review <" + reviewID + ">");
-              Review foundReview = Controller.findReview(reviewID);
+              //System.out.println("Review <" + itemID + ">");
+              Review foundReview = Controller.findReview(itemID);
               System.out.println(foundReview);
 
           } else { */
 
-              System.out.println("Number of reviews for item " + reviewID + " : " + Controller.reviewList.size());
+              System.out.println("Number of reviews for item " + itemID + " : " + Controller.reviewList.size());
 
               int i = UserInput.readInt("Enter reviewNumber to retrieve the review: ");
               int reviewNumber = Controller.reviewList.indexOf(i);
@@ -160,8 +159,8 @@ public class MenuClass {
               } else {
                   for (Review review : Controller.reviewList) { // parameter review never used?
                       System.out.println("Grade: " + "[" + reviewNumber + "]"
-                              + "<" + Controller.getReviewGrade((reviewID)) + ">.< "
-                              + Controller.getReviewComment(reviewID) + ">");
+                              + "<" + Controller.getItemGrade((itemID)) + ">.< "
+                              + Controller.getItemComment(itemID) + ">");
                   }
 
               }
@@ -173,48 +172,68 @@ public class MenuClass {
 
 
     public String getPrintedReviews () { //User story 3.3
-        String reviewID = UserInput.readLine("Enter the ID of Item: ");
-        if (facade.containsReview(reviewID)) {
+        String itemID = UserInput.readLine("Enter the ID of Item: ");
+        if (facade.containsReview(itemID)) {
 
-            System.out.println("Review(s) for <" + reviewID + ">: <"
-                    + Controller.getItemName(reviewID) + ">. " + "<"
-                        + Controller.getItemPrice(reviewID) + "> SEK.");
+            System.out.println("Review(s) for <" + itemID + ">: <"
+                    + Controller.getItemName(itemID) + ">. " + "<"
+                        + Controller.getItemPrice(itemID) + "> SEK.");
 
-                Review foundReview = Controller.findReview(reviewID);
+                Review foundReview = Controller.findReview(itemID);
                     System.out.println(foundReview);
 
-        } else if (!facade.containsItem(reviewID)) {
-            System.out.println("Item <" + reviewID + "> was not registered yet.");
+        } else if (!facade.containsItem(itemID)) {
+            System.out.println("Item <" + itemID + "> was not registered yet.");
 
-        } else if (facade.containsItem(reviewID) && !facade.containsReview(reviewID)){
-            System.out.println("Review(s) for <"+reviewID+">: <"
-                    + Controller.getItemName(reviewID) + ">. <"
-                        + Controller.getItemPrice(reviewID)+"> SEK");
+        } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)){
+            System.out.println("Review(s) for <"+itemID+">: <"
+                    + Controller.getItemName(itemID) + ">. <"
+                        + Controller.getItemPrice(itemID)+"> SEK");
 
         }
         return "";
     }
 
-     /* public String getItemMeanGrade(){ //User Story 3.4
-        String reviewID = UserInput.readLine("Enter the ID of Item");
-        if (facade.containsReview(reviewID)){ // Checks if there are a review with that ID.
-            Review foundReview = Controller.findReview(reviewID);
-            System.out.println(foundReview);
+     public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
 
-        }for (reviewID)
+        String itemID = UserInput.readLine("Enter the ID of Item: ");
+         if (facade.containsReview(itemID)) {
+             Review foundReview = Controller.findReview(itemID);
+             System.out.println(foundReview);
+         }else {
+             Iterator iterator = Controller.reviewList.iterator();
 
-    }*/
+             while (iterator.hasNext())
+                 System.out.print(iterator.next() + System.lineSeparator());
+
+             System.out.println();
+
+         }
+        return "";
+    }
 
     /* public String getItemComments() { //User Story 3.5
 
     } */
 
     public String printAllReviews() { //User Story 3.6
+        if (Controller.reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
 
-        facade.printAllReviews();
+            Iterator iterator = Controller.reviewList.iterator();
 
+            System.out.println("All registered reviews: ");
+
+            while (iterator.hasNext())
+                System.out.print(iterator.next() + System.lineSeparator());
+
+            System.out.println();
+        }
         return "";
+
     }
+
 //___________________________________________________________________________________________________________
 
     // 4.3 print transaction for specific item
@@ -312,28 +331,28 @@ public class MenuClass {
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : createReview();
+            case 1 : createReview(); // User Story 3.1
                 ReviewMenu();
                 break;
-            case 2 : getPrintedItemReview();
+            case 2 : getPrintedItemReview();// User Story 3.2
                 ReviewMenu();
                 break;
             case 3 : getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
-            case 4 : //meanReview();
+            case 4 : //meanReview(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : System.out.println("Option 6");
+            case 5 : System.out.println("Option 6"); // User Story 3.5
                 break;
-            case 6 : printAllReviews();
+            case 6 : printAllReviews(); // User Story 3.6
                 ReviewMenu();
                 break;
-            case 7 : System.out.println("Option 8");
+            case 7 : System.out.println("Option 8");// User Story 3.7
                 break;
-            case 8 : System.out.println("Option 9");
+            case 8 : System.out.println("Option 9");// User Story 3.8
                 break;
-            case 9 : System.out.println("Option 10");
+            case 9 : System.out.println("Option 10");// User Story 3.9
                 break;
             default : System.out.println("Please enter a valid option");
                 break;
@@ -380,9 +399,69 @@ public class MenuClass {
                 break;
             case 8 : System.out.println("Option 9");
                 break;
+            default : System.out.println("Please enter a valid option");
+                break;
         }
 
         UserInput.scanner.close();
+    }
+
+    public void EmployeeMenu(){
+        int option = UserInput.readInt("Employee options menu:\n" +
+                "0. Return to Main Menu.\n" +
+                "1. Create an employee (Regular Employee).\n" +
+                "2. Create an employee (Manager).\n" +
+                "3. Create an employee (Director).\n" +
+                "4. Create an employee (Intern).\n" +
+                "5. Remove an employee.\n" +
+                "6. Print specific employee.\n" +
+                "7. Print all registered employees.\n" +
+                "8. Print the total expense with net salary.\n" +
+                "9. Print all employees sorted by gross salary.\n" +
+                "\n" +
+                "Type an option number:\n");
+
+        while (option < 0 || option > 7){
+
+            option = UserInput.readInt("Invalid menu option. Please type another option");
+        }
+
+            switch (option) {
+                case 0:
+                    MainMenu();
+                    break;// create method, need help from TA with this / Carl
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                case 4:
+
+                    break;
+                case 5:
+
+                    break;
+                case 6:
+
+                    break;
+                case 7:
+
+                    break;
+                case 8:
+
+                    break;
+                case 9:
+
+                    break;
+                default : System.out.println("Please enter a valid option");
+                    break;
+
+
+        }
     }
 
     public void MainMenu(){
@@ -392,10 +471,11 @@ public class MenuClass {
                         "0. Close System.\n" +
                         "1. Open Item Options.\n" +
                         "2. Open Review options.\n" +
-                        "3. Open Transaction History Options.\n\n" +
+                        "3. Open Transaction History Options.\n" +
+                        "4. Open Employee options.\n" +
                         "Type any Option Number:");
 
-        while (option < 0 || option > 3) {
+        while (option < 0 || option > 4) {
 
             option = UserInput.readInt("Invalid menu option. Please type another option");
         }
@@ -412,8 +492,12 @@ public class MenuClass {
                 break;
             case 3:
                 transactionHistoryMenu();
-                break; // Added method, so when "3" is pressed we have the transactionMenu printed /Carl
-
+                break;
+            case 4:
+                EmployeeMenu();
+                break;
+            default : System.out.println("Please enter a valid option");
+                break;
         }
 
         UserInput.scanner.close();

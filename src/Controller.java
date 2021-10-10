@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Controller {
 
@@ -133,52 +132,80 @@ public class Controller {
         }
         return "";
     }
-
-    // ----------------------------------------------------------------------------------------
-    public static  String getReviewComment (String reviewID){
-        String reviewComment = findReviewComment(reviewID).getReviewComment();
-        return String.valueOf(reviewComment);
+    public static String getItemID (String itemID){
+        String ID = findItemID(itemID).getID();
+        return itemID;
     }
 
-    public static Review findReviewComment(String reviewComment) {
 
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewComment)) {
-                return reviewList.get(i);
+    public static Item findItemID(String itemID) {
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getID().equals(itemID)) {
+                return itemList.get(i);
             }
         }
         return null;
     }
 
-    public boolean containsReviewComment(String reviewComment) {
+    public boolean containsItemID(String itemID) {
 
-        for (int i = 0; i < getReviewList().size(); i++) {
-            if (getReviewList().get(i).getID().equals(reviewComment)) {
+        for (int i = 0; i < getItemList().size(); i++) {
+            if (getItemList().get(i).getID().equals(itemID)) {
                 return true;
             }
         }
         return false;
     }
 
-    public static  String getReviewGrade (String reviewID){
-        double reviewGrade = findReviewGrade(reviewID).getReviewGrade();
-        return String.valueOf(reviewGrade);
-   }
 
-    public static Review findReviewGrade(String reviewGrade) {
+
+    // ----------------------------------------------------------------------------------------
+    public static  String getItemComment(String itemID){
+        String itemComment = findItemComment(itemID).getItemComment();
+        return String.valueOf(itemID);
+
+    }
+
+    public static Review findItemComment(String itemComment) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewGrade)) {
+            if (reviewList.get(i).getID().equals(itemComment)) {
                 return reviewList.get(i);
             }
         }
         return null;
     }
 
-    public boolean containsReviewGrade(String reviewGrade) {
+    public boolean containsItemComment(String itemComment) {
 
         for (int i = 0; i < getReviewList().size(); i++) {
-            if (getReviewList().get(i).getID().equals(reviewGrade)) {
+            if (getReviewList().get(i).getID().equals(itemComment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static  String getItemGrade(String itemID){
+        double itemGrade = findItemGrade(itemID).getItemGrade();
+        return String.valueOf(itemGrade);
+   }
+
+    public static Review findItemGrade(String itemGrade) {
+
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(itemGrade)) {
+                return reviewList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean containsItemGrade(String itemGrade) {
+
+        for (int i = 0; i < getReviewList().size(); i++) {
+            if (getReviewList().get(i).getID().equals(itemGrade)) {
                 return true;
             }
         }
@@ -247,7 +274,7 @@ public class Controller {
         return null;
     }
 
-    public Review findIndex(String reviewID) {
+    /*public Review findIndex(String reviewID) { Might remove
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getID().equals(reviewID)) {
@@ -255,7 +282,7 @@ public class Controller {
             }
         }
         return null;
-    }
+    }*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
@@ -287,18 +314,16 @@ public class Controller {
 
 
     public static String printAllReviews() {
-        if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added: "+ System.lineSeparator());
-        } else {
-            System.out.println("All registered reviews: ");
-            for (Review review : reviewList) {
-                System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
 
-            }
-        }
         return "";
+
     }
 
+
+/*  for (Review review : reviewList) {
+                // System.out.println("Review(s) for <"+ review.getID() +">: <"+ getItemPrice(itemID) +">. <Price> SEK");
+                System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
+*/
 
     public boolean containsReview(String reviewID) {
 
@@ -320,27 +345,9 @@ public class Controller {
     }
 
 
-  /*_______________________________Mean Grade of Review____________________________________________
-/*    public boolean containsGrade(String reviewGrade) {
+  //_______________________________Mean Grade of Review____________________________________________
 
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getGrade(double).equals(reviewGrade)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    public Review findGrade(String reviewGrade) {
-
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getGrade().equals(reviewGrade)) {
-                return reviewList.get(i);
-            }
-        }
-        return null;
-    }
-
-      public String meanReview() {
+    public String meanReview() {
           if (reviewList.size() == 0) {
               System.out.println("No reviews have been added:" + System.lineSeparator());
           } else {
@@ -351,7 +358,7 @@ public class Controller {
 
           }
           return "";
-      } */
+      }
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
