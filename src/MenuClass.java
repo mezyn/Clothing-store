@@ -153,7 +153,7 @@ public class MenuClass {
               int i = UserInput.readInt("Enter reviewNumber to retrieve the review: ");
               int reviewNumber = Controller.reviewList.indexOf(i);
 
-              if (reviewNumber > Controller.reviewList.size()) {
+              if (reviewNumber > Controller.reviewList.size() || reviewNumber < Controller.reviewList.size()) {
                   System.out.println("Invalid review number. Choose between 1 and <"
                           + Controller.reviewList.size() + ">.");
               } else {
@@ -212,29 +212,30 @@ public class MenuClass {
         return "";
     }
 
-     //public String getItemComments() { //User Story 3.5
+     public String getItemComments() { //User Story 3.5
+        String itemID = UserInput.readLine("Enter the ID of Item");
+        if(facade.containsReview(itemID)){
+            Review foundReview = Controller.findReview(itemID);
+            System.out.println(foundReview);
 
+        }else {
+            for (Review reviewItem : Controller.reviewList) {
+                System.out.println("Comment: " + "<" + Controller.getItemComment(itemID) + ">");
 
-
-   // }
-
-    public String printAllReviews() { //User Story 3.6
-        if (Controller.reviewList.size() == 0) {
-            System.out.println("No reviews have been added: "+ System.lineSeparator());
-        } else {
-
-            Iterator iterator = Controller.reviewList.iterator();
-
-            System.out.println("All registered reviews: ");
-
-            while (iterator.hasNext())
-                System.out.print(iterator.next() + System.lineSeparator());
-
-            System.out.println();
+            }
         }
+
         return "";
 
     }
+
+    public String printAllReviews() { //User Story 3.6
+
+        facade.printAllReviews();
+
+        return "";
+        }
+
 
 
 
@@ -347,7 +348,8 @@ public class MenuClass {
             case 4 : //meanReview(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : System.out.println("Option 6"); // User Story 3.5
+            case 5 : getItemComments();// User Story 3.5
+                ReviewMenu();
                 break;
             case 6 : printAllReviews(); // User Story 3.6
                 ReviewMenu();
