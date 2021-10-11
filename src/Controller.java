@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 public class Controller {
 
@@ -20,7 +20,7 @@ public class Controller {
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    private static ArrayList<Item> itemList = new ArrayList<>();
+    public static ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
@@ -292,6 +292,8 @@ public class Controller {
     public ArrayList<Review> getReviewList() {
         return reviewList;
     }
+
+
 //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
         Review review = new Review(ID, reviewComment, reviewGrade);

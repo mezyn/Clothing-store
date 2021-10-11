@@ -83,7 +83,7 @@ Controller controller = new Controller();
         return -1;
     }
 
-    public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story?
+    public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story
 
 
         return controller.getPrintedItemReview(itemID, reviewNumber);
@@ -127,6 +127,7 @@ Controller controller = new Controller();
     }
 
     public String printAllReviews() {
+
         controller.printAllReviews();
 
         return "";
@@ -232,9 +233,9 @@ Controller controller = new Controller();
         return "";
     }
 
-    public Map<String, Integer> mapEachDegree() throws Exception {
+    /*public Map<String, Integer> mapEachDegree() throws Exception {
         return null;
-    }
+    }*/
 
     public String promoteToManager(String empID, String degree) throws Exception {
         return "";
@@ -252,4 +253,4 @@ Controller controller = new Controller();
 
 
 
-}
+
