@@ -265,7 +265,7 @@ public class MenuClass {
                 "4. Buy an Item.\n" +
                 "5. Update an item’s name.\n" +
                 "6. Update an item’s price.\n" +
-                "7. Print an specific Item.\n\n" + //It's for User Story 2.6, but not in the menu option? I put it here temporarily anyway.
+                "7. Print a specific Item.\n\n" +
                 "Type an option number: ");
 
         while (option < 0 || option > 7) { // 7 instead of 6 (temporarily)
