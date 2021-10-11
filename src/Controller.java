@@ -408,7 +408,12 @@ public class Controller {
 
     }
 
+    //-----------------------------------FOR Employee-----------------------------------
 
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+
+        return "";
+    }
 
 }
 
