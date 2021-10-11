@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Controller {
 
@@ -169,9 +170,9 @@ public class Controller {
 
     public static Review findItemComment(String itemComment) {
 
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(itemComment)) {
-                return reviewList.get(i);
+        for (Review review : reviewList) {
+            if (review.getID().equals(itemComment)) {
+                return review;
             }
         }
         return null;
@@ -194,9 +195,9 @@ public class Controller {
 
     public static Review findItemGrade(String itemGrade) {
 
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(itemGrade)) {
-                return reviewList.get(i);
+        for (Review review : reviewList) {
+            if (review.getID().equals(itemGrade)) {
+                return review;
             }
         }
         return null;
@@ -313,12 +314,19 @@ public class Controller {
     }
 
 
-    public static String printAllReviews() {
-
+    public String printAllReviews() {
+        if (reviewList.size() == 0) {
+            System.out.println("No items registered yet.");
+        } else {
+            System.out.println("All registered items:");
+            for (Review review : reviewList) {
+                System.out.println(review);
+            }
+        }
         return "";
 
-    }
 
+    }
 
 /*  for (Review review : reviewList) {
                 // System.out.println("Review(s) for <"+ review.getID() +">: <"+ getItemPrice(itemID) +">. <Price> SEK");
@@ -347,14 +355,14 @@ public class Controller {
 
   //_______________________________Mean Grade of Review____________________________________________
 
-    public String meanReview() {
+    public String getItemMeanGrade() {
           if (reviewList.size() == 0) {
               System.out.println("No reviews have been added:" + System.lineSeparator());
           } else {
               System.out.println("Reviews of item: ");
           }
           for (Review reviewGrade : reviewList) {
-              System.out.print("____________________________" + System.lineSeparator() + reviewGrade + System.lineSeparator());
+              System.out.print( reviewGrade + System.lineSeparator());
 
           }
           return "";
