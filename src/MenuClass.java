@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.Iterator;
 
 public class MenuClass {
@@ -185,8 +186,6 @@ public class MenuClass {
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
         if (facade.containsReview(itemID)) {
-
-
             System.out.println("Review(s) for <" + itemID + ">: <"
                     + Controller.getItemName(itemID) + ">. " + "<"
                         + Controller.getItemPrice(itemID) + "> SEK.");
@@ -208,6 +207,10 @@ public class MenuClass {
     }
 
      public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
+         String userInput = UserInput.readLine("Enter the ID of Item: ");
+
+
+
 
 
 
@@ -365,7 +368,7 @@ public class MenuClass {
             case 3 : getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
-            case 4 : //meanReview(); // User Story 3.4
+            case 4 : getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
             case 5 : getItemComments();// User Story 3.5

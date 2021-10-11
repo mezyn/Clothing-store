@@ -11,6 +11,8 @@ public class Review {
         this.grade = grade;
         this.comment= comment; //Should it be set as null? -M
     }
+
+
     @Override
     public String toString() {
         return  "Grade: <" + this.grade +">. <" + this.comment + ">";

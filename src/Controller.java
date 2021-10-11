@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
 
@@ -275,19 +274,12 @@ public class Controller {
         return null;
     }
 
-    /*public Review findIndex(String reviewID) { Might remove
-
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewID)) {
-                return reviewList.get(i);
-            }
-        }
-        return null;
-    }*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
     static ArrayList<Review> reviewList = new ArrayList<>();
+
+
 
     public ArrayList<Review> getReviewList() {
         return reviewList;
