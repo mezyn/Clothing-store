@@ -36,6 +36,13 @@ public class Employee {
         this.grossSalary = grossSalary;
     }
 
+    //Net salary of regular employee
+    public double netSalary() {
+        double netSalary = this.grossSalary - (this.grossSalary * 0.1);
+        return netSalary;
+    }
+
+
     //toString
 
     public String toString() {

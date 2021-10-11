@@ -133,13 +133,13 @@ public class Controller {
         }
         return "";
     }
-    public static String getItemID (String itemID){
+    public String getItemID (String itemID){
         String ID = findItemID(itemID).getID();
         return itemID;
     }
 
 
-    public static Item findItemID(String itemID) {
+    public Item findItemID(String itemID) {
 
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getID().equals(itemID)) {
@@ -188,7 +188,7 @@ public class Controller {
         return false;
     }
 
-    public static  String getItemGrade(String itemID){
+    public static String getItemGrade(String itemID){
         double itemGrade = findItemGrade(itemID).getItemGrade();
         return String.valueOf(itemGrade);
    }
@@ -411,6 +411,12 @@ public class Controller {
     }
 
     //-----------------------------------FOR Employee-----------------------------------
+
+    private static ArrayList<Item> employeeList = new ArrayList<>();
+
+    public ArrayList<Item> getEmployeeList() {
+        return employeeList;
+    }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
