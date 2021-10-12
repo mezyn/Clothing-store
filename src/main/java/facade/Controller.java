@@ -36,24 +36,46 @@ System.out.println(value + " " + pattern + " " + output);*/
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
 
-        unitPrice = changeDecimal(unitPrice, 2);
-        Item item = new Item(itemID, itemName, unitPrice);
-        itemList.add(item);
-        return "Item " + itemID + " was registered successfully.";
+        if (!containsItem(itemID)) {
+            return "Invalid data for item.";
+        } else if (itemID.isEmpty()) {
+            return "Invalid data for item.";
+        } else if (itemName.isEmpty()) {
+            return "Invalid data for item.";
+        } else if (unitPrice == 0 || unitPrice < 0) {
+            return "Invalid data for item.";
+        } else {
+            unitPrice = changeDecimal(unitPrice, 2);
+
+            Item item = new Item(itemID, itemName, unitPrice);
+            itemList.add(item);
+            return "Item " + itemID + " was registered successfully.";
+        }
     }
 
     public String updateItemName(String IDInput, String newNameInput) {
 
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemName(newNameInput);
-        return "Item " + IDInput + " was updated successfully.";
+        if (containsItem(IDInput)){
+            return "Item " +IDInput + " was not registered yet.";
+        } else if (IDInput.isBlank() || containsItem(IDInput)) {
+            return "Invalid data for item.";
+        } else {
+            Item foundItem = findItem(IDInput);
+            foundItem.setItemName(newNameInput);
+            return "Item " + IDInput + " was updated successfully.";
+        }
     }
 
     public String updateItemPrice(String IDInput, double newPriceInput) {
 
+        if (newPriceInput < 0 || newPriceInput == 0) {
+            return "Invalid data for item.";
+        } else {
+
         Item foundItem = findItem(IDInput);
         foundItem.setItemPrice(newPriceInput);
         return "Item " + IDInput + " was updated successfully.";
+        }
     }
 
     //Remove item
