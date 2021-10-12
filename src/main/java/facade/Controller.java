@@ -36,7 +36,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
 
-        if (!containsItem(itemID)) {
+        if (containsItem(itemID)) {
             return "Invalid data for item.";
         } else if (itemID.isEmpty()) {
             return "Invalid data for item.";
@@ -55,9 +55,9 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String updateItemName(String IDInput, String newNameInput) {
 
-        if (containsItem(IDInput)){
+        if (!containsItem(IDInput)){
             return "Item " +IDInput + " was not registered yet.";
-        } else if (IDInput.isBlank() || containsItem(IDInput)) {
+        } else if (IDInput.isBlank() || !containsItem(IDInput)) {
             return "Invalid data for item.";
         } else {
             Item foundItem = findItem(IDInput);
@@ -68,10 +68,11 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String updateItemPrice(String IDInput, double newPriceInput) {
 
-        if (newPriceInput < 0 || newPriceInput == 0) {
+        if (!containsItem(IDInput)){
+            return "Item " +IDInput + " was not registered yet.";
+        } else if (newPriceInput < 0 || newPriceInput == 0) {
             return "Invalid data for item.";
         } else {
-
         Item foundItem = findItem(IDInput);
         foundItem.setItemPrice(newPriceInput);
         return "Item " + IDInput + " was updated successfully.";
