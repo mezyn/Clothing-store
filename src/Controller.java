@@ -279,6 +279,11 @@ public class Controller {
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
     static ArrayList<Review> reviewList = new ArrayList<>();
 
+    static ArrayList<String> commentsList = new ArrayList<>();
+
+    public static ArrayList<String> getCommentsList() {
+        return commentsList;
+    }
 
 
     public static ArrayList<Review> getReviewList() {
@@ -295,7 +300,7 @@ public class Controller {
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {
-        if (reviewList.size() == 0) {
+        /*if (reviewList.size() == 0) {
             System.out.println("No reviews have been added: "+ System.lineSeparator());
         } else {
             System.out.println("Index ");
@@ -303,7 +308,7 @@ public class Controller {
                 System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
 
             }
-        }
+        }*/
         return "";
     }
 
