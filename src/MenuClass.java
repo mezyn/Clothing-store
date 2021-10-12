@@ -103,6 +103,7 @@ public class MenuClass {
 
 
 //____________________________________________Reviews___________________________________________________
+
     public void createReview() { //User Story 3.1
 
         System.out.println("To create a review for a item please enter ID of the item:");
@@ -163,7 +164,6 @@ public class MenuClass {
       }
 
 
-
     public void getPrintedReviews () { //User story 3.3
         String itemID = UserInput.readLine("Enter the ID of Item: ");
         //Review review = new Review();
@@ -195,10 +195,6 @@ public class MenuClass {
 
      //public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
          //String userInput = UserInput.readLine("Enter the ID of Item: ");
-
-
-
-
 
 
         /*String itemID = UserInput.readLine("Enter the ID of Item: ");

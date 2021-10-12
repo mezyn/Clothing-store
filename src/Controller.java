@@ -443,12 +443,16 @@ public class Controller {
     //   4.5 - Print all transactions
     public String printAllTransactions() {
 
-        if (transactionHistoryList.size() ==0) {
+        if (transactionHistoryList.size() == 0) {
             System.out.println("All purchases made:\n" +
                     "Total profit: 0.00 SEK\n" +
                     "Total items sold: 0 units\n" +
-                    "Total purchases made: 0 transactions\n");
+                    "Total purchases made: 0 transactions\n" +
+                    "----------------------------------------\n" +
+                    "----------------------------------------");
         } else {
+
+
             System.out.println("All purchases made:\n" +
                     "Total profit: <total profit> SEK\n" +
                     "Total items sold: <total units> units\n" +
