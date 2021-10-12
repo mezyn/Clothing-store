@@ -322,12 +322,7 @@ public class Controller {
 
     }
 
-/*  for (Review review : reviewList) {
-                // System.out.println("Review(s) for <"+ review.getID() +">: <"+ getItemPrice(itemID) +">. <Price> SEK");
-                System.out.print("____________________________" + System.lineSeparator() + review + System.lineSeparator());
-*/
-
-    public boolean containsReview(String reviewID) {
+    public static boolean containsReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (getReviewList().get(i).getID().equals(reviewID)) {
@@ -349,18 +344,18 @@ public class Controller {
 
   //_______________________________Mean Grade of Review____________________________________________
 
-    public String getItemMeanGrade() {
+    /*public String getItemMeanGrade() {
           if (reviewList.size() == 0) {
               System.out.println("No reviews have been added:" + System.lineSeparator());
           } else {
-              System.out.println("Reviews of item: ");
+              System.out.println("Grade of item: ");
           }
           for (Review reviewGrade : reviewList) {
               System.out.print( reviewGrade + System.lineSeparator());
 
           }
           return "";
-      }
+      }*/
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction

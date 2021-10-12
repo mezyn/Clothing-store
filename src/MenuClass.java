@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -98,10 +97,6 @@ public class MenuClass {
         return "";
     }
 
-
-
-
-
 //____________________________________________Reviews___________________________________________________
 
     public void createReview() { //User Story 3.1
@@ -109,59 +104,59 @@ public class MenuClass {
         System.out.println("To create a review for a item please enter ID of the item:");
 
         String itemID = UserInput.readLine("Enter the ID number: ");
+
         while(itemID.isEmpty()) {
             System.out.println("ID needed to review item: ");
             itemID = UserInput.readLine("Enter ID number: ");
         } while (!facade.containsItem(itemID)){
             System.out.println("Item <" + itemID + "> was not registered yet.");
             itemID = UserInput.readLine("Enter a valid ID number: ");
-
         }
         String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
-       
         int reviewGrade = UserInput.readInt("Enter a grade between 1 to 5: ");
-         while (reviewGrade < 1.0 || reviewGrade > 5.0){
+        while (reviewGrade < 1.0 || reviewGrade > 5.0){
 
-             reviewGrade = UserInput.readInt("Grade values must be between 1 and 5.");
+            reviewGrade = UserInput.readInt("Grade values must be between 1 and 5.");
         }
 
         String review = facade.reviewItem(itemID, reviewComment, reviewGrade);
 
         System.out.println("Your item review was registered successfully.");
 
+}
+
+    public String getPrintedItemReview() { // User story 3.2
+
+        System.out.println("Size of list: " + Controller.reviewList.size());
+
+        String itemID = UserInput.readLine("Enter the ID of Item: ");
+
+        if (!facade.containsItem(itemID)) { // Check if item exists
+
+            System.out.println("Item <" + itemID + "> was not registered yet.");
+            itemID = UserInput.readLine("Enter a valid ID number: ");
+
+        } else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
+            System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
+        }
+        else {
+
+            int index = UserInput.readInt("Enter an index of the review: ");
+
+            if (index < 1 || index > Controller.reviewList.size()){
+                System.out.println("Invalid review number. Choose between 1 and <"
+                        + Controller.reviewList.size() + ">.");
+            } else {
+                Review reviewItem = Controller.reviewList.get(index - 1);
+                System.out.println(reviewItem);
+            }
+
+
+        }
+
+        return "";
     }
 
-      public String getPrintedItemReview() { // User story 3.2
-
-          System.out.println("Size of list: " + Controller.reviewList.size());
-
-          String itemID = UserInput.readLine("Enter the ID of Item: ");
-
-          if (!facade.containsItem(itemID)) { // Check if item exists
-
-              System.out.println("Item <" + itemID + "> was not registered yet.");
-              itemID = UserInput.readLine("Enter a valid ID number: ");
-
-          } else if (!facade.containsReview(itemID)) { // checks if there is a review of item
-              System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
-          }
-          else {
-
-              int index = UserInput.readInt("Enter an index of the review: ");
-
-              if (index < 1 || index > Controller.reviewList.size()){
-                  System.out.println("Invalid review number. Choose between 1 and <"
-                          + Controller.reviewList.size() + ">.");
-              } else {
-                  Review reviewItem = Controller.reviewList.get(index - 1);
-                  System.out.println(reviewItem);
-              }
-
-
-              }
-
-          return "";
-      }
 
 
     public void getPrintedReviews () { //User story 3.3
@@ -171,14 +166,14 @@ public class MenuClass {
         if (!facade.containsItem(itemID)) {
             System.out.println("Item <" + itemID + "> was not registered yet.");
 
-        } else if (!facade.containsReview(itemID)) {
+        } else if (!Controller.containsReview(itemID)) {
             System.out.println("Review(s) for <" + itemID + ">: <"
                     + Controller.getItemName(itemID) + ">. <"
                     + Controller.getItemPrice(itemID) + "> SEK");
             System.out.println("Item <" + Controller.getItemName(itemID) + "> has not been reviewed yet.");
 
 
-        } else if (facade.containsReview(itemID)) {
+        } else if (Controller.containsReview(itemID)) {
             System.out.println("Review(s) for <" + itemID + ">: <"
                     + Controller.getItemName(itemID) + ">. " + "<"
                     + Controller.getItemPrice(itemID) + "> SEK.");
@@ -193,29 +188,19 @@ public class MenuClass {
     }
 
 
-     //public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
-         //String userInput = UserInput.readLine("Enter the ID of Item: ");
+    /*public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
 
-
-        /*String itemID = UserInput.readLine("Enter the ID of Item: ");
-         if (facade.containsReview(itemID)) {
-             Review foundReview = Controller.findReview(itemID);
-             System.out.println(foundReview);
-         }else {
-             Iterator iterator = Controller.reviewList.iterator();
-
-             while (iterator.hasNext())
-                 System.out.print(iterator.next() + System.lineSeparator());
-
-             System.out.println();
 
          }*/
-        //return "";
-    //}}
 
-     public String getItemComments() { //User Story 3.5
-        String itemID = UserInput.readLine("Enter the ID of Item");
-        if(facade.containsReview(itemID)){
+
+
+    //public void getItemComments() { //User Story 3.5
+
+
+    //
+        /*String itemID = UserInput.readLine("Enter the ID of Item");
+        if(Controller.containsReview(itemID)){
             Review foundReview = Controller.findReview(itemID);
             System.out.println(foundReview);
 
@@ -228,14 +213,20 @@ public class MenuClass {
 
         return "";
 
-    }
+    }*/
+    //Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
+    //When retrieving all comments, users must specify an item ID. For this user story,
+    // only the written comments are retrieved and can be iterated as a collection of strings.
+    // If the item ID was not registered or if the item has no reviews or written comments in it,
+    // the system should return an empty collection.
+
 
     public String printAllReviews() { //User Story 3.6
 
         facade.printAllReviews();
 
         return "";
-        }
+    }
 
 
 
@@ -360,7 +351,7 @@ public class MenuClass {
             case 4 : //getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : getItemComments();// User Story 3.5
+            case 5 : //getItemComments();// User Story 3.5
                 ReviewMenu();
                 break;
             case 6 : printAllReviews(); // User Story 3.6

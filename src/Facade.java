@@ -29,12 +29,6 @@ Controller controller = new Controller();
         return controller.containsItem(itemID);
     }
 
-    public boolean containsReview(String reviewID) { // added by Carl,
-        controller.findReview(reviewID);
-        return controller.containsItem(reviewID);
-    }
-
-
     public double buyItem(String itemID, int amount) {
         controller.buyItem(itemID, amount);
         return 0.0;
