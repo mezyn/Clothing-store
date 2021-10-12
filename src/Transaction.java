@@ -31,7 +31,7 @@ public class Transaction {
 
     public void setProfit(double profit) {this.profit = profit;}
 
-    public void getProfit(double profit) {this.profit = profit;}
+    public double getProfit() {return profit;}
 
 
 }

@@ -367,11 +367,6 @@ public class Controller {
     public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
 
-
-
-
-    /*
-
     //to contain transaction for specific item ... (4.3)
     public boolean containsTransaction(String itemID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
@@ -382,15 +377,37 @@ public class Controller {
         return false;
     }
 
-    User Story 4.2 - Retrieve purchase data for a specific item
-    I want to retrieve different data about transactions of a specific item in order to get an overview of how profitable the item is.
-    For a registered item ID specified by the user, the system should print three different summary data:
-    Sum of all the profit made by purchasing that specific item.
-    Sum of all units sold of that specific item.
-    Total number of transactions registered for the specific item.
-    If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
+    /*
+        User Story 4.2 - Retrieve purchase data for a specific item
+        I want to retrieve different data about transactions of a specific item in order to get an overview of how profitable the item is.
+        For a registered item ID specified by the user, the system should print three different summary data:
+        Sum of all the profit made by purchasing that specific item.
+        Sum of all units sold of that specific item.
+        Total number of transactions registered for the specific item.
+        If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
+
+    */
+
+    public String printItemTransactions(String itemID) {
+
+        double sumProfit = 0.0;
+        int sumUnitSold = 0;
+        int transactionCounter = 0;
+
+        for (int i=0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
+                sumUnitSold = sumUnitSold + transactionHistoryList.get(i).getUnitsSold();
+                transactionCounter += 1;
+            }
+
+        }
+
+        return "";
+    }
 
 
+    /*
         //get specific item transactions
     public static String getPurchasePrice(String itemID) {
         for (int i = 0; i < transactionHistoryList.size(); i++);
@@ -400,19 +417,6 @@ public class Controller {
         return "Can't find";
     }
 */
-
-
-
-    //to contain transaction for specific item ... (4.3)
-    public boolean containsTransaction(String itemID) {
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
 
     public static Transaction findItemTransactionHistory(String userID) {
@@ -440,6 +444,7 @@ public class Controller {
     }
 
 
+
     //   4.5 - Print all transactions
     public String printAllTransactions() {
 
@@ -459,7 +464,7 @@ public class Controller {
                     "Total purchases made: <total transactions> transactions");
 
             for (Transaction transaction : transactionHistoryList) {
-                System.out.println(transaction);
+                System.out.println(transaction.toString());
             }
 
             System.out.println("------------------------------------\n" + "\n");
