@@ -259,18 +259,24 @@ public class MenuClass {
 
 //___________________________________________________________________________________________________________
 
+    /*public int getUnitsSold(String itemID) {
+        int itemID = UserInput.readLine("enter the ID of the item");
+        if(facade.contains)
+    }*/
+
     // 4.3 print transaction for specific item
-    /*public String printTransactionSpecificItem() {
+/*
+    public String printTransactionSpecificItem() {
             String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");
-       if (obj.containsTransaction(itemID)) {
-            Item foundItem = obj.findItem(itemID);
+       if (facade.containsTransaction(itemID)) {
+            Item foundItem = facade.findItem(itemID);
             System.out.println(foundItem);
     } else {
         System.out.println("Item <" + itemID + " > was not registered yet.");
        }
        return "";
     }
-     */
+*/
 
 //____________________________________________ Employee ___________________________________________________
   /*
@@ -414,7 +420,8 @@ public class MenuClass {
                 break;
             case 2 : System.out.println("Option 3");
                 break;
-            case 3 : System.out.println("Option 4");
+            case 3 : facade.getTotalTransactions();
+                transactionHistoryMenu();
                 break;
             case 4 : facade.printAllTransactions();
                 transactionHistoryMenu();

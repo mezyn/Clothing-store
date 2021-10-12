@@ -2,29 +2,38 @@
 public class Transaction {
 
     private String ID;
-    private int amount;
-    private double purchasePrice;
+    private int unitsSold;
+    private double profit;
 
-    public Transaction(String ID, int amount, double purchasePrice){
+
+    public Transaction(String ID, int unitsSold, double profit){
 
         this.ID = ID;
-        this.amount = amount;
-        this.purchasePrice = purchasePrice;
+        this.unitsSold = unitsSold;
+        this.profit = profit;
     }
+
+
 
     @Override
     public String toString() {
-        return "<" + this.ID + ">: <" + this.amount + "> item(s). <" + this.purchasePrice + "> SEK.";
+        return "<" + this.ID + ">: <" + this.unitsSold + "> item(s). <" + this.profit + "> SEK.";
+
+
     }
+
 
     public String getID() {return ID;}
 
-    public int getAmount() {return amount;}
+    public int getUnitsSold() {return unitsSold;}
 
-    public void setAmount(int amount) {this.amount = amount;}
+    public void setUnitsSold(int unitsSold) {this.unitsSold = unitsSold;}
 
-    public void setPurchasePrice(double purchasePrice) {this.purchasePrice = purchasePrice;}
+    public void setProfit(double profit) {this.profit = profit;}
 
-    public void getPurchasePrice (double purchasePrice) {this.purchasePrice = purchasePrice;}
+    public void getProfit(double profit) {this.profit = profit;}
+
+
 }
+
 

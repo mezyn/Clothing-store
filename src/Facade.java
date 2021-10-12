@@ -150,6 +150,7 @@ Controller controller = new Controller();
     }
 
     public int getTotalTransactions() {
+        controller.getTotalTransactions();
         return -1;
     }
 
@@ -161,7 +162,13 @@ Controller controller = new Controller();
         return -1;
     }
 
+    /*public boolean containsTransaction(String itemID) {
+        controller.containsTransaction(itemID);
+        return controller.containsItem(itemID);
+    }*/
+
     public String printAllTransactions() {
+        controller.printAllTransactions();
         return "";
     }
 

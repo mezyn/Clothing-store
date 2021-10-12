@@ -363,16 +363,43 @@ public class Controller {
       }
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
-    //creating a transaction but I still didn't figure out how to link it, so that when an item is bought it would be automatically created...
-    private ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+    //creating a transaction
+    public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
 
 
-    public void createTransaction( String ID, int amount, double purchasePrice){
 
-        Transaction transaction = new Transaction(ID, amount, purchasePrice);
-        transactionHistoryList.add(transaction);
+
+    /*
+
+    //to contain transaction for specific item ... (4.3)
+    public boolean containsTransaction(String itemID) {
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    User Story 4.2 - Retrieve purchase data for a specific item
+    I want to retrieve different data about transactions of a specific item in order to get an overview of how profitable the item is.
+    For a registered item ID specified by the user, the system should print three different summary data:
+    Sum of all the profit made by purchasing that specific item.
+    Sum of all units sold of that specific item.
+    Total number of transactions registered for the specific item.
+    If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
+
+
+        //get specific item transactions
+    public static String getPurchasePrice(String itemID) {
+        for (int i = 0; i < transactionHistoryList.size(); i++);
+        if (transactionHistoryList.get(i).getID().equals(itemID)) {
+            return String.valueOf(transactionHistoryList.get(i).getItemPurchase());
+        }
+        return "Can't find";
+    }
+*/
 
 
 
@@ -387,16 +414,51 @@ public class Controller {
     }
 
 
+
+    public static Transaction findItemTransactionHistory(String userID) {
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(userID)) {
+                return transactionHistoryList.get(i);
+            }
+        }
+        return null;
+    }
+
+
+
+    //4.4  3. print total number of transactions
+    public int getTotalTransactions() {
+        int totalTransactions = transactionHistoryList.size();
+        if (totalTransactions == 0) {
+            System.out.println("Total purchases made: 0 transactions");
+        } else {
+            for (int i = 0; i < totalTransactions; i++); {
+            System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
+            }
+        }
+        return -1;
+    }
+
+
     //   4.5 - Print all transactions
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() ==0) {
-            System.out.println("No registered transactions.");
+            System.out.println("All purchases made:\n" +
+                    "Total profit: 0.00 SEK\n" +
+                    "Total items sold: 0 units\n" +
+                    "Total purchases made: 0 transactions\n");
         } else {
-            System.out.println("All registered transactions:");
+            System.out.println("All purchases made:\n" +
+                    "Total profit: <total profit> SEK\n" +
+                    "Total items sold: <total units> units\n" +
+                    "Total purchases made: <total transactions> transactions");
+
             for (Transaction transaction : transactionHistoryList) {
                 System.out.println(transaction);
             }
+
+            System.out.println("------------------------------------\n" + "\n");
         }
         return "";
 
