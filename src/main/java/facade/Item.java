@@ -1,6 +1,7 @@
 package facade;
 
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class Item {
 
@@ -23,7 +24,9 @@ public class Item {
     @Override
     public String toString() {
 
-        return  this.ID + ": " + this.name + ". " + this.pricePerUnit + " SEK.";
+        DecimalFormat decimal2 = new DecimalFormat("###.00");
+        String stringPrice = decimal2.format(this.pricePerUnit);
+        return  this.ID + ": " + this.name + ". " + stringPrice + " SEK";
     }
 
 

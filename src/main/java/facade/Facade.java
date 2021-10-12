@@ -14,18 +14,18 @@ Controller controller = new Controller();
     }
 
     public String updateItemName(String itemID, String newName) {
-        controller.updateItemName(itemID,newName);
-        return "";
+        return controller.updateItemName(itemID,newName);
+
     }
 
     public String updateItemPrice(String itemID, double newPrice) {
-        controller.updateItemPrice(itemID, newPrice);
-        return "";
+        return controller.updateItemPrice(itemID, newPrice);
+
     }
 
     public String removeItem(String itemID) {
-        controller.removeItem(itemID);
-        return "";
+        return controller.removeItem(itemID);
+
     }
 
     public boolean containsItem(String itemID) {
@@ -33,8 +33,7 @@ Controller controller = new Controller();
     }
 
     public double buyItem(String itemID, int amount) {
-        controller.buyItem(itemID, amount);
-        return 0.0;
+        return controller.buyItem(itemID, amount);
     }
 
     public String printItem(String itemID) {
@@ -44,9 +43,8 @@ Controller controller = new Controller();
 
     public String printAllItems() {
 
-        controller.printAllItems();
+        return controller.printAllItems();
 
-        return "";
     }
 
 

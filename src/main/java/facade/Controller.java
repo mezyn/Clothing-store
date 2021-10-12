@@ -2,6 +2,7 @@ package facade;
 
 import java.util.ArrayList;
 
+
 public class Controller {
 
     // -----------------------------COMMON METHODS----------------------------------
@@ -10,8 +11,13 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
+/*
+    DecimalFormat myFormatter = new DecimalFormat(pattern);
+    String output = myFormatter.format(value);
+System.out.println(value + " " + pattern + " " + output);*/
+
     public double changeDecimal(double value, int decimalPoint) {
-        // Using the pow() method
+
         value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
         value = value / Math.pow(10, decimalPoint);
@@ -40,14 +46,14 @@ public class Controller {
 
         Item foundItem = findItem(IDInput);
         foundItem.setItemName(newNameInput);
-        return "";
+        return "Item " + IDInput + " was updated successfully.";
     }
 
     public String updateItemPrice(String IDInput, double newPriceInput) {
 
         Item foundItem = findItem(IDInput);
         foundItem.setItemPrice(newPriceInput);
-        return "";
+        return "Item " + IDInput + " was updated successfully.";
     }
 
     //Remove item
@@ -56,9 +62,9 @@ public class Controller {
         if (this.containsItem(itemID)) {
             Item itemToRemove = this.findItem(itemID);
             itemList.remove(itemToRemove);
-            return "Item <" + itemID + "> was successfully removed.";
+            return "Item " + itemID + " was successfully removed.";
         } else {
-            return "Item <" + itemID + "> could not be removed.";
+            return "Item " + itemID + " could not be removed.";
         }
     }
 
@@ -105,7 +111,7 @@ public class Controller {
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
 
-            return totalPrice;
+            return changeDecimal(totalPrice, 2);
 
         }
     }
@@ -116,8 +122,7 @@ public class Controller {
             Item foundItem = findItem(itemID);
             return foundItem.toString();
         } else {
-            System.out.println("Item <" + itemID + " > was not registered yet.");
-            return null;
+            return "Item " + itemID + " was not registered yet.";
         }
     }
 
@@ -125,14 +130,17 @@ public class Controller {
     public String printAllItems() {
 
         if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
+            return "No items registered yet.";
         } else {
-            System.out.println("All registered items:");
+            String allItem = "All registered items:\n";
+
             for (Item item : itemList) {
                 System.out.println(item);
+                allItem += item + "\n";
             }
+            return allItem;
         }
-        return "";
+
     }
     public String getItemID (String itemID){
         String ID = findItemID(itemID).getID();

@@ -17,6 +17,7 @@ public class Transaction {
 
     @Override
     public String toString() {
+
         return "<" + this.ID + ">: <" + this.unitsSold + "> item(s). <" + this.profit + "> SEK.";
 
     }
