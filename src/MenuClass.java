@@ -132,13 +132,8 @@ public class MenuClass {
       public String getPrintedItemReview() { // User story 3.2
 
           System.out.println("Size of list: " + Controller.reviewList.size());
-          int index = UserInput.readInt("Enter index: press 0 for first. 1 for second, and so on: ");
 
-          Review review = Controller.reviewList.get(index);
-          System.out.println("Review number["+ index +"] : "+ review);
-
-
-          /*String itemID = UserInput.readLine("Enter the ID of Item: ");
+          String itemID = UserInput.readLine("Enter the ID of Item: ");
 
           if (!facade.containsItem(itemID)) { // Check if item exists
 
@@ -147,12 +142,27 @@ public class MenuClass {
 
           } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)) { // checks if there is a review of item
               System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
+          }
+          else {
 
+              int index = UserInput.readInt("Enter an index of the review: ");
+
+              if (index < 1 || index > Controller.reviewList.size()){
+                  System.out.println("Invalid review number. Choose between 1 and <"
+                          + Controller.reviewList.size() + ">.");
+              } else {
+                  Review reviewItem = Controller.reviewList.get(index - 1);
+                  System.out.println(reviewItem);
+              }
+
+
+              }
+              /*
           } else if (facade.containsReview(itemID)) {
 
               //System.out.println("Review <" + itemID + ">");
               Review foundReview = Controller.findReview(itemID);
-              System.out.println(foundReview);
+              System.out.println(foundReview);*/
 
           } else {
 
@@ -161,9 +171,8 @@ public class MenuClass {
               int i = UserInput.readInt("Enter reviewNumber to retrieve the review: ");
               int reviewNumber = Controller.reviewList.indexOf(i);
 
-              if (reviewNumber > Controller.reviewList.size() || reviewNumber < Controller.reviewList.size()) {
-                  System.out.println("Invalid review number. Choose between 1 and <"
-                          + Controller.reviewList.size() + ">.");
+              //if (reviewNumber > Controller.reviewList.size() || reviewNumber < Controller.reviewList.size()) {
+
               } else {
                   for (Review review : Controller.reviewList) { // parameter review never used?
                       System.out.println("Grade: " + "[" + reviewNumber + "]"
