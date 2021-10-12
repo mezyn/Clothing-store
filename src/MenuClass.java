@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -186,37 +187,39 @@ public class MenuClass {
           return "";
       }
 
-/*Controller.itemList().retainAll(Controller.reviewList);
 
-          System.out.println(Controller.reviewList);
-*/
 
-    public String getPrintedReviews () { //User story 3.3
+    public void getPrintedReviews () { //User story 3.3
         String itemID = UserInput.readLine("Enter the ID of Item: ");
+        //Review review = new Review();
 
-        if (facade.containsReview(itemID)) {
-            System.out.println("Review(s) for <" + itemID + ">: <"
-                    + Controller.getItemName(itemID) + ">. " + "<"
-                        + Controller.getItemPrice(itemID) + "> SEK.");
-
-                Review foundReview = Controller.findReview(itemID);
-                    System.out.println(foundReview);
-
-        } else if (!facade.containsItem(itemID)) {
+        if (!facade.containsItem(itemID)) {
             System.out.println("Item <" + itemID + "> was not registered yet.");
 
         } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)){
             System.out.println("Review(s) for <"+itemID+">: <"
                     + Controller.getItemName(itemID) + ">. <"
-                        + Controller.getItemPrice(itemID)+"> SEK");
-            System.out.println("Item <"+Controller.getItemName(itemID)+"> has not been reviewed yet.");
+                    + Controller.getItemPrice(itemID) + "> SEK");
+            System.out.println("Item <" + Controller.getItemName(itemID) + "> has not been reviewed yet.");
 
+
+        } else if (facade.containsReview(itemID)) {
+            System.out.println("Review(s) for <" + itemID + ">: <"
+                    + Controller.getItemName(itemID) + ">. " + "<"
+                    + Controller.getItemPrice(itemID) + "> SEK.");
+
+            for (int i = 0; i < Controller.reviewList.size(); i++) {
+                if (Controller.getReviewList().get(i).getID().equals(itemID)) {
+                    System.out.println(Controller.getReviewList().get(i).toString());
+
+                }
+            }
         }
-        return "";
     }
 
-     public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
-         String userInput = UserInput.readLine("Enter the ID of Item: ");
+
+     //public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
+         //String userInput = UserInput.readLine("Enter the ID of Item: ");
 
 
 
@@ -236,8 +239,8 @@ public class MenuClass {
              System.out.println();
 
          }*/
-        return "";
-    }
+        //return "";
+    //}}
 
      public String getItemComments() { //User Story 3.5
         String itemID = UserInput.readLine("Enter the ID of Item");

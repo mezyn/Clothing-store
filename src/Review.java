@@ -5,6 +5,11 @@ public class Review {
     private String comment; //attribute
     private double grade; //attribute
 
+
+    public Review(){
+
+    }
+
     public Review(String ID, String comment, double grade){
 
         this.ID = ID;

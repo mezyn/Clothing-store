@@ -281,7 +281,7 @@ public class Controller {
 
 
 
-    public ArrayList<Review> getReviewList() {
+    public static ArrayList<Review> getReviewList() {
         return reviewList;
     }
 

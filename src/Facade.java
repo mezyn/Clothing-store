@@ -26,7 +26,6 @@ Controller controller = new Controller();
     }
 
     public boolean containsItem(String itemID) {
-        controller.findReview(itemID);
         return controller.containsItem(itemID);
     }
 
@@ -126,7 +125,7 @@ Controller controller = new Controller();
         return null;
     }
 
-    public String printAllReviews() {
+    public String printAllReviews() {  // for US 3.6
 
         controller.printAllReviews();
 
