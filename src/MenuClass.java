@@ -141,7 +141,7 @@ public class MenuClass {
               System.out.println("Item <" + itemID + "> was not registered yet.");
               itemID = UserInput.readLine("Enter a valid ID number: ");
 
-          } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)) { // checks if there is a review of item
+          } else if (!facade.containsReview(itemID)) { // checks if there is a review of item
               System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
           }
           else {
@@ -158,32 +158,7 @@ public class MenuClass {
 
 
               }
-              /*
-          } else if (facade.containsReview(itemID)) {
 
-              //System.out.println("Review <" + itemID + ">");
-              Review foundReview = Controller.findReview(itemID);
-              System.out.println(foundReview);*/
-
-          } else {
-
-              System.out.println("Number of reviews for item " + itemID + " : " + Controller.reviewList.size());
-
-              int i = UserInput.readInt("Enter reviewNumber to retrieve the review: ");
-              int reviewNumber = Controller.reviewList.indexOf(i);
-
-              //if (reviewNumber > Controller.reviewList.size() || reviewNumber < Controller.reviewList.size()) {
-
-              } else {
-                  for (Review review : Controller.reviewList) { // parameter review never used?
-                      System.out.println("Grade: " + "[" + reviewNumber + "]"
-                              + "<" + Controller.getItemGrade((itemID)) + ">.< "
-                              + Controller.getItemComment(itemID) + ">");
-                  }
-
-              }
-
-          }*/
           return "";
       }
 
@@ -196,8 +171,8 @@ public class MenuClass {
         if (!facade.containsItem(itemID)) {
             System.out.println("Item <" + itemID + "> was not registered yet.");
 
-        } else if (facade.containsItem(itemID) && !facade.containsReview(itemID)){
-            System.out.println("Review(s) for <"+itemID+">: <"
+        } else if (!facade.containsReview(itemID)) {
+            System.out.println("Review(s) for <" + itemID + ">: <"
                     + Controller.getItemName(itemID) + ">. <"
                     + Controller.getItemPrice(itemID) + "> SEK");
             System.out.println("Item <" + Controller.getItemName(itemID) + "> has not been reviewed yet.");
@@ -386,7 +361,7 @@ public class MenuClass {
             case 3 : getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
-            case 4 : getItemMeanGrade(); // User Story 3.4
+            case 4 : //getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
             case 5 : getItemComments();// User Story 3.5
