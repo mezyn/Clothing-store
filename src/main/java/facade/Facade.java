@@ -88,7 +88,7 @@ Controller controller = new Controller();
 
     public String getPrintedReviews(String itemID) { // 3.3 user story
 
-        return "";
+        return controller.getPrintedReviews(itemID);
     }
 
     public String printMostReviewedItems() {
@@ -123,11 +123,11 @@ Controller controller = new Controller();
         return null;
     }
 
-    /*
+
     public String printAllReviews() {  // for US 3.6
 
         return controller.printAllReviews();
-    }*/
+    }
 
 
 
