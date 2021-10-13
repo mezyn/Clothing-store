@@ -310,8 +310,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    static ArrayList<Review> reviewList = new ArrayList<>();
-
+    public static ArrayList<Review> reviewList = new ArrayList<>();
 
 
     public static ArrayList<Review> getReviewList() {
@@ -404,9 +403,14 @@ System.out.println(value + " " + pattern + " " + output);*/
         return totalProfit;
     }
 
+    public int getTotalUnitsSold() {
 
-
-
+        int totalUnitsSold = 0;
+        for (int i=0; i<transactionHistoryList.size(); i++) {
+            totalUnitsSold += transactionHistoryList.get(i).getUnitsSold();
+        }
+        return totalUnitsSold;
+    }
 
 
     //to contain transaction for specific item ... (4.3)
@@ -478,15 +482,17 @@ System.out.println(value + " " + pattern + " " + output);*/
     //4.4  3. print total number of transactions
     public int getTotalTransactions() {
         int totalTransactions = transactionHistoryList.size();
-        if (totalTransactions == 0) {
-            System.out.println("Total purchases made: 0 transactions");
+        return totalTransactions;
+        /*if (totalTransactions == 0) {
+            "Total purchases made: 0 transactions");
         } else {
             for (int i = 0; i < totalTransactions; i++); {
             System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
             }
         }
         return -1;
-    }
+   */ }
+
 
 
 
@@ -517,10 +523,11 @@ System.out.println(value + " " + pattern + " " + output);*/
         return "";
 
     }
+        /*
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    private static ArrayList<Item> employeeList = new ArrayList<>();
+    public static ArrayList<Item> employeeList = new ArrayList<>();
 
     public ArrayList<Item> getEmployeeList() {
         return employeeList;
@@ -530,6 +537,6 @@ System.out.println(value + " " + pattern + " " + output);*/
 
         return "";
     }
-
+*/
 }
 

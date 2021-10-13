@@ -136,16 +136,17 @@ Controller controller = new Controller();
     }
 
     public String printItemTransactions(String itemID) {
+
         return "";
     }
 
     public int getTotalUnitsSold() {
-        return -1;
+        return controller.getTotalUnitsSold();
     }
 
     public int getTotalTransactions() {
-        controller.getTotalTransactions();
-        return -1;
+        return controller.getTotalTransactions();
+
     }
 
     public double getProfit(String itemID) {
@@ -162,8 +163,7 @@ Controller controller = new Controller();
     }*/
 
     public String printAllTransactions() {
-        controller.printAllTransactions();
-        return "";
+        return controller.printAllTransactions();
     }
 
 
@@ -173,10 +173,10 @@ Controller controller = new Controller();
 
     // ------------------------------- for Employee ---------------------------------
 
-    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+  /*  public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
         controller.createEmployee(employeeID, employeeName, grossSalary);
         return "";
-    }
+    }*/
 
     public String printEmployee(String employeeID) throws Exception {
         return "";
