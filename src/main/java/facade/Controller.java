@@ -28,7 +28,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    public static ArrayList<Item> itemList = new ArrayList<>();
+    private static ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
@@ -47,36 +47,35 @@ System.out.println(value + " " + pattern + " " + output);*/
             return "Invalid data for item.";
         } else {
             unitPrice = changeDecimal(unitPrice, 2);
-
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
         }
     }
 
-    public String updateItemName(String IDInput, String newNameInput) {
+    public String updateItemName(String itemID, String newName) {
 
-        if (!containsItem(IDInput)) {
-            return "Item " + IDInput + " was not registered yet.";
-        } else if (IDInput.isBlank() || !containsItem(IDInput)) {
+        if (!containsItem(itemID)) {
+            return "Item " + itemID + " was not registered yet.";
+        } else if (itemID.isBlank() || !containsItem(itemID)) {
             return "Invalid data for item.";
         } else {
-            Item foundItem = findItem(IDInput);
-            foundItem.setItemName(newNameInput);
-            return "Item " + IDInput + " was updated successfully.";
+            Item foundItem = findItem(itemID);
+            foundItem.setItemName(newName);
+            return "Item " + itemID + " was updated successfully.";
         }
     }
 
-    public String updateItemPrice(String IDInput, double newPriceInput) {
+    public String updateItemPrice(String itemID, double newPrice) {
 
-        if (!containsItem(IDInput)) {
-            return "Item " + IDInput + " was not registered yet.";
-        } else if (newPriceInput < 0 || newPriceInput == 0) {
+        if (!containsItem(itemID)) {
+            return "Item " + itemID + " was not registered yet.";
+        } else if (newPrice < 0 || newPrice == 0) {
             return "Invalid data for item.";
         } else {
-            Item foundItem = findItem(IDInput);
-            foundItem.setItemPrice(newPriceInput);
-            return "Item " + IDInput + " was updated successfully.";
+            Item foundItem = findItem(itemID);
+            foundItem.setItemPrice(newPrice);
+            return "Item " + itemID + " was updated successfully.";
         }
     }
 
@@ -104,10 +103,10 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
     //Find index for user typed ID
-    public Item findItem(String userID) {
+    public Item findItem(String itemID) {
 
         for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(userID)) {
+            if (itemList.get(i).getID().equals(itemID)) {
                 return itemList.get(i);
             }
         }
