@@ -265,7 +265,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         return false;
     }
 
-
+//I'll use this to do the mean grade - Mijin
     public static Item findItemName(String itemName) {
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -305,6 +305,12 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         return null;
+    }
+
+    public double getItemMeanGrade(String itemID) {
+
+
+        return -1.0;
     }
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
