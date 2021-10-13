@@ -364,7 +364,6 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return false;
     }
-
     public static Review findReview(String reviewID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
@@ -392,14 +391,12 @@ System.out.println(value + " " + pattern + " " + output);*/
       }*/
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
-//creating a transaction
-public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
-
-    public static ArrayList<Transaction> getTransactionHistoryList() {return transactionHistoryList;}
+    //creating a transaction
+    public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
 
     //to contain transaction for specific item ... (4.3)
-    public static boolean containsTransaction(String itemID) {
+    public boolean containsTransaction(String itemID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 return true;
@@ -425,41 +422,17 @@ public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Tran
         int sumUnitSold = 0;
         int transactionCounter = 0;
 
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
+        for (int i=0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
                 sumUnitSold = sumUnitSold + transactionHistoryList.get(i).getUnitsSold();
                 transactionCounter += 1;
             }
-            System.out.println("Transactions for item: <" + itemID + ">: <" + getItemName(itemID) + ">. <" + sumProfit+ "> SEK\n");
-            for (getTransactionHistoryList().get(i).getID().equals(itemID);;) {
-                System.out.println(transactionHistoryList.get(i).getID().equals(itemID));
-                return "";
-            }
+
         }
+
         return "";
-
     }
-
-    public static String getUnitPrice(String itemID) {
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(itemID)) {
-                return String.valueOf(itemList.get(i).getItemPrice()); //
-            }
-        }
-        return "0";
-    }
-
-
-    /*public double getProfit(String itemID) {
-
-        double profit = 0.0
-        for (int i = 0; i < transactionHistoryList.size(); i++){
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-
-            }
-        }
-    }*/
 
 
     /*
@@ -492,19 +465,13 @@ public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Tran
             System.out.println("Total purchases made: 0 transactions");
         } else {
             for (int i = 0; i < totalTransactions; i++); {
-                System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
+            System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
             }
-            return totalTransactions;
         }
-        return -1; //change later
+        return -1;
     }
 
-    /*public int getTotalUnitsSold() {
-        int totalUnitsSold = 0
-                for (int i = 0; i < transactionHistoryList.size(); i++) {
-                    totalUnitsSold = totalUnitsSold + transactionHistoryList.
-                }
-    }*/
+
 
     //   4.5 - Print all transactions
     public String printAllTransactions() {
@@ -522,16 +489,18 @@ public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Tran
             System.out.println("All purchases made:\n" +
                     "Total profit: <total profit> SEK\n" +
                     "Total items sold: <total units> units\n" +
-                    "Total purchases made: <" + getTotalTransactions() + "> transactions\n" +
-                    "------------------------------------");
-        }
+                    "Total purchases made: <total transactions> transactions");
 
-        for (Transaction transaction : transactionHistoryList) {
-        System.out.print(transaction + System.lineSeparator());
-        System.out.println("\n------------------------------------\n");
+            for (Transaction transaction : transactionHistoryList) {
+                System.out.println(transaction.toString());
+            }
+
+            System.out.println("------------------------------------\n" + "\n");
         }
         return "";
+
     }
+
     //-----------------------------------FOR Employee-----------------------------------
 
     private static ArrayList<Item> employeeList = new ArrayList<>();
