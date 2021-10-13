@@ -158,7 +158,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             String allItem = "All registered items:\n";
 
             for (Item item : itemList) {
-                System.out.println(item);
+                //System.out.println(item);
                 allItem += item + "\n";
             }
             return allItem;
@@ -166,12 +166,13 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     }
 
+    //I don't need this method for Items. If you're using this method, then tell me, otherwise I'll remove it. -Mijin
     public String getItemID(String itemID) {
         String ID = findItemID(itemID).getID();
         return itemID;
     }
 
-
+    //I don't need this method for Items. If you're using this method, then tell me, otherwise I'll remove it. -Mijin
     public Item findItemID(String itemID) {
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -182,6 +183,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         return null;
     }
 
+    //I already have an exactly same method, named containsItem(). So delete this and use that one instead -Mijin
     public boolean containsItemID(String itemID) {
 
         for (int i = 0; i < getItemList().size(); i++) {
