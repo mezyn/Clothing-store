@@ -56,8 +56,8 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String updateItemName(String IDInput, String newNameInput) {
 
-        if (!containsItem(IDInput)){
-            return "Item " +IDInput + " was not registered yet.";
+        if (!containsItem(IDInput)) {
+            return "Item " + IDInput + " was not registered yet.";
         } else if (IDInput.isBlank() || !containsItem(IDInput)) {
             return "Invalid data for item.";
         } else {
@@ -69,14 +69,14 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String updateItemPrice(String IDInput, double newPriceInput) {
 
-        if (!containsItem(IDInput)){
-            return "Item " +IDInput + " was not registered yet.";
+        if (!containsItem(IDInput)) {
+            return "Item " + IDInput + " was not registered yet.";
         } else if (newPriceInput < 0 || newPriceInput == 0) {
             return "Invalid data for item.";
         } else {
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemPrice(newPriceInput);
-        return "Item " + IDInput + " was updated successfully.";
+            Item foundItem = findItem(IDInput);
+            foundItem.setItemPrice(newPriceInput);
+            return "Item " + IDInput + " was updated successfully.";
         }
     }
 
@@ -166,7 +166,8 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
 
     }
-    public String getItemID (String itemID){
+
+    public String getItemID(String itemID) {
         String ID = findItemID(itemID).getID();
         return itemID;
     }
@@ -193,7 +194,6 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-
     // ----------------------------------------------------------------------------------------
 
 
@@ -217,10 +217,10 @@ System.out.println(value + " " + pattern + " " + output);*/
         return false;
     }
 
-    public static String getItemGrade(String itemID){
+    public static String getItemGrade(String itemID) {
         double itemGrade = findItemGrade(itemID).getItemGrade();
         return String.valueOf(itemGrade);
-   }
+    }
 
     public static Review findItemGrade(String itemGrade) {
 
@@ -260,7 +260,6 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return false;
     }
-
 
 
     public static Item findItemName(String itemName) {
@@ -317,29 +316,21 @@ System.out.println(value + " " + pattern + " " + output);*/
     public static ArrayList<String> commentsList = new ArrayList<>();
 
 
-
-
-    public static ArrayList<String> getcommentsList() {
-        return commentsList;
-    }
-
-    public static ArrayList<String> commentsList = new ArrayList<>();
-
-
-    public static ArrayList<String> getcommentsList() {
+    public static ArrayList<String> getCommentsList() {
         return commentsList;
     }
 
 
-//Create Review 3.1
+    //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
-        } else if (!containsItem(ID)){
-            return "Item " + ID + " was not registered yet.";
+        } else if (!containsItem(ID)) {
+            return "Item ID1 not found.";
+            //"Item " + ID + " was not registered yet.";
 
-        } else if (reviewGrade < 1.0 || reviewGrade > 5.0){
+        } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
 
@@ -347,6 +338,73 @@ System.out.println(value + " " + pattern + " " + output);*/
             reviewList.add(review);
             return "Your item review was registered successfully."; //Testing issue
         }
+    }
+
+
+
+    public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
+        System.out.println("Size of list: " + reviewList.size());
+
+        if (containsItem(itemID)) {
+
+            System.out.println("Item <" + itemID + "> was not registered yet.");
+
+        } else if (!containsReview(itemID)) {
+            System.out.println("Item < " + getItemName(itemID) + "> has not been reviewed yet.");
+        } else {
+
+
+            if (reviewNumber < 1 || reviewNumber > reviewList.size()) {
+                System.out.println("Invalid review number. Choose between 1 and <"
+                        + reviewList.size() + ">.");
+            } else {
+                Review reviewItem = reviewList.get(reviewNumber - 1);
+
+            }
+
+
+        }
+
+        return null; // set to null for now so no error
+    }
+
+
+        /*if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
+            System.out.println("Index ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }
+        return "";
+    }*/
+
+    public String getPrintedReviews(String itemID) { //User story 3.3
+        if (!containsItem(itemID)) {
+            System.out.println("Item <" + itemID + "> was not registered yet.");
+
+        } else if (!containsReview(itemID)) {
+            System.out.println("Review(s) for <" + itemID + ">: <"
+                    + getItemName(itemID) + ">. <"
+                    + getItemPrice(itemID) + "> SEK");
+            System.out.println("Item <" + getItemName(itemID) + "> has not been reviewed yet.");
+
+
+        } else if (containsReview(itemID)) {
+            System.out.println("Review(s) for <" + itemID + ">: <"
+                    + getItemName(itemID) + ">. " + "<"
+                    + getItemPrice(itemID) + "> SEK.");
+
+            for (int i = 0; i < reviewList.size(); i++) {
+                if (getReviewList().get(i).getID().equals(itemID)) {
+                    System.out.println(getReviewList().get(i).toString());
+
+                }
+            }
+        }
+        return null; // set to null for now so no error
     }
 
     public static List<String> getItemComments(String itemID) { //User Story 3.5
@@ -363,50 +421,33 @@ System.out.println(value + " " + pattern + " " + output);*/
                 }
             }
         }
-        return getcommentsList();
-    }
-
-    public String getPrintedItemReview(String itemID, int reviewNumber) {
-        if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added: "+ System.lineSeparator());
-        } else {
-            System.out.println("Index ");
-            for (Review review : reviewList) {
-                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
-
-            }
-        }
-        return "";
+        return getCommentsList();
     }
 
 
-    public String printAllReviews() {
-        if (reviewList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else {
-            System.out.println("All registered items:");
-            for (Review review : reviewList) {
-                System.out.println(review);
-            }
-        }
-        return "";
+     public String printAllReviews() { // User Story 3.6
+         String allReview = null;
+         if (reviewList.size() == 0) {
+             System.out.println("No items registered yet.");
+         } else {
+             allReview = "All registered reviews:" +
+                     System.lineSeparator() +
+                     "------------------------------------" +
+                     System.lineSeparator();
+
+             for (Review review : reviewList) {
+                 System.out.println("Review(s) for <ID>: <Item Name>. <Price> SEK");
+                 //"Review(s) for "+  +": "+ getItemName() +". "+ getItemName() +" SEK");
+
+                 System.out.println(review);
+                 allReview += review + System.lineSeparator();
+             }
+         }
+         return allReview;
 
 
-    }
-//Temp
-    public static String printAllcomments() {
-        if (commentsList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else {
-            System.out.println("All registered items:");
-            for (String review : commentsList) {
-                System.out.println(review);
-            }
-        }
-        return "";
+     }
 
-
-    }
 
     public static boolean containsReview(String itemID) {
 

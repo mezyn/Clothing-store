@@ -199,7 +199,7 @@ public class MenuClass {
 
 
 
-   /*public void getItemComments() { //User Story 3.5 // getItemCommentsPrinted I think it should be.
+   /*public void getItemComments() { //User Story 3.5
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
