@@ -68,7 +68,7 @@ Controller controller = new Controller();
 
     public List<String> getItemComments(String itemID) {
 
-        return Controller.getItemComments(itemID);
+        return getItemComments(itemID);
 
     }
 

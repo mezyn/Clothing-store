@@ -12,10 +12,7 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
-/*
-    DecimalFormat myFormatter = new DecimalFormat(pattern);
-    String output = myFormatter.format(value);
-System.out.println(value + " " + pattern + " " + output);*/
+
 
     public double changeDecimal(double value, int decimalPoint) {
 
@@ -28,14 +25,14 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    public static ArrayList<Item> itemList = new ArrayList<>();
+    private static ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
     }
 
     //Create a new item and add it to itemList
-    public String createItem(String itemID, String itemName, double unitPrice) {
+    public String createItem(String itemID, String itemName, double price) {
 
         if (containsItem(itemID)) {
             return "Invalid data for item.";
@@ -43,52 +40,13 @@ System.out.println(value + " " + pattern + " " + output);*/
             return "Invalid data for item.";
         } else if (itemName.isEmpty()) {
             return "Invalid data for item.";
-        } else if (unitPrice == 0 || unitPrice < 0) {
+        } else if (price == 0 || price < 0) {
             return "Invalid data for item.";
         } else {
-            unitPrice = changeDecimal(unitPrice, 2);
-
-            Item item = new Item(itemID, itemName, unitPrice);
+            price = changeDecimal(price, 2);
+            Item item = new Item(itemID, itemName, price);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
-        }
-    }
-
-    public String updateItemName(String IDInput, String newNameInput) {
-
-        if (!containsItem(IDInput)){
-            return "Item " +IDInput + " was not registered yet.";
-        } else if (IDInput.isBlank() || !containsItem(IDInput)) {
-            return "Invalid data for item.";
-        } else {
-            Item foundItem = findItem(IDInput);
-            foundItem.setItemName(newNameInput);
-            return "Item " + IDInput + " was updated successfully.";
-        }
-    }
-
-    public String updateItemPrice(String IDInput, double newPriceInput) {
-
-        if (!containsItem(IDInput)){
-            return "Item " +IDInput + " was not registered yet.";
-        } else if (newPriceInput < 0 || newPriceInput == 0) {
-            return "Invalid data for item.";
-        } else {
-        Item foundItem = findItem(IDInput);
-        foundItem.setItemPrice(newPriceInput);
-        return "Item " + IDInput + " was updated successfully.";
-        }
-    }
-
-    //Remove item
-    public String removeItem(String itemID) {
-
-        if (this.containsItem(itemID)) {
-            Item itemToRemove = this.findItem(itemID);
-            itemList.remove(itemToRemove);
-            return "Item " + itemID + " was successfully removed.";
-        } else {
-            return "Item " + itemID + " could not be removed.";
         }
     }
 
@@ -103,35 +61,68 @@ System.out.println(value + " " + pattern + " " + output);*/
         return false;
     }
 
-    //Find index for user typed ID
-    public Item findItem(String userID) {
+    //Find item by using ID
+    public Item findItem(String itemID) {
 
         for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(userID)) {
+            if (itemList.get(i).getID().equals(itemID)) {
                 return itemList.get(i);
             }
         }
         return null;
     }
 
+    public String removeItem(String itemID) {
+
+        if (containsItem(itemID)) {
+            Item itemToRemove = findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item " + itemID + " was successfully removed.";
+        } else {
+            return "Item " + itemID + " could not be removed.";
+        }
+    }
+
+    public String updateItemName(String oldID, String newID) {
+
+        if (!containsItem(oldID)){
+            return "Item " +oldID + " was not registered yet.";
+        } else if (oldID.isBlank() || !containsItem(oldID)) {
+            return "Invalid data for item.";
+        } else {
+            Item foundItem = findItem(oldID);
+            foundItem.setItemName(newID);
+            return "Item " + oldID + " was updated successfully.";
+        }
+    }
+
+    public String updateItemPrice(String itemID, double newPrice) {
+
+        if (!containsItem(itemID)){
+            return "Item " +itemID + " was not registered yet.";
+        } else if (newPrice < 0 || newPrice == 0) {
+            return "Invalid data for item.";
+        } else {
+        Item foundItem = findItem(itemID);
+        foundItem.setItemPrice(newPrice);
+        return "Item " + itemID + " was updated successfully.";
+        }
+    }
+
 
     public double buyItem(String itemID, int amount) {
 
-        double totalPrice;
+        double totalPrice = 0.0;
 
         if (!containsItem(itemID)) {
             return -1;
-
         } else {
-
             double itemPrice = findItem(itemID).getItemPrice();
-
             if (amount < 4 || amount == 4) {
                 totalPrice = itemPrice * amount;
             } else {
                 totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
             }
-
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
 
@@ -159,28 +150,19 @@ System.out.println(value + " " + pattern + " " + output);*/
             String allItem = "All registered items:\n";
 
             for (Item item : itemList) {
-                System.out.println(item);
                 allItem += item + "\n";
             }
             return allItem;
         }
 
     }
+
+    //Mijin: I don't really use this code. Was it one of you who put it here? Otherwise I'll remove it.
     public String getItemID (String itemID){
-        String ID = findItemID(itemID).getID();
+        String ID = findItem(itemID).getID();
         return itemID;
     }
 
-
-    public Item findItemID(String itemID) {
-
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(itemID)) {
-                return itemList.get(i);
-            }
-        }
-        return null;
-    }
 
     public boolean containsItemID(String itemID) {
 
@@ -193,9 +175,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-
     // ----------------------------------------------------------------------------------------
-
 
     public static Review findItemComment(String itemComment) {
 
@@ -307,28 +287,19 @@ System.out.println(value + " " + pattern + " " + output);*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    public static ArrayList<Review> reviewList = new ArrayList<>();
+    private static ArrayList<Review> reviewList = new ArrayList<>();
 
 
     public static ArrayList<Review> getReviewList() {
         return reviewList;
     }
 
-    public static ArrayList<String> commentsList = new ArrayList<>();
-
-
-
+    private static ArrayList<String> commentsList = new ArrayList<>();
 
     public static ArrayList<String> getcommentsList() {
         return commentsList;
     }
 
-    public static ArrayList<String> commentsList = new ArrayList<>();
-
-
-    public static ArrayList<String> getcommentsList() {
-        return commentsList;
-    }
 
 
 //Create Review 3.1
