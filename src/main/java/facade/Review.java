@@ -38,6 +38,9 @@ public class Review {
 
     public double getItemGrade() { return grade; }
 
+    public String addComment(){
+        return comment;}
+
 
 
 }

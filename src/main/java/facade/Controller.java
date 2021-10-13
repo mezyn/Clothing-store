@@ -282,7 +282,7 @@ System.out.println(value + " " + pattern + " " + output);*/
                 return String.valueOf(itemList.get(i).getItemPrice()); //
             }
         }
-        return "Can't find"; //change later
+        return null;
 
 
     }
@@ -318,6 +318,14 @@ System.out.println(value + " " + pattern + " " + output);*/
         return reviewList;
     }
 
+    public static ArrayList<String> commentsList = new ArrayList<>();
+
+
+
+
+    public static ArrayList<String> getcommentsList() {
+        return commentsList;
+    }
 
 //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
@@ -354,20 +362,34 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
     }
+//Temp
+    public static String printAllcomments() {
+        if (commentsList.size() == 0) {
+            System.out.println("No items registered yet.");
+        } else {
+            System.out.println("All registered items:");
+            for (String review : commentsList) {
+                System.out.println(review);
+            }
+        }
+        return "";
 
-    public static boolean containsReview(String reviewID) {
+
+    }
+
+    public static boolean containsReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (getReviewList().get(i).getID().equals(reviewID)) {
+            if (getReviewList().get(i).getID().equals(itemID)) {
                 return true;
             }
         }
         return false;
     }
-    public static Review findReview(String reviewID) {
+    public static Review findReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(reviewID)) {
+            if (reviewList.get(i).getID().equals(itemID)) {
                 return reviewList.get(i);
             }
         }
