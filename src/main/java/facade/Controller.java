@@ -317,14 +317,6 @@ System.out.println(value + " " + pattern + " " + output);*/
         return reviewList;
     }
 
-    public static ArrayList<String> commentsList = new ArrayList<>();
-
-
-
-
-    public static ArrayList<String> getcommentsList() {
-        return commentsList;
-    }
 
 //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {

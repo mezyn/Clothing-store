@@ -1,5 +1,8 @@
 package facade;
 
+import java.util.Collections;
+import java.util.Iterator;
+
 public class MenuClass {
 
     Facade facade = new Facade();
@@ -203,14 +206,17 @@ public class MenuClass {
                 if (Controller.getReviewList().get(i).getID().equals(itemID)) {
                     Controller.commentsList.add(itemID);
 
-                    System.out.print(Controller.getcommentsList());
-                /*}for (String review : Controller.commentsList) {
-                    System.out.println(reviewNumber);
-                }*/
-                }
             }
         }
-    }
+
+        return "";
+
+    }*/
+    //Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
+    //When retrieving all comments, users must specify an item ID. For this user story,
+    // only the written comments are retrieved and can be iterated as a collection of strings.
+    // If the item ID was not registered or if the item has no reviews or written comments in it,
+    // the system should return an empty collection.
 
 
     public String printAllReviews() { //User Story 3.6
@@ -374,7 +380,7 @@ if (!facade.containsItem(itemID)) { // Check if item exists
             case 4 : //getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : getItemComments();// User Story 3.5
+            case 5 : //getItemComments();// User Story 3.5
                 ReviewMenu();
                 break;
             case 6 : Controller.printAllcomments();
