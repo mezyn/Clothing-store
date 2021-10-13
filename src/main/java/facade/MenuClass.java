@@ -129,7 +129,7 @@ public class MenuClass {
 
     public String getPrintedItemReview() { // User story 3.2
 
-        System.out.println("Size of list: " + Controller.reviewList.size());
+        System.out.println("Size of list: " + Controller.getReviewList().size());
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
@@ -145,11 +145,11 @@ public class MenuClass {
 
             int index = UserInput.readInt("Enter an index of the review: ");
 
-            if (index < 1 || index > Controller.reviewList.size()){
+            if (index < 1 || index > Controller.getReviewList().size()){
                 System.out.println("Invalid review number. Choose between 1 and <"
-                        + Controller.reviewList.size() + ">.");
+                        + Controller.getReviewList().size() + ">.");
             } else {
-                Review reviewItem = Controller.reviewList.get(index - 1);
+                Review reviewItem = Controller.getReviewList().get(index - 1);
                 System.out.println(reviewItem);
             }
 
@@ -180,7 +180,7 @@ public class MenuClass {
                     + Controller.getItemName(itemID) + ">. " + "<"
                     + Controller.getItemPrice(itemID) + "> SEK.");
 
-            for (int i = 0; i < Controller.reviewList.size(); i++) {
+            for (int i = 0; i < Controller.getReviewList().size(); i++) {
                 if (Controller.getReviewList().get(i).getID().equals(itemID)) {
                     System.out.println(Controller.getReviewList().get(i).toString());
 

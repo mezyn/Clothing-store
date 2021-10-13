@@ -73,11 +73,13 @@ Controller controller = new Controller();
     }
 
     public double getItemMeanGrade(String itemID) {
-        return -1.0;
+
+        return controller.getItemMeanGrade(itemID);
     }
 
     public int getNumberOfReviews(String itemID) {
-        return -1;
+
+        return controller.getNumberOfReviews(itemID);
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story

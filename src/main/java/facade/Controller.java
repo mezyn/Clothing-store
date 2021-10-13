@@ -307,14 +307,6 @@ System.out.println(value + " " + pattern + " " + output);*/
         return null;
     }
 
-    public double getItemMeanGrade(String itemID) {
-
-        double sumGrade = 0.0;
-        for (int i=0; i<reviewList.size(); i++) {
-            if (findItemName())
-        }
-        return -1.0;
-    }
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
@@ -471,6 +463,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return false;
     }
+
     public static Review findReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
@@ -481,8 +474,34 @@ System.out.println(value + " " + pattern + " " + output);*/
         return null;
     }
 
+    //From here I did - Mijin
 
-  //_______________________________Mean Grade of Review____________________________________________
+    public double getItemMeanGrade(String itemID) {
+
+        double sumGrade = 0.0;
+        int counter = 0;
+        for (int i = 0; i < reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(itemID)) {
+                sumGrade += reviewList.get(i).getItemGrade();
+                counter += 1;
+            }
+        }
+        double meanGrade = changeDecimal(sumGrade / counter, 1);
+        return meanGrade;
+    }
+
+    public int getNumberOfReviews(String itemID) {
+
+        int reviewCounter = 0;
+        for (int i=0; i<reviewList.size(); i++) {
+            if (reviewList.get(i).getID().equals(itemID)) {
+                reviewCounter += 1;
+            }
+        }
+        return reviewCounter;
+    }
+
+    //_______________________________Mean Grade of Review____________________________________________
 
     /*public String getItemMeanGrade() {
           if (reviewList.size() == 0) {
