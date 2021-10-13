@@ -131,7 +131,8 @@ Controller controller = new Controller();
     // ------------------------------- for transaction history ---------------------------------
 
     public double getTotalProfit() {
-        return -1.0;
+
+        return controller.getTotalProfit();
     }
 
     public String printItemTransactions(String itemID) {

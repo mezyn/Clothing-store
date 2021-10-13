@@ -395,6 +395,20 @@ System.out.println(value + " " + pattern + " " + output);*/
     public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
 
+    public double getTotalProfit() {
+
+        double totalProfit = 0.0;
+        for (int i = 0; i < transactionHistoryList.size(); i++)
+            totalProfit += transactionHistoryList.get(i).getProfit();
+
+        return totalProfit;
+    }
+
+
+
+
+
+
     //to contain transaction for specific item ... (4.3)
     public boolean containsTransaction(String itemID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
@@ -415,25 +429,28 @@ System.out.println(value + " " + pattern + " " + output);*/
         If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
 
     */
+/*
+    // US 4.2 -Retrieve purchase data for a specific item
 
     public String printItemTransactions(String itemID) {
 
         double sumProfit = 0.0;
         int sumUnitSold = 0;
-        int transactionCounter = 0;
 
         for (int i=0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
                 sumUnitSold = sumUnitSold + transactionHistoryList.get(i).getUnitsSold();
-                transactionCounter += 1;
+            } else {
+                return "No transactions have been registered for item " + itemID + " yet.";
             }
+            return "Transactions for item: " + itemID.toString() +
 
         }
 
         return "";
     }
-
+*/
 
     /*
         //get specific item transactions

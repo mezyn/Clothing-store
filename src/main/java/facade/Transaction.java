@@ -1,5 +1,7 @@
 package facade;
 
+import java.text.DecimalFormat;
+
 public class Transaction {
 
     private String ID;
@@ -18,7 +20,9 @@ public class Transaction {
     @Override
     public String toString() {
 
-        return "<" + this.ID + ">: <" + this.unitsSold + "> item(s). <" + this.profit + "> SEK.";
+        DecimalFormat decimal2 = new DecimalFormat("###.00");
+        String stringProfit = decimal2.format(this.profit);
+        return "" + this.ID + ": " + this.unitsSold + " item(s). " + stringProfit + " SEK.";
 
     }
 
