@@ -201,6 +201,9 @@ System.out.println(value + " " + pattern + " " + output);*/
     public static Review findItemComment(String itemComment) {
 
         for (Review review : reviewList) {
+            //the code below won't work, because here you're comparing 'review.getID()' and 'itemComment', which will
+            //never be equal. So you need to add 'getItemComment()' after 'getID()', so that you're actually comparing
+            //comment to comment.
             if (review.getID().equals(itemComment)) {
                 return review;
             }
