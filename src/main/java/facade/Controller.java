@@ -309,21 +309,24 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public double getItemMeanGrade(String itemID) {
 
-
+        double sumGrade = 0.0;
+        for (int i=0; i<reviewList.size(); i++) {
+            if (findItemName())
+        }
         return -1.0;
     }
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    public static ArrayList<Review> reviewList = new ArrayList<>();
+    private static ArrayList<Review> reviewList = new ArrayList<>();
 
 
     public static ArrayList<Review> getReviewList() {
         return reviewList;
     }
 
-    public static ArrayList<String> commentsList = new ArrayList<>();
+    private static ArrayList<String> commentsList = new ArrayList<>();
 
 
     public static ArrayList<String> getCommentsList() {
@@ -496,9 +499,11 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction
-    public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+    private static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
-
+    public ArrayList<Transaction> getTransactionHistoryList(){
+        return transactionHistoryList;
+    }
     public double getTotalProfit() {
 
         double totalProfit = 0.0;
@@ -650,7 +655,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    public static ArrayList<Item> employeeList = new ArrayList<>();
+    private static ArrayList<Item> employeeList = new ArrayList<>();
 
     public ArrayList<Item> getEmployeeList() {
         return employeeList;
