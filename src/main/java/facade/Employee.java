@@ -39,7 +39,7 @@ public class Employee {
     }
 
     //Net salary of regular employee
-    public double netSalary() {
+    public double getNetSalary() {
         double netSalary = this.grossSalary - (this.grossSalary * 0.1);
         return netSalary;
     }
@@ -48,6 +48,7 @@ public class Employee {
     //toString
 
     public String toString() {
-        return "<" + this.name + ">'s gross salary is <" + grossSalary + "> SEK per month.";
+
+        return "" + this.name + "'s gross salary is " + grossSalary + " SEK per month.";
     }
 }

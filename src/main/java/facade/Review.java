@@ -12,20 +12,21 @@ public class Review {
     public Review(String ID, String comment, double grade){
 
         this.ID = ID;
-        this.grade = grade;
         this.comment= comment; //Should it be set as null? -M
+        this.grade = grade;
+
     }
 
 
     @Override
-    public String toString() {return  "Grade: <" + this.grade +">. <" + this.comment + ">";}
+    public String toString() {return  "Grade: " + this.grade +". " + this.comment ;}
 
 
 
     public String getID() {return ID;}
 
     public String getItemComment() {
-        return comment;
+        return this.comment;
     }
 
     public void setComment(String comment) {

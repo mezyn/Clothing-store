@@ -310,8 +310,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    static ArrayList<Review> reviewList = new ArrayList<>();
-
+    public static ArrayList<Review> reviewList = new ArrayList<>();
 
 
     public static ArrayList<Review> getReviewList() {
@@ -321,11 +320,38 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
-        Review review = new Review(ID, reviewComment, reviewGrade);
-        reviewList.add(review);
-        return "";
+
+        if (ID.isEmpty()) {
+            return "ID needed to review item: ";
+        } else if (!containsItem(ID)){
+            return "Item " + ID + " was not registered yet.";
+
+        } else if (reviewGrade < 1.0 || reviewGrade > 5.0){
+            return "Grade values must be between 1 and 5.";
+        } else {
+
+            Review review = new Review(ID, reviewComment, reviewGrade);
+            reviewList.add(review);
+            return "Your item review was registered successfully."; //Testing issue
+        }
     }
 
+    public static List<String> getItemComments(String itemID) { //User Story 3.5
+
+
+        if (containsReview(itemID)) {
+            for (int i = 0; i < reviewList.size(); i++) {
+                if (getReviewList().get(i).getID().equals(itemID)) {
+                    commentsList.add(getReviewList().get(i).getItemComment());
+
+                    /*}for (String review : commentsList) {
+            System.out.println(itemID);
+        }*/
+                }
+            }
+        }
+        return getcommentsList();
+    }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {
         if (reviewList.size() == 0) {
@@ -395,14 +421,49 @@ System.out.println(value + " " + pattern + " " + output);*/
     public static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
 
-    //to contain transaction for specific item ... (4.3)
-    public boolean containsTransaction(String itemID) {
+    public double getTotalProfit() {
+
+        double totalProfit = 0.0;
+        for (int i = 0; i < transactionHistoryList.size(); i++)
+            totalProfit += transactionHistoryList.get(i).getProfit();
+
+        return totalProfit;
+    }
+
+    public int getTotalUnitsSold() {
+
+        int totalUnitsSold = 0;
+        for (int i=0; i<transactionHistoryList.size(); i++) {
+            totalUnitsSold += transactionHistoryList.get(i).getUnitsSold();
+        }
+        return totalUnitsSold;
+    }
+
+    public double getProfit(String itemID) {
+
+        double sumProfit = 0.0;
+
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
+            } else {
+                System.out.println("No transactions have been registered for item " + itemID + " yet.");
+            }
+
+        }
+        return sumProfit;
+    }
+
+        //to contain transaction for specific item ... (4.3)
+        public boolean containsTransaction (String itemID)
+    {
+
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 return true;
             }
         }
-        return false;
+            return false;
     }
 
     /*
@@ -415,25 +476,28 @@ System.out.println(value + " " + pattern + " " + output);*/
         If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
 
     */
+/*
+    // US 4.2 -Retrieve purchase data for a specific item
 
     public String printItemTransactions(String itemID) {
 
         double sumProfit = 0.0;
         int sumUnitSold = 0;
-        int transactionCounter = 0;
 
         for (int i=0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
                 sumUnitSold = sumUnitSold + transactionHistoryList.get(i).getUnitsSold();
-                transactionCounter += 1;
+            } else {
+                return "No transactions have been registered for item " + itemID + " yet.";
             }
+            return "Transactions for item: " + itemID.toString() +
 
         }
 
         return "";
     }
-
+*/
 
     /*
         //get specific item transactions
@@ -460,16 +524,20 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //4.4  3. print total number of transactions
     public int getTotalTransactions() {
+
         int totalTransactions = transactionHistoryList.size();
-        if (totalTransactions == 0) {
-            System.out.println("Total purchases made: 0 transactions");
+        return totalTransactions;
+
+        /*if (totalTransactions == 0) {
+            "Total purchases made: 0 transactions");
         } else {
             for (int i = 0; i < totalTransactions; i++); {
             System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
             }
         }
         return -1;
-    }
+   */ }
+
 
 
 
@@ -487,9 +555,9 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
             System.out.println("All purchases made:\n" +
-                    "Total profit: <total profit> SEK\n" +
-                    "Total items sold: <total units> units\n" +
-                    "Total purchases made: <total transactions> transactions");
+                    "Total profit: total profit SEK\n" +
+                    "Total items sold: total units units\n" +
+                    "Total purchases made: total transactions transactions");
 
             for (Transaction transaction : transactionHistoryList) {
                 System.out.println(transaction.toString());
@@ -500,10 +568,11 @@ System.out.println(value + " " + pattern + " " + output);*/
         return "";
 
     }
+        /*
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    private static ArrayList<Item> employeeList = new ArrayList<>();
+    public static ArrayList<Item> employeeList = new ArrayList<>();
 
     public ArrayList<Item> getEmployeeList() {
         return employeeList;
@@ -513,6 +582,6 @@ System.out.println(value + " " + pattern + " " + output);*/
 
         return "";
     }
-
+*/
 }
 

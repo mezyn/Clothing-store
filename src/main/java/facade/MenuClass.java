@@ -111,7 +111,7 @@ public class MenuClass {
             System.out.println("ID needed to review item: ");
             itemID = UserInput.readLine("Enter ID number: ");
         } while (!facade.containsItem(itemID)){
-            System.out.println("Item <" + itemID + "> was not registered yet.");
+            System.out.println("Item " + itemID + " was not registered yet.");
             itemID = UserInput.readLine("Enter a valid ID number: ");
         }
         String reviewComment = UserInput.readLine("What did you like or dislike about this item?: ");
@@ -225,7 +225,7 @@ public class MenuClass {
 
     public String printAllReviews() { //User Story 3.6
 
-        facade.printAllReviews();
+        //facade.printAllReviews();
 
         return "";
     }
@@ -437,7 +437,7 @@ if (!facade.containsItem(itemID)) { // Check if item exists
                 break;
             case 6 : System.out.println("Option 7");
                 break;
-            case 7 : printItemTransactions();
+            case 7 : //printItemTransactions();
                 transactionHistoryMenu();
                 break;
             case 8 : System.out.println("Option 9");

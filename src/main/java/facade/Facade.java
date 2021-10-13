@@ -61,11 +61,15 @@ Controller controller = new Controller();
     }
 
     public String getItemCommentsPrinted(String itemID) {
+
         return "";
     }
 
+
     public List<String> getItemComments(String itemID) {
-        return null;
+
+        return Controller.getItemComments(itemID);
+
     }
 
     public double getItemMeanGrade(String itemID) {
@@ -119,6 +123,7 @@ Controller controller = new Controller();
         return null;
     }
 
+    /*
     public String printAllReviews() {  // for US 3.6
 
         controller.printAllReviews();
@@ -131,7 +136,7 @@ Controller controller = new Controller();
     // ------------------------------- for transaction history ---------------------------------
 
     public double getTotalProfit() {
-        return -1.0;
+        return controller.getTotalProfit();
     }
 
     public String printItemTransactions(String itemID) {
@@ -139,16 +144,15 @@ Controller controller = new Controller();
     }
 
     public int getTotalUnitsSold() {
-        return -1;
+        return controller.getTotalUnitsSold();
     }
 
     public int getTotalTransactions() {
-        controller.getTotalTransactions();
-        return -1;
+        return controller.getTotalTransactions();
     }
 
     public double getProfit(String itemID) {
-        return -1.0;
+        return controller.getProfit(itemID);
     }
 
     public int getUnitsSolds(String itemID) {
