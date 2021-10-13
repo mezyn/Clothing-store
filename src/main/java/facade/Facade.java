@@ -135,7 +135,7 @@ Controller controller = new Controller();
     }
 
     public String printItemTransactions(String itemID) {
-        return "";
+        return controller.printItemTransactions(itemID);
     }
 
     public int getTotalUnitsSold() {
@@ -143,8 +143,7 @@ Controller controller = new Controller();
     }
 
     public int getTotalTransactions() {
-        controller.getTotalTransactions();
-        return -1;
+        return controller.getTotalTransactions();
     }
 
     public double getProfit(String itemID) {
@@ -155,14 +154,9 @@ Controller controller = new Controller();
         return -1;
     }
 
-    /*public boolean containsTransaction(String itemID) {
-        controller.containsTransaction(itemID);
-        return controller.containsItem(itemID);
-    }*/
 
     public String printAllTransactions() {
-        controller.printAllTransactions();
-        return "";
+        return controller.printAllTransactions();
     }
 
 

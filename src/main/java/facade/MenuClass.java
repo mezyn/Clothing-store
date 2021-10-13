@@ -240,8 +240,39 @@ public class MenuClass {
         if(facade.contains)
     }*/
 
+    public String printItemTransactions() {
+
+        String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
+
+        if (!facade.containsItem(itemID)) {
+            System.out.println("Item < " + Controller.findItemName(itemID) + "> was not registered.");
+        } else if (!Controller.containsTransaction(itemID)) {
+            System.out.println("Transactions for item: <" + itemID + ">: <" + Controller.getItemName(itemID) + ">. <" + Controller.getUnitPrice(itemID) + "> SEK\n" + "No transactions have been registered for item <" + itemID + "> yet.\n");
+        } else {facade.printItemTransactions(itemID);
+        }
+        return "";
+    }
     // 4.3 print transaction for specific item
 /*
+if (!facade.containsItem(itemID)) { // Check if item exists
+
+            System.out.println("Item <" + itemID + "> was not registered yet.");
+            itemID = UserInput.readLine("Enter a valid ID number: ");
+
+        } else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
+            System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
+        }
+        else {
+
+            int index = UserInput.readInt("Enter an index of the review: ");
+
+            if (index < 1 || index > Controller.reviewList.size()){
+                System.out.println("Invalid review number. Choose between 1 and <"
+                        + Controller.reviewList.size() + ">.");
+            } else {
+                Review reviewItem = Controller.reviewList.get(index - 1);
+                System.out.println(reviewItem); ¨
+
     public String printTransactionSpecificItem() {
             String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");
        if (facade.containsTransaction(itemID)) {
@@ -406,7 +437,7 @@ public class MenuClass {
                 break;
             case 6 : System.out.println("Option 7");
                 break;
-            case 7 : //printTransactionSpecificItem();
+            case 7 : printItemTransactions();
                 transactionHistoryMenu();
                 break;
             case 8 : System.out.println("Option 9");
