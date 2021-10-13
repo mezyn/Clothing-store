@@ -664,20 +664,23 @@ System.out.println(value + " " + pattern + " " + output);*/
         return "";
 
     }
-        /*
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    private static ArrayList<Item> employeeList = new ArrayList<>();
+    private static ArrayList<Employee> employeeList = new ArrayList<>();
 
-    public ArrayList<Item> getEmployeeList() {
+    public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
-        return "";
+        grossSalary = changeDecimal(grossSalary, 2);
+        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary );
+        employeeList.add(newEmployee);
+
+        return "Employee " + employeeID + "was registered successfully.";
     }
-*/
+
 }
 

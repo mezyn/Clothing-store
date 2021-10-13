@@ -3,52 +3,51 @@ package facade;
 public class Employee {
 
     //attributes of the Employee class
-    private String ID;
-    private String name;
+    private String employeeID;
+    private String employeeName;
     private double grossSalary;
 
+    //Default constructor - necessary?
+    public Employee () {}
 
     //Constructor
-    public Employee (String ID, String name, double grossSalary) {
-        this.ID = ID;
-        this.name = name;
+    public Employee (String employeeID, String employeeName, double grossSalary) {
+        this.employeeID = employeeID;
+        this.employeeName = employeeName;
         this.grossSalary = grossSalary;
     }
 
     //Getters and setters
 
 
-    public String getID() {
-        return ID;
+    protected String getID() {
+        return employeeID;
     }
 
-    public String getName() {
-        return name;
+    protected String getEmployeeName() {
+        return employeeName;
     }
 
-    public double getGrossSalary() {
+    protected double getGrossSalary() {
         return grossSalary;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    protected void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
-    public void setGrossSalary(double grossSalary) {
+    protected void setGrossSalary(double grossSalary) {
         this.grossSalary = grossSalary;
     }
 
     //Net salary of regular employee
-    public double getNetSalary() {
+    protected double getNetSalary() {
         double netSalary = this.grossSalary - (this.grossSalary * 0.1);
         return netSalary;
     }
 
-
-    //toString
-
     public String toString() {
 
-        return "" + this.name + "'s gross salary is " + grossSalary + " SEK per month.";
+        return employeeName + "'s gross salary is " + grossSalary + " SEK per month.";
     }
 }
