@@ -457,7 +457,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     public static boolean containsReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
-            if (getReviewList().get(i).getID().equals(itemID)) {
+            if (reviewList.get(i).getID().equals(itemID)) {
                 return true;
             }
         }
@@ -480,11 +480,18 @@ System.out.println(value + " " + pattern + " " + output);*/
 
         double sumGrade = 0.0;
         int counter = 0;
-        for (int i = 0; i < reviewList.size(); i++) {
-            if (reviewList.get(i).getID().equals(itemID)) {
-                sumGrade += reviewList.get(i).getItemGrade();
-                counter += 1;
+
+        if (!containsReview(itemID)) {
+            System.out.println("Item " + itemID + "was not registered yet.");
+        } else if (findReview(itemID).getItemComment().isEmpty()) {
+            System.out.println("Item " + itemID + " has not been reviewed yet.");
+        } else {
+            for (int i = 0; i < reviewList.size(); i++) {
+                if (reviewList.get(i).getID().equals(itemID)) {
+                    sumGrade += reviewList.get(i).getItemGrade();
+                    counter += 1;
             }
+        }
         }
         double meanGrade = changeDecimal(sumGrade / counter, 1);
         return meanGrade;
