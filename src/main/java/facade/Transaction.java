@@ -22,7 +22,7 @@ public class Transaction {
 
         DecimalFormat decimal2 = new DecimalFormat("###.00");
         String stringProfit = decimal2.format(this.profit);
-        return "" + this.ID + ": " + this.unitsSold + " item(s). " + stringProfit + " SEK.";
+        return "" + this.ID + ": " + this.unitsSold + " item(s). " + stringProfit + " SEK";
 
     }
 

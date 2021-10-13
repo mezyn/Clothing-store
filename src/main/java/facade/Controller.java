@@ -563,50 +563,36 @@ System.out.println(value + " " + pattern + " " + output);*/
         return sumProfit;
     }
 
-        //to contain transaction for specific item ... (4.3)
-        public boolean containsTransaction (String itemID)
-    {
+    //to contain transaction for specific item ... (4.3)
+    public boolean containsTransaction (String itemID) {
 
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-                return true;
+    for (int i = 0; i < transactionHistoryList.size(); i++) {
+        if (transactionHistoryList.get(i).getID().equals(itemID)) {
+            return true;
             }
         }
-            return false;
+        return false;
     }
 
-    /*
-        User Story 4.2 - Retrieve purchase data for a specific item
-        I want to retrieve different data about transactions of a specific item in order to get an overview of how profitable the item is.
-        For a registered item ID specified by the user, the system should print three different summary data:
-        Sum of all the profit made by purchasing that specific item.
-        Sum of all units sold of that specific item.
-        Total number of transactions registered for the specific item.
-        If the item ID has not been registered or if no transaction for that item has been made, the system should return the value zero (0) for all operations above.
-
-    */
-/*
     // US 4.2 -Retrieve purchase data for a specific item
 
     public String printItemTransactions(String itemID) {
 
-        double sumProfit = 0.0;
-        int sumUnitSold = 0;
-
-        for (int i=0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-                sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
-                sumUnitSold = sumUnitSold + transactionHistoryList.get(i).getUnitsSold();
-            } else {
-                return "No transactions have been registered for item " + itemID + " yet.";
+        if (!containsItem(itemID)) {
+            return "Item " + itemID + "was not registered yet.";
+        } else if (!containsTransaction(itemID)) {
+            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            return message + "No transactions have been registered for item " + itemID + " yet.";
+        } else {
+            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            for (int i = 0; i < transactionHistoryList.size(); i++) {
+                if (transactionHistoryList.get(i).getID().equals(itemID))
+                message += transactionHistoryList.get(i).toString() + "\n";
             }
-            return "Transactions for item: " + itemID.toString() +
-
+            return message;
         }
-
-        return "";
     }
-*/
+
 
     /*
         //get specific item transactions
@@ -635,9 +621,10 @@ System.out.println(value + " " + pattern + " " + output);*/
     public int getTotalTransactions() {
 
         int totalTransactions = transactionHistoryList.size();
-        return totalTransactions;
+        return -1;
+        /*return totalTransactions;
 
-        /*if (totalTransactions == 0) {
+        if (totalTransactions == 0) {
             "Total purchases made: 0 transactions");
         } else {
             for (int i = 0; i < totalTransactions; i++); {

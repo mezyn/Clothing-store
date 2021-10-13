@@ -140,7 +140,7 @@ Controller controller = new Controller();
     }
 
     public String printItemTransactions(String itemID) {
-        return "";
+        return controller.printItemTransactions(itemID);
     }
 
     public int getTotalUnitsSold() {
@@ -159,10 +159,11 @@ Controller controller = new Controller();
         return -1;
     }
 
-    /*public boolean containsTransaction(String itemID) {
-        controller.containsTransaction(itemID);
-        return controller.containsItem(itemID);
-    }*/
+    //Is this supposed to be in a facade? You don't suppose to add extra method here. We should only keep what
+    //Francisco originally gave us I think -Mijin
+    public boolean containsTransaction(String itemID) {
+        return controller.containsTransaction(itemID);
+    }
 
     public String printAllTransactions() {
         controller.printAllTransactions();
