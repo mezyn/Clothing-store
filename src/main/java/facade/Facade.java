@@ -126,10 +126,8 @@ Controller controller = new Controller();
     /*
     public String printAllReviews() {  // for US 3.6
 
-        controller.printAllReviews();
-
-        return "";
-    }
+        return controller.printAllReviews();
+    }*/
 
 
 
@@ -176,10 +174,10 @@ Controller controller = new Controller();
 
     // ------------------------------- for Employee ---------------------------------
 
-    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+    /*public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
         controller.createEmployee(employeeID, employeeName, grossSalary);
         return "";
-    }
+    }*/
 
     public String printEmployee(String employeeID) throws Exception {
         return "";

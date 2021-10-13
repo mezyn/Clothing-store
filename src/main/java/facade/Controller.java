@@ -1,6 +1,7 @@
 package facade;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Controller {
@@ -194,11 +195,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
     // ----------------------------------------------------------------------------------------
-    public static  String getItemComment(String itemID){
-        String itemComment = findItemComment(itemID).getItemComment();
-        return String.valueOf(itemID);
 
-    }
 
     public static Review findItemComment(String itemComment) {
 
@@ -315,6 +312,22 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public static ArrayList<Review> getReviewList() {
         return reviewList;
+    }
+
+    public static ArrayList<String> commentsList = new ArrayList<>();
+
+
+
+
+    public static ArrayList<String> getcommentsList() {
+        return commentsList;
+    }
+
+    public static ArrayList<String> commentsList = new ArrayList<>();
+
+
+    public static ArrayList<String> getcommentsList() {
+        return commentsList;
     }
 
 

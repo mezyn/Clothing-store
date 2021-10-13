@@ -4,12 +4,12 @@ public class Review {
 
     private String ID;
     private String comment;
-    private double grade;
+    private int grade;
 
 
     //public Review(){}
 
-    public Review(String ID, String comment, double grade){
+    public Review(String ID, String comment, int grade){
 
         this.ID = ID;
         this.comment= comment; //Should it be set as null? -M
@@ -33,7 +33,7 @@ public class Review {
         this.comment = comment;
     } // Don't need this?
 
-    public void setGrade(double grade) {
+    public void setGrade(int grade) {
         this.grade = grade;
     } // Don't need this?
 

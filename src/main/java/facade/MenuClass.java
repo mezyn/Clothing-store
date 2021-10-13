@@ -101,7 +101,7 @@ public class MenuClass {
 
 //____________________________________________Reviews___________________________________________________
 
-    public void createReview() { //User Story 3.1
+    public void reviewItem() { //User Story 3.1
 
         System.out.println("To create a review for a item please enter ID of the item:");
 
@@ -197,14 +197,36 @@ public class MenuClass {
 
 
 
-    public void getItemComments() { //User Story 3.5 // getItemCommentsPrinted I think it should be.
+
+
+   /*public void getItemComments() { //User Story 3.5 // getItemCommentsPrinted I think it should be.
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
         if (Controller.containsReview(itemID)) {
             for (int i = 0; i < Controller.reviewList.size(); i++) {
-                if (Controller.getReviewList().get(i).getID().equals(itemID)) {
-                    Controller.commentsList.add(itemID);
+                if (Controller.getReviewList().get(i).equals(itemID)) {
+                    Controller.commentsList.add(Controller.getReviewList().get(i).getItemComment());
+
+                    System.out.print(Controller.getcommentsList());
+        /for (String review : Controller.commentsList) {
+            System.out.println(reviewNumber);
+        }
+                }
+            }
+        }
+    } /*
+
+
+
+       /* String itemID = UserInput.readLine("Enter the ID of Item");
+        if(Controller.containsReview(itemID)){
+            Review foundReview = Controller.findReview(itemID);
+            System.out.println(foundReview);
+
+        }else {
+            for (Review reviewItem : Controller.reviewList) {
+                System.out.println("Comment: " + "<" + Controller.getItemComment(itemID) + ">");
 
             }
         }
@@ -236,7 +258,7 @@ public class MenuClass {
         if(facade.contains)
     }*/
 
-    public String printItemTransactions() {
+   /* public String printItemTransactions() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
 
@@ -247,7 +269,7 @@ public class MenuClass {
         } else {facade.printItemTransactions(itemID);
         }
         return "";
-    }
+    }*/
     // 4.3 print transaction for specific item
 /*
 if (!facade.containsItem(itemID)) { // Check if item exists
@@ -368,7 +390,7 @@ if (!facade.containsItem(itemID)) { // Check if item exists
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : createReview(); // User Story 3.1
+            case 1 : reviewItem(); // User Story 3.1
                 ReviewMenu();
                 break;
             case 2 : getPrintedItemReview();// User Story 3.2
@@ -383,8 +405,7 @@ if (!facade.containsItem(itemID)) { // Check if item exists
             case 5 : //getItemComments();// User Story 3.5
                 ReviewMenu();
                 break;
-            case 6 : Controller.printAllcomments();
-                //printAllReviews(); // User Story 3.6
+            case 6 : //printAllReviews(); // User Story 3.6
                 ReviewMenu();
                 break;
             case 7 : System.out.println("Option 8");// User Story 3.7
