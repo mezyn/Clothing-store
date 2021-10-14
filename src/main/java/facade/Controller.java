@@ -375,6 +375,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
     }
 // Second reviewItem
+
     public String reviewItemWithoutComment(String ID, int reviewGrade) {
 
         if (ID.isEmpty()) {
@@ -386,9 +387,9 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-
-            Review review = new Review(ID, reviewGrade);
-            Item.reviews().add(review);
+            Item founditem = findItem(ID);
+            Review review = new Review(reviewGrade);
+            founditem.registerReview(review);
             return "Your item review was registered successfully.";
         }
     }
@@ -505,16 +506,19 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
      }
-
+// I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
     public boolean containsReview(String itemID) {
 
-        for (int i = 0; i < Item.getReviews().size(); i++) {
-            if (Item.getReviews().get(i).getID().equals(itemID)) {
+        for (int i = 0; i < getItemList().size(); i++) {
+            if (getItemList().get(i).getID().equals(itemID)) {
+                int nrOfreviews = getItemList().get(i).getReviewList().size();
+                if (nrOfreviews == 0) {
+                    return false;
+                } else {
                 return true;
             }
         }
-        return false;
     }
 
     public Review findReview(String itemID) {
