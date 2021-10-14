@@ -651,12 +651,12 @@ System.out.println(value + " " + pattern + " " + output);*/
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return ("All purchases made:\n" +
+            return ("All purchases made: \n" +
                     "Total profit: 0.00 SEK\n" +
                     "Total items sold: 0 units\n" +
                     "Total purchases made: 0 transactions\n" +
-                    "----------------------------------------\n" +
-                    "----------------------------------------");
+                    "------------------------------------\n" +
+                    "------------------------------------\n");
         } else {
 
 
@@ -666,11 +666,12 @@ System.out.println(value + " " + pattern + " " + output);*/
                     "Total purchases made:" + getTotalTransactions() + "transactions transactions");
 
             for (Transaction transaction : transactionHistoryList) {
-                System.out.println(transaction.toString());
+                return (transaction.toString());
             }
 
             return ("------------------------------------\n" + "\n");
         }
+
     }
 
     //-----------------------------------FOR Employee-----------------------------------

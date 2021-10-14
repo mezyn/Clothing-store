@@ -163,8 +163,7 @@ Controller controller = new Controller();
 
 
     public String printAllTransactions() {
-        controller.printAllTransactions();
-        return "";
+        return controller.printAllTransactions();
     }
 
 
