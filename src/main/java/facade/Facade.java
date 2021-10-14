@@ -56,8 +56,8 @@ Controller controller = new Controller();
     }
 
     public String reviewItem(String itemID, int reviewGrade) { // 3.1 user story
-        reviewItem(itemID, "", reviewGrade);
-        return "";
+
+        return controller.reviewItem(itemID, "", reviewGrade); // This is might be a problem!
     }
 
     public String getItemCommentsPrinted(String itemID) {
@@ -107,6 +107,7 @@ Controller controller = new Controller();
     public String printLeastReviewedItems() {
         return "";
     }
+
 
     public String printWorseReviewedItems() {
         return "";

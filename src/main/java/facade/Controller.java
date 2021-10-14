@@ -1,6 +1,8 @@
 package facade;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -325,24 +327,28 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-    //Create Review 3.1
-    public String reviewItem(String ID, String reviewComment, int reviewGrade) {
 
-        if (ID.isEmpty()) {
-            return "ID needed to review item: ";
-        } else if (!containsItem(ID)) {
-            return "Item ID1 not found.";
+
+
+    public String reviewItem(String itemID, String comment, int reviewGrade) {
+
+        if (itemID.isEmpty()) { return "ID needed to review item: ";
+
+        } else if (!containsItem(itemID)) {
+            return "Item "+getItemName(itemID)+" has not been reviewed yet.";
             //"Item " + ID + " was not registered yet.";
 
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
-        } else {
 
-            Review review = new Review(ID, reviewComment, reviewGrade);
+        } else {
+            String message = "Your item review was registered successfully.";
+            Review review = new Review(itemID, comment, reviewGrade);
             reviewList.add(review);
-            return "Your item review was registered successfully."; //Testing issue
+            return message; //Testing issue
         }
     }
+
 
 
 
@@ -471,7 +477,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //From here I did - Mijin
 
-    public double getItemMeanGrade(String itemID) {
+    public double getItemMeanGrade(String itemID) { //User Story 3.4
 
         double sumGrade = 0.0;
         int counter = 0;
@@ -502,6 +508,21 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return reviewCounter;
     }
+
+    /*public String printMostReviewedItems(){
+        if (itemList.isEmpty()){
+            return "No items registered yet.";
+        }else if (reviewList.isEmpty()){
+            return "No items were reviewed yet.";
+
+        } else {
+            return "";
+        }
+    }
+
+    public List<String> getMostReviewedItems() {
+
+    }*/
 
     //_______________________________Mean Grade of Review____________________________________________
 
