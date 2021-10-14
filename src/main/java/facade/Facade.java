@@ -68,7 +68,7 @@ Controller controller = new Controller();
 
     public List<String> getItemComments(String itemID) {
 
-        return getItemComments(itemID);
+        return Controller.getItemComments(itemID);
 
     }
 
@@ -83,7 +83,6 @@ Controller controller = new Controller();
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story
-
 
         return controller.getPrintedItemReview(itemID, reviewNumber);
     }

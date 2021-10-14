@@ -320,7 +320,6 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     private static ArrayList<String> commentsList = new ArrayList<>();
 
-
     public static ArrayList<String> getCommentsList() {
         return commentsList;
     }
@@ -348,28 +347,22 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
-        System.out.println("Size of list: " + reviewList.size());
+        //System.out.println("Size of list: " + reviewList.size()); // This line is just for us to see what to enter.
 
         if (containsItem(itemID)) {
-
-            System.out.println("Item <" + itemID + "> was not registered yet.");
+           return "Item " + itemID + " was not registered yet.";
 
         } else if (!containsReview(itemID)) {
-            System.out.println("Item < " + getItemName(itemID) + "> has not been reviewed yet.");
+            return "Item " + getItemName(itemID) + " has not been reviewed yet.";
         } else {
-
-
             if (reviewNumber < 1 || reviewNumber > reviewList.size()) {
-                System.out.println("Invalid review number. Choose between 1 and <"
-                        + reviewList.size() + ">.");
+                return "Invalid review number. Choose between 1 and "
+                        + reviewList.size() + ".";
             } else {
                 Review reviewItem = reviewList.get(reviewNumber - 1);
 
             }
-
-
         }
-
         return null; // set to null for now so no error
     }
 
@@ -388,23 +381,25 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String getPrintedReviews(String itemID) { //User story 3.3
         if (!containsItem(itemID)) {
-            System.out.println("Item <" + itemID + "> was not registered yet.");
+            return "Item <" + itemID + "> was not registered yet.";
 
         } else if (!containsReview(itemID)) {
-            System.out.println("Review(s) for <" + itemID + ">: <"
-                    + getItemName(itemID) + ">. <"
-                    + getItemPrice(itemID) + "> SEK");
-            System.out.println("Item <" + getItemName(itemID) + "> has not been reviewed yet.");
+            return "Review(s) for " + itemID + ": "
+                    + getItemName(itemID) + ". "
+                    + getItemPrice(itemID) + " SEK" + System.lineSeparator();
 
+        } else if (containsItem(itemID) && !reviewList.equals(itemID)) {
+
+                return "Item " + getItemName(itemID) + " has not been reviewed yet.";
 
         } else if (containsReview(itemID)) {
-            System.out.println("Review(s) for <" + itemID + ">: <"
-                    + getItemName(itemID) + ">. " + "<"
-                    + getItemPrice(itemID) + "> SEK.");
+            String message = "Review(s) for " + itemID + ": "
+                    + getItemName(itemID) + ". "
+                    + getItemPrice(itemID) + " SEK.";
 
             for (int i = 0; i < reviewList.size(); i++) {
                 if (getReviewList().get(i).getID().equals(itemID)) {
-                    System.out.println(getReviewList().get(i).toString());
+                    return message + getReviewList().get(i).toString();
 
                 }
             }
@@ -433,7 +428,7 @@ System.out.println(value + " " + pattern + " " + output);*/
      public String printAllReviews() { // User Story 3.6
          String allReview = null;
          if (reviewList.size() == 0) {
-             System.out.println("No items registered yet.");
+             return ("No items registered yet.");
          } else {
              allReview = "All registered reviews:" +
                      System.lineSeparator() +
@@ -442,7 +437,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
              for (Review review : reviewList) {
                  System.out.println("Review(s) for <ID>: <Item Name>. <Price> SEK");
-                 //"Review(s) for "+  +": "+ getItemName() +". "+ getItemName() +" SEK");
+                 //"Review(s) for "+  +": "+ getItemName() +". "+ getItemName() +" SEK"); // ask TA
 
                  System.out.println(review);
                  allReview += review + System.lineSeparator();
