@@ -129,7 +129,7 @@ public class MenuClass {
 
     public String getPrintedItemReview() { // User story 3.2
 
-        System.out.println("Size of list: " + Controller.getReviewList().size());
+        System.out.println("Size of list: " + Item.getReviews().size());
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
@@ -180,9 +180,9 @@ public class MenuClass {
                     + Controller.getItemName(itemID) + ">. " + "<"
                     + Controller.getItemPrice(itemID) + "> SEK.");
 
-            for (int i = 0; i < Controller.getReviewList().size(); i++) {
-                if (Controller.getReviewList().get(i).getID().equals(itemID)) {
-                    System.out.println(Controller.getReviewList().get(i).toString());
+            for (int i = 0; i < Item.getReviews().size(); i++) {
+                if (Item.getReviews().get(i).getID().equals(itemID)) {
+                    System.out.println(Item.getReviews().get(i).toString());
 
                 }
             }
@@ -190,13 +190,26 @@ public class MenuClass {
     }
 
 
-    /*public String getItemMeanGrade(){ //User Story 3.4 Retrieve the mean grade of a specific item
+    public double getItemMeanGrade(String itemID) { //User Story 3.4
 
+        double sumGrade = 0.0;
+        int counter = 0;
 
-         }*/
-
-
-
+        if (!containsReview(itemID)) {
+            System.out.println("Item " + itemID + "was not registered yet.");
+        } else if (findReview(itemID).getItemComment().isEmpty()) {
+            System.out.println("Item " + itemID + " has not been reviewed yet.");
+        } else {
+            for (int i = 0; i < Item.getReviews().size(); i++) {
+                if (Item.getReviews().get(i).getID().equals(itemID)) {
+                    sumGrade += Item.getReviews().get(i).getItemGrade();
+                    counter += 1;
+                }
+            }
+        }
+        double meanGrade = Controller.changeDecimalToOne(double value)
+        return meanGrade;
+    }
 
 
    /*public void getItemComments() { //User Story 3.5
@@ -209,17 +222,17 @@ public class MenuClass {
                     Controller.commentsList.add(Controller.getReviewList().get(i).getItemComment());
 
                     System.out.print(Controller.getcommentsList());
-        /for (String review : Controller.commentsList) {
+            for (String review : Controller.commentsList) {
             System.out.println(reviewNumber);
         }
                 }
             }
         }
-    } /*
+    }*/
 
 
-
-       /* String itemID = UserInput.readLine("Enter the ID of Item");
+       /* Old version
+       String itemID = UserInput.readLine("Enter the ID of Item");
         if(Controller.containsReview(itemID)){
             Review foundReview = Controller.findReview(itemID);
             System.out.println(foundReview);
@@ -234,11 +247,7 @@ public class MenuClass {
         return "";
 
     }*/
-    //Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
-    //When retrieving all comments, users must specify an item ID. For this user story,
-    // only the written comments are retrieved and can be iterated as a collection of strings.
-    // If the item ID was not registered or if the item has no reviews or written comments in it,
-    // the system should return an empty collection.
+
 
 
     public String printAllReviews() { //User Story 3.6

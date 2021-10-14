@@ -61,8 +61,8 @@ Controller controller = new Controller();
     }
 
     public String getItemCommentsPrinted(String itemID) {
-
-        return controller.getItemCommentsPrinted(itemID);
+        //controller.getItemCommentsPrinted(itemID);
+        return "";
     }
 
 

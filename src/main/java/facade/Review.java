@@ -20,9 +20,7 @@ public class Review {
     @Override
     public String toString() {return  "Grade: " + this.grade +". " + this.comment ;}
 
-
-
-    public String getID() {return ID;}
+    //public String getID() {return ID;}
 
     public String getItemComment() {
         return this.comment;
