@@ -631,7 +631,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     public int getTotalTransactions() {
 
         int totalTransactions = transactionHistoryList.size();
-        return -1;
+        return totalTransactions;
         /*return totalTransactions;
 
         if (totalTransactions == 0) {

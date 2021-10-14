@@ -262,7 +262,7 @@ public class MenuClass {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
 
-        if (!facade.containsItem(itemID)) {
+        if (!controller.containsItem(itemID)) {
             System.out.println("Item < " + Controller.findItemName(itemID) + "> was not registered.");
         } else if (!Controller.containsTransaction(itemID)) {
             System.out.println("Transactions for item: <" + itemID + ">: <" + Controller.getItemName(itemID) + ">. <" + Controller.getUnitPrice(itemID) + "> SEK\n" + "No transactions have been registered for item <" + itemID + "> yet.\n");
