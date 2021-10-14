@@ -61,8 +61,8 @@ Controller controller = new Controller();
     }
 
     public String getItemCommentsPrinted(String itemID) {
-        //controller.getItemCommentsPrinted(itemID);
-        return "";
+
+        return controller.getItemCommentsPrinted(itemID);
     }
 
 
@@ -107,7 +107,6 @@ Controller controller = new Controller();
     public String printLeastReviewedItems() {
         return "";
     }
-
 
     public String printWorseReviewedItems() {
         return "";

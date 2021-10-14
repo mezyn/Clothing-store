@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.text.DecimalFormat;
 
 public class Item {
-    private Review review;
 
     //attributes of Item class
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
+     private ArrayList<Review> reviewList;
 
-     public  ArrayList<Review> reviews = new ArrayList<Review>();
 
     //constructor
     public Item(String ID, String name, double pricePerUnit) {
@@ -19,12 +18,15 @@ public class Item {
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
+        this.reviewList = new ArrayList<Review>();
 
     }
 
-    public  ArrayList<Review> getReviews(){
-     return this.reviews;
-} //removed "this", and I think it needs to be static.
+    public void registerReview(Review review) {
+
+        this.reviewList.add(review);
+
+    }
 
     @Override
     public String toString() {
@@ -57,7 +59,9 @@ public class Item {
         this.pricePerUnit = newPriceInput;
     }
 
-
+    public ArrayList<Review> getReviewList(){
+        return this.reviewList;
+    }
 
 }
 
