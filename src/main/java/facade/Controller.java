@@ -589,7 +589,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     public String printItemTransactions(String itemID) {
 
         if (!containsItem(itemID)) {
-            return "Item " + itemID + "was not registered yet.";
+            return "Item " + itemID + " was not registered yet.";
         } else if (!containsTransaction(itemID)) {
             String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
             return message + "No transactions have been registered for item " + itemID + " yet.";
@@ -651,7 +651,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            System.out.println("All purchases made:\n" +
+            return ("All purchases made:\n" +
                     "Total profit: 0.00 SEK\n" +
                     "Total items sold: 0 units\n" +
                     "Total purchases made: 0 transactions\n" +
@@ -669,10 +669,8 @@ System.out.println(value + " " + pattern + " " + output);*/
                 System.out.println(transaction.toString());
             }
 
-            System.out.println("------------------------------------\n" + "\n");
+            return ("------------------------------------\n" + "\n");
         }
-        return "";
-
     }
 
     //-----------------------------------FOR Employee-----------------------------------
