@@ -26,6 +26,8 @@ public class Review {
         return this.comment;
     }
 
+    public double getItemGrade() { return this.grade; }
+
     public void setComment(String comment) {
         this.comment = comment;
     } // Don't need this?
@@ -33,8 +35,7 @@ public class Review {
     public void setGrade(int grade) {
         this.grade = grade;
     } // Don't need this?
-
-    public double getItemGrade() { return grade; }
+    //Don't we have a method for this? then we can remove the setters -Mijin
 
 
 }

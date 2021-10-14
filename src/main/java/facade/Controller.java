@@ -367,10 +367,10 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-
+            Item founditem = findItem(ID);
             //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
-            Item.getReviews().add(review);
+            founditem.registerReview(review);
             return "Your item review was registered successfully."; //Testing issue
         }
     }
