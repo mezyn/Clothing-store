@@ -651,7 +651,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return ("All purchases made: \n" +
+            return ("All purchases made:\n" +
                     "Total profit: 0.00 SEK\n" +
                     "Total items sold: 0 units\n" +
                     "Total purchases made: 0 transactions\n" +
@@ -659,17 +659,17 @@ System.out.println(value + " " + pattern + " " + output);*/
                     "------------------------------------\n");
         } else {
 
-
-            System.out.println("All purchases made:\n" +
-                    "Total profit:" + getTotalProfit() + "total profit SEK\n" +
-                    "Total items sold:" + getTotalUnitsSold() + "total units units\n" +
-                    "Total purchases made:" + getTotalTransactions() + "transactions transactions");
+            String allTransactions = ("All purchases made:\n" +
+                    "Total profit: " + getTotalProfit() + " total profit SEK\n" +
+                    "Total items sold: " + getTotalUnitsSold() + " units\n" +
+                    "Total purchases made: " + getTotalTransactions() + " transactions\n" +
+                    "------------------------------------\n");
 
             for (Transaction transaction : transactionHistoryList) {
-                return (transaction.toString());
+                allTransactions += transaction + "\n";
             }
 
-            return ("------------------------------------\n" + "\n");
+            return (allTransactions + "------------------------------------\n");
         }
 
     }
