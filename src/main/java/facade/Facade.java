@@ -62,7 +62,7 @@ Controller controller = new Controller();
 
     public String getItemCommentsPrinted(String itemID) {
 
-        return "";
+        return controller.getItemCommentsPrinted(itemID);
     }
 
 

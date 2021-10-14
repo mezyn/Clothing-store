@@ -2,16 +2,14 @@ package facade;
 
 public class Review {
 
-    private String ID;
     private String comment;
     private int grade;
 
 
     //public Review(){}
 
-    public Review(String ID, String comment, int grade){
+    public Review(String comment, int grade){
 
-        this.ID = ID;
         this.comment= comment; //Should it be set as null? -M
         this.grade = grade;
 
