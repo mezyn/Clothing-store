@@ -10,6 +10,7 @@ public class Item {
      private String name;
      private double pricePerUnit;
 
+     ArrayList<Review> reviews = new ArrayList<Review>();
 
     //constructor
     public Item(String ID, String name, double pricePerUnit) {
@@ -20,6 +21,9 @@ public class Item {
 
     }
 
+public ArrayList<Review> getReviews(){
+     return this.reviews;
+}
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package facade;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,18 +18,46 @@ public class Controller {
     String output = myFormatter.format(value);
 System.out.println(value + " " + pattern + " " + output);*/
 
-    public double changeDecimal(double value, int decimalPoint) {
+    public double changeDecimal(double value) {
 
-        value = value * Math.pow(10, decimalPoint);
+        value = value * Math.pow(10, 2);
         value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);
-
+        value = value / Math.pow(10, 2);
         return value;
+    }
+
+        public double changeDecimal2(double value) { //for two decimal digits
+
+        /*value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);*/
+        String newString = String.valueOf(value);
+        int index = 0;
+        for(int i = 0;i<newString.length();i++){
+            if(newString.charAt(i)=='.' || newString.charAt(i)==','){
+                index = i;
+            }
+        }
+        newString = newString.substring(0,index+3);
+        double newValue = Double.valueOf(newString);
+        //String sValue = (String) String.format("%.2f", value);
+        //Double newValue = Double.parseDouble(sValue);
+        return newValue;
+    }
+
+    public double changeDecimalToOne(double value) { //for One decimal digit
+
+        /*value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);*/
+        String sValue = (String) String.format("%.1f", value);
+        Double newValue = Double.parseDouble(sValue);
+        return newValue;
     }
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    private static ArrayList<Item> itemList = new ArrayList<>();
+     ArrayList<Item> itemList = new ArrayList<>();
 
     public ArrayList<Item> getItemList() {
         return itemList;
@@ -46,7 +75,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            unitPrice = changeDecimal(unitPrice, 2);
+            unitPrice = changeDecimal(unitPrice);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -134,7 +163,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
 
-            return changeDecimal(totalPrice, 2);
+            return changeDecimal(totalPrice);
 
         }
     }
@@ -198,7 +227,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     // ----------------------------------------------------------------------------------------
 
 
-    public static Review findItemComment(String itemComment) {
+    public Review findItemComment(String itemComment) {
 
         for (Review review : reviewList) {
             //the code below won't work, because here you're comparing 'review.getID()' and 'itemComment', which will
@@ -221,12 +250,12 @@ System.out.println(value + " " + pattern + " " + output);*/
         return false;
     }
 
-    public static String getItemGrade(String itemID) {
+    public String getItemGrade(String itemID) {
         double itemGrade = findItemGrade(itemID).getItemGrade();
         return String.valueOf(itemGrade);
     }
 
-    public static Review findItemGrade(String itemGrade) {
+    public Review findItemGrade(String itemGrade) {
 
         for (Review review : reviewList) {
             if (review.getID().equals(itemGrade)) {
@@ -247,7 +276,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-    public static String getItemName(String itemID) {
+    public String getItemName(String itemID) {
 
         String itemName = findItemName(itemID).getItemName();
 
@@ -266,7 +295,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 //I'll use this to do the mean grade - Mijin
-    public static Item findItemName(String itemName) {
+    public Item findItemName(String itemName) {
 
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getID().equals(itemName)) {
@@ -276,7 +305,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         return null;
     }
 
-    public static String getItemPrice(String itemID) {
+    public String getItemPrice(String itemID) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getID().equals(itemID)) {
                 return String.valueOf(itemList.get(i).getItemPrice()); //
@@ -311,16 +340,16 @@ System.out.println(value + " " + pattern + " " + output);*/
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
     //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    private static ArrayList<Review> reviewList = new ArrayList<>();
+    ArrayList<Review> reviewList = new ArrayList<>();
 
 
-    public static ArrayList<Review> getReviewList() {
+    public ArrayList<Review> getReviewList() {
         return reviewList;
     }
 
-    private static ArrayList<String> commentsList = new ArrayList<>();
+     ArrayList<String> commentsList = new ArrayList<>();
 
-    public static ArrayList<String> getCommentsList() {
+    public ArrayList<String> getCommentsList() {
         return commentsList;
     }
 
@@ -338,12 +367,30 @@ System.out.println(value + " " + pattern + " " + output);*/
             return "Grade values must be between 1 and 5.";
         } else {
 
+            //item.getReviewList().add(review);
             Review review = new Review(ID, reviewComment, reviewGrade);
             reviewList.add(review);
             return "Your item review was registered successfully."; //Testing issue
         }
     }
+// Second reviewItem
+    public String reviewItemWithoutComment(String ID, int reviewGrade) {
 
+        if (ID.isEmpty()) {
+            return "ID needed to review item: ";
+        } else if (!containsItem(ID)) {
+            return "Item ID1 not found.";
+            //"Item " + ID + " was not registered yet.";
+
+        } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
+            return "Grade values must be between 1 and 5.";
+        } else {
+
+            Review review = new Review(ID, reviewGrade);
+            reviewList.add(review);
+            return "Your item review was registered successfully.";
+        }
+    }
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
@@ -407,7 +454,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         return null; // set to null for now so no error
     }
 
-    public static List<String> getItemComments(String itemID) { //User Story 3.5
+    public List<String> getItemComments(String itemID) { //User Story 3.5
 
 
         if (containsReview(itemID)) {
@@ -421,8 +468,13 @@ System.out.println(value + " " + pattern + " " + output);*/
                 }
             }
         }
-        return getCommentsList();
+        return commentsList;
     }
+
+    /*for(int i = 0; i <commentList.size();i++){
+        System.out.println(commentsList.get(i));
+    }*/
+
 
 
      public String printAllReviews() { // User Story 3.6
@@ -449,7 +501,7 @@ System.out.println(value + " " + pattern + " " + output);*/
      }
 
 
-    public static boolean containsReview(String itemID) {
+    public boolean containsReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getID().equals(itemID)) {
@@ -459,7 +511,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         return false;
     }
 
-    public static Review findReview(String itemID) {
+    public Review findReview(String itemID) {
 
         for (int i = 0; i < reviewList.size(); i++) {
             if (reviewList.get(i).getID().equals(itemID)) {
@@ -488,7 +540,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         }
-        double meanGrade = changeDecimal(sumGrade / counter, 1);
+        double meanGrade = changeDecimal(sumGrade / counter);
         return meanGrade;
     }
 
@@ -520,7 +572,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction
-    private static ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+    ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
     public ArrayList<Transaction> getTransactionHistoryList(){
         return transactionHistoryList;
@@ -531,6 +583,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         for (int i = 0; i < transactionHistoryList.size(); i++)
             totalProfit += transactionHistoryList.get(i).getProfit();
 
+        totalProfit = changeDecimal(totalProfit);
         return totalProfit;
     }
 
@@ -545,16 +598,15 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public double getProfit(String itemID) {
 
-        double sumProfit = 0.0;
+        double sumProfit = 0.00;
 
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
-            } else {
-                System.out.println("No transactions have been registered for item " + itemID + " yet.");
             }
-
         }
+        if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");
+        sumProfit = changeDecimal(sumProfit);
         return sumProfit;
     }
     public int getUnitsSolds(String itemID) { //should we change name to getUnitsSold?
@@ -616,7 +668,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 */
 
 
-    public static Transaction findItemTransactionHistory(String userID) {
+    public Transaction findItemTransactionHistory(String userID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(userID)) {
                 return transactionHistoryList.get(i);
@@ -676,7 +728,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    private static ArrayList<Employee> employeeList = new ArrayList<>();
+    ArrayList<Employee> employeeList = new ArrayList<>();
 
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
@@ -684,7 +736,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
-        grossSalary = changeDecimal(grossSalary, 2);
+        grossSalary = changeDecimal(grossSalary);
         Employee newEmployee = new Employee(employeeID, employeeName, grossSalary );
         employeeList.add(newEmployee);
 
