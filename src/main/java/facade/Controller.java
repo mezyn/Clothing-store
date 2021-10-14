@@ -661,9 +661,9 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
             System.out.println("All purchases made:\n" +
-                    "Total profit: total profit SEK\n" +
-                    "Total items sold: total units units\n" +
-                    "Total purchases made: total transactions transactions");
+                    "Total profit:" + getTotalProfit() + "total profit SEK\n" +
+                    "Total items sold:" + getTotalUnitsSold() + "total units units\n" +
+                    "Total purchases made:" + getTotalTransactions() + "transactions transactions");
 
             for (Transaction transaction : transactionHistoryList) {
                 System.out.println(transaction.toString());
