@@ -557,6 +557,21 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return sumProfit;
     }
+    public int getUnitsSolds(String itemID) { //should we change name to getUnitsSold?
+
+        int sumUnitsSold = 0;
+
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
+            } else {
+                System.out.println("No transactions have been registered for item " + itemID + " yet.");
+            }
+
+        }
+        return sumUnitsSold;
+    }
+
 
     //to contain transaction for specific item ... (4.3)
     public boolean containsTransaction (String itemID) {

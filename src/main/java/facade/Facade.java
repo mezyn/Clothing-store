@@ -155,14 +155,12 @@ Controller controller = new Controller();
     }
 
     public int getUnitsSolds(String itemID) {
-        return -1;
+        return controller.getUnitsSolds(itemID);
     }
 
     //Is this supposed to be in a facade? You don't suppose to add extra method here. We should only keep what
     //Francisco originally gave us I think -Mijin
-    public boolean containsTransaction(String itemID) {
-        return controller.containsTransaction(itemID);
-    }
+
 
     public String printAllTransactions() {
         controller.printAllTransactions();
