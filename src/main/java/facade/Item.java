@@ -11,7 +11,7 @@ public class Item {
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
-     private  ArrayList<Review> reviewList= new ArrayList<Review>;
+     private ArrayList<Review> reviewList= new ArrayList<Review>;
 
 
     //constructor
