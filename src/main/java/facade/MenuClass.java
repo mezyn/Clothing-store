@@ -263,10 +263,34 @@ public class MenuClass {
 
 //___________________________________________________________________________________________________________
 
-    /*public int getUnitsSold(String itemID) {
-        int itemID = UserInput.readLine("enter the ID of the item");
-        if(facade.contains)
-    }*/
+
+    // 4.3 - Print all transactions for a specific item
+    public String printItemTransactions() {
+
+        String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
+        facade.printItemTransactions(itemID);
+
+        return "";
+    }
+
+    // Print total profit for a specific item
+    public double printProfit() {
+
+        String itemID = UserInput.readLine("Type the ID of the desired item for profit to be printed:");
+        facade.getProfit(itemID);
+
+        return 0.0;
+    }
+
+    //Print total units sold for a specific item
+    public int printUnitsSolds() {
+
+        String itemID = UserInput.readLine("Type the ID of the desired item for units sold to be printed:");
+        facade.getUnitsSolds(itemID);
+
+        return 0;
+    }
+
 
    /* public String printItemTransactions() {
 
@@ -279,27 +303,26 @@ public class MenuClass {
         } else {facade.printItemTransactions(itemID);
         }
         return "";
+
+         public String printItemTransactions(String itemID) {
+
+        if (!containsItem(itemID)) {
+            return "Item " + itemID + " was not registered yet.";
+        } else if (!containsTransaction(itemID)) {
+            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            return message + "No transactions have been registered for item " + itemID + " yet.";
+        } else {
+            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            for (int i = 0; i < transactionHistoryList.size(); i++) {
+                if (transactionHistoryList.get(i).getID().equals(itemID))
+                message += transactionHistoryList.get(i).toString() + "\n";
+            }
+            return message;
+        }
+    }
     }*/
     // 4.3 print transaction for specific item
 /*
-if (!facade.containsItem(itemID)) { // Check if item exists
-
-            System.out.println("Item <" + itemID + "> was not registered yet.");
-            itemID = UserInput.readLine("Enter a valid ID number: ");
-
-        } else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
-            System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
-        }
-        else {
-
-            int index = UserInput.readInt("Enter an index of the review: ");
-
-            if (index < 1 || index > Controller.reviewList.size()){
-                System.out.println("Invalid review number. Choose between 1 and <"
-                        + Controller.reviewList.size() + ">.");
-            } else {
-                Review reviewItem = Controller.reviewList.get(index - 1);
-                System.out.println(reviewItem); ¨
 
     public String printTransactionSpecificItem() {
             String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");
@@ -451,9 +474,9 @@ if (!facade.containsItem(itemID)) { // Check if item exists
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : System.out.println("Option 2");
+            case 1 : facade.getTotalProfit();
                 break;
-            case 2 : System.out.println("Option 3");
+            case 2 : facade.getTotalUnitsSold();
                 break;
             case 3 : facade.getTotalTransactions();
                 transactionHistoryMenu();
@@ -461,14 +484,14 @@ if (!facade.containsItem(itemID)) { // Check if item exists
             case 4 : facade.printAllTransactions();
                 transactionHistoryMenu();
                 break;
-            case 5 : System.out.println("Option 6");
+            case 5 : printProfit();
                 break;
-            case 6 : System.out.println("Option 7");
+            case 6 : printUnitsSolds();
                 break;
-            case 7 : //printItemTransactions();
+            case 7 : printItemTransactions();
                 transactionHistoryMenu();
                 break;
-            case 8 : System.out.println("Option 9");
+            case 8 : facade.printMostProfitableItems();
                 break;
             default : System.out.println("Please enter a valid option");
                 break;

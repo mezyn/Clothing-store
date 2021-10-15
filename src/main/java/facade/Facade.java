@@ -134,25 +134,15 @@ Controller controller = new Controller();
 
     // ------------------------------- for transaction history ---------------------------------
 
-    public double getTotalProfit() {
-        return controller.getTotalProfit();
-    }
+    public double getTotalProfit() {return controller.getTotalProfit();}
 
-    public String printItemTransactions(String itemID) {
-        return controller.printItemTransactions(itemID);
-    }
+    public String printItemTransactions(String itemID) {return controller.printItemTransactions(itemID);}
 
-    public int getTotalUnitsSold() {
-        return controller.getTotalUnitsSold();
-    }
+    public int getTotalUnitsSold() {return controller.getTotalUnitsSold();}
 
-    public int getTotalTransactions() {
-        return controller.getTotalTransactions();
-    }
+    public int getTotalTransactions() {return controller.getTotalTransactions();}
 
-    public double getProfit(String itemID) {
-        return controller.getProfit(itemID);
-    }
+    public double getProfit(String itemID) {return controller.getProfit(itemID);}
 
     public int getUnitsSolds(String itemID) {return controller.getUnitsSolds(itemID);}
 
