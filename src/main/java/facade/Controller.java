@@ -330,7 +330,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }*/
 
 
-    public String getPrintedReviews(String itemID) {
+    public String getPrintedReviews(String itemID) { // User Story 3.3
 
         Item itemToPrint = findItem(itemID);
         if (itemToPrint == null) {
@@ -369,9 +369,22 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
     public String printAllReviews() { // User Story 3.6
-        Item item = findItem(itemID);
 
-        String allReview = null;
+        String message = "All registered reviews:" +
+                System.lineSeparator() +
+                "------------------------------------" +
+                System.lineSeparator();
+
+        for (Item item : getItemList()){
+            return "Review(s) for "+ getID() +": "+ getItemName() +". "+ getItemName() +" SEK";
+
+            for (Review review : item.getReviewList()){
+                return message + review + System.lineSeparator();
+
+            }
+        }
+
+        /*String allReview = null;
         if (Item.getReviewList().size() == 0) {
             return ("No items registered yet.");
         } else {
@@ -390,7 +403,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         return allReview;
-    }
+    }*/
 
 
     public String printMostReviewedItems() {
