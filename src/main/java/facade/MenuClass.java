@@ -7,6 +7,7 @@ public class MenuClass {
 
     Facade facade = new Facade();
 
+
     //method for creating items
     public void createItem(){
 
@@ -139,17 +140,17 @@ public class MenuClass {
             itemID = UserInput.readLine("Enter a valid ID number: ");
 
         } else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
-            System.out.println("Item < " + Controller.getItemName(itemID) + "> has not been reviewed yet.");
+            System.out.println("Item < " + Item.getItemName(itemID) + "> has not been reviewed yet.");
         }
         else {
 
             int index = UserInput.readInt("Enter an index of the review: ");
 
-            if (index < 1 || index > Controller.getReviewList().size()){
+            if (index < 1 || index > Item.getReviewList().size()){
                 System.out.println("Invalid review number. Choose between 1 and <"
-                        + Controller.getReviewList().size() + ">.");
+                        + Item.getReviewList().size() + ">.");
             } else {
-                Review reviewItem = Controller.getReviewList().get(index - 1);
+                Review reviewItem = Item.getReviewList().get(index - 1);
                 System.out.println(reviewItem);
             }
 

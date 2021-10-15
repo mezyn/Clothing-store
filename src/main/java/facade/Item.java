@@ -2,14 +2,16 @@ package facade;
 
 import java.util.ArrayList;
 import java.text.DecimalFormat;
+import java.util.Collection;
 
 public class Item {
+
 
     //attributes of Item class
      private String ID; //I'll put this as String for now + only have getter(?)
      private String name;
      private double pricePerUnit;
-     private ArrayList<Review> reviewList;
+     private  ArrayList<Review> reviewList= new ArrayList<Review>;
 
 
     //constructor
@@ -18,8 +20,6 @@ public class Item {
         this.ID = ID;
         this.name = name;
         this.pricePerUnit = pricePerUnit;
-        this.reviewList = new ArrayList<Review>();
-
     }
 
     public void registerReview(Review review) {
@@ -27,6 +27,8 @@ public class Item {
         this.reviewList.add(review);
 
     }
+
+
 
     @Override
     public String toString() {
