@@ -14,6 +14,11 @@ public class Review {
         this.grade = grade;
 
     }
+    public Review(int grade){
+
+        this.grade = grade;
+
+    }
 
 
 

@@ -57,7 +57,7 @@ Controller controller = new Controller();
 
     public String reviewItem(String itemID, int reviewGrade) { // 3.1 user story
 
-        return controller.reviewItem(itemID, "", reviewGrade); // This is might be a problem!
+        return controller.reviewItem(itemID, "", reviewGrade);
     }
 
     public String getItemCommentsPrinted(String itemID) {
