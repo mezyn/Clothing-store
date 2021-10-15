@@ -803,6 +803,9 @@ System.out.println(value + " " + pattern + " " + output);*/
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
+    public ArrayList<EmployeeManager> getEmployeeManagerList() {
+        return employeeManagerList;
+    }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
@@ -811,6 +814,17 @@ System.out.println(value + " " + pattern + " " + output);*/
         employeeList.add(newEmployee);
 
         return "Employee " + employeeID + "was registered successfully.";
+    }
+
+
+    public String createEmployeeManager(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
+
+        grossSalary = changeDecimal(grossSalary);
+        EmployeeManager newEmployeeManager = new EmployeeManager(employeeID, employeeName, grossSalary );
+        employeeManagerList.add(newEmployee);
+
+        return "Employee " + employeeID + "was registered successfully.";
+        }
     }
 
 }

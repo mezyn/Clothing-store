@@ -9,6 +9,7 @@ public class EmployeeManager extends Employee {
         this.degree = degree;
     }
 
+
     @Override
     protected double getGrossSalary() {
 
