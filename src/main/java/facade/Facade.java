@@ -154,22 +154,11 @@ Controller controller = new Controller();
         return controller.getProfit(itemID);
     }
 
-    public int getUnitsSolds(String itemID) {
-        return controller.getUnitsSolds(itemID);
-    }
+    public int getUnitsSolds(String itemID) {return controller.getUnitsSolds(itemID);}
 
-    //Is this supposed to be in a facade? You don't suppose to add extra method here. We should only keep what
-    //Francisco originally gave us I think -Mijin
+    public String printAllTransactions() {return controller.printAllTransactions();}
 
-
-    public String printAllTransactions() {
-        return controller.printAllTransactions();
-    }
-
-
-    public String printMostProfitableItems() {
-        return "";
-    }
+    public String printMostProfitableItems() {return controller.printMostProfitableItems();}
 
     // ------------------------------- for Employee ---------------------------------
 

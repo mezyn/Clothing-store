@@ -27,9 +27,30 @@ System.out.println(value + " " + pattern + " " + output);*/
         return value;
     }
 
+    public double changeDecimal2(double value) { //for two decimal digits
+
+        /*value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);*/
+        String newString = String.valueOf(value);
+        int index = 0;
+        for (int i = 0; i < newString.length(); i++) {
+            if (newString.charAt(i) == '.' || newString.charAt(i) == ',') {
+                index = i;
+            }
+        }
+        newString = newString.substring(0, index + 3);
+        double newValue = Double.valueOf(newString);
+        //String sValue = (String) String.format("%.2f", value);
+        //Double newValue = Double.parseDouble(sValue);
+        return newValue;
+    }
 
     public double changeDecimalToOne(double value) { //for One decimal digit
 
+        /*value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);*/
         String sValue = (String) String.format("%.1f", value);
         Double newValue = Double.parseDouble(sValue);
         return newValue;
@@ -319,19 +340,35 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
+    //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
+    /*ArrayList<Review> reviewList = new ArrayList<>();
+
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
+    }
+
+     ArrayList<String> commentsList = new ArrayList<>();
+
+    public ArrayList<String> getCommentsList() {
+        return commentsList;
+    }*/
+
+
     //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
         } else if (!containsItem(ID)) {
-            return "Item " + ID + " not found.";
+            return "Item ID1 not found.";
             //"Item " + ID + " was not registered yet.";
 
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
             Item founditem = findItem(ID);
+            //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
             founditem.registerReview(review);
             return "Your item review was registered successfully."; //Testing issue
@@ -344,7 +381,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
         } else if (!containsItem(ID)) {
-            return "Item " + ID + " not found.";
+            return "Item ID1 not found.";
             //"Item " + ID + " was not registered yet.";
 
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
@@ -356,6 +393,11 @@ System.out.println(value + " " + pattern + " " + output);*/
             return "Your item review was registered successfully.";
         }
     }
+    /*item.getReviewList().add(review);
+            Review review = new Review(ID, reviewComment, reviewGrade);
+            reviewList.add(review);
+            return "Your item review was registered successfully."; //Testing issue
+        }*/
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
@@ -380,33 +422,46 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
+        /*if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
+            System.out.println("Index ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }
+        return "";
+    }*/
+
+
     public String getPrintedReviews(String itemID) {
 
         Item itemToPrint = findItem(itemID);
         if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         }
-        else if (itemToPrint.getReviewList().size() > 0) {
-            String printedOutput =  "Review(s) for " + itemID + ": "
+        else if (itemToPrint.getReviewList().size()>0) {
+            String build =  "Review(s) for " + itemID + ": "
                     + getItemName(itemID) + ". "
                     + getItemPrice(itemID) + " SEK" + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
-                    printedOutput += itemToPrint.getReviewList().get(i).toString();
+                    build += itemToPrint.getReviewList().get(i).toString();
 
             }
-            return printedOutput;
+            return build;
         } else  {
             return "Item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
     }
-
 
     public List<String> getItemComments(String itemID) { //User Story 3.5
 
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<String>();
 
-        if (commentedItem != null) {
+
+        if (commentedItem !=null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if(!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
                     commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
@@ -444,36 +499,25 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-    public List<String> printMostReviewedItems() {
+    public String printMostReviewedItems() {
 
-        int reviewCounter = 0;
-        int highestReviewNumber = 0;
-        ArrayList<Item> mostReviewedItems = new ArrayList<>();
-        ArrayList<String> printMostReviewedItems = new ArrayList<>();
-
-        for (int i=0; i < itemList.size(); i++) {
-            reviewCounter += itemList.get(i).getReviewList().size();
-
-        if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
-        } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
-        } else {
-            for (i=0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
-                    highestReviewNumber = itemList.get(i).getReviewList().size();
-                }
+        if (Item.getReviewList().isEmpty()) {
+            return "No items registered yet.";
+        } else if (!getItemList().isEmpty() && Item.getReviewList() == 0) {
+            return "No items were reviewed yet.";
+        } else if (!(getItemList() && Item.getReviewList() == 0)) { //Not(item list and review list= 0) = there contains something in both
+            
+            for (Review review : Item.getReviewList()) {
+                if ()
             }
-            for (i=0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                    printMostReviewedItems.add(itemList.get(i).toString());
-                }
-        }
-        return printMostReviewedItems;
+
+            
+
+            }
 
         }
 
-/*
+    }
 
     ArrayList<String> mostReviewItemList = new ArrayList<>();
 
@@ -495,11 +539,11 @@ System.out.println(value + " " + pattern + " " + output);*/
         return ;
     }
 
-*/
+
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
-    public boolean containsReview(String itemID){
+    public boolean containsReview(String itemID) {
 
         for (int i = 0; i < getItemList().size(); i++) {
             if (getItemList().get(i).getID().equals(itemID)) {
@@ -507,10 +551,11 @@ System.out.println(value + " " + pattern + " " + output);*/
                 if (nrOfreviews == 0) {
                     return false;
                 } else {
-                    return true;
-                }
+                return true;
             }
         }
+    }
+        return true; //Added a bracket here because it was missing as well as return statement and I put it as true but please correct it if it is wrong - Hadieh
     }
 
     public Review findReview(String itemID) {
@@ -579,7 +624,6 @@ System.out.println(value + " " + pattern + " " + output);*/
     public ArrayList<Transaction> getTransactionHistoryList(){
         return transactionHistoryList;
     }
-
     public double getTotalProfit() {
 
         double totalProfit = 0.0;
@@ -729,6 +773,29 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     }
 
+    public String printMostProfitableItems() {
+        Transaction highestProfit = null;
+        if (itemList.size() == 0) {
+            return "No items registered yet.";
+        } else if (transactionHistoryList.size() == 0) {
+            return "No items ere bought yet.";
+        } else if( !transactionHistoryList.isEmpty() ) {
+            highestProfit = transactionHistoryList.get(0);
+            for (int i = 1; i < transactionHistoryList.size(); i++) {
+                Transaction currentTransaction = transactionHistoryList.get(i);
+                if(currentTransaction.getProfit() > highestProfit.getProfit()) {
+                    highestProfit = currentTransaction;
+                }
+            }
+        } else {
+
+            String mostProfitableItem = ("Most profitable items:\n" +
+                    "Total profit: " + highestProfit + " SEK\n" +
+                    highestProfit.toString());          //I will change more on it later
+        }
+        return printMostProfitableItems();
+    }
+
     //-----------------------------------FOR Employee-----------------------------------
 
     ArrayList<Employee> employeeList = new ArrayList<>();
@@ -746,5 +813,5 @@ System.out.println(value + " " + pattern + " " + output);*/
         return "Employee " + employeeID + "was registered successfully.";
     }
 
-}}
+}
 
