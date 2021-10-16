@@ -351,7 +351,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-    public List<String> getItemComments(String itemID) { //User Story 3.5
+    public List<String> getItemComments(String itemID) { //User Story 3.5 | PART 1#
 
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<String>();
@@ -366,17 +366,30 @@ System.out.println(value + " " + pattern + " " + output);*/
         return commentsList;
     }
 
+    public String getItemCommentsPrinted(String itemID){ // User Story 3.5 | PART 2#
 
 
-    public String printAllReviews() { // User Story 3.6
+        return "";
+
+    }
+
+/*Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
+When retrieving all comments, users must specify an item ID. For this user story, only the written comments are retrieved
+and can be iterated as a collection of strings.
+If the item ID was not registered or if the item has no reviews or written comments in it,
+the system should return an empty collection.
+*/
+
+    public String printAllReviews() { // User Story 3.6 // Saved old code in NOT_USED_CODE.JAVA
 
         String message = "All registered reviews:" +
                 System.lineSeparator() +
                 "------------------------------------" +
                 System.lineSeparator();
+        String messageToString = "Review(s) for " + toString();
 
         for (Item item : getItemList()){
-            return "Review(s) for "+ getID() +": "+ getItemName() +". "+ getItemName() +" SEK";
+            return messageToString;
 
             for (Review review : item.getReviewList()){
                 return message + review + System.lineSeparator();
@@ -384,26 +397,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
 
-        /*String allReview = null;
-        if (Item.getReviewList().size() == 0) {
-            return ("No items registered yet.");
-        } else {
 
-            allReview = "All registered reviews:" +
-                    System.lineSeparator() +
-                    "------------------------------------" +
-                    System.lineSeparator();
-
-            for (Review review : Item.getReviewList()) {
-                System.out.println("Review(s) for <ID>: <Item Name>. <Price> SEK");
-                //"Review(s) for "+  +": "+ getItemName() +". "+ getItemName() +" SEK"); // ask TA
-
-                System.out.println(review);
-                allReview += review + System.lineSeparator();
-            }
-        }
-        return allReview;
-    }*/
 
 
     public String printMostReviewedItems() {
@@ -413,12 +407,12 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (!getItemList().isEmpty() && Item.getReviewList() == 0) {
             return "No items were reviewed yet.";
         } else if (!(getItemList() && Item.getReviewList() == 0)) { //Not(item list and review list= 0) = there contains something in both
-            
+
             for (Review review : Item.getReviewList()) {
                 if ()
             }
 
-            
+
 
             }
 
@@ -433,8 +427,7 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
     public List<String> getMostReviewedItems(String itemID) {
-        
-    
+
         if (containsReview(itemID)) {
             for (int i = 0; i < Item.getReviewList().size(); i++) {
                 if (Item.getReviewList().get(i).getID().equals(itemID)) {
@@ -462,7 +455,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
     }
-        return true; //Added a bracket here because it was missing as well as return statement and I put it as true but please correct it if it is wrong - Hadieh
+        return true;
     }
         /*public Review findReview(String review) {
           Item item = findItem(itemID);
@@ -474,7 +467,17 @@ System.out.println(value + " " + pattern + " " + output);*/
            }
            return null;
        }*/
-    public Review findReview(String review) {
+    public Review findReview(String itemID) {
+        Item item = findItem(itemID);
+
+        for (int i = 0; i < item.getReviewList().size(); i++) {
+            if (item.getReviewList().get(i).equals(itemID)) {
+                return item.getReviewList().get(i);
+            }
+        }
+        return null;
+    }
+    /*  public Review findReview(String review) { // In case its wrong
 
         for (int i = 0; i < Item.getReviewList().size(); i++) {
             if (Item.getReviewList().get(i).getID().equals(itemID)) {
@@ -482,11 +485,13 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         return null;
-    }
+    }*/
+
 
     //From here I did - Mijin
 
     public double getItemMeanGrade(String itemID) {
+        Item amazingCool = findItem(itemID);
 
         double sumGrade = 0.0;
         int counter = 0;
@@ -496,9 +501,9 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
-            for (int i = 0; i < Item.getReviewList().size(); i++) {
-                if (Item.getReviewList().get(i).getID().equals(itemID)) {
-                    sumGrade += Item.getReviewList().get(i).getItemGrade();
+            for (int i = 0; i < amazingCool.getReviewList().size(); i++) {
+                if (amazingCool.getReviewList().get(i).equals(itemID)) { // Revmoved getID()
+                    sumGrade += amazingCool.getReviewList().get(i).getItemGrade();
                     counter += 1;
             }
         }
@@ -508,10 +513,11 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
     public int getNumberOfReviews(String itemID) {
+        Item number = findItem(itemID);
 
         int reviewCounter = 0;
-        for (int i=0; i<Item.getReviewList().size(); i++) {
-            if (Item.getReviewList().get(i).getID().equals(itemID)) {
+        for (int i=0; i<number.getReviewList().size(); i++) {
+            if (number.getReviewList().get(i).equals(itemID)) { //getID() removed
                 reviewCounter += 1;
             }
         }

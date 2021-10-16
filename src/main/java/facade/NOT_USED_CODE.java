@@ -159,7 +159,30 @@
 
         return "";
 
+    }
+      // old print all review.
+        /* public String printAllReviews() { // User Story 3.6 //
+        String allReview = null;
+        if (Item.getReviewList().size() == 0) {
+            return ("No items registered yet.");
+        } else {
+
+            allReview = "All registered reviews:" +
+                    System.lineSeparator() +
+                    "------------------------------------" +
+                    System.lineSeparator();
+
+            for (Review review : Item.getReviewList()) {
+                System.out.println("Review(s) for <ID>: <Item Name>. <Price> SEK");
+                //"Review(s) for "+  +": "+ getItemName() +". "+ getItemName() +" SEK"); // ask TA
+
+                System.out.println(review);
+                allReview += review + System.lineSeparator();
+            }
+        }
+        return allReview;
     }*/
+
 
 
 

@@ -129,11 +129,12 @@ public class MenuClass {
 }
 
 
-    public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
+    /*public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
+
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
-        System.out.println("Size of list: " + item.getReviewList().size());
+        System.out.println("Size of list: " + Item.getReviewList().size());
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
@@ -161,7 +162,7 @@ public class MenuClass {
         }
 
         return "";
-    }
+    }*/
 
 /*public String getPrintedReviews(String itemID) {
 
@@ -183,7 +184,7 @@ public class MenuClass {
         }
     }*/
 
-    public String getPrintedReviews () { //User story 3.3
+    /*public String getPrintedReviews () { //User story 3.3
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
         if (!facade.containsItem(itemID)) {
@@ -208,39 +209,39 @@ public class MenuClass {
                 }
             }
         }
-    }
+    }*/
 
 
-    public double getItemMeanGrade(String itemID) { //User Story 3.4
+    /*public double getItemMeanGrade(String itemID) { //User Story 3.4
 
 
         double sumGrade = 0.0;
         int counter = 0;
-        if (!containsReview(itemID)) {
+        if (!Controller.containsReview(itemID)) {
             System.out.println("Item " + itemID + "was not registered yet.");
         } else if (findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
-            for (int i = 0; i < Item.getReviews().size(); i++) {
-                if (Item.getReviews().get(i).getID().equals(itemID)) {
-                    sumGrade += Item.getReviews().get(i).getItemGrade();
+            for (int i = 0; i < Item.getReviewList().size(); i++) {
+                if (Item.getReviewList().get(i).getID().equals(itemID)) {
+                    sumGrade += Item.getReviewList().get(i).getItemGrade();
                     counter += 1;
                 }
             }
         }
         double meanGrade = Controller.changeDecimalToOne(double value)
         return meanGrade;
-    }
+    }*/
 
 
-   public void getItemComments() { //User Story 3.5
+   /*public void getItemComments() { //User Story 3.5
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
         if (Controller.containsReview(itemID)) {
             for (int i = 0; i < Item.reviewList.size(); i++) {
-                if (Controller.getReviewList().get(i).equals(itemID)) {
-                    Controller.commentsList.add(Controller.getReviewList().get(i).getItemComment());
+                if (Item.getReviewList().get(i).equals(itemID)) {
+                    Controller.commentsList.add(Controller.Item.getReviewList().get(i).getItemComment());
 
                     System.out.print(Controller.getcommentsList());
             for (String review : Controller.commentsList) {
@@ -249,7 +250,7 @@ public class MenuClass {
                 }
             }
         }
-    }
+    }*/
 
 
     public String printAllReviews() { //User Story 3.6
@@ -427,10 +428,10 @@ public class MenuClass {
             case 1 : reviewItem(); // User Story 3.1
                 ReviewMenu();
                 break;
-            case 2 : getPrintedItemReview();// User Story 3.2
+            case 2 : //getPrintedItemReview();// User Story 3.2
                 ReviewMenu();
                 break;
-            case 3 : getPrintedReviews (); // User Story 3.3
+            case 3 : //getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
             case 4 : //getItemMeanGrade(); // User Story 3.4
