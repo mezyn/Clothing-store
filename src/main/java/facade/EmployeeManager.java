@@ -18,19 +18,15 @@ public class EmployeeManager extends Employee {
             grossSalary = grossSalary * 1.1;
         } else if (degree.equals("MSc")) {
             grossSalary = grossSalary * 1.2;
-        } else if (this.degree.equals("PhD")) {
+        } else if (degree.equals("PhD")) {
             grossSalary = grossSalary * 1.35;
         }
 
         return grossSalary;
     }
 
-    //need to fix it later
-    /*
     public String toString() {
-        return this. + "'s gross salary is " + grossSalary + " SEK per month.";
+        return degree + " " + this.getEmployeeName() + "'s gross salary is " + this.getGrossSalary() + " SEK per month.";
     }
-     */
 
-    //    public String getDegree
 }

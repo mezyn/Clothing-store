@@ -684,7 +684,7 @@ public class Controller {
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    /*ArrayList<Employee> employeeList = new ArrayList<>();
+    ArrayList<Employee> employeeList = new ArrayList<>();
 
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
@@ -695,8 +695,8 @@ public class Controller {
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
-        grossSalary = changeDecimal(grossSalary);
-        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary );
+        grossSalary = changeDecimal(grossSalary, 2);
+        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
         employeeList.add(newEmployee);
 
         return "Employee " + employeeID + "was registered successfully.";
@@ -705,15 +705,19 @@ public class Controller {
 
     public String createEmployeeManager(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
 
-        grossSalary = changeDecimal(grossSalary);
-        EmployeeManager newEmployeeManager = new EmployeeManager(employeeID, employeeName, grossSalary );
+        grossSalary = changeDecimal(grossSalary,2);
+        Employee newEmployeeManager = new EmployeeManager(employeeID, employeeName, grossSalary);
         employeeManagerList.add(newEmployee);
 
         return "Employee " + employeeID + "was registered successfully.";
         }
-    } */
 
 
-}
+
+
+
+    } //Don't delete this!! It's the most outer bracket
+
+
 
 
