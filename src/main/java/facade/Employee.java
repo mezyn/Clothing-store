@@ -1,5 +1,7 @@
 package facade;
 
+import java.text.DecimalFormat;
+
 public class Employee {
 
     //attributes of the Employee class
@@ -48,6 +50,8 @@ public class Employee {
 
     public String toString() {
 
+        DecimalFormat decimal2 = new DecimalFormat("###.00");
+        String grossSalary = decimal2.format(this.grossSalary);
         return employeeName + "'s gross salary is " + grossSalary + " SEK per month.";
     }
 }

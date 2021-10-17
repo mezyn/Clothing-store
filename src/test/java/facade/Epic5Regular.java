@@ -1,4 +1,4 @@
-/*package facade;
+package facade;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -348,4 +348,3 @@ public class Epic5Regular {
         assertEquals(expectedEmployee, facade.printEmployee(prayID));
     }
 }
-*/

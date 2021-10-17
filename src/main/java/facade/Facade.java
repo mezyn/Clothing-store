@@ -155,7 +155,7 @@ Controller controller = new Controller();
     }
 
     public String printEmployee(String employeeID) throws Exception {
-        return "";
+        return controller.printEmployee(employeeID);
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
@@ -175,11 +175,11 @@ Controller controller = new Controller();
     }
 
     public String removeEmployee(String empID) throws Exception {
-        return "";
+        return controller.removeEmployee(empID);
     }
 
     public String printAllEmployees() throws Exception {
-        return "";
+        return controller.printAllEmployees();
     }
 
     public double getTotalNetSalary() throws Exception {

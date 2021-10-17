@@ -696,7 +696,7 @@ public class Controller {
         Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
         employeeList.add(newEmployee);
 
-        return "Employee " + employeeID + "was registered successfully.";
+        return "Employee " + employeeID + " was registered successfully.";
     }
 
     //createEmployeeManager
@@ -706,7 +706,7 @@ public class Controller {
         Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
-        return "Employee " + employeeID + "was registered successfully.";
+        return "Employee " + employeeID + " was registered successfully.";
         }
 
     //createEmployeeDirector
@@ -716,7 +716,7 @@ public class Controller {
         Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
         employeeList.add(newDirector);
 
-        return "Employee " + employeeID + "was registered successfully.";
+        return "Employee " + employeeID + " was registered successfully.";
     }
 
     //createEmployeeIntern
@@ -726,8 +726,60 @@ public class Controller {
         Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
         employeeList.add(newIntern);
 
-        return "Employee " + employeeID + "was registered successfully.";
+        return "Employee " + employeeID + " was registered successfully.";
     }
+
+    //I created this just in case, but might not needed?
+    public Employee findEmployee(String employeeID) {
+
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getID().equals(employeeID)) {
+                return employeeList.get(i);
+            }
+        } return null;
+    }
+
+    //US 5.5: Print a specific employee
+    public String printEmployee(String employeeID) throws Exception {
+
+        String outputMessage = "";
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getID().equals(employeeID)) {
+                outputMessage = employeeList.get(i).toString();
+            }
+        } return outputMessage;
+    }
+
+    public double getNetSalary(String employeeID) throws Exception {
+
+
+
+        return -1.0;
+
+        // US 5.4
+    }
+
+        public String removeEmployee(String empID) throws Exception {
+
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getID().equals(empID)) {
+                employeeList.remove(employeeList.get(i));
+            }
+        }
+        return "Employee " + empID + " was successfully removed.";
+    }
+
+    //US 5.6
+    public String printAllEmployees() throws Exception {
+
+        String output = "All registered employees:" + System.lineSeparator();
+
+        for (int i = 0; i < employeeList.size(); i++) {
+            output += employeeList.get(i).toString() + System.lineSeparator();
+        }
+        return output;
+    }
+
 
     } //Don't delete this!! It's the most outer bracket
 

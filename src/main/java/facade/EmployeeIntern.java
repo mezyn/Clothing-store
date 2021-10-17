@@ -1,5 +1,7 @@
 package facade;
 
+import java.text.DecimalFormat;
+
 public class EmployeeIntern extends Employee {
 
     double GPA;
@@ -34,6 +36,8 @@ public class EmployeeIntern extends Employee {
 
     @Override
     public String toString() {
+        DecimalFormat decimal2 = new DecimalFormat("###.00");
+        String grossSalary = decimal2.format(getGrossSalary());
         return getEmployeeName() + "'s gross salary is " + getGrossSalary() + " SEK per month. GPA: " + this.GPA;
     }
 }

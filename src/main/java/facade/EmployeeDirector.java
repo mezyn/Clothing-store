@@ -1,5 +1,7 @@
 package facade;
 
+import java.text.DecimalFormat;
+
 public class EmployeeDirector extends EmployeeManager {
 
     String department;
@@ -34,7 +36,9 @@ public class EmployeeDirector extends EmployeeManager {
 
     @Override
     public String toString() {
-        return degree + " " + getEmployeeName() + "'s gross salary is " + getGrossSalary() + " SEK per month. Dept: " + department;
+        DecimalFormat decimal2 = new DecimalFormat("###.00");
+        String grossSalary = decimal2.format(this.getGrossSalary());
+        return degree + " " + getEmployeeName() + "'s gross salary is " + grossSalary + " SEK per month. Dept: " + department;
     }
 }
 
