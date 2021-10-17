@@ -27,6 +27,7 @@ public class EmployeeManager extends Employee {
         return grossSalary;
     }
 
+    @Override
     public String toString() {
         return degree + " " + this.getEmployeeName() + "'s gross salary is " + this.getGrossSalary() + " SEK per month.";
     }
