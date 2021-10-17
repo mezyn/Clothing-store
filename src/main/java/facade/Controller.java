@@ -14,47 +14,34 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
-/*
-    DecimalFormat myFormatter = new DecimalFormat(pattern);
-    String output = myFormatter.format(value);
-System.out.println(value + " " + pattern + " " + output);*/
 
-    public double changeDecimal(double value) {
 
-        value = value * Math.pow(10, 2);
-        value = Math.floor(value);
-        value = value / Math.pow(10, 2);
+    public double changeDecimal(double value, int decimalDigit) {
+
+        if (decimalDigit == 1) {
+            value = value * Math.pow(10, 1);
+            value = Math.floor(value);
+            value = value / Math.pow(10, 1);
+
+        } else if (decimalDigit == 2) {
+            value = value * Math.pow(10, 1);
+            value = Math.floor(value);
+            value = value / Math.pow(10, 1);
+        }
         return value;
     }
 
-    public double changeDecimal2(double value) { //for two decimal digits
-
-        /*value = value * Math.pow(10, decimalPoint);
-        value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);*/
-        String newString = String.valueOf(value);
-        int index = 0;
-        for (int i = 0; i < newString.length(); i++) {
-            if (newString.charAt(i) == '.' || newString.charAt(i) == ',') {
-                index = i;
-            }
-        }
-        newString = newString.substring(0, index + 3);
-        double newValue = Double.valueOf(newString);
-        //String sValue = (String) String.format("%.2f", value);
-        //Double newValue = Double.parseDouble(sValue);
-        return newValue;
-    }
-
+/*Don't think we need it, but will leave for now
     public double changeDecimalToOne(double value) { //for One decimal digit
 
-        /*value = value * Math.pow(10, decimalPoint);
+        value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);*/
+        value = value / Math.pow(10, decimalPoint);
         String sValue = (String) String.format("%.1f", value);
         Double newValue = Double.parseDouble(sValue);
         return newValue;
     }
+        */
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
@@ -76,7 +63,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            unitPrice = changeDecimal(unitPrice);
+            unitPrice = changeDecimal(unitPrice, 2);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -164,7 +151,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
 
-            return changeDecimal(totalPrice);
+            return changeDecimal(totalPrice, 2);
 
         }
     }
@@ -498,7 +485,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         }
-        double meanGrade = changeDecimal(sumGrade / counter);
+        double meanGrade = changeDecimal(sumGrade / counter, 2);
         return meanGrade;
     }
 
@@ -529,7 +516,7 @@ System.out.println(value + " " + pattern + " " + output);*/
         for (int i = 0; i < transactionHistoryList.size(); i++)
             totalProfit += transactionHistoryList.get(i).getProfit();
 
-        totalProfit = changeDecimal(totalProfit);
+        totalProfit = changeDecimal(totalProfit, 2);
         return totalProfit;
     }
 
@@ -552,7 +539,7 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
         if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");
-        sumProfit = changeDecimal(sumProfit);
+        sumProfit = changeDecimal(sumProfit, 2);
         return sumProfit;
     }
     public int getUnitsSolds(String itemID) { //should we change name to getUnitsSold?
