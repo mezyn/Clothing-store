@@ -253,12 +253,12 @@ public class MenuClass {
     }*/
 
 
-    public String printAllReviews() { //User Story 3.6
+    /*public String printAllReviews() { //User Story 3.6
 
         facade.printAllReviews();
 
         return "";
-    }
+    }*/
 
 
 

@@ -295,7 +295,6 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
-        //System.out.println("Size of list: " + reviewList.size()); // This line is just for us to see what to enter.
 
         Item item = findItem(itemID);
 
@@ -314,20 +313,6 @@ System.out.println(value + " " + pattern + " " + output);*/
             }
         }
     }
-/* public  Review findReview(String itemID) {
-
-
-        /*if (reviewList.size() == 0) {
-            System.out.println("No reviews have been added: "+ System.lineSeparator());
-        } else {
-            System.out.println("Index ");
-            for (Review review : reviewList) {
-                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
-
-            }
-        }
-        return "";
-    }*/
 
 
     public String getPrintedReviews(String itemID) { // User Story 3.3
@@ -337,14 +322,14 @@ System.out.println(value + " " + pattern + " " + output);*/
             return "Item " + itemID + " was not registered yet.";
         }
         else if (itemToPrint.getReviewList().size()>0) {
-            String build =  "Review(s) for " + itemID + ": "
+            String printedOutput =  "Review(s) for " + itemID + ": "
                     + getItemName(itemID) + ". "
                     + getItemPrice(itemID) + " SEK" + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
-                    build += itemToPrint.getReviewList().get(i).toString();
+                printedOutput += itemToPrint.getReviewList().get(i).toString();
 
             }
-            return build;
+            return printedOutput;
         } else  {
             return "Item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
@@ -356,7 +341,6 @@ System.out.println(value + " " + pattern + " " + output);*/
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<String>();
 
-
         if (commentedItem !=null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if(!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
@@ -366,79 +350,68 @@ System.out.println(value + " " + pattern + " " + output);*/
         return commentsList;
     }
 
-    public String getItemCommentsPrinted(String itemID){ // User Story 3.5 | PART 2#
+
+    /*public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
+
+    }*/
 
 
-        return "";
-
-    }
-
-/*Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
-When retrieving all comments, users must specify an item ID. For this user story, only the written comments are retrieved
-and can be iterated as a collection of strings.
-If the item ID was not registered or if the item has no reviews or written comments in it,
-the system should return an empty collection.
-*/
 
     public String printAllReviews() { // User Story 3.6 // Saved old code in NOT_USED_CODE.JAVA
 
-        String message = "All registered reviews:" +
-                System.lineSeparator() +
-                "------------------------------------" +
-                System.lineSeparator();
-        String messageToString = "Review(s) for " + toString();
-
-        for (Item item : getItemList()){
-            return messageToString;
-
-            for (Review review : item.getReviewList()){
-                return message + review + System.lineSeparator();
-
-            }
-        }
-
-
-
-
-    public String printMostReviewedItems() {
-
-        if (Item.getReviewList().isEmpty()) {
+        if(itemList.size() == 0) {
             return "No items registered yet.";
-        } else if (!getItemList().isEmpty() && Item.getReviewList() == 0) {
+        }else if (getReviewList().size()==0) {
             return "No items were reviewed yet.";
-        } else if (!(getItemList() && Item.getReviewList() == 0)) { //Not(item list and review list= 0) = there contains something in both
+        }else {
+            String header = "All registered reviews:" +
+                    System.lineSeparator() +
+                    "------------------------------------" +
+                    System.lineSeparator();
+            String reviewtext = "Grade: <grade>.<written comment>";
 
-            for (Review review : Item.getReviewList()) {
-                if ()
-            }
+            for (Item item : getItemList()) {
+                return "Review(s) for " + item;
 
-
-
-            }
-
-        }
-
-    }
-
-    ArrayList<String> mostReviewItemList = new ArrayList<>();
-
-    public ArrayList<String> getMostReviewItemList() {
-        return mostReviewItemList;
-    }
-
-    public List<String> getMostReviewedItems(String itemID) {
-
-        if (containsReview(itemID)) {
-            for (int i = 0; i < Item.getReviewList().size(); i++) {
-                if (Item.getReviewList().get(i).getID().equals(itemID)) {
-                    mostReviewItemList.add(Item.getReviewList().get(i).getItemReview());
+                    for (Review review : item.getReviewList()) {
+                        return "" + review;
 
                 }
             }
         }
-        return ;
+        return " ";
     }
 
+    public List<String> printMostReviewedItems() {
+
+        int reviewCounter = 0;
+        int highestReviewNumber = 0;
+        ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        ArrayList<String> printMostReviewedItems = new ArrayList<>();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
+                        highestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
+                        printMostReviewedItems.add(itemList.get(i).toString());
+                    }
+                }
+
+            }
+        }
+        return printMostReviewedItems;
+    }
 
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
@@ -457,16 +430,7 @@ the system should return an empty collection.
     }
         return true;
     }
-        /*public Review findReview(String review) {
-          Item item = findItem(itemID);
 
-           for (int i = 0; i < Item.getReviews().size(); i++) {
-               if (Item.getReviews().get(i).getID().equals(itemID)) {
-                   return Item.getReviews().get(i);
-               }
-           }
-           return null;
-       }*/
     public Review findReview(String itemID) {
         Item item = findItem(itemID);
 
@@ -477,7 +441,7 @@ the system should return an empty collection.
         }
         return null;
     }
-    /*  public Review findReview(String review) { // In case its wrong
+    /*  public Review findReview(String review) { // In case its wrong ^
 
         for (int i = 0; i < Item.getReviewList().size(); i++) {
             if (Item.getReviewList().get(i).getID().equals(itemID)) {
@@ -704,6 +668,7 @@ the system should return an empty collection.
         }
         return printMostProfitableItems();
     }
+
 
     //-----------------------------------FOR Employee-----------------------------------
 

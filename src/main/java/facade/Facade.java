@@ -65,11 +65,9 @@ Controller controller = new Controller();
         return controller.getItemCommentsPrinted(itemID);
     }
 
-
     public List<String> getItemComments(String itemID) {
 
-        return Controller.getItemComments(itemID);
-
+        return controller.getItemComments(itemID);
     }
 
     public double getItemMeanGrade(String itemID) {

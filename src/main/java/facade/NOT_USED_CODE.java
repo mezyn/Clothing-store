@@ -181,6 +181,69 @@
             }
         }
         return allReview;
+    }
+    /* public String printMostReviewedItems() {
+
+        if (Item.getReviewList().isEmpty()) {
+            return "No items registered yet.";
+        } else if (!getItemList().isEmpty() && Item.getReviewList() == 0) {
+            return "No items were reviewed yet.";
+        } else if (!(getItemList() && Item.getReviewList() == 0)) { //Not(item list and review list= 0) = there contains something in both
+
+            for (Review review : Item.getReviewList()) {
+                if ()
+            }
+
+
+            }
+
+        }
+
+    } */
+
+    /*ArrayList<String> mostReviewItemList = new ArrayList<>();
+
+    public ArrayList<String> getMostReviewItemList() {
+        return mostReviewItemList;
+    }
+
+    public List<String> getMostReviewedItems(String itemID) {
+
+        if (containsReview(itemID)) {
+            for (int i = 0; i < Item.getReviewList().size(); i++) {
+                if (Item.getReviewList().get(i).getID().equals(itemID)) {
+                    mostReviewItemList.add(Item.getReviewList().get(i).getItemReview());
+
+                }
+            }
+        }
+        return ;
+    }
+
+    /*public Review findReview(String review) {
+          Item item = findItem(itemID);
+
+           for (int i = 0; i < Item.getReviews().size(); i++) {
+               if (Item.getReviews().get(i).getID().equals(itemID)) {
+                   return Item.getReviews().get(i);
+               }
+           }
+           return null;
+       }*
+
+       /* public  Review findReview(String itemID) {
+
+
+        /*if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
+            System.out.println("Index ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }
+        return "";
     }*/
 
 
