@@ -5,9 +5,9 @@ import java.text.DecimalFormat;
 public class Employee {
 
     //attributes of the Employee class
-    private String employeeID;
-    private String employeeName;
-    private double grossSalary;
+    protected String employeeID;
+    protected String employeeName;
+    protected double grossSalary;
 
     //Default constructor - necessary?
     public Employee () {}

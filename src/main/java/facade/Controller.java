@@ -702,7 +702,7 @@ public class Controller {
     //createEmployeeManager
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) {//throws Exception
 
-        grossSalary = changeDecimal(grossSalary,2);
+        //grossSalary = changeDecimal(grossSalary,2);
         Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
@@ -720,7 +720,7 @@ public class Controller {
     }
 
     //createEmployeeIntern
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, double GPA) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, int GPA) {//throws Exception
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
@@ -752,13 +752,16 @@ public class Controller {
 
     public double getNetSalary(String employeeID) throws Exception {
 
-
-
-        return -1.0;
-
-        // US 5.4
+        double outputSalary = 0.0;
+        for (int i = 0; i < employeeList.size(); i++) {
+           if (employeeList.get(i).getID().equals(employeeID)) {
+                outputSalary = employeeList.get(i).getNetSalary();
+            }
+        }
+        return outputSalary;
     }
 
+    // US 5.4
         public String removeEmployee(String empID) throws Exception {
 
         for (int i = 0; i < employeeList.size(); i++) {
@@ -780,8 +783,26 @@ public class Controller {
         return output;
     }
 
+    public double getTotalNetSalary() throws Exception {
 
-    } //Don't delete this!! It's the most outer bracket
+        double totalNetSalary = 0.0;
+
+        for (int i = 0; i < employeeList.size(); i++) {
+            totalNetSalary += employeeList.get(i).getNetSalary();
+        }
+        return totalNetSalary;
+    }
+
+    //I'm woriking on this - Mijin
+    //Sorted by gross salary, in ascending order
+    public String printSortedEmployees() throws Exception {
+
+        ArrayList<Employee> listBeforeSorted = new ArrayList<>();
+        return "";
+    }
+
+
+} //Don't delete this!! It's the most outer bracket
 
 
 

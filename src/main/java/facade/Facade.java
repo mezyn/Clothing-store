@@ -167,7 +167,7 @@ Controller controller = new Controller();
     }
 
     public double getNetSalary(String employeeID) throws Exception {
-        return -1.0;
+        return controller.getNetSalary(employeeID);
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
@@ -183,7 +183,7 @@ Controller controller = new Controller();
     }
 
     public double getTotalNetSalary() throws Exception {
-        return -1.0;
+        return controller.getTotalNetSalary();
     }
 
     public String printSortedEmployees() throws Exception {

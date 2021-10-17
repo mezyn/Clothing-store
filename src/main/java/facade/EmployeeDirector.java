@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 public class EmployeeDirector extends EmployeeManager {
 
-    String department;
+    protected String department;
 
     //Constructor
     public EmployeeDirector(String employeeID, String employeeName, double grossSalary, String degree, String department) {
@@ -14,13 +14,13 @@ public class EmployeeDirector extends EmployeeManager {
 
     @Override
     protected double getNetSalary() {
-        double grossSalary = this.getGrossSalary();
+        double grossSalary = getGrossSalary();
         if (grossSalary < 30000) {
-            return getNetSalary();
+            return super.getNetSalary();
         } else if (grossSalary == 30000 || (grossSalary > 30000 && grossSalary < 50000)) {
             return grossSalary - (grossSalary * 0.2);
         } else {
-            double exceeding30000 = (grossSalary - 30000);
+            double exceeding30000 = grossSalary - 30000;
             double netSalary = 30000 * (1 - 0.2) + exceeding30000 * (1 - 0.4);
             return netSalary;
         }
@@ -29,7 +29,7 @@ public class EmployeeDirector extends EmployeeManager {
     @Override
     protected double getGrossSalary(){
         double grossSalary = super.getGrossSalary();
-        grossSalary += 5000;
+        grossSalary = grossSalary + 5000;
         return grossSalary;
         }
 

@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 public class EmployeeManager extends Employee {
 
-    String degree;
+    protected String degree;
 
     public EmployeeManager () {}
 
@@ -17,7 +17,7 @@ public class EmployeeManager extends Employee {
     @Override
     protected double getGrossSalary() {
 
-        double grossSalary = super.getGrossSalary();
+        double grossSalary = super.grossSalary;
         if (degree.equals("BSc")) {
             grossSalary = grossSalary * 1.1;
         } else if (degree.equals("MSc")) {
@@ -25,8 +25,13 @@ public class EmployeeManager extends Employee {
         } else if (degree.equals("PhD")) {
             grossSalary = grossSalary * 1.35;
         }
-
         return grossSalary;
+    }
+
+    @Override
+    protected double getNetSalary() {
+        double netSalary = getGrossSalary() - (getGrossSalary() * 0.1);
+        return netSalary;
     }
 
     @Override
