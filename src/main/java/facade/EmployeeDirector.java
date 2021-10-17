@@ -23,7 +23,6 @@ public class EmployeeDirector extends EmployeeManager {
         }
     }
 
-
     @Override
     protected double getGrossSalary(){
         double grossSalary = super.getGrossSalary();
