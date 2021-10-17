@@ -42,7 +42,7 @@ public class Employee {
 
     //Net salary of regular employee
     protected double getNetSalary() {
-        double netSalary = this.grossSalary - (this.grossSalary * 0.1);
+        double netSalary = grossSalary - (grossSalary * 0.1);
         return netSalary;
     }
 

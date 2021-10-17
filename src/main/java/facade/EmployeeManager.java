@@ -4,6 +4,8 @@ public class EmployeeManager extends Employee {
 
     String degree;
 
+    public EmployeeManager () {}
+
     public EmployeeManager (String employeeID, String employeeName, double grossSalary, String degree) {
         super(employeeID, employeeName, grossSalary);
         this.degree = degree;
