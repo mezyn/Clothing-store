@@ -184,8 +184,6 @@ public class Controller {
     }
 
 
-
-
     // ----------------------------------------------------------------------------------------
 
 
@@ -391,11 +389,12 @@ public class Controller {
             return " ";
         }*/
 
+//Test this first, and if it works properly it's easy to build printLeastReviwedItems()
 
     public List<String> printMostReviewedItems() {
 
         int reviewCounter = 0;
-        int highestReviewNumber = 0;
+        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
         ArrayList<String> printMostReviewedItems = new ArrayList<>();
 
