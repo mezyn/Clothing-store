@@ -689,11 +689,8 @@ public class Controller {
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
-    public ArrayList<EmployeeManager> getEmployeeManagerList() {
-        return employeeManagerList;
-    }
-
-    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+    // Create Regular employee
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) {//throws Exception
 
         grossSalary = changeDecimal(grossSalary, 2);
         Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
@@ -702,19 +699,35 @@ public class Controller {
         return "Employee " + employeeID + "was registered successfully.";
     }
 
-
-    public String createEmployeeManager(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
+    //createEmployeeManager
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) {//throws Exception
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newEmployeeManager = new EmployeeManager(employeeID, employeeName, grossSalary);
-        employeeManagerList.add(newEmployee);
+        Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
+        employeeList.add(newManager);
 
         return "Employee " + employeeID + "was registered successfully.";
         }
 
+    //createEmployeeDirector
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String department) {//throws Exception
 
+        grossSalary = changeDecimal(grossSalary,2);
+        Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
+        employeeList.add(newDirector);
 
+        return "Employee " + employeeID + "was registered successfully.";
+    }
 
+    //createEmployeeIntern
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, double GPA) {//throws Exception
+
+        grossSalary = changeDecimal(grossSalary,2);
+        Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
+        employeeList.add(newIntern);
+
+        return "Employee " + employeeID + "was registered successfully.";
+    }
 
     } //Don't delete this!! It's the most outer bracket
 

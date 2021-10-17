@@ -150,21 +150,20 @@ Controller controller = new Controller();
 
     // ------------------------------- for Employee ---------------------------------
 
-    /*public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
-        controller.createEmployee(employeeID, employeeName, grossSalary);
-        return "";
-    }*/
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+        return controller.createEmployee(employeeID, employeeName, grossSalary);
+    }
 
     public String printEmployee(String employeeID) throws Exception {
         return "";
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
-        return "";
+        return controller.createEmployee(employeeID, employeeName, grossSalary, degree);
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, int gpa) throws Exception {
-        return "";
+        return controller.createEmployee(employeeID, employeeName, grossSalary, gpa);
     }
 
     public double getNetSalary(String employeeID) throws Exception {
@@ -172,7 +171,7 @@ Controller controller = new Controller();
     }
 
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
-        return "";
+        return controller.createEmployee(employeeID, employeeName, grossSalary, degree, dept);
     }
 
     public String removeEmployee(String empID) throws Exception {
