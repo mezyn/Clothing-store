@@ -234,21 +234,6 @@ System.out.println(value + " " + pattern + " " + output);*/
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
-    //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
-    /*ArrayList<Review> reviewList = new ArrayList<>();
-
-
-    public ArrayList<Review> getReviewList() {
-        return reviewList;
-    }
-
-     ArrayList<String> commentsList = new ArrayList<>();
-
-    public ArrayList<String> getCommentsList() {
-        return commentsList;
-    }*/
-
-
     //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
 
@@ -326,7 +311,8 @@ System.out.println(value + " " + pattern + " " + output);*/
                     + getItemName(itemID) + ". "
                     + getItemPrice(itemID) + " SEK" + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
-                printedOutput += itemToPrint.getReviewList().get(i).toString();
+                printedOutput += itemToPrint.getReviewList().get(i).toString()
+                        + System.lineSeparator();
 
             }
             return printedOutput;
@@ -351,36 +337,73 @@ System.out.println(value + " " + pattern + " " + output);*/
     }
 
 
-    /*public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
+    public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
 
-    }*/
+
+
+        return "";
+    }
 
 
 
     public String printAllReviews() { // User Story 3.6 // Saved old code in NOT_USED_CODE.JAVA
 
-        if(itemList.size() == 0) {
-            return "No items registered yet.";
-        }else if (getReviewList().size()==0) {
-            return "No items were reviewed yet.";
-        }else {
-            String header = "All registered reviews:" +
-                    System.lineSeparator() +
-                    "------------------------------------" +
-                    System.lineSeparator();
-            String reviewtext = "Grade: <grade>.<written comment>";
+        String header = "All registered reviews:" + System.lineSeparator() +
+                "------------------------------------" +
+                System.lineSeparator();
+        String textItem = "Review(s) for ";
+        String reviewText = "";
 
-            for (Item item : getItemList()) {
-                return "Review(s) for " + item;
+        int reviewCounter = 0;
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+
+            } else {
+
+                for (Item item : getItemList()) {
+                    textItem += item + System.lineSeparator()
+                            + "------------------------------------"
+                            + System.lineSeparator();
 
                     for (Review review : item.getReviewList()) {
-                        return "" + review;
+                        reviewText += review + System.lineSeparator();
 
+                    }
                 }
             }
         }
-        return " ";
+        return header + textItem + reviewText;
     }
+
+    /*public String printAllReviews() { // User Story 3.6 // OLD VERSION 
+    
+            if(itemList.size() == 0) {
+                return "No items registered yet.";
+            }else if (getReviewList().size()==0) {
+                return "No items were reviewed yet.";
+            }else {
+                String header = "All registered reviews:" +
+                        System.lineSeparator() +
+                        "------------------------------------" +
+                        System.lineSeparator();
+                String reviewtext = "Grade: <grade>.<written comment>";
+    
+                for (Item item : getItemList()) {
+                    return "Review(s) for " + item;
+    
+                        for (Review review : item.getReviewList()) {
+                            return "" + review;
+                    }
+                }
+            }
+            return " ";
+        }*/
+
 
     public List<String> printMostReviewedItems() {
 
@@ -412,6 +435,9 @@ System.out.println(value + " " + pattern + " " + output);*/
         }
         return printMostReviewedItems;
     }
+
+
+
 
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
@@ -454,7 +480,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //From here I did - Mijin
 
-    public double getItemMeanGrade(String itemID) {
+    public double getItemMeanGrade(String itemID) { //User Story 3.4
         Item amazingCool = findItem(itemID);
 
         double sumGrade = 0.0;
@@ -672,7 +698,7 @@ System.out.println(value + " " + pattern + " " + output);*/
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    ArrayList<Employee> employeeList = new ArrayList<>();
+    /*ArrayList<Employee> employeeList = new ArrayList<>();
 
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
@@ -699,7 +725,9 @@ System.out.println(value + " " + pattern + " " + output);*/
 
         return "Employee " + employeeID + "was registered successfully.";
         }
-    }
+    } */
+
 
 }
+
 

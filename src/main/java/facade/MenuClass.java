@@ -7,7 +7,6 @@ public class MenuClass {
 
     Facade facade = new Facade();
 
-
     //method for creating items
     public void createItem(){
 
@@ -132,27 +131,24 @@ public class MenuClass {
     /*public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
 
 
-        String itemID = UserInput.readLine("Enter the ID of Item: ");
-
         System.out.println("Size of list: " + Item.getReviewList().size());
-
-        String itemID = UserInput.readLine("Enter the ID of Item: ");
+        itemID = UserInput.readLine("Enter the ID of Item: ");
 
         if (!facade.containsItem(itemID)) { // Check if item exists
 
-            System.out.println("Item <" + itemID + "> was not registered yet.");
+            System.out.println("Item " + itemID + " was not registered yet.");
             itemID = UserInput.readLine("Enter a valid ID number: ");
 
-        } else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
-            System.out.println("Item < " + Item.getItemName(itemID) + "> has not been reviewed yet.");
+        }  else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
+            System.out.println("Item " + Item.getItemName(itemID) + " has not been reviewed yet.");
         }
         else {
 
             int index = UserInput.readInt("Enter an index of the review: ");
 
             if (index < 1 || index > Item.getReviewList().size()){
-                System.out.println("Invalid review number. Choose between 1 and <"
-                        + Item.getReviewList().size() + ">.");
+                System.out.println("Invalid review number. Choose between 1 and "
+                        + Item.getReviewList().size() + ".");
             } else {
                 Review reviewItem = Item.getReviewList().get(index - 1);
                 System.out.println(reviewItem);
@@ -164,23 +160,24 @@ public class MenuClass {
         return "";
     }*/
 
-/*public String getPrintedReviews(String itemID) {
+    /*public String getPrintedReviews(String itemID) { //User story 3.3
 
-        Item itemToPrint = findItem(itemID);
-        if (itemToPrint == null) {
+        itemID = UserInput.readLine("Enter ID: ");
+
+        if (!facade.containsItem(itemID)) {
             return "Item " + itemID + " was not registered yet.";
         }
-        else if (itemToPrint.getReviewList().size() > 0) {
+        else if (Item.getReviewList().size() > 0) {
             String printedOutput =  "Review(s) for " + itemID + ": "
-                    + getItemName(itemID) + ". "
-                    + getItemPrice(itemID) + " SEK" + System.lineSeparator();
-            for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
-                    printedOutput += itemToPrint.getReviewList().get(i).toString();
+                    + Controller.getItemName(itemID) + ". "
+                    + Controller.getItemPrice(itemID) + " SEK" + System.lineSeparator();
+            for (int i = 0; i < Item.getReviewList().size(); i++) {
+                    printedOutput += Item.getReviewList().get(i).toString();
 
             }
             return printedOutput;
         } else  {
-            return "Item " + itemToPrint.getItemName() + " has not been reviewed yet.";
+            return "Item " + Item.getItemName() + " has not been reviewed yet.";
         }
     }*/
 
@@ -214,12 +211,13 @@ public class MenuClass {
 
     /*public double getItemMeanGrade(String itemID) { //User Story 3.4
 
+        itemID = UserInput.readLine("Enter ID of item: ");
 
         double sumGrade = 0.0;
         int counter = 0;
         if (!Controller.containsReview(itemID)) {
             System.out.println("Item " + itemID + "was not registered yet.");
-        } else if (findReview(itemID).getItemComment().isEmpty()) {
+        } else if (Controller.findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
             for (int i = 0; i < Item.getReviewList().size(); i++) {
@@ -241,7 +239,7 @@ public class MenuClass {
         if (Controller.containsReview(itemID)) {
             for (int i = 0; i < Item.reviewList.size(); i++) {
                 if (Item.getReviewList().get(i).equals(itemID)) {
-                    Controller.commentsList.add(Controller.Item.getReviewList().get(i).getItemComment());
+                    Controller.commentsList.add(Controller.getReviewList().get(i).getItemComment());
 
                     System.out.print(Controller.getcommentsList());
             for (String review : Controller.commentsList) {
