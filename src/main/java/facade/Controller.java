@@ -1,5 +1,6 @@
 package facade;
 
+import javax.swing.text.Utilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,9 +25,9 @@ public class Controller {
             value = value / Math.pow(10, 1);
 
         } else if (decimalDigit == 2) {
-            value = value * Math.pow(10, 1);
+            value = value * Math.pow(10, 2);
             value = Math.floor(value);
-            value = value / Math.pow(10, 1);
+            value = value / Math.pow(10, 2);
         }
         return value;
     }
@@ -63,7 +64,7 @@ public class Controller {
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            unitPrice = changeDecimal(unitPrice, 2);
+            //unitPrice = changeDecimal(unitPrice, 2);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -74,7 +75,7 @@ public class Controller {
 
         if (!containsItem(itemID)) {
             return "Item " + itemID + " was not registered yet.";
-        } else if (itemID.isBlank() || !containsItem(itemID)) {
+        } else if (itemID.isBlank() || !containsItem(itemID) || newName.isBlank()) {
             return "Invalid data for item.";
         } else {
             Item foundItem = findItem(itemID);
@@ -150,7 +151,6 @@ public class Controller {
 
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
-
             return changeDecimal(totalPrice, 2);
 
         }
@@ -278,8 +278,9 @@ public class Controller {
                 return "Invalid review number. Choose between 1 and "
                         + item.getReviewList().size() + ".";
             } else {
+                String toReturn = "Review(s) for "+item.toString() + System.lineSeparator();
                 Review reviewItem = item.getReviewList().get(reviewNumber - 1);
-                return reviewItem.toString();
+                return toReturn + reviewItem.toString();
             }
         }
     }
@@ -302,7 +303,8 @@ public class Controller {
             }
             return printedOutput;
         } else  {
-            return "Item " + itemToPrint.getItemName() + " has not been reviewed yet.";
+            String printedOutput =  "Review(s) for " + itemToPrint.toString() + System.lineSeparator();
+            return printedOutput + "The item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
     }
 
@@ -341,39 +343,26 @@ public class Controller {
 
     public String printAllReviews() { // User Story 3.6
 
-        String head = "All registered reviews:" + System.lineSeparator() +
-                "------------------------------------" +
-                System.lineSeparator();
+        String head = "All registered reviews:" + System.lineSeparator();
+
         String textItem = "Review(s) for ";
         String reviewText = "";
 
-        int reviewCounter = 0;
+        if (itemList.size() == 0) {
+            System.out.println("No items registered yet.");
+        }
         for (int i = 0; i < itemList.size(); i++) {
-            reviewCounter += itemList.get(i).getReviewList().size();
+            if(!itemList.get(i).getReviewList().isEmpty()) {
+                reviewText += "------------------------------------" + System.lineSeparator();
+                reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
+                for (Review review : itemList.get(i).getReviewList()) {
+                    reviewText += review.toString() + System.lineSeparator();
 
-            if (itemList.size() == 0) {
-                System.out.println("No items registered yet.");
-            } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
-
-            } else {
-
-                for (Item item : getItemList()) {
-                    textItem += item + System.lineSeparator()
-                            + "------------------------------------"
-                            + System.lineSeparator();
-
-                    for (Review review : item.getReviewList()) {
-                        reviewText += review + System.lineSeparator();
-
-                    }
                 }
             }
         }
-        return head + textItem + reviewText;
+        return head + reviewText + "------------------------------------" + System.lineSeparator();
     }
-
-
 
 //Test this first, and if it works properly it's easy to build printLeastReviwedItems()
 
@@ -456,21 +445,20 @@ public class Controller {
         Item item = findItem(itemID);
 
         double sumGrade = 0.0;
-        int counter = 0;
-
+        double meanGrade = 0.0;
         if (!containsReview(itemID)) {
             System.out.println("Item " + itemID + "was not registered yet.");
-        } else if (findReview(itemID).getItemComment().isEmpty()) {
+        }
+        else if(item.getReviewList().isEmpty()) meanGrade = 0.0;
+        else if (findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
             for (int i = 0; i < item.getReviewList().size(); i++) {
-                if (item.getReviewList().get(i).equals(itemID)) { // Revmoved getID()
                     sumGrade += item.getReviewList().get(i).getItemGrade();
-                    counter += 1;
-            }
         }
+             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 2);
         }
-        double meanGrade = changeDecimal(sumGrade / counter, 2);
+
         return meanGrade;
     }
 
