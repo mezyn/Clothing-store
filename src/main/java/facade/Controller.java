@@ -306,6 +306,11 @@ public class Controller {
         }
     }
 
+    ArrayList<String> commentsList = new ArrayList<String>();
+    public ArrayList<String> getCommentsList(){
+        return this.commentsList;
+    }
+
 
     public List<String> getItemComments(String itemID) { //User Story 3.5 | PART 1#
 
@@ -316,6 +321,7 @@ public class Controller {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if(!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
                     commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
+
             }
         }
         return commentsList;
@@ -323,17 +329,19 @@ public class Controller {
 
 
     public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
+        String comment = "";
 
+        for (String comments : getCommentsList())
+            comment += comments + System.lineSeparator();
 
-
-        return "";
+        return comment;
     }
 
 
 
-    public String printAllReviews() { // User Story 3.6 // Saved old code in NOT_USED_CODE.JAVA
+    public String printAllReviews() { // User Story 3.6
 
-        String header = "All registered reviews:" + System.lineSeparator() +
+        String head = "All registered reviews:" + System.lineSeparator() +
                 "------------------------------------" +
                 System.lineSeparator();
         String textItem = "Review(s) for ";
@@ -362,36 +370,14 @@ public class Controller {
                 }
             }
         }
-        return header + textItem + reviewText;
+        return head + textItem + reviewText;
     }
 
-    /*public String printAllReviews() { // User Story 3.6 // OLD VERSION 
-    
-            if(itemList.size() == 0) {
-                return "No items registered yet.";
-            }else if (getReviewList().size()==0) {
-                return "No items were reviewed yet.";
-            }else {
-                String header = "All registered reviews:" +
-                        System.lineSeparator() +
-                        "------------------------------------" +
-                        System.lineSeparator();
-                String reviewtext = "Grade: <grade>.<written comment>";
-    
-                for (Item item : getItemList()) {
-                    return "Review(s) for " + item;
-    
-                        for (Review review : item.getReviewList()) {
-                            return "" + review;
-                    }
-                }
-            }
-            return " ";
-        }*/
+
 
 //Test this first, and if it works properly it's easy to build printLeastReviwedItems()
 
-    public List<String> printMostReviewedItems() {
+    public List<String> printMostReviewedItems() { // getMostReviewedItems
 
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
@@ -467,7 +453,7 @@ public class Controller {
     //From here I did - Mijin
 
     public double getItemMeanGrade(String itemID) { //User Story 3.4
-        Item amazingCool = findItem(itemID);
+        Item item = findItem(itemID);
 
         double sumGrade = 0.0;
         int counter = 0;
@@ -477,9 +463,9 @@ public class Controller {
         } else if (findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
-            for (int i = 0; i < amazingCool.getReviewList().size(); i++) {
-                if (amazingCool.getReviewList().get(i).equals(itemID)) { // Revmoved getID()
-                    sumGrade += amazingCool.getReviewList().get(i).getItemGrade();
+            for (int i = 0; i < item.getReviewList().size(); i++) {
+                if (item.getReviewList().get(i).equals(itemID)) { // Revmoved getID()
+                    sumGrade += item.getReviewList().get(i).getItemGrade();
                     counter += 1;
             }
         }

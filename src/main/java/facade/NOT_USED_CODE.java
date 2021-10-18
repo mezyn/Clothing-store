@@ -244,7 +244,30 @@
             }
         }
         return "";
-    }*/
+    }
+    /*public String printAllReviews() { // User Story 3.6 // OLD VERSION
+
+            if(itemList.size() == 0) {
+                return "No items registered yet.";
+            }else if (getReviewList().size()==0) {
+                return "No items were reviewed yet.";
+            }else {
+                String header = "All registered reviews:" +
+                        System.lineSeparator() +
+                        "------------------------------------" +
+                        System.lineSeparator();
+                String reviewtext = "Grade: <grade>.<written comment>";
+
+                for (Item item : getItemList()) {
+                    return "Review(s) for " + item;
+
+                        for (Review review : item.getReviewList()) {
+                            return "" + review;
+                    }
+                }
+            }
+            return " ";
+        }*/
 
 
 
