@@ -40,5 +40,13 @@ public class EmployeeDirector extends EmployeeManager {
         String grossSalary = decimal2.format(this.getGrossSalary());
         return degree + " " + getEmployeeName() + "'s gross salary is " + grossSalary + " SEK per month. Dept: " + department;
     }
+
+    public String getDepartment() {
+        return this.department;
+    }
+
+    public void setDepartment(String newDepartment) {
+        this.department = newDepartment;
+    }
 }
 

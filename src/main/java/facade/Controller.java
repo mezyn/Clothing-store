@@ -1,9 +1,7 @@
 package facade;
 
 import javax.swing.text.Utilities;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class Controller {
@@ -769,6 +767,15 @@ public class Controller {
         } return null;
     }
 
+    public int findEmployeeIndex(String employeeID) {
+
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getID().equals(employeeID)) {
+                return i;
+            }
+        } return -1;
+    }
+
     //US 5.5: Print a specific employee
     public String printEmployee(String employeeID) throws Exception {
 
@@ -823,15 +830,68 @@ public class Controller {
         return changeDecimal(totalNetSalary,2 );
     }
 
-    //I'm woriking on this - Mijin
+
     //Sorted by gross salary, in ascending order
     public String printSortedEmployees() throws Exception {
 
-        ArrayList<Employee> listBeforeSorted = employeeList;
+        Collections.sort(employeeList, new Comparator<Employee>() {
+            @Override
+            public int compare(Employee o1, Employee o2) {
+                return o1.compareTo(o2);
+            }
+        });
 
-        return "";
+        String outputString = "Employees sorted by gross salary (ascending order):" + System.lineSeparator();
+        for (int i = 0; i < employeeList.size(); i++) {
+            outputString += employeeList.get(i).toString() + System.lineSeparator();
+        }
+
+        return outputString;
     }
 
+    public String updateEmployeeName(String empID, String newName) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        foundEmployee.setEmployeeName(newName);
+
+        return "Employee " + empID + " was updated successfully";
+    }
+
+    public String updateInternGPA(String empID, int newGPA) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee instanceof EmployeeIntern) {
+            EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
+            foundIntern.setGPA(newGPA);
+        }
+        return "Employee " + empID + " was updated successfully";
+    }
+
+    public String updateManagerDegree(String empID, String newDegree) throws Exception {
+        Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee instanceof EmployeeManager) {
+            EmployeeManager foundManager = (EmployeeManager) foundEmployee;
+            foundManager.setDegree(newDegree);
+        }
+        return "Employee " + empID + " was updated successfully";
+    }
+
+    public String updateDirectorDept(String empID, String newDepartment) throws Exception {
+        Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee instanceof EmployeeDirector) {
+            EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
+            foundDirector.setDepartment(newDepartment);
+        }
+        return "Employee " + empID + " was updated successfully";
+    }
+
+    public String updateGrossSalary(String empID, double newSalary) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        foundEmployee.setGrossSalary(newSalary);
+
+        return "Employee " + empID + " was updated successfully";
+    }
 
 } //Don't delete this!! It's the most outer bracket
 

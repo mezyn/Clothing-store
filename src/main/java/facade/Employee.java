@@ -1,6 +1,7 @@
 package facade;
 
 import java.text.DecimalFormat;
+import java.util.Comparator;
 
 public class Employee implements Comparable<Employee> {
 
@@ -10,10 +11,11 @@ public class Employee implements Comparable<Employee> {
     protected double grossSalary;
 
     //Default constructor - necessary?
-    public Employee () {}
+    public Employee() {
+    }
 
     //Constructor
-    public Employee (String employeeID, String employeeName, double grossSalary) {
+    public Employee(String employeeID, String employeeName, double grossSalary) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.grossSalary = grossSalary;
@@ -59,14 +61,18 @@ public class Employee implements Comparable<Employee> {
     public int compareTo(Employee anotherEmployee) {
 
         double anotherSalary = anotherEmployee.getGrossSalary();
-        double comparisonResult = this.grossSalary - anotherSalary;
-        if (comparisonResult > 0) {
+        double comparisonResult = this.getGrossSalary() - anotherSalary;
+        //System.out.println("Comparing " this.employeeName + " to " + anotherEmployee.employeeName);
+
+        if (comparisonResult > 0.0) {
             return 1;
-        } else if (comparisonResult == 0) {
+        } else if (comparisonResult == 0.0) {
             return 0;
         } else {
             return -1;
         }
     }
-}
+
+ }
+
 

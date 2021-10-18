@@ -40,4 +40,13 @@ public class EmployeeManager extends Employee {
         return degree + " " + this.getEmployeeName() + "'s gross salary is " + grossSalary + " SEK per month.";
     }
 
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String newDegree) {
+
+        this.degree = newDegree;
+
+    }
 }

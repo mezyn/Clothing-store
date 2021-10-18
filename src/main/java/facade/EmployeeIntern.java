@@ -41,4 +41,6 @@ public class EmployeeIntern extends Employee {
         String grossSalary = decimal2.format(this.getGrossSalary());
         return getEmployeeName() + "'s gross salary is " + grossSalary + " SEK per month. GPA: " + this.GPA;
     }
+
+
 }

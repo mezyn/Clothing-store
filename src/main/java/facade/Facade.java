@@ -187,27 +187,27 @@ Controller controller = new Controller();
     }
 
     public String printSortedEmployees() throws Exception {
-        return "";
+        return controller.printSortedEmployees();
     }
 
     public String updateEmployeeName(String empID, String newName) throws Exception {
-        return "";
+        return controller.updateEmployeeName(empID, newName);
     }
 
     public String updateInternGPA(String empID, int newGPA) throws Exception {
-        return "";
+        return controller.updateInternGPA(empID, newGPA);
     }
 
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
-        return "";
+        return controller.updateManagerDegree(empID, newDegree);
     }
 
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
-        return "";
+        return controller.updateDirectorDept(empID, newDepartment);
     }
 
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
-        return "";
+        return controller.updateGrossSalary(empID, newSalary);
     }
 
     public Map<String, Integer> mapEachDegree() throws Exception {
