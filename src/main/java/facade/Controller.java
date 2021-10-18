@@ -231,10 +231,10 @@ public class Controller {
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-            Item founditem = findItem(ID);
+            Item foundItem = findItem(ID);
             //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
-            founditem.registerReview(review);
+            foundItem.registerReview(review);
 
             return "Your item review was registered successfully."; //Testing issue
         }
@@ -252,9 +252,9 @@ public class Controller {
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-            Item founditem = findItem(ID);
+            Item foundItem = findItem(ID);
             Review review = new Review(reviewGrade);
-            founditem.registerReview(review);
+            foundItem.registerReview(review);
             return "Your item review was registered successfully.";
         }
     }
@@ -279,9 +279,8 @@ public class Controller {
                 return "Invalid review number. Choose between 1 and "
                         + item.getReviewList().size() + ".";
             } else {
-                String toReturn = "Review(s) for "+item.toString() + System.lineSeparator();
                 Review reviewItem = item.getReviewList().get(reviewNumber - 1);
-                return toReturn + reviewItem.toString();
+                return  reviewItem.toString();
             }
         }
     }
@@ -332,15 +331,13 @@ public class Controller {
 
 
     public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
-        String comment = "";
+        String commentToPrint = "";
 
         for (String comments : getCommentsList())
-            comment += comments + System.lineSeparator();
+            commentToPrint += comments + System.lineSeparator();
 
-        return comment;
+        return commentToPrint;
     }
-
-
 
     public String printAllReviews() { // User Story 3.6
 
@@ -366,8 +363,13 @@ public class Controller {
     }
 
 //Test this first, and if it works properly it's easy to build printLeastReviwedItems()
+    public String printMostReviewedItems(){
 
-    public List<String> printMostReviewedItems() { // getMostReviewedItems
+
+        return null;
+    }
+
+    public List<String> getMostReviewedItems() {
 
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
@@ -396,6 +398,35 @@ public class Controller {
         }
         return printMostReviewedItems;
     }
+    /*public List<String> printMostReviewedItems() { // getMostReviewedItems
+
+        int reviewCounter = 0;
+        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
+        ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        ArrayList<String> printMostReviewedItems = new ArrayList<>();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
+                        highestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
+                        printMostReviewedItems.add(itemList.get(i).toString());
+                    }
+                }
+            }
+        }
+        return printMostReviewedItems;
+    }*/
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 

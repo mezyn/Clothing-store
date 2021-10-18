@@ -267,7 +267,31 @@
                 }
             }
             return " ";
-        }*/
+        }
+        public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
+
+        Item item = findItem(itemID);
+
+        if (item == null) {
+            return "Item " + itemID + " was not registered yet.";
+
+        } else if (item.getReviewList().size()==0) {
+            return "Item " + item.getItemName() + " has not been reviewed yet.";
+        } else {
+            if (reviewNumber < 1 || reviewNumber > item.getReviewList().size()) {
+                return "Invalid review number. Choose between 1 and "
+                        + item.getReviewList().size() + ".";
+            } else {
+                String toReturn = "Review(s) for "+item.toString() + System.lineSeparator();
+                Review reviewItem = item.getReviewList().get(reviewNumber - 1);
+                        return toReturn + reviewItem.toString();
+                        }
+                        }
+                        }
+                        */
+
+
+
 
 
 
