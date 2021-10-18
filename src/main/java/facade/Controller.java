@@ -235,12 +235,13 @@ public class Controller {
             //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
             founditem.registerReview(review);
+
             return "Your item review was registered successfully."; //Testing issue
         }
     }
 // Second reviewItem
 
-    public String reviewItemWithoutComment(String ID, int reviewGrade) {
+    public String reviewItem(String ID, int reviewGrade) {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
@@ -391,15 +392,10 @@ public class Controller {
                         printMostReviewedItems.add(itemList.get(i).toString());
                     }
                 }
-
             }
         }
         return printMostReviewedItems;
     }
-
-
-
-
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
