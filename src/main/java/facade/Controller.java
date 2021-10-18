@@ -17,7 +17,7 @@ public class Controller {
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
 
 
-    public double changeDecimal(double value, int decimalDigit) {
+    public static double changeDecimal(double value, int decimalDigit) {
 
         if (decimalDigit == 1) {
             value = value * Math.pow(10, 1);
@@ -676,7 +676,7 @@ public class Controller {
     //createEmployeeManager
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) {//throws Exception
 
-        //grossSalary = changeDecimal(grossSalary,2);
+        grossSalary = changeDecimal(grossSalary,2);
         Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
@@ -764,14 +764,15 @@ public class Controller {
         for (int i = 0; i < employeeList.size(); i++) {
             totalNetSalary += employeeList.get(i).getNetSalary();
         }
-        return totalNetSalary;
+        return changeDecimal(totalNetSalary,2 );
     }
 
     //I'm woriking on this - Mijin
     //Sorted by gross salary, in ascending order
     public String printSortedEmployees() throws Exception {
 
-        ArrayList<Employee> listBeforeSorted = new ArrayList<>();
+        ArrayList<Employee> listBeforeSorted = employeeList;
+
         return "";
     }
 

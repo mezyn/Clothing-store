@@ -6,8 +6,6 @@ public class EmployeeManager extends Employee {
 
     protected String degree;
 
-    public EmployeeManager () {}
-
     public EmployeeManager (String employeeID, String employeeName, double grossSalary, String degree) {
         super(employeeID, employeeName, grossSalary);
         this.degree = degree;
@@ -25,7 +23,7 @@ public class EmployeeManager extends Employee {
         } else if (degree.equals("PhD")) {
             grossSalary = grossSalary * 1.35;
         }
-        return grossSalary;
+        return Controller.changeDecimal(grossSalary, 2);
     }
 
     @Override

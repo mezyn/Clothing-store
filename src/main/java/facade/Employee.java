@@ -2,7 +2,7 @@ package facade;
 
 import java.text.DecimalFormat;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
 
     //attributes of the Employee class
     protected String employeeID;
@@ -53,5 +53,19 @@ public class Employee {
         DecimalFormat decimal2 = new DecimalFormat("###.00");
         String grossSalary = decimal2.format(this.grossSalary);
         return employeeName + "'s gross salary is " + grossSalary + " SEK per month.";
+    }
+
+    @Override
+    public int compareTo(Employee anotherEmployee) {
+
+        double anotherSalary = anotherEmployee.getGrossSalary();
+        double comparisonResult = this.grossSalary - anotherSalary;
+        if (comparisonResult > 0) {
+            return 1;
+        } else if (comparisonResult == 0) {
+            return 0;
+        } else {
+            return -1;
+        }
     }
 }
