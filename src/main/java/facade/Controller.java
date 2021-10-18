@@ -893,6 +893,14 @@ public class Controller {
         return "Employee " + empID + " was updated successfully";
     }
 
+    /* WORKING ON IT NOW
+    public Map<String, Integer> mapEachDegree() throws Exception {
+
+        HashMap <String, Integer> degreeMap = new HashMap<>();
+
+
+    }*/
+
 } //Don't delete this!! It's the most outer bracket
 
 
