@@ -99,7 +99,7 @@ Controller controller = new Controller();
     }
 
     public List<String> getLeastReviewedItems() {
-        return null;
+        return controller.getLeastReviewedItems();
     }
 
     public String printLeastReviewedItems() {

@@ -368,8 +368,37 @@ public class Controller {
 
         return null;
     }
+    public List<String> getLeastReviewedItems() {
 
-    public List<String> getMostReviewedItems() {
+        int reviewCounter = 0;
+        int lowestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
+        ArrayList<Item> leastReviewedItems = new ArrayList<>();
+        ArrayList<String> printLeastReviewedItems = new ArrayList<>();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber) {
+                        lowestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                        printLeastReviewedItems.add(itemList.get(i).getID());
+                    }
+                }
+            }
+        }
+        return printLeastReviewedItems;
+    }
+
+    public List<String> getMostReviewedItems() { //Passed test
 
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
@@ -391,7 +420,7 @@ public class Controller {
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        printMostReviewedItems.add(itemList.get(i).toString());
+                        printMostReviewedItems.add(itemList.get(i).getID()); // removed to.String
                     }
                 }
             }
