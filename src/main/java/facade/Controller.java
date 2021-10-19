@@ -129,16 +129,13 @@ public class Controller {
         return null;
     }
 
-
     public double buyItem(String itemID, int amount) {
 
         double totalPrice;
 
         if (!containsItem(itemID)) {
             return -1;
-
         } else {
-
             double itemPrice = findItem(itemID).getItemPrice();
 
             if (amount < 4 || amount == 4) {
@@ -150,7 +147,6 @@ public class Controller {
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
             return changeDecimal(totalPrice, 2);
-
         }
     }
 
@@ -163,7 +159,6 @@ public class Controller {
             return "Item " + itemID + " was not registered yet.";
         }
     }
-
 
     public String printAllItems() {
 
@@ -786,7 +781,15 @@ public class Controller {
         return employeeList;
     }
     // Create Regular employee
-    public String createEmployee(String employeeID, String employeeName, double grossSalary) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+
+        if (employeeID.isBlank()) {
+            throw new Exception("ID cannot be blank.");
+        } else if (employeeName.isBlank()) {
+            throw new Exception("Name cannot be blank.");
+        } else if (grossSalary < 0 || grossSalary == 0.0) {
+            throw new Exception("Salary must be greater than zero.");
+        }
 
         grossSalary = changeDecimal(grossSalary, 2);
         Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
@@ -796,7 +799,15 @@ public class Controller {
     }
 
     //createEmployeeManager
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
+
+        if (employeeID.isBlank()) {
+            throw new Exception("ID cannot be blank.");
+        } else if (employeeName.isBlank()) {
+            throw new Exception("Name cannot be blank.");
+        } else if (grossSalary < 0 || grossSalary == 0.0) {
+            throw new Exception("Salary must be greater than zero.");
+        }
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
@@ -806,7 +817,15 @@ public class Controller {
         }
 
     //createEmployeeDirector
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String department) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String department) throws Exception {
+
+        if (employeeID.isBlank()) {
+            throw new Exception("ID cannot be blank.");
+        } else if (employeeName.isBlank()) {
+            throw new Exception("Name cannot be blank.");
+        } else if (grossSalary < 0 || grossSalary == 0.0) {
+            throw new Exception("Salary must be greater than zero.");
+        }
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
@@ -816,7 +835,15 @@ public class Controller {
     }
 
     //createEmployeeIntern
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, int GPA) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, int GPA) throws Exception {
+
+        if (employeeID.isBlank()) {
+            throw new Exception("ID cannot be blank.");
+        } else if (employeeName.isBlank()) {
+            throw new Exception("Name cannot be blank.");
+        } else if (grossSalary < 0 || grossSalary == 0.0) {
+            throw new Exception("Salary must be greater than zero.");
+        }
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
@@ -852,11 +879,18 @@ public class Controller {
             if (employeeList.get(i).getID().equals(employeeID)) {
                 outputMessage = employeeList.get(i).toString();
             }
-        } return outputMessage;
+        }
+        if (findEmployee(employeeID) == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
+        return outputMessage;
     }
 
     public double getNetSalary(String employeeID) throws Exception {
 
+        if (findEmployee(employeeID) == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
         double outputSalary = 0.0;
         for (int i = 0; i < employeeList.size(); i++) {
            if (employeeList.get(i).getID().equals(employeeID)) {
@@ -869,11 +903,16 @@ public class Controller {
     // US 5.4
         public String removeEmployee(String empID) throws Exception {
 
+        if (findEmployee(empID) == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
+
         for (int i = 0; i < employeeList.size(); i++) {
             if (employeeList.get(i).getID().equals(empID)) {
                 employeeList.remove(employeeList.get(i));
             }
         }
+
         return "Employee " + empID + " was successfully removed.";
     }
 
@@ -885,6 +924,10 @@ public class Controller {
         for (int i = 0; i < employeeList.size(); i++) {
             output += employeeList.get(i).toString() + System.lineSeparator();
         }
+
+        if(output.equals("All registered employees:" + System.lineSeparator())){
+            throw new Exception("No employees registered yet.");
+        }
         return output;
     }
 
@@ -895,6 +938,11 @@ public class Controller {
         for (int i = 0; i < employeeList.size(); i++) {
             totalNetSalary += employeeList.get(i).getNetSalary();
         }
+
+        if(totalNetSalary == 0.0) {
+            throw new Exception("No employees registered yet.");
+        }
+
         return changeDecimal(totalNetSalary,2 );
     }
 
@@ -914,12 +962,22 @@ public class Controller {
             outputString += employeeList.get(i).toString() + System.lineSeparator();
         }
 
+        if(outputString.equals("Employees sorted by gross salary (ascending order):" + System.lineSeparator())){
+            throw new Exception("No employees registered yet.");
+        }
         return outputString;
     }
 
     public String updateEmployeeName(String empID, String newName) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        } else if (newName.isBlank()) {
+            throw new Exception("Name cannot be blank.");
+        }
+
+
         foundEmployee.setEmployeeName(newName);
 
         return "Employee " + empID + " was updated successfully";
@@ -928,7 +986,9 @@ public class Controller {
     public String updateInternGPA(String empID, int newGPA) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeIntern) {
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        } else if (foundEmployee instanceof EmployeeIntern) {
             EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
             foundIntern.setGPA(newGPA);
         }
@@ -936,8 +996,11 @@ public class Controller {
     }
 
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
+
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeManager) {
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        } else if (foundEmployee instanceof EmployeeManager) {
             EmployeeManager foundManager = (EmployeeManager) foundEmployee;
             foundManager.setDegree(newDegree);
         }
@@ -945,8 +1008,11 @@ public class Controller {
     }
 
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
+
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeDirector) {
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        } else if (foundEmployee instanceof EmployeeDirector) {
             EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
             foundDirector.setDepartment(newDepartment);
         }
@@ -956,17 +1022,24 @@ public class Controller {
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        } else if (newSalary < 0 || newSalary == 0.0) {
+            throw new Exception("Salary must be greater than zero.");
+        }
         foundEmployee.setGrossSalary(newSalary);
 
         return "Employee " + empID + " was updated successfully";
     }
 
-    // Why use hashmap?
     public Map<String, Integer> mapEachDegree() throws Exception {
 
         Map<String, Integer> degreeMap = new HashMap<>();
         String degree = "";
 
+        if (employeeList.size() == 0) {
+            throw new Exception("No employees registered yet.");
+        }
         for (int i = 0; i < getEmployeeList().size(); i++) {
             if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
                 degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
@@ -991,9 +1064,6 @@ public class Controller {
                 }
             }
         }
-
-        //System.out.println(Arrays.asList(degreeMap));
-
             return degreeMap;
         }
 
@@ -1001,6 +1071,10 @@ public class Controller {
     public String promoteToManager(String empID, String degree) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
+
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
 
@@ -1014,6 +1088,9 @@ public class Controller {
     public String promoteToDirector(String empID, String degree, String department) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
 
@@ -1026,6 +1103,9 @@ public class Controller {
     public String promoteToIntern(String empID, int gpa) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
+        if (foundEmployee == null) {
+            throw new Exception("Employee IDx was not registered yet.");
+        }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
 
@@ -1036,6 +1116,3 @@ public class Controller {
     }
 
 } //Don't delete this!! It's the most outer bracket
-
-
-

@@ -29,13 +29,13 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
-        String item = facade.createItem(ID, name, pricePerUnit);
+        facade.createItem(ID, name, pricePerUnit);
 
     }
 
 
     //2.3 - Update item name and price
-    public String updateItemName() { //(String itemID, String newName)
+    public void updateItemName() { //(String itemID, String newName)
 
         String IDInput = UserInput.readLine("Type current ID of the item: ");
         while (IDInput.isBlank() || IDInput.equals(IDInput)) {
@@ -44,14 +44,11 @@ public class MenuClass {
         }
         String newNameInput = UserInput.readLine("Type new name for the item: ");
 
-        facade.updateItemName(IDInput,newNameInput);
-        
-       
-        return "";
+        facade.updateItemName(IDInput,newNameInput);;
         }
 
 
-    public String updateItemPrice(){
+    public void updateItemPrice(){
 
         String IDInput = UserInput.readLine("Type current ID of the item: ");
         double newPriceInput = UserInput.readDouble("Type new price for the item: ");
@@ -61,43 +58,37 @@ public class MenuClass {
             newPriceInput = UserInput.readDouble("Type new price for the item: ");
         }
         facade.updateItemPrice(IDInput, newPriceInput);
-
-        return "";
+;
     }
 
     //2.5 - Remove items
-    public String removeItem() {
+    public void removeItem() {
 
         String itemID = UserInput.readLine("Type ID of item you would like to remove: ");
         facade.removeItem(itemID);
 
-        return "";
     }
 
-    public double buyItem() {
+    public void buyItem() {
 
         String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
         int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
         facade.buyItem(itemID, amount);
 
-        return 0.0;
     }
 
 
     //2.6 - print an specific item
-    public String printItem() {
+    public void printItem() {
 
         String itemID = UserInput.readLine("Type ID of item to be printed: ");
         facade.printItem(itemID);
-
-        return "";
     }
 
-    public String printAllItems() {
+    public void printAllItems() {
 
         facade.printAllItems();
 
-        return "";
     }
 
 //____________________________________________Reviews___________________________________________________
@@ -401,7 +392,7 @@ public class MenuClass {
                 "7. Print a specific Item.\n\n" +
                 "Type an option number: ");
 
-        while (option < 0 || option > 7) { // 7 instead of 6 (temporarily)
+        while (option < 0 || option > 7) {
 
             option = UserInput.readInt("Invalid menu option. Please type another option");
         }
