@@ -375,18 +375,16 @@ public class MenuClass {
         String employee = facade.createEmployee(employeeID, employeeName, grossSalary, GPA);
     }
 
-    public String removeEmployee() throws Exception {
+    public void removeEmployee() throws Exception {
         String empID = UserInput.readLine("Type ID of employee you would like to remove:");
         facade.removeEmployee(empID);
 
-        return "";
     }
 
-    public String printEmployee() throws Exception {
+    public void printEmployee() throws Exception {
         String empID = UserInput.readLine("Type ID of employee you would like to print:");
         facade.printEmployee(empID);
 
-        return "";
     }
 
 
