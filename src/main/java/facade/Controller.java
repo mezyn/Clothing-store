@@ -913,38 +913,37 @@ public class Controller {
         String degree = "";
 
         for (int i = 0; i < getEmployeeList().size(); i++) {
-            if (getEmployeeList().get(i) instanceof EmployeeManager) {
+            if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
                 degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
-            } else if (getEmployeeList().get(i) instanceof EmployeeDirector) {
-                degree = ((EmployeeDirector) getEmployeeList().get(i)).getDegree();
-            }
-
-            if (degree.equals("BSc")) {
-                if (degreeMap.containsKey("BSc")) {
-                    degreeMap.put("BSc", degreeMap.get("BSc") + 1);
-                } else {
-                    degreeMap.put("BSc", 1);
-                }
-            } else if (degree.equals("MSc")) {
-                if (degreeMap.containsKey("MSc")) {
-                    degreeMap.put("MSc", degreeMap.get("MSc") + 1);
-                } else {
-                    degreeMap.put("MSc", 1);
-                }
-            } else if (degree.equals("PhD")) {
-                if (degreeMap.containsKey("PhD")) {
-                    degreeMap.put("PhD", degreeMap.get("PhD") + 1);
-                } else {
-                    degreeMap.put("PhD", 1);
+                if (degree.equals("BSc")) {
+                    if (degreeMap.containsKey("BSc")) {
+                        degreeMap.put("BSc", degreeMap.get("BSc") + 1);
+                    } else {
+                        degreeMap.put("BSc", 1);
+                    }
+                } else if (degree.equals("MSc")) {
+                    if (degreeMap.containsKey("MSc")) {
+                        degreeMap.put("MSc", degreeMap.get("MSc") + 1);
+                    } else {
+                        degreeMap.put("MSc", 1);
+                    }
+                } else if (degree.equals("PhD")) {
+                    if (degreeMap.containsKey("PhD")) {
+                        degreeMap.put("PhD", degreeMap.get("PhD") + 1);
+                    } else {
+                        degreeMap.put("PhD", 1);
+                    }
                 }
             }
         }
 
+
+
+        System.out.println(Arrays.asList(degreeMap));
         /*
         for (Map.Entry<String, Integer> entry : degreeMap.entrySet()) {
             System.out.println(entry.getKey() + ": => " + entry.getValue());
         }*/
-
             return degreeMap;
         }
 
