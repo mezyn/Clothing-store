@@ -338,6 +338,42 @@ public class MenuClass {
 
 //____________________________________________ Employee ___________________________________________________
 
+    public void createEmployee() throws Exception {
+        String employeeID = UserInput.readLine("Tye ID for employee:");
+        String employeeName = UserInput.readLine("Type name for employee:");
+        double grossSalary = UserInput.readDouble("Type gross salary for employee:");
+
+        String employee = facade.createEmployee(employeeID, employeeName, grossSalary);
+    }
+
+    public void createEmployeeManager() throws Exception {
+        String employeeID = UserInput.readLine("Type ID for employee:");
+        String employeeName = UserInput.readLine("Type name for employee:");
+        double grossSalary = UserInput.readDouble("Type gross salary for employee:");
+        String degree = UserInput.readLine("Type degree for employee:");
+
+        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, degree);
+    }
+
+    public void createEmployeeDirector() throws Exception {
+        String employeeID = UserInput.readLine("Type ID for employee:");
+        String employeeName = UserInput.readLine("Type name for employee:");
+        double grossSalary = UserInput.readDouble("Type gross salary for employee");
+        String degree = UserInput.readLine("Type degree for employee:");
+        String department = UserInput.readLine("Type department for employee:");
+
+        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, degree, department);
+    }
+
+    public void createEmployeeIntern() throws Exception {
+        String employeeID = UserInput.readLine("Type ID for employee:");
+        String employeeName = UserInput.readLine("Type name for employee:");
+        double grossSalary = UserInput.readDouble("Type gross salary for employee:");
+        int GPA = UserInput.readInt("Type GPA for employee:");
+
+
+        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, GPA);
+    }
 
     public String removeEmployee() throws Exception {
         String empID = UserInput.readLine("Type ID of employee you would like to remove:");
@@ -352,9 +388,6 @@ public class MenuClass {
 
         return "";
     }
-
-
-
 
 
     public void itemOption() throws Exception {
@@ -543,16 +576,16 @@ public class MenuClass {
                 case 0: EmployeeMenu();
                     MainMenu();
                     break;// create method, need help from TA with this / Carl
-                case 1:
+                case 1: createEmployee();
                     EmployeeMenu();
                     break;
-                case 2:
+                case 2: createEmployeeManager();
                     EmployeeMenu();
                     break;
-                case 3:
+                case 3: createEmployeeDirector();
                     EmployeeMenu();
                     break;
-                case 4:
+                case 4: createEmployeeIntern();
                     EmployeeMenu();
                     break;
                 case 5: removeEmployee();
