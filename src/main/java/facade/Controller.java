@@ -234,7 +234,7 @@ public class Controller {
             Review review = new Review(reviewComment, reviewGrade);
             foundItem.registerReview(review);
 
-            return "Your item review was registered successfully."; //Testing issue
+            return "Your item review was registered successfully.";
         }
     }
 // Second reviewItem
@@ -251,7 +251,7 @@ public class Controller {
             return "Grade values must be between 1 and 5.";
         } else {
             Item foundItem = findItem(ID);
-            Review review = new Review(reviewGrade);
+            Review review = new Review("",reviewGrade);
             foundItem.registerReview(review);
             return "Your item review was registered successfully.";
         }
@@ -319,9 +319,10 @@ public class Controller {
 
         if (commentedItem !=null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
-                if(!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
-                    commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
-
+                if(!commentedItem.getReviewList().isEmpty()) {
+                    if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
+                        commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
+                }
             }
         }
         return commentsList;
@@ -361,11 +362,7 @@ public class Controller {
     }
 
 //Test this first, and if it works properly it's easy to build printLeastReviwedItems()
-    public String printMostReviewedItems(){
 
-
-        return null;
-    }
     public List<String> getLeastReviewedItems() {
 
         int reviewCounter = 0;
@@ -396,12 +393,31 @@ public class Controller {
         return printLeastReviewedItems;
     }
 
+
+    public String printMostReviewedItems(){
+        String text = "";
+
+
+        for (int i = 0; i < getMostReviewedItemsList().size(); i++ ){
+            text += getMostReviewedItemsList();
+        }
+
+        return text;
+    }
+
+    ArrayList<Item> mostReviewedItems = new ArrayList<>();
+    ArrayList<String> mostReviewedItemsList = new ArrayList<>(); // printMostReviewedItems
+    public ArrayList<String> getMostReviewedItemsList(){
+        return this.mostReviewedItemsList;
+    }
+
+
     public List<String> getMostReviewedItems() { //Passed test
 
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        ArrayList<Item> mostReviewedItems = new ArrayList<>();
-        ArrayList<String> printMostReviewedItems = new ArrayList<>();
+        //ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        //ArrayList<String> mostReviewedItemsList = new ArrayList<>(); // printMostReviewedItems
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -418,12 +434,12 @@ public class Controller {
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        printMostReviewedItems.add(itemList.get(i).getID()); // removed to.String
+                        mostReviewedItemsList.add(itemList.get(i).getID()); // removed to.String
                     }
                 }
             }
         }
-        return printMostReviewedItems;
+        return mostReviewedItemsList;
     }
     /*public List<String> printMostReviewedItems() { // getMostReviewedItems
 
@@ -504,13 +520,13 @@ public class Controller {
             System.out.println("Item " + itemID + "was not registered yet.");
         }
         else if(item.getReviewList().isEmpty()) meanGrade = 0.0;
-        else if (findReview(itemID).getItemComment().isEmpty()) {
+        else if (findReview(itemID)!=null && findReview(itemID).getItemComment().trim().equals("")) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
             for (int i = 0; i < item.getReviewList().size(); i++) {
                     sumGrade += item.getReviewList().get(i).getItemGrade();
         }
-             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 2);
+             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 1);
         }
 
         return meanGrade;
@@ -522,7 +538,8 @@ public class Controller {
         int reviewCounter = 0;
         for (int i=0; i<number.getReviewList().size(); i++) {
             if (number.getReviewList().get(i).equals(itemID)) { //getID() removed
-                reviewCounter += 1;
+                reviewCounter += 0;
+
             }
         }
         return reviewCounter;
