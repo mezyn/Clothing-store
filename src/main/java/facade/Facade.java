@@ -60,7 +60,7 @@ Controller controller = new Controller();
         return controller.reviewItem(itemID, reviewGrade);
     }
 
-    public String getItemCommentsPrinted(String itemID) {
+    public String getItemCommentsPrinted(String itemID) { // maybe for menu class?
 
         return controller.getItemCommentsPrinted(itemID);
     }
