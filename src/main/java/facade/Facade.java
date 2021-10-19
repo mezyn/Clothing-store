@@ -91,10 +91,11 @@ Controller controller = new Controller();
     }
 
     public String printMostReviewedItems() {
-        return controller.printMostReviewedItems();
+        return  controller.printMostReviewedItems();
     }
 
     public List<String> getMostReviewedItems() {
+
         return controller.getMostReviewedItems();
     }
 

@@ -362,12 +362,14 @@ public class Controller {
     }
 
 //Test this first, and if it works properly it's easy to build printLeastReviwedItems()
+    //ArrayList<Item> leastReviewedItems = new ArrayList<>();
+
 
     public List<String> getLeastReviewedItems() {
 
+
         int reviewCounter = 0;
-        int lowestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        ArrayList<Item> leastReviewedItems = new ArrayList<>();
+        int lowestReviewNumber = 0;
         ArrayList<String> printLeastReviewedItems = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -378,13 +380,15 @@ public class Controller {
             } else if (reviewCounter == 0) {
                 System.out.println("No items were reviewed yet.");
             } else {
+
+
                 for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber) {
+                    if (itemList.get(i).getReviewList().size() > lowestReviewNumber) {
                         lowestReviewNumber = itemList.get(i).getReviewList().size();
                     }
                 }
                 for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                    if (itemList.get(i).getReviewList().size() > lowestReviewNumber) {
                         printLeastReviewedItems.add(itemList.get(i).getID());
                     }
                 }
@@ -394,30 +398,15 @@ public class Controller {
     }
 
 
-    public String printMostReviewedItems(){
-        String text = "";
-
-
-        for (int i = 0; i < getMostReviewedItemsList().size(); i++ ){
-            text += getMostReviewedItemsList();
-        }
-
-        return text;
-    }
-
-    ArrayList<Item> mostReviewedItems = new ArrayList<>();
-    ArrayList<String> mostReviewedItemsList = new ArrayList<>(); // printMostReviewedItems
-    public ArrayList<String> getMostReviewedItemsList(){
-        return this.mostReviewedItemsList;
-    }
-
-
-    public List<String> getMostReviewedItems() { //Passed test
-
+    public String printMostReviewedItems() { // Passed test
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        //ArrayList<Item> mostReviewedItems = new ArrayList<>();
+
+        ArrayList<Item> mostReviewedItems = new ArrayList<>();
         //ArrayList<String> mostReviewedItemsList = new ArrayList<>(); // printMostReviewedItems
+
+        String header = "Most reviews: "+reviewCounter+" review(s) each." + System.lineSeparator();
+        String message = "";
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -434,7 +423,48 @@ public class Controller {
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        mostReviewedItemsList.add(itemList.get(i).getID()); // removed to.String
+                        mostReviewedItems.add(itemList.get(i));
+
+                    }
+                }
+
+                if (mostReviewedItems.size() != 0){
+                    for (Item item : mostReviewedItems){
+                        message += item.toString() + System.lineSeparator() ;
+
+                    }
+                }
+            }
+        }
+
+        return "Most reviews: "+ reviewCounter +" review(s) each." + System.lineSeparator() + message ;
+    }
+
+
+    public List<String> getMostReviewedItems() { //Passed test
+
+        int reviewCounter = 0;
+        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
+        ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        ArrayList<String> mostReviewedItemsList = new ArrayList<>(); // printMostReviewedItems
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
+                        highestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
+                        mostReviewedItemsList.add(itemList.get(i).getID());
+
                     }
                 }
             }
