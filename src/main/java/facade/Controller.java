@@ -684,8 +684,8 @@ public class Controller {
                     "------------------------------------\n");
         } else {
 
-            String allTransactions = ("All purchases made:\n" +
-                    "Total profit: " + getTotalProfit() + " total profit SEK\n" +
+            String allTransactions = ("All purchases made: \n" +
+                    "Total profit: " + getTotalProfit() + " SEK\n" +
                     "Total items sold: " + getTotalUnitsSold() + " units\n" +
                     "Total purchases made: " + getTotalTransactions() + " transactions\n" +
                     "------------------------------------\n");

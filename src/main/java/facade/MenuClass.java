@@ -1,5 +1,6 @@
 package facade;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -336,13 +337,27 @@ public class MenuClass {
 */
 
 //____________________________________________ Employee ___________________________________________________
-  /*
-    public Employee createEmployee() {
 
+
+    public String removeEmployee() throws Exception {
+        String empID = UserInput.readLine("Type ID of employee you would like to remove:");
+        facade.removeEmployee(empID);
+
+        return "";
     }
-    */
 
-    public void itemOption() {
+    public String printEmployee() throws Exception {
+        String empID = UserInput.readLine("Type ID of employee you would like to print:");
+        facade.printEmployee(empID);
+
+        return "";
+    }
+
+
+
+
+
+    public void itemOption() throws Exception {
 
         int option = UserInput.readInt("Item options menu:\n" +
                 "0. Return to Main Menu.\n" +
@@ -397,7 +412,7 @@ public class MenuClass {
 
         UserInput.scanner.close();
     }
-    public void ReviewMenu() {
+    public void ReviewMenu() throws Exception {
 
         int option = UserInput.readInt("Reviews options menu:\n" +
                 "0. Return to Main Menu.\n" +
@@ -451,7 +466,7 @@ public class MenuClass {
         }
         UserInput.scanner.close();
     }
-    public void transactionHistoryMenu() {
+    public void transactionHistoryMenu() throws Exception {
 
         int option = UserInput.readInt("Transaction History options menu:\n" +
                 "0. Return to Main Menu.\n" +
@@ -474,8 +489,10 @@ public class MenuClass {
             case 0 : MainMenu();
                 break;
             case 1 : facade.getTotalProfit();
+                transactionHistoryMenu();
                 break;
             case 2 : facade.getTotalUnitsSold();
+                transactionHistoryMenu();
                 break;
             case 3 : facade.getTotalTransactions();
                 transactionHistoryMenu();
@@ -484,13 +501,16 @@ public class MenuClass {
                 transactionHistoryMenu();
                 break;
             case 5 : printProfit();
+                transactionHistoryMenu();
                 break;
             case 6 : printUnitsSolds();
+                transactionHistoryMenu();
                 break;
             case 7 : printItemTransactions();
                 transactionHistoryMenu();
                 break;
             case 8 : facade.printMostProfitableItems();
+                transactionHistoryMenu();
                 break;
             default : System.out.println("Please enter a valid option");
                 break;
@@ -499,7 +519,7 @@ public class MenuClass {
         UserInput.scanner.close();
     }
 
-    public void EmployeeMenu(){
+    public void EmployeeMenu() throws Exception {
         int option = UserInput.readInt("Employee options menu:\n" +
                 "0. Return to Main Menu.\n" +
                 "1. Create an employee (Regular Employee).\n" +
@@ -520,35 +540,35 @@ public class MenuClass {
         }
 
             switch (option) {
-                case 0:
+                case 0: EmployeeMenu();
                     MainMenu();
                     break;// create method, need help from TA with this / Carl
                 case 1:
-
+                    EmployeeMenu();
                     break;
                 case 2:
-
+                    EmployeeMenu();
                     break;
                 case 3:
-
+                    EmployeeMenu();
                     break;
                 case 4:
-
+                    EmployeeMenu();
                     break;
-                case 5:
-
+                case 5: removeEmployee();
+                    EmployeeMenu();
                     break;
-                case 6:
-
+                case 6: printEmployee();
+                    EmployeeMenu();
                     break;
-                case 7:
-
+                case 7: facade.printAllEmployees();
+                    EmployeeMenu();
                     break;
-                case 8:
-
+                case 8: facade.getTotalNetSalary();
+                    EmployeeMenu();
                     break;
-                case 9:
-
+                case 9: facade.printSortedEmployees();
+                    EmployeeMenu();
                     break;
                 default : System.out.println("Please enter a valid option");
                     break;
@@ -557,7 +577,7 @@ public class MenuClass {
         }
     }
 
-    public void MainMenu(){
+    public void MainMenu() throws Exception {
 
         int option = UserInput.readInt(
                 "Main Menu: Please chose among the options below \n" +
@@ -597,7 +617,7 @@ public class MenuClass {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         MenuClass mainmenu = new MenuClass();
         mainmenu.MainMenu();
