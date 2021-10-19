@@ -910,13 +910,51 @@ public class Controller {
         return "Employee " + empID + " was updated successfully";
     }
 
-    /* WORKING ON IT NOW
+    /* Why use hashmap?
     public Map<String, Integer> mapEachDegree() throws Exception {
 
         HashMap <String, Integer> degreeMap = new HashMap<>();
 
 
     }*/
+
+
+    public String promoteToManager(String empID, String degree) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        String tempName = foundEmployee.getEmployeeName();
+        double tempGrossSalary = foundEmployee.getRawSalary();
+
+        employeeList.remove(findEmployee(empID));
+        createEmployee(empID, tempName, tempGrossSalary, degree);
+
+        return empID + " promoted successfully to Manager.";
+
+    }
+
+    public String promoteToDirector(String empID, String degree, String department) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        String tempName = foundEmployee.getEmployeeName();
+        double tempGrossSalary = foundEmployee.getRawSalary();
+
+        employeeList.remove(findEmployee(empID));
+        createEmployee(empID, tempName, tempGrossSalary, degree, department);
+
+        return empID + " promoted successfully to Director.";
+    }
+
+    public String promoteToIntern(String empID, int gpa) throws Exception {
+
+        Employee foundEmployee = findEmployee(empID);
+        String tempName = foundEmployee.getEmployeeName();
+        double tempGrossSalary = foundEmployee.getRawSalary();
+
+        employeeList.remove(findEmployee(empID));
+        createEmployee(empID, tempName, tempGrossSalary, gpa);
+
+        return empID + " promoted successfully to Intern.";
+    }
 
 } //Don't delete this!! It's the most outer bracket
 
