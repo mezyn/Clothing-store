@@ -992,13 +992,8 @@ public class Controller {
             }
         }
 
+        //System.out.println(Arrays.asList(degreeMap));
 
-
-        System.out.println(Arrays.asList(degreeMap));
-        /*
-        for (Map.Entry<String, Integer> entry : degreeMap.entrySet()) {
-            System.out.println(entry.getKey() + ": => " + entry.getValue());
-        }*/
             return degreeMap;
         }
 
