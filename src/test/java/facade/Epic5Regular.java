@@ -266,9 +266,9 @@ public class Epic5Regular {
     @Test
     public void shouldMapPerDegree() throws Exception {
         Map<String, Integer> actualMap = facade.mapEachDegree();
-        assertEquals(actualMap.get("PhD"), 1);
-        assertEquals(actualMap.get("MSc"), 1);
-        assertEquals(actualMap.get("BSc"), 1);
+        assertEquals(1,actualMap.get("PhD"));
+        assertEquals(1, actualMap.get("MSc"));
+        assertEquals(1, actualMap.get("BSc"));
 
         facade.removeEmployee("Emp2"); // Remove Blanca with the PhD
         //Adds temporary employees with more 3 MSc and 1 BSc

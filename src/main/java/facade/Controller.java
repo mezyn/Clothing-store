@@ -361,17 +361,23 @@ public class Controller {
         return head + reviewText + "------------------------------------" + System.lineSeparator();
     }
 
-    public List<String> getLeastReviewedItems() { // User story 3.8
+    public String printLeastReviewedItems() { // User story 3.8 //// Printer
 
 
-        int reviewCounter = 0;
-        int lowestReviewNumber = itemList.get(0).getReviewList().size();
-        //Review last = itemList.get(itemList.size() - 1);
-        ArrayList<String> printLeastReviewedItems = new ArrayList<>(); //Maybe remove "print" in the list name. confusing with the other method that actually prints items
+
+        int lowestReviewNumber = 0;
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getReviewList().size() > 0) {
+                lowestReviewNumber = itemList.get(i).getReviewList().size();
+            }
+        }
+        ArrayList<Item> leastReviewedItems = new ArrayList<>();
+        int reviewCounter = -3;
+        String header = "Least reviews: "+reviewCounter+" review(s) each." + System.lineSeparator();
+        String message = "";
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
-
 
             if (itemList.size() == 0) {
                 System.out.println("No items registered yet.");
@@ -380,13 +386,62 @@ public class Controller {
             } else {
 
                 for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber) { //> before
+                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) { //> before
+                        lowestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                        leastReviewedItems.add(itemList.get(i));
+
+                    }
+                }
+                if (leastReviewedItems.size() != 0) {
+                    for (Item item : leastReviewedItems) {
+                        message += item.toString() + System.lineSeparator();
+
+                    }
+                }
+            }
+
+        }
+        return  "Least reviews: "+ reviewCounter +" review(s) each." + System.lineSeparator() + message ;
+    }
+// -----------------------------------------------------------------------------------------
+
+    public List<String> getLeastReviewedItems() { // User story 3.8 //// getter
+
+
+        int reviewCounter = 0;
+        int lowestReviewNumber = 0;
+        for(int i=0;i<itemList.size();i++){
+            if(itemList.get(i).getReviewList().size()>0){
+                lowestReviewNumber = itemList.get(i).getReviewList().size();
+            }
+        }
+
+        ArrayList<String> printLeastReviewedItems = new ArrayList<>(); //Maybe remove "print" in the list name. confusing with the other method that actually prints items
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size()>0) { //> before
                         lowestReviewNumber = itemList.get(i).getReviewList().size();
                     }
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
                         printLeastReviewedItems.add(itemList.get(i).getID());
+
+
+
                     }
                 }
             }
@@ -913,37 +968,31 @@ public class Controller {
         String degree = "";
 
         for (int i = 0; i < getEmployeeList().size(); i++) {
-            if (getEmployeeList().get(i) instanceof EmployeeManager) {
+            if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
                 degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
-            } else if (getEmployeeList().get(i) instanceof EmployeeDirector) {
-                degree = ((EmployeeDirector) getEmployeeList().get(i)).getDegree();
-            }
-
-            if (degree.equals("BSc")) {
-                if (degreeMap.containsKey("BSc")) {
-                    degreeMap.put("BSc", degreeMap.get("BSc") + 1);
-                } else {
-                    degreeMap.put("BSc", 1);
-                }
-            } else if (degree.equals("MSc")) {
-                if (degreeMap.containsKey("MSc")) {
-                    degreeMap.put("MSc", degreeMap.get("MSc") + 1);
-                } else {
-                    degreeMap.put("MSc", 1);
-                }
-            } else if (degree.equals("PhD")) {
-                if (degreeMap.containsKey("PhD")) {
-                    degreeMap.put("PhD", degreeMap.get("PhD") + 1);
-                } else {
-                    degreeMap.put("PhD", 1);
+                if (degree.equals("BSc")) {
+                    if (degreeMap.containsKey("BSc")) {
+                        degreeMap.put("BSc", degreeMap.get("BSc") + 1);
+                    } else {
+                        degreeMap.put("BSc", 1);
+                    }
+                } else if (degree.equals("MSc")) {
+                    if (degreeMap.containsKey("MSc")) {
+                        degreeMap.put("MSc", degreeMap.get("MSc") + 1);
+                    } else {
+                        degreeMap.put("MSc", 1);
+                    }
+                } else if (degree.equals("PhD")) {
+                    if (degreeMap.containsKey("PhD")) {
+                        degreeMap.put("PhD", degreeMap.get("PhD") + 1);
+                    } else {
+                        degreeMap.put("PhD", 1);
+                    }
                 }
             }
         }
 
-        /*
-        for (Map.Entry<String, Integer> entry : degreeMap.entrySet()) {
-            System.out.println(entry.getKey() + ": => " + entry.getValue());
-        }*/
+        //System.out.println(Arrays.asList(degreeMap));
 
             return degreeMap;
         }

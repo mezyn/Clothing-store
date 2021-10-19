@@ -104,7 +104,7 @@ Controller controller = new Controller();
     }
 
     public String printLeastReviewedItems() {
-        return "";
+        return controller.printLeastReviewedItems();
     }
 
     public String printWorseReviewedItems() {
