@@ -1,4 +1,4 @@
-/*package facade;
+package facade;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -251,4 +251,3 @@ public class Epic6Exceptions {
         assertEquals("15 outside range. Must be between 0-10.", exceptionUpdateGPA.getMessage());
     }
 }
-*/
