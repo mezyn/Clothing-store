@@ -290,6 +290,36 @@
                         }
                         */
 
+/* /*public List<String> printMostReviewedItems() { // getMostReviewedItems // old
+
+        int reviewCounter = 0;
+        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
+        ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        ArrayList<String> printMostReviewedItems = new ArrayList<>();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            reviewCounter += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (reviewCounter == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
+                        highestReviewNumber = itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
+                        printMostReviewedItems.add(itemList.get(i).toString());
+                    }
+                }
+            }
+        }
+        return printMostReviewedItems;
+    }*/
+
 
 
 

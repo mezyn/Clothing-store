@@ -60,7 +60,7 @@ Controller controller = new Controller();
         return controller.reviewItem(itemID, reviewGrade);
     }
 
-    public String getItemCommentsPrinted(String itemID) {
+    public String getItemCommentsPrinted(String itemID) { // maybe for menu class?
 
         return controller.getItemCommentsPrinted(itemID);
     }
@@ -91,10 +91,11 @@ Controller controller = new Controller();
     }
 
     public String printMostReviewedItems() {
-        return controller.printMostReviewedItems();
+        return  controller.printMostReviewedItems();
     }
 
     public List<String> getMostReviewedItems() {
+
         return controller.getMostReviewedItems();
     }
 
@@ -215,16 +216,16 @@ Controller controller = new Controller();
     }
 
     public String promoteToManager(String empID, String degree) throws Exception {
-        return "";
+        return controller.promoteToManager(empID, degree);
 
     }
 
     public String promoteToDirector(String empID, String degree, String department) throws Exception {
-        return "";
+        return controller.promoteToDirector(empID, degree, department);
     }
 
     public String promoteToIntern(String empID, int gpa) throws Exception {
-        return "";
+        return controller.promoteToIntern(empID, gpa);
     }
 
 }

@@ -127,9 +127,8 @@ public class MenuClass {
 
 }
 
-
-    /*public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
-
+/*
+    public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
 
         System.out.println("Size of list: " + Item.getReviewList().size());
         itemID = UserInput.readLine("Enter the ID of Item: ");
