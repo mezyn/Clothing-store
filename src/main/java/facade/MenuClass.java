@@ -1,8 +1,6 @@
 package facade;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.List;
 
 public class MenuClass {
 
@@ -118,6 +116,51 @@ public class MenuClass {
         System.out.println("Your item review was registered successfully.");
 
 }
+    public void getPrintedItemReview() { // User story 3.2
+
+        String itemID = UserInput.readLine("Enter the ID of Item: ");
+        int reviewNumber = UserInput.readInt("Enter an index of the review: ");
+
+        facade.getPrintedItemReview( itemID, reviewNumber);
+    }
+
+    public void getPrintedReviews(){ //User story 3.3
+        String itemID = UserInput.readLine("Enter ID: ");
+        facade.getPrintedReviews( itemID);
+    }
+
+    public void getItemMeanGrade() { //User Story 3.4
+        String itemID = UserInput.readLine("Enter ID: ");
+        facade.getItemMeanGrade(itemID);
+    }
+
+    public void getItemComments() { //User Story 3.5
+        String itemID = UserInput.readLine("Enter the ID of Item: ");
+        facade.getItemComments(itemID);
+    }
+
+    public void printAllReviews() { //User Story 3.6
+        facade.printAllReviews();
+    }
+
+    public void printLeastReviewedItems(){ //User Story 3.7
+        facade.printLeastReviewedItems();
+    }
+
+    public void printMostReviewedItems() {
+        facade.printMostReviewedItems();
+    }
+
+    public void printBestReviewedItems()  {
+        facade.printBestReviewedItems();
+    }
+
+    public String printWorseReviewedItems() {
+        return facade.printWorseReviewedItems();
+    }
+
+
+
 
 /*
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
@@ -462,28 +505,30 @@ public class MenuClass {
             case 1 : reviewItem(); // User Story 3.1
                 ReviewMenu();
                 break;
-            case 2 : //getPrintedItemReview();// User Story 3.2
+            case 2 : getPrintedItemReview();// User Story 3.2
                 ReviewMenu();
                 break;
-            case 3 : //getPrintedReviews (); // User Story 3.3
+            case 3 : getPrintedReviews (); // User Story 3.3
                 ReviewMenu();
                 break;
-            case 4 : //getItemMeanGrade(); // User Story 3.4
+            case 4 : getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : //getItemComments();// User Story 3.5
+            case 5 : getItemComments();// User Story 3.5
                 ReviewMenu();
                 break;
-            case 6 : //printAllReviews(); // User Story 3.6
+            case 6 : printAllReviews(); // User Story 3.6
                 ReviewMenu();
                 break;
-            case 7 : System.out.println("Option 8");// User Story 3.7
+            case 7 : printMostReviewedItems();// User Story 3.7
+                ReviewMenu();
                 break;
-            case 8 : System.out.println("Option 9");// User Story 3.8
+            case 8 : printLeastReviewedItems();// User Story 3.7
+                ReviewMenu();
                 break;
-            case 9 : System.out.println("Option 10");// User Story 3.9
+            case 9 : printBestReviewedItems() ;// User Story 3.8
                 break;
-            default : System.out.println("Please enter a valid option");
+            default : printWorseReviewedItems(); // User Story 3.8
                 break;
         }
         UserInput.scanner.close();

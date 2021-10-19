@@ -356,7 +356,7 @@ public class Controller {
         return head + reviewText + "------------------------------------" + System.lineSeparator();
     }
 
-    public String printLeastReviewedItems() { // User story 3.8 //// Printer
+    public String printLeastReviewedItems() { // User story 3.7 //// Printer // passed teh test.
 
 
 
@@ -402,9 +402,8 @@ public class Controller {
         }
         return  "Least reviews: "+ reviewCounter +" review(s) each." + System.lineSeparator() + message ;
     }
-// -----------------------------------------------------------------------------------------
 
-    public List<String> getLeastReviewedItems() { // User story 3.8 //// getter
+    public List<String> getLeastReviewedItems() { // User story 3.7 //// getter
 
 
         int reviewCounter = 0;
@@ -415,7 +414,7 @@ public class Controller {
             }
         }
 
-        ArrayList<String> printLeastReviewedItems = new ArrayList<>(); //Maybe remove "print" in the list name. confusing with the other method that actually prints items
+        ArrayList<String> leastReviewedItemsList = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -427,13 +426,15 @@ public class Controller {
             } else {
 
                 for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size()>0) { //> before
+                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber
+                            && itemList.get(i).getReviewList().size()>0) {
+
                         lowestReviewNumber = itemList.get(i).getReviewList().size();
                     }
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
-                        printLeastReviewedItems.add(itemList.get(i).getID());
+                        leastReviewedItemsList.add(itemList.get(i).getID());
 
 
 
@@ -441,11 +442,11 @@ public class Controller {
                 }
             }
         }
-        return printLeastReviewedItems;
+        return leastReviewedItemsList;
     }
 
 
-    public String printMostReviewedItems() { // User story 3.8 // Passed test
+    public String printMostReviewedItems() { // User story 3.7 // Passed test
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
 
@@ -485,7 +486,7 @@ public class Controller {
     }
 
 
-    public List<String> getMostReviewedItems() { // User story 3.8 //Passed test
+    public List<String> getMostReviewedItems() { // User story 3.7 //Passed test
 
         int reviewCounter = 0;
         int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
@@ -591,7 +592,51 @@ public class Controller {
         return reviewCounter;
     }
 
+    public List<String> getBestReviewedItems() {
 
+        int bestGradeReview = itemList.get(0).getReviewList().size();
+
+        ArrayList<String> bestGradeList = new ArrayList<>();
+
+        for (int i = 0; i < itemList.size(); i++) {
+            bestGradeReview += itemList.get(i).getReviewList().size();
+
+            if (itemList.size() == 0) {
+                System.out.println("No items registered yet.");
+            } else if (bestGradeReview == 0) {
+                System.out.println("No items were reviewed yet.");
+            } else {
+
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() < bestGradeReview
+                            && itemList.get(i).getReviewList().size()>0) {
+
+                        bestGradeReview = itemList.get(i).getReviewList().size();
+
+                    }
+                }
+                for (i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == bestGradeReview) {
+                        bestGradeList.add(itemList.get(i).getID());
+                    }
+                }
+            }
+        }
+        return bestGradeList;
+    }
+    public String printBestReviewedItems() {
+
+        return "";
+    }
+
+
+    public List<String> getWorseReviewedItems() {
+        return null;
+    }
+
+    public String printWorseReviewedItems() {
+        return "";
+    }
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction

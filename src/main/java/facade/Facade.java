@@ -112,7 +112,7 @@ Controller controller = new Controller();
     }
 
     public String printBestReviewedItems() {
-        return "";
+        return controller.printBestReviewedItems();
     }
 
     public List<String> getWorseReviewedItems() {
@@ -120,7 +120,7 @@ Controller controller = new Controller();
     }
 
     public List<String> getBestReviewedItems() {
-        return null;
+        return controller.getBestReviewedItems();
     }
 
 
