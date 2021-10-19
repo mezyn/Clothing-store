@@ -212,7 +212,7 @@ Controller controller = new Controller();
     }
 
     public Map<String, Integer> mapEachDegree() throws Exception {
-        return null;
+        return controller.mapEachDegree();
     }
 
     public String promoteToManager(String empID, String degree) throws Exception {
