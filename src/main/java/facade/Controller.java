@@ -1,7 +1,9 @@
 package facade;
 
-import javax.swing.text.Utilities;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EmptyStackException;
+import java.util.List;
 
 
 public class Controller {
@@ -13,34 +15,47 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
+/*
+    DecimalFormat myFormatter = new DecimalFormat(pattern);
+    String output = myFormatter.format(value);
+System.out.println(value + " " + pattern + " " + output);*/
 
+    public double changeDecimal(double value) {
 
-    public static double changeDecimal(double value, int decimalDigit) {
-
-        if (decimalDigit == 1) {
-            value = value * Math.pow(10, 1);
-            value = Math.floor(value);
-            value = value / Math.pow(10, 1);
-
-        } else if (decimalDigit == 2) {
-            value = value * Math.pow(10, 2);
-            value = Math.floor(value);
-            value = value / Math.pow(10, 2);
-        }
+        value = value * Math.pow(10, 2);
+        value = Math.floor(value);
+        value = value / Math.pow(10, 2);
         return value;
     }
 
-/*Don't think we need it, but will leave for now
+    public double changeDecimal2(double value) { //for two decimal digits
+
+        /*value = value * Math.pow(10, decimalPoint);
+        value = Math.floor(value);
+        value = value / Math.pow(10, decimalPoint);*/
+        String newString = String.valueOf(value);
+        int index = 0;
+        for (int i = 0; i < newString.length(); i++) {
+            if (newString.charAt(i) == '.' || newString.charAt(i) == ',') {
+                index = i;
+            }
+        }
+        newString = newString.substring(0, index + 3);
+        double newValue = Double.valueOf(newString);
+        //String sValue = (String) String.format("%.2f", value);
+        //Double newValue = Double.parseDouble(sValue);
+        return newValue;
+    }
+
     public double changeDecimalToOne(double value) { //for One decimal digit
 
-        value = value * Math.pow(10, decimalPoint);
+        /*value = value * Math.pow(10, decimalPoint);
         value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);
+        value = value / Math.pow(10, decimalPoint);*/
         String sValue = (String) String.format("%.1f", value);
         Double newValue = Double.parseDouble(sValue);
         return newValue;
     }
-        */
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
@@ -62,7 +77,7 @@ public class Controller {
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            //unitPrice = changeDecimal(unitPrice, 2);
+            unitPrice = changeDecimal(unitPrice);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -73,7 +88,7 @@ public class Controller {
 
         if (!containsItem(itemID)) {
             return "Item " + itemID + " was not registered yet.";
-        } else if (itemID.isBlank() || !containsItem(itemID) || newName.isBlank()) {
+        } else if (itemID.isBlank() || !containsItem(itemID)) {
             return "Invalid data for item.";
         } else {
             Item foundItem = findItem(itemID);
@@ -149,7 +164,8 @@ public class Controller {
 
             Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
             transactionHistoryList.add(newTransaction);
-            return changeDecimal(totalPrice, 2);
+
+            return changeDecimal(totalPrice);
 
         }
     }
@@ -180,6 +196,8 @@ public class Controller {
         }
 
     }
+
+
 
 
     // ----------------------------------------------------------------------------------------
@@ -217,6 +235,21 @@ public class Controller {
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
+    //does it have to be static? I know TA mentioned this but I didn't get why -Mijin
+    /*ArrayList<Review> reviewList = new ArrayList<>();
+
+
+    public ArrayList<Review> getReviewList() {
+        return reviewList;
+    }
+
+     ArrayList<String> commentsList = new ArrayList<>();
+
+    public ArrayList<String> getCommentsList() {
+        return commentsList;
+    }*/
+
+
     //Create Review 3.1
     public String reviewItem(String ID, String reviewComment, int reviewGrade) {
 
@@ -229,17 +262,16 @@ public class Controller {
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-            Item foundItem = findItem(ID);
+            Item founditem = findItem(ID);
             //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
-            foundItem.registerReview(review);
-
+            founditem.registerReview(review);
             return "Your item review was registered successfully."; //Testing issue
         }
     }
 // Second reviewItem
 
-    public String reviewItem(String ID, int reviewGrade) {
+    public String reviewItemWithoutComment(String ID, int reviewGrade) {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
@@ -250,9 +282,9 @@ public class Controller {
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
         } else {
-            Item foundItem = findItem(ID);
+            Item founditem = findItem(ID);
             Review review = new Review(reviewGrade);
-            foundItem.registerReview(review);
+            founditem.registerReview(review);
             return "Your item review was registered successfully.";
         }
     }
@@ -264,6 +296,7 @@ public class Controller {
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
+        //System.out.println("Size of list: " + reviewList.size()); // This line is just for us to see what to enter.
 
         Item item = findItem(itemID);
 
@@ -278,10 +311,24 @@ public class Controller {
                         + item.getReviewList().size() + ".";
             } else {
                 Review reviewItem = item.getReviewList().get(reviewNumber - 1);
-                return  reviewItem.toString();
+                return reviewItem.toString();
             }
         }
     }
+/* public  Review findReview(String itemID) {
+
+
+        /*if (reviewList.size() == 0) {
+            System.out.println("No reviews have been added: "+ System.lineSeparator());
+        } else {
+            System.out.println("Index ");
+            for (Review review : reviewList) {
+                System.out.print("____________________________" + System.lineSeparator()+ review + System.lineSeparator());
+
+            }
+        }
+        return "";
+    }*/
 
 
     public String getPrintedReviews(String itemID) { // User Story 3.3
@@ -291,24 +338,17 @@ public class Controller {
             return "Item " + itemID + " was not registered yet.";
         }
         else if (itemToPrint.getReviewList().size()>0) {
-            String printedOutput =  "Review(s) for " + itemID + ": "
+            String build =  "Review(s) for " + itemID + ": "
                     + getItemName(itemID) + ". "
                     + getItemPrice(itemID) + " SEK" + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
-                printedOutput += itemToPrint.getReviewList().get(i).toString()
-                        + System.lineSeparator();
+                    build += itemToPrint.getReviewList().get(i).toString();
 
             }
-            return printedOutput;
+            return build;
         } else  {
-            String printedOutput =  "Review(s) for " + itemToPrint.toString() + System.lineSeparator();
-            return printedOutput + "The item " + itemToPrint.getItemName() + " has not been reviewed yet.";
+            return "Item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
-    }
-
-    ArrayList<String> commentsList = new ArrayList<String>();
-    public ArrayList<String> getCommentsList(){
-        return this.commentsList;
     }
 
 
@@ -317,143 +357,91 @@ public class Controller {
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<String>();
 
+
         if (commentedItem !=null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if(!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
                     commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
-
             }
         }
         return commentsList;
     }
 
+    public String getItemCommentsPrinted(String itemID){ // User Story 3.5 | PART 2#
 
-    public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
-        String commentToPrint = "";
 
-        for (String comments : getCommentsList())
-            commentToPrint += comments + System.lineSeparator();
+        return "";
 
-        return commentToPrint;
     }
 
-    public String printAllReviews() { // User Story 3.6
+/*Users want to read all comments written for a reviewed item so that they can see the general opinion of previous customers.
+When retrieving all comments, users must specify an item ID. For this user story, only the written comments are retrieved
+and can be iterated as a collection of strings.
+If the item ID was not registered or if the item has no reviews or written comments in it,
+the system should return an empty collection.
+*/
 
-        String head = "All registered reviews:" + System.lineSeparator();
+    public String printAllReviews() { // User Story 3.6 // Saved old code in NOT_USED_CODE.JAVA
 
-        String textItem = "Review(s) for ";
-        String reviewText = "";
+        String message = "All registered reviews:" +
+                System.lineSeparator() +
+                "------------------------------------" +
+                System.lineSeparator();
+        String messageToString = "Review(s) for " + toString();
 
-        if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
+        for (Item item : getItemList()){
+            return messageToString;
+
+            for (Review review : item.getReviewList()){
+                return message + review + System.lineSeparator();
+
+            }
         }
-        for (int i = 0; i < itemList.size(); i++) {
-            if(!itemList.get(i).getReviewList().isEmpty()) {
-                reviewText += "------------------------------------" + System.lineSeparator();
-                reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
-                for (Review review : itemList.get(i).getReviewList()) {
-                    reviewText += review.toString() + System.lineSeparator();
+    }
+
+
+
+/*
+    public String printMostReviewedItems() {
+
+        if (Item.getReviewList().isEmpty()) {
+            return "No items registered yet.";
+        } else if (!getItemList().isEmpty() && Item.getReviewList() == 0) {
+            return "No items were reviewed yet.";
+        } else if (!(getItemList() && Item.getReviewList() == 0)) { //Not(item list and review list= 0) = there contains something in both
+
+            for (Review review : Item.getReviewList()) {
+                if ()
+            }
+
+
+
+            }
+
+        }
+
+    }
+
+    ArrayList<String> mostReviewItemList = new ArrayList<>();
+
+    public ArrayList<String> getMostReviewItemList() {
+        return mostReviewItemList;
+    }
+
+    public List<String> getMostReviewedItems(String itemID) {
+
+        if (containsReview(itemID)) {
+            for (int i = 0; i < Item.getReviewList().size(); i++) {
+                if (Item.getReviewList().get(i).getID().equals(itemID)) {
+                    mostReviewItemList.add(Item.getReviewList().get(i).getItemReview());
 
                 }
             }
         }
-        return head + reviewText + "------------------------------------" + System.lineSeparator();
+        return ;
     }
 
-//Test this first, and if it works properly it's easy to build printLeastReviwedItems()
-    public String printMostReviewedItems(){
 
-
-        return null;
-    }
-    public List<String> getLeastReviewedItems() {
-
-        int reviewCounter = 0;
-        int lowestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        ArrayList<Item> leastReviewedItems = new ArrayList<>();
-        ArrayList<String> printLeastReviewedItems = new ArrayList<>();
-
-        for (int i = 0; i < itemList.size(); i++) {
-            reviewCounter += itemList.get(i).getReviewList().size();
-
-            if (itemList.size() == 0) {
-                System.out.println("No items registered yet.");
-            } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
-            } else {
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber) {
-                        lowestReviewNumber = itemList.get(i).getReviewList().size();
-                    }
-                }
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
-                        printLeastReviewedItems.add(itemList.get(i).getID());
-                    }
-                }
-            }
-        }
-        return printLeastReviewedItems;
-    }
-
-    public List<String> getMostReviewedItems() { //Passed test
-
-        int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        ArrayList<Item> mostReviewedItems = new ArrayList<>();
-        ArrayList<String> printMostReviewedItems = new ArrayList<>();
-
-        for (int i = 0; i < itemList.size(); i++) {
-            reviewCounter += itemList.get(i).getReviewList().size();
-
-            if (itemList.size() == 0) {
-                System.out.println("No items registered yet.");
-            } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
-            } else {
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
-                        highestReviewNumber = itemList.get(i).getReviewList().size();
-                    }
-                }
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        printMostReviewedItems.add(itemList.get(i).getID()); // removed to.String
-                    }
-                }
-            }
-        }
-        return printMostReviewedItems;
-    }
-    /*public List<String> printMostReviewedItems() { // getMostReviewedItems
-
-        int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        ArrayList<Item> mostReviewedItems = new ArrayList<>();
-        ArrayList<String> printMostReviewedItems = new ArrayList<>();
-
-        for (int i = 0; i < itemList.size(); i++) {
-            reviewCounter += itemList.get(i).getReviewList().size();
-
-            if (itemList.size() == 0) {
-                System.out.println("No items registered yet.");
-            } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
-            } else {
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
-                        highestReviewNumber = itemList.get(i).getReviewList().size();
-                    }
-                }
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        printMostReviewedItems.add(itemList.get(i).toString());
-                    }
-                }
-            }
-        }
-        return printMostReviewedItems;
-    }*/
 
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
@@ -471,7 +459,16 @@ public class Controller {
     }
         return true;
     }
+        /*public Review findReview(String review) {
+          Item item = findItem(itemID);
 
+           for (int i = 0; i < Item.getReviews().size(); i++) {
+               if (Item.getReviews().get(i).getID().equals(itemID)) {
+                   return Item.getReviews().get(i);
+               }
+           }
+           return null;
+       }*/
     public Review findReview(String itemID) {
         Item item = findItem(itemID);
 
@@ -482,7 +479,7 @@ public class Controller {
         }
         return null;
     }
-    /*  public Review findReview(String review) { // In case its wrong ^
+    /*  public Review findReview(String review) { // In case its wrong
 
         for (int i = 0; i < Item.getReviewList().size(); i++) {
             if (Item.getReviewList().get(i).getID().equals(itemID)) {
@@ -495,24 +492,25 @@ public class Controller {
 
     //From here I did - Mijin
 
-    public double getItemMeanGrade(String itemID) { //User Story 3.4
-        Item item = findItem(itemID);
+    public double getItemMeanGrade(String itemID) {
+        Item amazingCool = findItem(itemID);
 
         double sumGrade = 0.0;
-        double meanGrade = 0.0;
+        int counter = 0;
+
         if (!containsReview(itemID)) {
             System.out.println("Item " + itemID + "was not registered yet.");
-        }
-        else if(item.getReviewList().isEmpty()) meanGrade = 0.0;
-        else if (findReview(itemID).getItemComment().isEmpty()) {
+        } else if (findReview(itemID).getItemComment().isEmpty()) {
             System.out.println("Item " + itemID + " has not been reviewed yet.");
         } else {
-            for (int i = 0; i < item.getReviewList().size(); i++) {
-                    sumGrade += item.getReviewList().get(i).getItemGrade();
+            for (int i = 0; i < amazingCool.getReviewList().size(); i++) {
+                if (amazingCool.getReviewList().get(i).equals(itemID)) { // Revmoved getID()
+                    sumGrade += amazingCool.getReviewList().get(i).getItemGrade();
+                    counter += 1;
+            }
         }
-             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 2);
         }
-
+        double meanGrade = changeDecimal(sumGrade / counter);
         return meanGrade;
     }
 
@@ -543,7 +541,7 @@ public class Controller {
         for (int i = 0; i < transactionHistoryList.size(); i++)
             totalProfit += transactionHistoryList.get(i).getProfit();
 
-        totalProfit = changeDecimal(totalProfit, 2);
+        totalProfit = changeDecimal(totalProfit);
         return totalProfit;
     }
 
@@ -566,7 +564,7 @@ public class Controller {
             }
         }
         if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");
-        sumProfit = changeDecimal(sumProfit, 2);
+        sumProfit = changeDecimal(sumProfit);
         return sumProfit;
     }
     public int getUnitsSolds(String itemID) { //should we change name to getUnitsSold?
@@ -709,200 +707,253 @@ public class Controller {
         return printMostProfitableItems();
     }
 
-
     //-----------------------------------FOR Employee-----------------------------------
 
     ArrayList<Employee> employeeList = new ArrayList<>();
-
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
-    // Create Regular employee
-    public String createEmployee(String employeeID, String employeeName, double grossSalary) {//throws Exception
 
-        grossSalary = changeDecimal(grossSalary, 2);
-        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary);
+    ArrayList<EmployeeManager> employeeManagerList = new ArrayList<>();
+    public ArrayList<EmployeeManager> getEmployeeManagerList() {
+        return employeeManagerList;
+    }
+
+    ArrayList<EmployeeDirector> employeeDirectorList = new ArrayList<>();
+    public ArrayList<EmployeeDirector> getEmployeeDirectorList() {
+        return employeeDirectorList;
+    }
+
+    ArrayList<EmployeeIntern> employeeInternList = new ArrayList<>();
+    public ArrayList<EmployeeIntern> getEmployeeInternList() {
+        return employeeInternList;
+    }
+
+    public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
+
+        grossSalary = changeDecimal(grossSalary);
+        Employee newEmployee = new Employee(employeeID, employeeName, grossSalary );
         employeeList.add(newEmployee);
 
-        return "Employee " + employeeID + " was registered successfully.";
+        return "Employee " + employeeID + "was registered successfully.";
     }
 
-    //createEmployeeManager
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree) throws Exception {
 
-        grossSalary = changeDecimal(grossSalary,2);
-        Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
-        employeeList.add(newManager);
+        grossSalary = changeDecimal(grossSalary);
+        EmployeeManager newEmployeeManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree );
+        employeeManagerList.add(newEmployeeManager);
 
-        return "Employee " + employeeID + " was registered successfully.";
+        return "Employee " + employeeID + "was registered successfully.";
         }
 
-    //createEmployeeDirector
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String department) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String dept) throws Exception {
+        grossSalary = changeDecimal(grossSalary);
+        EmployeeDirector newEmployeeDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, dept );
+        employeeDirectorList.add(newEmployeeDirector);
 
-        grossSalary = changeDecimal(grossSalary,2);
-        Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
-        employeeList.add(newDirector);
-
-        return "Employee " + employeeID + " was registered successfully.";
+        return "Employee " + employeeID + "was registered successfully.";
     }
 
-    //createEmployeeIntern
-    public String createEmployee(String employeeID, String employeeName, double grossSalary, int GPA) {//throws Exception
+    public String createEmployee(String employeeID, String employeeName, double grossSalary, int gpa) throws Exception {
+        grossSalary = changeDecimal(grossSalary);
+        EmployeeIntern newEmployeeIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, gpa);
+        employeeInternList.add(newEmployeeIntern);
 
-        grossSalary = changeDecimal(grossSalary,2);
-        Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
-        employeeList.add(newIntern);
-
-        return "Employee " + employeeID + " was registered successfully.";
+        return "Employee " + employeeID + "was registered successfully.";
     }
 
-    //I created this just in case, but might not needed?
+    public boolean containsEmployee(String employeeID) {
+
+        for (int i = 0; i < getEmployeeList().size(); i++) {
+            if (getEmployeeList().get(i).getID().equals(employeeID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Employee findEmployee(String employeeID) {
 
         for (int i = 0; i < employeeList.size(); i++) {
             if (employeeList.get(i).getID().equals(employeeID)) {
                 return employeeList.get(i);
             }
-        } return null;
+        }
+        return null;
     }
 
-    public int findEmployeeIndex(String employeeID) {
+    public boolean containsEmployeeManager(String employeeID) {
 
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getID().equals(employeeID)) {
-                return i;
+        for (int i = 0; i < getEmployeeManagerList().size(); i++) {
+            if (getEmployeeManagerList().get(i).getID().equals(employeeID)) {
+                return true;
             }
-        } return -1;
+        }
+        return false;
+    }
+    public EmployeeManager findEmployeeManager(String employeeID) {
+
+        for (int i = 0; i < employeeManagerList.size(); i++) {
+            if (employeeManagerList.get(i).getID().equals(employeeID)) {
+                return employeeManagerList.get(i);
+            }
+        }
+        return null;
     }
 
-    //US 5.5: Print a specific employee
+    public boolean containsEmployeeDirector(String employeeID) {
+
+        for (int i = 0; i < getEmployeeDirectorList().size(); i++) {
+            if (getEmployeeDirectorList().get(i).getID().equals(employeeID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public EmployeeDirector findEmployeeDirector(String employeeID) {
+
+        for (int i = 0; i < employeeDirectorList.size(); i++) {
+            if (employeeDirectorList.get(i).getID().equals(employeeID)) {
+                return employeeDirectorList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public boolean containsEmployeeIntern(String employeeID) {
+
+        for (int i = 0; i < getEmployeeInternList().size(); i++) {
+            if (getEmployeeManagerList().get(i).getID().equals(employeeID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public EmployeeIntern findEmployeeIntern(String employeeID) {
+
+        for (int i = 0; i < employeeInternList.size(); i++) {
+            if (employeeInternList.get(i).getID().equals(employeeID)) {
+                return employeeInternList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public String removeEmployee(String employeeID) throws Exception {
+        if (this.containsEmployee(employeeID)) {
+            Employee employeeToRemove = this.findEmployee(employeeID);
+            employeeList.remove(employeeToRemove);
+            return "Employee " + employeeID + " was successfully removed.";
+
+        } else if (this.containsEmployeeManager(employeeID)){
+            EmployeeManager employeeManagerToRemove = this.findEmployeeManager(employeeID);
+            employeeList.remove(employeeManagerToRemove);
+            return "Employee " + employeeID + " was successfully removed.";
+
+        } else if (this.containsEmployeeDirector(employeeID)){
+            EmployeeDirector employeeDirectorToRemove = this.findEmployeeDirector(employeeID);
+            employeeList.remove(employeeDirectorToRemove);
+            return "Employee " + employeeID + " was successfully removed.";
+
+        } else if (this.containsEmployeeIntern(employeeID)) {
+            EmployeeIntern employeeInternToRemove = this.findEmployeeIntern(employeeID);
+            employeeList.remove(employeeInternToRemove);
+            return "Employee " + employeeID + " was successfully removed.";
+
+        } else {
+            return "Employee " + employeeID + " could not be removed.";
+        }
+    }
+
     public String printEmployee(String employeeID) throws Exception {
+        if (containsEmployee(employeeID)) {
+            Employee foundEmployee = findEmployee(employeeID);
+            return foundEmployee.toString();
 
-        String outputMessage = "";
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getID().equals(employeeID)) {
-                outputMessage = employeeList.get(i).toString();
-            }
-        } return outputMessage;
-    }
+        } else if (containsEmployeeManager(employeeID)) {
+            EmployeeManager foundEmployeeManager = findEmployeeManager(employeeID);
+            return foundEmployeeManager.toString();
 
-    public double getNetSalary(String employeeID) throws Exception {
+        } else if (containsEmployeeDirector(employeeID)) {
+            EmployeeDirector foundEmployeeDirector = findEmployeeDirector(employeeID);
+            return foundEmployeeDirector.toString();
 
-        double outputSalary = 0.0;
-        for (int i = 0; i < employeeList.size(); i++) {
-           if (employeeList.get(i).getID().equals(employeeID)) {
-                outputSalary = employeeList.get(i).getNetSalary();
-            }
+        } else if (containsEmployeeIntern(employeeID)) {
+            EmployeeIntern foundEmployeeIntern = findEmployeeIntern(employeeID);
+            return foundEmployeeIntern.toString();
+
+        } else {
+            return "Employee " + employeeID + " was not registered yet.";
         }
-        return outputSalary;
     }
 
-    // US 5.4
-        public String removeEmployee(String empID) throws Exception {
-
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getID().equals(empID)) {
-                employeeList.remove(employeeList.get(i));
-            }
-        }
-        return "Employee " + empID + " was successfully removed.";
-    }
-
-    //US 5.6
     public String printAllEmployees() throws Exception {
 
-        String output = "All registered employees:" + System.lineSeparator();
-
-        for (int i = 0; i < employeeList.size(); i++) {
-            output += employeeList.get(i).toString() + System.lineSeparator();
+        if (employeeList.size()== 0 && employeeManagerList.size()==0 && employeeDirectorList.size()==0 && employeeInternList.size()==0) {
+            return ("No employees were registered yet");
+        } else {
+            String allEmloyees =
         }
-        return output;
-    }
-
-    public double getTotalNetSalary() throws Exception {
-
-        double totalNetSalary = 0.0;
-
-        for (int i = 0; i < employeeList.size(); i++) {
-            totalNetSalary += employeeList.get(i).getNetSalary();
-        }
-        return changeDecimal(totalNetSalary,2 );
     }
 
 
-    //Sorted by gross salary, in ascending order
-    public String printSortedEmployees() throws Exception {
 
-        Collections.sort(employeeList, new Comparator<Employee>() {
-            @Override
-            public int compare(Employee o1, Employee o2) {
-                return o1.compareTo(o2);
+
+}
+
+
+
+    /*
+    if (transactionHistoryList.size() == 0) {
+            return ("All purchases made:\n" +
+                    "Total profit: 0.00 SEK\n" +
+                    "Total items sold: 0 units\n" +
+                    "Total purchases made: 0 transactions\n" +
+                    "------------------------------------\n" +
+                    "------------------------------------\n");
+        } else {
+
+            String allTransactions = ("All purchases made:\n" +
+                    "Total profit: " + getTotalProfit() + " total profit SEK\n" +
+                    "Total items sold: " + getTotalUnitsSold() + " units\n" +
+                    "Total purchases made: " + getTotalTransactions() + " transactions\n" +
+                    "------------------------------------\n");
+
+            for (Transaction transaction : transactionHistoryList) {
+                allTransactions += transaction + "\n";
             }
-        });
 
-        String outputString = "Employees sorted by gross salary (ascending order):" + System.lineSeparator();
-        for (int i = 0; i < employeeList.size(); i++) {
-            outputString += employeeList.get(i).toString() + System.lineSeparator();
+            return (allTransactions + "------------------------------------\n");
         }
+      public String printItem(String itemID) {
 
-        return outputString;
-    }
-
-    public String updateEmployeeName(String empID, String newName) throws Exception {
-
-        Employee foundEmployee = findEmployee(empID);
-        foundEmployee.setEmployeeName(newName);
-
-        return "Employee " + empID + " was updated successfully";
-    }
-
-    public String updateInternGPA(String empID, int newGPA) throws Exception {
-
-        Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeIntern) {
-            EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
-            foundIntern.setGPA(newGPA);
+        if (containsItem(itemID)) {
+            Item foundItem = findItem(itemID);
+            return foundItem.toString();
+        } else {
+            return "Item " + itemID + " was not registered yet.";
         }
-        return "Employee " + empID + " was updated successfully";
     }
+    public boolean containsItem(String itemID) {
 
-    public String updateManagerDegree(String empID, String newDegree) throws Exception {
-        Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeManager) {
-            EmployeeManager foundManager = (EmployeeManager) foundEmployee;
-            foundManager.setDegree(newDegree);
+        for (int i = 0; i < getItemList().size(); i++) {
+            if (getItemList().get(i).getID().equals(itemID)) {
+                return true;
+            }
         }
-        return "Employee " + empID + " was updated successfully";
+        return false;
     }
+     public String removeItem(String itemID) {
 
-    public String updateDirectorDept(String empID, String newDepartment) throws Exception {
-        Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee instanceof EmployeeDirector) {
-            EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
-            foundDirector.setDepartment(newDepartment);
+        if (this.containsItem(itemID)) {
+            Item itemToRemove = this.findItem(itemID);
+            itemList.remove(itemToRemove);
+            return "Item " + itemID + " was successfully removed.";
+        } else {
+            return "Item " + itemID + " could not be removed.";
         }
-        return "Employee " + empID + " was updated successfully";
     }
-
-    public String updateGrossSalary(String empID, double newSalary) throws Exception {
-
-        Employee foundEmployee = findEmployee(empID);
-        foundEmployee.setGrossSalary(newSalary);
-
-        return "Employee " + empID + " was updated successfully";
-    }
-
-    /* WORKING ON IT NOW
-    public Map<String, Integer> mapEachDegree() throws Exception {
-
-        HashMap <String, Integer> degreeMap = new HashMap<>();
-
-
-    }*/
-
-} //Don't delete this!! It's the most outer bracket
-
-
+     */
 
 
