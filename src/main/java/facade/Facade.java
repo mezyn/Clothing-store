@@ -106,21 +106,19 @@ Controller controller = new Controller();
 
 
     public String printWorseReviewedItems() {
-        return "";
-    } // 3.8 user story
+        return controller.printWorseReviewedItems();
+    } // 3.8 user story WORST
+
+    public List<String> getWorseReviewedItems() { return controller.getWorseReviewedItems();} // 3.8 user story WORST
 
 
-    public String printBestReviewedItems() {
+    public String printBestReviewedItems() { // 3.8 user story BEST
         return controller.printBestReviewedItems();
-    } // 3.8 user story
+    }
 
-    public List<String> getWorseReviewedItems() {
-        return null;
-    } // 3.8 user story
-
-    public List<String> getBestReviewedItems() {
+    public List<String> getBestReviewedItems() { // 3.8 user story BEST
         return controller.getBestReviewedItems();
-    } // 3.8 user story
+    }
 
     // ------------------------------- for transaction history ---------------------------------
 

@@ -327,7 +327,53 @@
             }
         }
         return null;
-    }*/
+    }
+
+
+        /* public List<String> getBestReviewedItems() {
+            int bestGradeReview = itemList.get(0).getReviewList().size();
+
+            double sumGrade = 0.0;
+            double meanGrade;
+
+            ArrayList<String> bestGradeList = new ArrayList<>();
+
+            for (int i = 0; i < itemList.size(); i++) {
+                bestGradeReview += itemList.get(i).getReviewList().size();
+
+                if (itemList.size() == 0) { // Checks if item list is empty.
+                    System.out.println("No items registered yet.");
+                } else if (bestGradeReview == 0) { // Checks if review list is empty.
+                    System.out.println("No items were reviewed yet.");
+                } else {
+
+                    int reviewList = itemList.get(i).getReviewList().size();
+
+                    for (i = 0; i < reviewList; i++) {
+                        sumGrade += itemList.get(i).getReviewList().get(i).getItemGrade();
+
+                        meanGrade = changeDecimal(sumGrade / reviewList, 1);
+
+                        for (i = 0; i < itemList.size(); i++) {
+                            if (itemList.get(i).getReviewList().size() > meanGrade) {
+
+                                meanGrade = itemList.get(i).getReviewList().size();
+                            }
+                        }
+                        for (i = 0; i < itemList.size(); i++) {
+                            if (itemList.get(i).getReviewList().size() == meanGrade) {
+                                bestGradeList.add(itemList.get(i).getID());
+                            }
+                        }
+                        if (bestGradeList.size() > 1) {
+                            int index = bestGradeList.size() - 1;
+                            bestGradeList.remove(index);
+                        }
+                    }
+                }
+            }
+            return bestGradeList;
+        }*/
 
 
 
