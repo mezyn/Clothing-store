@@ -860,6 +860,8 @@ public class Controller {
             throw new Exception("Name cannot be blank.");
         } else if (grossSalary < 0 || grossSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
+        } else if (!degree.equals("BSc") || !degree.equals("MSc") || !degree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
         }
 
         grossSalary = changeDecimal(grossSalary,2);
@@ -878,7 +880,12 @@ public class Controller {
             throw new Exception("Name cannot be blank.");
         } else if (grossSalary < 0 || grossSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
+        } else if (!degree.equals("BSc") || !degree.equals("MSc") || !degree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+        } else if (!department.equals("Business") || !department.equals("Human Resources") || !department.equals("Technical")) {
+            throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         }
+
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
@@ -896,6 +903,8 @@ public class Controller {
             throw new Exception("Name cannot be blank.");
         } else if (grossSalary < 0 || grossSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
+        } else if (GPA < 0 || GPA > 10) {
+            throw new Exception(GPA + " outside range. Must be between 0-10.");
         }
 
         grossSalary = changeDecimal(grossSalary,2);
@@ -934,7 +943,7 @@ public class Controller {
             }
         }
         if (findEmployee(employeeID) == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         return outputMessage;
     }
@@ -942,7 +951,7 @@ public class Controller {
     public double getNetSalary(String employeeID) throws Exception {
 
         if (findEmployee(employeeID) == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         double outputSalary = 0.0;
         for (int i = 0; i < employeeList.size(); i++) {
@@ -957,7 +966,7 @@ public class Controller {
         public String removeEmployee(String empID) throws Exception {
 
         if (findEmployee(empID) == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
         for (int i = 0; i < employeeList.size(); i++) {
@@ -1025,7 +1034,7 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newName.isBlank()) {
             throw new Exception("Name cannot be blank.");
         }
@@ -1040,7 +1049,9 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        } else if (newGPA < 0 || newGPA > 10) {
+            throw new Exception(newGPA + " outside range. Must be between 0-10.");
         } else if (foundEmployee instanceof EmployeeIntern) {
             EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
             foundIntern.setGPA(newGPA);
@@ -1052,7 +1063,9 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        } else if (!newDegree.equals("BSc") || !newDegree.equals("MSc") || !newDegree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
         } else if (foundEmployee instanceof EmployeeManager) {
             EmployeeManager foundManager = (EmployeeManager) foundEmployee;
             foundManager.setDegree(newDegree);
@@ -1064,7 +1077,9 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        } else if (!newDepartment.equals("Business") || !newDepartment.equals("Human Resources") || !newDepartment.equals("Technical")) {
+            throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         } else if (foundEmployee instanceof EmployeeDirector) {
             EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
             foundDirector.setDepartment(newDepartment);
@@ -1076,7 +1091,7 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newSalary < 0 || newSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
         }
@@ -1121,43 +1136,46 @@ public class Controller {
         }
 
 
-    public String promoteToManager(String empID, String degree) throws Exception {
+    public String promoteToManager(String empID, String newDegree) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
 
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
 
         employeeList.remove(findEmployee(empID));
-        createEmployee(empID, tempName, tempGrossSalary, degree);
+        createEmployee(empID, tempName, tempGrossSalary, newDegree);
 
         return empID + " promoted successfully to Manager.";
 
     }
 
-    public String promoteToDirector(String empID, String degree, String department) throws Exception {
+    public String promoteToDirector(String empID, String newDegree, String newDepartment) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
 
         employeeList.remove(findEmployee(empID));
-        createEmployee(empID, tempName, tempGrossSalary, degree, department);
+        createEmployee(empID, tempName, tempGrossSalary, newDegree, newDepartment);
 
         return empID + " promoted successfully to Director.";
     }
+
 
     public String promoteToIntern(String empID, int gpa) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
-            throw new Exception("Employee IDx was not registered yet.");
+            throw new Exception("Employee " + empID + " was not registered yet.");
+        } else if (gpa < 0 || gpa > 10) {
+            throw new Exception(gpa + " outside range. Must be between 0-10.");
         }
         String tempName = foundEmployee.getEmployeeName();
         double tempGrossSalary = foundEmployee.getRawSalary();
