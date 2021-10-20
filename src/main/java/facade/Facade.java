@@ -81,19 +81,14 @@ Controller controller = new Controller();
     }
 
     public String getPrintedItemReview(String itemID, int reviewNumber) {// 3.2 user Story
+        return controller.getPrintedItemReview(itemID, reviewNumber); }
 
-        return controller.getPrintedItemReview(itemID, reviewNumber);
-    }
-
-    public String getPrintedReviews(String itemID) { // 3.3 user story
-
-        return controller.getPrintedReviews(itemID);
-    }
+    public String getPrintedReviews(String itemID) { return controller.getPrintedReviews(itemID); } // 3.3 user story
 
     public String printAllReviews() { return controller.printAllReviews(); } // for US 3.6
 
     public String printMostReviewedItems() {
-        return  controller.printMostReviewedItems();
+        return controller.printMostReviewedItems();
     } // 3.7 user story
 
     public List<String> getMostReviewedItems() { return controller.getMostReviewedItems(); } // 3.7 user story
@@ -111,14 +106,13 @@ Controller controller = new Controller();
 
     public List<String> getWorseReviewedItems() { return controller.getWorseReviewedItems();} // 3.8 user story WORST
 
-
     public String printBestReviewedItems() { // 3.8 user story BEST
         return controller.printBestReviewedItems();
-    }
+    } // 3.8 user story BEST
 
     public List<String> getBestReviewedItems() { // 3.8 user story BEST
         return controller.getBestReviewedItems();
-    }
+    } // 3.8 user story BEST
 
     // ------------------------------- for transaction history ---------------------------------
 

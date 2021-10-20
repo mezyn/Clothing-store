@@ -357,7 +357,7 @@ public class Controller {
         return head + reviewText + "------------------------------------" + System.lineSeparator();
     }
 
-    public String printLeastReviewedItems() { // User story 3.7 //// Printer // passed teh test.
+    public String printLeastReviewedItems() { // User story 3.7
 
         int lowestReviewNumber = 0;
         for (int i = 0; i < itemList.size(); i++) {
@@ -441,9 +441,9 @@ public class Controller {
     }
 
 
-    public String printMostReviewedItems() { // User story 3.7 // Passed test
+    public String printMostReviewedItems() { // User story 3.7
         int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
+        int highestReviewNumber = itemList.get(0).getReviewList().size();
 
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
@@ -480,11 +480,10 @@ public class Controller {
     }
 
 
-    public List<String> getMostReviewedItems() { // User story 3.7 //Passed test
+    public List<String> getMostReviewedItems() { // User story 3.7
 
         int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size(); //Set as the first item to start with
-        //ArrayList<Item> mostReviewedItems = new ArrayList<>();
+        int highestReviewNumber = itemList.get(0).getReviewList().size();
         ArrayList<String> mostReviewedItemsList = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -509,8 +508,6 @@ public class Controller {
         }
         return mostReviewedItemsList;
     }
-
-// I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
     public boolean containsReview(String itemID) {
 
@@ -576,7 +573,7 @@ public class Controller {
         ArrayList<String> bestGradeList = new ArrayList<>();
         double bestGradeReview = 0.0;
 
-        if (itemList.isEmpty()) { // Checks if item list is empty.
+        if (itemList.isEmpty()) {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
@@ -595,13 +592,12 @@ public class Controller {
 
 
 
-    public String printBestReviewedItems() { // User Story 3.8 Best printer to terminal
+    public String printBestReviewedItems() { // User Story 3.8 Best
 
         String title = "Items with best mean reviews:" + System.lineSeparator();
         double bestGradeReview = 0.0;
         String toReturn = "";
 
-        ArrayList<Item> bestGradeList = new ArrayList<>();
         if (itemList.isEmpty()) { // Checks if item list is empty.
             System.out.println("No items registered yet.");
         }
@@ -622,13 +618,21 @@ public class Controller {
     public List<String> getWorseReviewedItems() { // User Story 3.8 Worst
 
         ArrayList<String> worstGradeList = new ArrayList<>();
+
         double worstGradedReview = 0.0;
 
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getReviewList().size() > 0) {
+                worstGradedReview = getItemMeanGrade(itemList.get(i).getID());
+            }
+        }
         if (itemList.isEmpty()) {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview)
+            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
+                    getItemMeanGrade(itemList.get(i).getID()) > 0)
+
                 worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
         }
         for (int i = 0; i < itemList.size(); i++) {
@@ -642,9 +646,36 @@ public class Controller {
     }
 
 
-    public String printWorseReviewedItems() {  // User Story 3.8 Worst
-        return "";
+    public String printWorseReviewedItems() {  // User Story 3.8 Worst // Printer for worst
+        String title = "Items with worst mean reviews:" + System.lineSeparator();
+        String toReturn = "";
+        double worstGradedReview = 0.0;
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getReviewList().size() > 0) {
+                worstGradedReview = getItemMeanGrade(itemList.get(i).getID());
+            }
+        }
+        if (itemList.isEmpty()) {
+            return "No items registered yet.";
+        }
+        for (int i = 0; i < itemList.size(); i++) {
+            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
+                    getItemMeanGrade(itemList.get(i).getID()) > 0)
+
+                worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
+        }
+        for (int i = 0; i < itemList.size(); i++) {
+            if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
+                toReturn += itemList.get(i).toString()+System.lineSeparator();
+
+        }if (worstGradedReview == 0.0) {
+            return "No items were reviewed yet.";
+        }else{
+            return title + "Grade: "+ worstGradedReview + System.lineSeparator() + toReturn;
+        }
     }
+
 
 // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction
