@@ -60,7 +60,7 @@ Controller controller = new Controller();
         return controller.reviewItem(itemID, reviewGrade);
     }
 
-    public String getItemCommentsPrinted(String itemID) { // maybe for menu class?
+    public String getItemCommentsPrinted(String itemID) {
 
         return controller.getItemCommentsPrinted(itemID);
     }
@@ -87,32 +87,28 @@ Controller controller = new Controller();
 
     public String printAllReviews() { return controller.printAllReviews(); } // for US 3.6
 
-    public String printMostReviewedItems() {
-        return controller.printMostReviewedItems();
-    } // 3.7 user story
+    public String printMostReviewedItems() { return controller.printMostReviewedItems(); } // 3.7 user story
 
     public List<String> getMostReviewedItems() { return controller.getMostReviewedItems(); } // 3.7 user story
 
     public List<String> getLeastReviewedItems() {return controller.getLeastReviewedItems();} // 3.7 user story
 
-    public String printLeastReviewedItems() {
-        return controller.printLeastReviewedItems();
-    } // 3.7 user story
+    public String printLeastReviewedItems() { return controller.printLeastReviewedItems(); } // 3.7 user story
 
 
     public String printWorseReviewedItems() { // 3.8 user story WORST
         return controller.printWorseReviewedItems();
-    } // 3.8 user story WORST
+    }
 
     public List<String> getWorseReviewedItems() { return controller.getWorseReviewedItems();} // 3.8 user story WORST
 
     public String printBestReviewedItems() { // 3.8 user story BEST
         return controller.printBestReviewedItems();
-    } // 3.8 user story BEST
+    }
 
     public List<String> getBestReviewedItems() { // 3.8 user story BEST
         return controller.getBestReviewedItems();
-    } // 3.8 user story BEST
+    }
 
     // ------------------------------- for transaction history ---------------------------------
 

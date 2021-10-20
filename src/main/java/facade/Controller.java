@@ -324,7 +324,7 @@ public class Controller {
     }
 
 
-    public String getItemCommentsPrinted(String itemID) { // User Story 3.5 | PART 2#
+    public String getItemCommentsPrinted(String itemID) { // User Story 3.5
         String commentToPrint = "";
 
         for (String comments : getCommentsList())
@@ -339,17 +339,23 @@ public class Controller {
 
         String textItem = "Review(s) for ";
         String reviewText = "";
+        int i = 0;
+
 
         if (itemList.size() == 0) {
-            System.out.println("No items registered yet.");
-        }
-        for (int i = 0; i < itemList.size(); i++) {
-            if (!itemList.get(i).getReviewList().isEmpty()) {
-                reviewText += "------------------------------------" + System.lineSeparator();
-                reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
-                for (Review review : itemList.get(i).getReviewList()) {
-                    reviewText += review.toString() + System.lineSeparator();
+            return "No items registered yet.";
+        } else if (itemList.get(i).getReviewList().size() == 0){
+            return "No items were reviewed yet.";
 
+        } else {
+            for ( i = 0; i < itemList.size(); i++) {
+                if (!itemList.get(i).getReviewList().isEmpty()) {
+                    reviewText += "------------------------------------" + System.lineSeparator();
+                    reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
+                    for (Review review : itemList.get(i).getReviewList()) {
+                        reviewText += review.toString() + System.lineSeparator();
+
+                    }
                 }
             }
         }
@@ -365,15 +371,16 @@ public class Controller {
                 break;
             }
         }
-        if(lowestReviewNumber==0) return "No items were reviewed yet";
+        if (itemList.isEmpty()) return "No items registered yet.";
 
         ArrayList<Item> leastReviewedItems = new ArrayList<>();
         int reviewCounter = 0;
         String itemDescription = "";
 
-        if (itemList.isEmpty()) {
-            return "No items registered yet.";
+        if(lowestReviewNumber==0) {
+            return "No items were reviewed yet.";
         }
+
         else{
         for (int i = 0; i < itemList.size(); i++) {
 
@@ -446,14 +453,14 @@ public class Controller {
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
         String message = "";
+        if (itemList.size() == 0) return "No items registered yet.";
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
 
-            if (itemList.size() == 0) {
-                System.out.println("No items registered yet.");
-            } else if (reviewCounter == 0) {
-                System.out.println("No items were reviewed yet.");
+            if (reviewCounter == 0) {
+                return "No items were reviewed yet.";
+
             } else {
                 for (i = 0; i < itemList.size(); i++) {
                     if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
@@ -477,7 +484,7 @@ public class Controller {
         return "Most reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + message;
     }
 
-
+    /*Most reviews: 0 review(s) each.*/
     public List<String> getMostReviewedItems() { // User story 3.7
 
         int reviewCounter = 0;
@@ -533,8 +540,6 @@ public class Controller {
         return null;
     }
 
-    //From here I did - Mijin
-
     public double getItemMeanGrade(String itemID) { //User Story 3.4
         Item item = findItem(itemID);
 
@@ -571,7 +576,7 @@ public class Controller {
         ArrayList<String> bestGradeList = new ArrayList<>();
         double bestGradeReview = 0.0;
 
-        if (itemList.isEmpty()) {
+        if (itemList.size()==0) {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
@@ -596,8 +601,8 @@ public class Controller {
         double bestGradeReview = 0.0;
         String toReturn = "";
 
-        if (itemList.isEmpty()) { // Checks if item list is empty.
-            System.out.println("No items registered yet.");
+        if (itemList.size()==0) {
+            return "No items registered yet.";
         }
         for (int i = 0; i < itemList.size(); i++) {
             if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview)
