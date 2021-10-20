@@ -576,7 +576,7 @@ public class Controller {
         ArrayList<String> bestGradeList = new ArrayList<>();
         double bestGradeReview = 0.0;
 
-        if (itemList.size()==0) {
+        if (itemList.isEmpty()) {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
