@@ -83,12 +83,6 @@ public class MenuClass {
         facade.printItem(itemID);
     }
 
-    public void printAllItems() {
-
-        facade.printAllItems();
-
-    }
-
 //____________________________________________Reviews___________________________________________________
 
     public void reviewItem() { //User Story 3.1
