@@ -358,8 +358,6 @@ public class Controller {
 
     public String printLeastReviewedItems() { // User story 3.7 //// Printer // passed teh test.
 
-
-
         int lowestReviewNumber = 0;
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getReviewList().size() > 0) {
@@ -367,7 +365,7 @@ public class Controller {
             }
         }
         ArrayList<Item> leastReviewedItems = new ArrayList<>();
-        int reviewCounter = -3;
+        int reviewCounter = -3; // Something strange here //
         String header = "Least reviews: "+reviewCounter+" review(s) each." + System.lineSeparator();
         String message = "";
 
@@ -452,7 +450,7 @@ public class Controller {
 
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
-        String header = "Most reviews: "+reviewCounter+" review(s) each." + System.lineSeparator();
+        //String header = "Most reviews: "+reviewCounter+" review(s) each." + System.lineSeparator();
         String message = "";
 
         for (int i = 0; i < itemList.size(); i++) {
@@ -516,8 +514,6 @@ public class Controller {
         return mostReviewedItemsList;
     }
 
-
-
 // I rewrote the containsReview, but not sure if this'll work. Feel free to fix if you think this doesn't make sense -Mijin
 
     public boolean containsReview(String itemID) {
@@ -545,16 +541,6 @@ public class Controller {
         }
         return null;
     }
-    /*  public Review findReview(String review) { // In case its wrong ^
-
-        for (int i = 0; i < Item.getReviewList().size(); i++) {
-            if (Item.getReviewList().get(i).getID().equals(itemID)) {
-                return Item.getReviewList().get(i);
-            }
-        }
-        return null;
-    }*/
-
 
     //From here I did - Mijin
 
@@ -579,9 +565,9 @@ public class Controller {
         return meanGrade;
     }
 
-    public int getNumberOfReviews(String itemID) {
-        Item number = findItem(itemID);
+    public int getNumberOfReviews(String itemID) { // Passed the test lol
 
+        Item number = findItem(itemID);
         int reviewCounter = 0;
         for (int i=0; i<number.getReviewList().size(); i++) {
             if (number.getReviewList().get(i).equals(itemID)) { //getID() removed
@@ -596,34 +582,47 @@ public class Controller {
 
         int bestGradeReview = itemList.get(0).getReviewList().size();
 
+        double sumGrade = 0.0;
+        double meanGrade;
+
         ArrayList<String> bestGradeList = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {
             bestGradeReview += itemList.get(i).getReviewList().size();
 
-            if (itemList.size() == 0) {
+            if (itemList.size() == 0) { // Checks if item list is empty.
                 System.out.println("No items registered yet.");
-            } else if (bestGradeReview == 0) {
+            } else if (bestGradeReview == 0) { // Checks if review list is empty.
                 System.out.println("No items were reviewed yet.");
             } else {
 
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() < bestGradeReview
-                            && itemList.get(i).getReviewList().size()>0) {
+                int reviewList = itemList.get(i).getReviewList().size();
 
-                        bestGradeReview = itemList.get(i).getReviewList().size();
+                for (i = 0; i < reviewList; i++) {
+                    sumGrade += itemList.get(i).getReviewList().get(i).getItemGrade();
 
+                    meanGrade = changeDecimal(sumGrade / reviewList , 1);
+
+                    for (i = 0; i < itemList.size(); i++) {
+                        if (itemList.get(i).getReviewList().size() > meanGrade) {
+
+                            meanGrade = itemList.get(i).getReviewList().size();
+                        }
                     }
-                }
-                for (i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == bestGradeReview) {
-                        bestGradeList.add(itemList.get(i).getID());
+                    for (i = 0; i < itemList.size(); i++) {
+                        if (itemList.get(i).getReviewList().size() == meanGrade) {
+                            bestGradeList.add(itemList.get(i).getID());
+                        }
+                    }if(bestGradeList.size() > 1){
+                        int index = bestGradeList.size() - 1;
+                        bestGradeList.remove(index);
                     }
                 }
             }
         }
         return bestGradeList;
     }
+
     public String printBestReviewedItems() {
 
         return "";
