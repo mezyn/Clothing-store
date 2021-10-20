@@ -387,7 +387,6 @@ public class Controller {
             for (i = 0; i < itemList.size(); i++) {
                 if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
                     leastReviewedItems.add(itemList.get(i));
-
                 }
             }
             for (Item item : leastReviewedItems) {
@@ -443,7 +442,7 @@ public class Controller {
 
     public String printMostReviewedItems() { // User story 3.7
         int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size();
+        int highestReviewNumber = 0; // itemList.get(0).getReviewList().size()
 
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
@@ -483,7 +482,7 @@ public class Controller {
     public List<String> getMostReviewedItems() { // User story 3.7
 
         int reviewCounter = 0;
-        int highestReviewNumber = itemList.get(0).getReviewList().size();
+        int highestReviewNumber = 0 ; //itemList.get(0).getReviewList().size()
         ArrayList<String> mostReviewedItemsList = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {
