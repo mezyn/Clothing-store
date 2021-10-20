@@ -100,7 +100,7 @@ Controller controller = new Controller();
     } // 3.7 user story
 
 
-    public String printWorseReviewedItems() {
+    public String printWorseReviewedItems() { // 3.8 user story WORST
         return controller.printWorseReviewedItems();
     } // 3.8 user story WORST
 

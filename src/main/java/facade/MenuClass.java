@@ -1,7 +1,5 @@
 package facade;
 
-import java.util.List;
-
 public class MenuClass {
 
     Facade facade = new Facade();
@@ -109,7 +107,8 @@ public class MenuClass {
 
         System.out.println("Your item review was registered successfully.");
 
-}
+    }
+
     public void getPrintedItemReview() { // User story 3.2
 
         String itemID = UserInput.readLine("Enter the ID of Item: ");
@@ -134,26 +133,29 @@ public class MenuClass {
     }
 
     public void printAllReviews() { //User Story 3.6
+
         facade.printAllReviews();
     }
 
     public void printLeastReviewedItems(){ //User Story 3.7
+
         facade.printLeastReviewedItems();
     }
 
     public void printMostReviewedItems() {
+
         facade.printMostReviewedItems();
     }
 
     public void printBestReviewedItems()  {
+
         facade.printBestReviewedItems();
     }
 
-    public String printWorseReviewedItems() {
+    public String printWorseReviewedItems(){
+
         return facade.printWorseReviewedItems();
     }
-
-
 
 
 /*
