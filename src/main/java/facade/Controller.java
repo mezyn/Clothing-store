@@ -366,10 +366,10 @@ public class Controller {
                 break;
             }
         }
-        if(lowestReviewNumber==0) return "No items were reveiwed yet";
+        if(lowestReviewNumber==0) return "No items were reviewed yet";
+
         ArrayList<Item> leastReviewedItems = new ArrayList<>();
-        int reviewCounter = 0; // Something strange here //
-        //String title = "Least reviews: " + reviewCounter + " review(s) each." + System.lineSeparator();
+        int reviewCounter = 0;
         String itemDescription = "";
 
         if (itemList.isEmpty()) {
