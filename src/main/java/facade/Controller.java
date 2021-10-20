@@ -860,8 +860,8 @@ public class Controller {
             throw new Exception("Name cannot be blank.");
         } else if (grossSalary < 0 || grossSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
-        } else if (!degree.equals("BSc") || !degree.equals("MSc") || !degree.equals("PhD")) {
-            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+        } else if (!degree.equals("BSc") && !degree.equals("MSc") && !degree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
         }
 
         grossSalary = changeDecimal(grossSalary,2);
@@ -880,9 +880,9 @@ public class Controller {
             throw new Exception("Name cannot be blank.");
         } else if (grossSalary < 0 || grossSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
-        } else if (!degree.equals("BSc") || !degree.equals("MSc") || !degree.equals("PhD")) {
-            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
-        } else if (!department.equals("Business") || !department.equals("Human Resources") || !department.equals("Technical")) {
+        } else if (!degree.equals("BSc") && !degree.equals("MSc") && !degree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
+        } else if (!department.equals("Business") && !department.equals("Human Resources") && !department.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         }
 
@@ -1064,8 +1064,8 @@ public class Controller {
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
-        } else if (!newDegree.equals("BSc") || !newDegree.equals("MSc") || !newDegree.equals("PhD")) {
-            throw new Exception("Degree must be one of the options: PhD, MSc or PhD.");
+        } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
+            throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
         } else if (foundEmployee instanceof EmployeeManager) {
             EmployeeManager foundManager = (EmployeeManager) foundEmployee;
             foundManager.setDegree(newDegree);
@@ -1078,7 +1078,7 @@ public class Controller {
         Employee foundEmployee = findEmployee(empID);
         if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
-        } else if (!newDepartment.equals("Business") || !newDepartment.equals("Human Resources") || !newDepartment.equals("Technical")) {
+        } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         } else if (foundEmployee instanceof EmployeeDirector) {
             EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
