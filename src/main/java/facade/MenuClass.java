@@ -36,24 +36,31 @@ public class MenuClass {
         String itemID = UserInput.readLine("Type current ID of the item: ");
         while (itemID.isBlank() || !facade.containsItem(itemID)) {
             System.out.println("Invalid data for item.");
+            itemID = UserInput.readLine("Type current ID of the item: ");
+        }
+        String newName = UserInput.readLine("Type new name for the item: ");
+        while (newName.isBlank()) {
+            System.out.println("Invalid data for item.");
             itemID = UserInput.readLine("Type new name for the item: ");
         }
-        String newNameInput = UserInput.readLine("Type new name for the item: ");
 
-        facade.updateItemName(itemID,newNameInput);;
+        facade.updateItemName(itemID,newName);;
         }
 
 
     public void updateItemPrice(){
 
-        String IDInput = UserInput.readLine("Type current ID of the item: ");
-        double newPriceInput = UserInput.readDouble("Type new price for the item: ");
-
-        while (newPriceInput < 0 || newPriceInput == 0) {
+        String itemID = UserInput.readLine("Type current ID of the item: ");
+        while (itemID.isBlank() || !facade.containsItem(itemID)) {
             System.out.println("Invalid data for item.");
-            newPriceInput = UserInput.readDouble("Type new price for the item: ");
+            itemID = UserInput.readLine("Type current ID of the item: ");
         }
-        facade.updateItemPrice(IDInput, newPriceInput);
+        double newPrice = UserInput.readDouble("Type new price for the item: ");
+        while (newPrice < 0 || newPrice == 0) {
+            System.out.println("Invalid data for item.");
+            newPrice = UserInput.readDouble("Type new price for the item: ");
+        }
+        facade.updateItemPrice(itemID, newPrice);
 ;
     }
 
@@ -61,6 +68,11 @@ public class MenuClass {
     public void removeItem() {
 
         String itemID = UserInput.readLine("Type ID of item you would like to remove: ");
+        while (itemID.isBlank() || !facade.containsItem(itemID)) {
+            System.out.println("Invalid data for item.");
+            itemID = UserInput.readLine("Type ID of item you would like to remove: ");
+        }
+
         facade.removeItem(itemID);
 
     }
@@ -68,7 +80,16 @@ public class MenuClass {
     public void buyItem() {
 
         String itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+        while (itemID.isBlank() || !facade.containsItem(itemID)) {
+            System.out.println("Invalid data for item.");
+            itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+        }
+
         int amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+        while (amount < 0 || amount == 0) {
+            System.out.println("Invalid data for item.");
+            amount = UserInput.readInt("Type the amount of items you want to purchase: ");
+        }
         facade.buyItem(itemID, amount);
 
     }
@@ -78,6 +99,10 @@ public class MenuClass {
     public void printItem() {
 
         String itemID = UserInput.readLine("Type ID of item to be printed: ");
+        while (itemID.isBlank() || !facade.containsItem(itemID)) {
+            System.out.println("Invalid data for item.");
+            itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+        }
         facade.printItem(itemID);
     }
 
