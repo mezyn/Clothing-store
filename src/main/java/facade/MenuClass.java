@@ -33,14 +33,14 @@ public class MenuClass {
     //2.3 - Update item name and price
     public void updateItemName() { //(String itemID, String newName)
 
-        String IDInput = UserInput.readLine("Type current ID of the item: ");
-        while (IDInput.isBlank() || IDInput.equals(IDInput)) {
+        String itemID = UserInput.readLine("Type current ID of the item: ");
+        while (itemID.isBlank() || !facade.containsItem(itemID)) {
             System.out.println("Invalid data for item.");
-            IDInput = UserInput.readLine("Type new name for the item: ");
+            itemID = UserInput.readLine("Type new name for the item: ");
         }
         String newNameInput = UserInput.readLine("Type new name for the item: ");
 
-        facade.updateItemName(IDInput,newNameInput);;
+        facade.updateItemName(itemID,newNameInput);;
         }
 
 
@@ -81,6 +81,7 @@ public class MenuClass {
         facade.printItem(itemID);
     }
 
+
 //____________________________________________Reviews___________________________________________________
 
     public void reviewItem() { //User Story 3.1
@@ -104,8 +105,6 @@ public class MenuClass {
         }
 
         String review = facade.reviewItem(itemID, reviewComment, reviewGrade);
-
-        System.out.println("Your item review was registered successfully.");
 
     }
 
@@ -133,30 +132,6 @@ public class MenuClass {
         facade.getItemCommentsPrinted(itemID);
     }
 
-    public void printAllReviews() { //User Story 3.6
-
-        facade.printAllReviews();
-    }
-
-    public void printLeastReviewedItems(){ //User Story 3.7
-
-        facade.printLeastReviewedItems();
-    }
-
-    public void printMostReviewedItems() {
-
-        facade.printMostReviewedItems();
-    }
-
-    public void printBestReviewedItems()  {
-
-        facade.printBestReviewedItems();
-    }
-
-    public String printWorseReviewedItems(){
-
-        return facade.printWorseReviewedItems();
-    }
 
 
 /*
@@ -450,7 +425,7 @@ public class MenuClass {
                 itemOption();
                 break;
             case 3 :
-                facade.printAllItems();
+                System.out.println(facade.printAllItems());
                 itemOption();
                 break;
             case 4 :
@@ -499,7 +474,8 @@ public class MenuClass {
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : reviewItem(); // User Story 3.1
+            case 1 :
+                reviewItem(); // User Story 3.1
                 ReviewMenu();
                 break;
             case 2 : getPrintedItemReview();// User Story 3.2
