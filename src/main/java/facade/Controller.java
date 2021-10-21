@@ -1,6 +1,7 @@
 package facade;
 
 import javax.swing.text.Utilities;
+import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -15,6 +16,7 @@ public class Controller {
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
 
 
+
     public static double changeDecimal(double value, int decimalDigit) {
 
         if (decimalDigit == 1) {
@@ -27,6 +29,7 @@ public class Controller {
             value = Math.floor(value);
             value = value / Math.pow(10, 2);
         }
+
         return value;
     }
 
@@ -708,7 +711,7 @@ public class Controller {
 
     public double getProfit(String itemID) {
 
-        double sumProfit = 0.00;
+        double sumProfit = 0.0;
 
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
@@ -890,16 +893,21 @@ public class Controller {
         } else {
 
             for (int i = 0; i < itemList.size(); i++) {
-                if (getProfit(itemList.get(i).getID()) > highestProfit)
-                    highestProfit = getProfit(itemList.get(i).getID());
+                if (containsTransaction(itemList.get(i).getID())) { //I added this line to prevent the printed lines
+                    if (getProfit(itemList.get(i).getID()) > highestProfit)
+                        highestProfit = getProfit(itemList.get(i).getID());
+                }
             }
             for (int i = 0; i < itemList.size(); i++) {
-                if (getProfit(itemList.get(i).getID()) == highestProfit)
-                    message = itemList.get(i) + System.lineSeparator();
+                if (containsTransaction(itemList.get(i).getID())) {
+                    if (getProfit(itemList.get(i).getID()) == highestProfit)
+                        message = itemList.get(i) + System.lineSeparator();
+                }
             }
+            DecimalFormat decimal2 = new DecimalFormat("###.00"); // And this to make the return result to end with .00
 
-            return ("Most profitable items:\n" +
-                    "Total profit: " + highestProfit + System.lineSeparator() + message);
+            return "Most profitable items: \n" +
+                    "Total profit: " + decimal2.format(highestProfit) + " SEK" + System.lineSeparator() + message;
             }
         }
 
