@@ -503,15 +503,31 @@
         facade.printAllReviews();
 
         return "";
-    }*/
+    }
 
+    */
+        /*public String getItemName(String itemID) { // In Use
 
+                return findItemName(itemID).getItemName();
+                }
 
+        //I'll use this to do the mean grade - Mijin
+        public Item findItemName(String itemName) { //IN Use
 
+                for (Item item : itemList) {
+                if (item.getID().equals(itemName)) {
+                return item;
+                }
+                }
+                return null;
+                }
 
+        public String getItemPrice(String itemID) { //In use
+                for (int i = 0; i < itemList.size(); i++) {
+                if (itemList.get(i).getID().equals(itemID)) {
+                return String.valueOf(itemList.get(i).getItemPrice()); //
+                }
+                }
+                return null;
 
-
-
-
-
-
+                }*/
