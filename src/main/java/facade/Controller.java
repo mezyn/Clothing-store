@@ -303,13 +303,6 @@ public class Controller {
         }
     }
 
-    ArrayList<String> commentsList = new ArrayList<>();
-
-    public ArrayList<String> getCommentsList() {
-        return this.commentsList;
-    }
-
-
     public List<String> getItemComments(String itemID) { //User Story 3.5 | PART 1#
 
         Item commentedItem = findItem(itemID);
@@ -328,9 +321,21 @@ public class Controller {
 
 
     public String getItemCommentsPrinted(String itemID) { // User Story 3.5
-        String commentToPrint = "";
 
-        for (String comments : getCommentsList())
+        String commentToPrint = "";
+        Item commentedItem = findItem(itemID);
+
+        ArrayList<String> commentsList = new ArrayList<>();
+
+        if (commentedItem != null) {
+            for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
+                if (!commentedItem.getReviewList().isEmpty()) {
+                    if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
+                        commentsList.add(commentedItem.getReviewList().get(i).getItemComment());
+                }
+            }
+        }
+        for (String comments : commentsList)
             commentToPrint += comments + System.lineSeparator();
 
         return commentToPrint;
@@ -407,7 +412,7 @@ public class Controller {
         return "Least reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + itemDescription;
     }
 
-    public List<String> getLeastReviewedItems() { // User story 3.7 //// getter
+    public List<String> getLeastReviewedItems() { // User story 3.7
 
 
         int reviewCounter = 0;
@@ -451,7 +456,7 @@ public class Controller {
 
     public String printMostReviewedItems() { // User story 3.7
         int reviewCounter = 0;
-        int highestReviewNumber = 0; // itemList.get(0).getReviewList().size()
+        int highestReviewNumber = 0;
 
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
@@ -491,7 +496,7 @@ public class Controller {
     public List<String> getMostReviewedItems() { // User story 3.7
 
         int reviewCounter = 0;
-        int highestReviewNumber = 0 ; //itemList.get(0).getReviewList().size()
+        int highestReviewNumber = 0 ;
         ArrayList<String> mostReviewedItemsList = new ArrayList<>();
 
         for (int i = 0; i < itemList.size(); i++) {

@@ -127,9 +127,10 @@ public class MenuClass {
         facade.getItemMeanGrade(itemID);
     }
 
-    public void getItemComments() { //User Story 3.5
+    public void getItemCommentsPrinted() { //User Story 3.5
         String itemID = UserInput.readLine("Enter the ID of Item: ");
-        facade.getItemComments(itemID);
+
+        facade.getItemCommentsPrinted(itemID);
     }
 
     public void printAllReviews() { //User Story 3.6
@@ -510,7 +511,7 @@ public class MenuClass {
             case 4 : getItemMeanGrade(); // User Story 3.4
                 ReviewMenu();
                 break;
-            case 5 : getItemComments();// User Story 3.5
+            case 5 : getItemCommentsPrinted();// User Story 3.5
                 ReviewMenu();
                 break;
             case 6 : printAllReviews(); // User Story 3.6
