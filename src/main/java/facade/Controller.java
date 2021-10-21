@@ -835,14 +835,22 @@ public class Controller {
         }
 
     }
+/*
+ } else if (itemList.size() == 0) {
+                return "No items registered yet.";
+        } else if (transactionHistoryList.size() == 0) {
+                return "No items ere bought yet.";
 
+ */
+    /*
     public String printMostProfitableItems() {
         Transaction highestProfit = null;
-        if (itemList.size() == 0) {
-            return "No items registered yet.";
-        } else if (transactionHistoryList.size() == 0) {
-            return "No items ere bought yet.";
-        } else if( !transactionHistoryList.isEmpty() ) {
+        int sumOfProfit = 0;
+        for (Transaction currentTransaction : transactionHistoryList){
+            sumOfProfit += currentTransaction.getProfit();
+        }
+
+        if( !transactionHistoryList.isEmpty() ) {
             highestProfit = transactionHistoryList.get(0);
             for (int i = 1; i < transactionHistoryList.size(); i++) {
                 Transaction currentTransaction = transactionHistoryList.get(i);
@@ -850,15 +858,50 @@ public class Controller {
                     highestProfit = currentTransaction;
                 }
             }
+        return (highestProfit + "");
+        } else if (itemList.size() == 0) {
+                return "No items registered yet.";
+        } else if (transactionHistoryList.size() == 0) {
+                return "No items ere bought yet.";
         } else {
-
-            String mostProfitableItem = ("Most profitable items:\n" +
-                    "Total profit: " + highestProfit + " SEK\n" +
-                    highestProfit.toString());          //I will change more on it later
+            System.out.println("Nothing");
         }
-        return printMostProfitableItems();
+        return ("Most profitable items:\n" +
+                "Total profit: " + sumOfProfit + " SEK\n");
     }
 
+
+    else {
+            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            for (int i = 0; i < transactionHistoryList.size(); i++) {
+                if (transactionHistoryList.get(i).getID().equals(itemID))
+                message += transactionHistoryList.get(i).toString() + "\n";
+            }
+            return message;
+        }
+    */
+    public String printMostProfitableItems() {
+        double highestProfit = 0.0;
+        String message = "";
+        if (itemList.size() == 0) {
+            return "No items registered yet.";
+        } else if (transactionHistoryList.size() == 0) {
+            return "No items were bought yet.";
+        } else {
+
+            for (int i = 0; i < itemList.size(); i++) {
+                if (getProfit(itemList.get(i).getID()) > highestProfit)
+                    highestProfit = getProfit(itemList.get(i).getID());
+            }
+            for (int i = 0; i < itemList.size(); i++) {
+                if (getProfit(itemList.get(i).getID()) == highestProfit)
+                    message = itemList.get(i) + System.lineSeparator();
+            }
+
+            return ("Most profitable items:\n" +
+                    "Total profit: " + highestProfit + System.lineSeparator() + message);
+            }
+        }
 
     //-----------------------------------FOR Employee-----------------------------------
 
