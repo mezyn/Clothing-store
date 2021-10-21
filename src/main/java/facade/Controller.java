@@ -101,8 +101,8 @@ public class Controller {
     //Remove item
     public String removeItem(String itemID) {
 
-        if (this.containsItem(itemID)) {
-            Item itemToRemove = this.findItem(itemID);
+        if (containsItem(itemID)) {
+            Item itemToRemove = findItem(itemID);
             itemList.remove(itemToRemove);
             return "Item " + itemID + " was successfully removed.";
         } else {
@@ -270,6 +270,7 @@ public class Controller {
 
         } else if (item.getReviewList().size() == 0) {
             return "Item " + item.getItemName() + " has not been reviewed yet.";
+
         } else {
             if (reviewNumber < 1 || reviewNumber > item.getReviewList().size()) {
                 return "Invalid review number. Choose between 1 and "
@@ -288,9 +289,7 @@ public class Controller {
         if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
-            String printedOutput = "Review(s) for " + itemID + ": "
-                    + getItemName(itemID) + ". "
-                    + getItemPrice(itemID) + " SEK" + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
                 printedOutput += itemToPrint.getReviewList().get(i).toString()
                         + System.lineSeparator();
@@ -298,7 +297,7 @@ public class Controller {
             }
             return printedOutput;
         } else {
-            String printedOutput = "Review(s) for " + itemToPrint.toString() + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
             return printedOutput + "The item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
     }
@@ -318,6 +317,7 @@ public class Controller {
         }
         return commentsList;
     }
+
 
 
     public String getItemCommentsPrinted(String itemID) { // User Story 3.5
@@ -349,13 +349,12 @@ public class Controller {
         String reviewText = "";
         int i = 0;
 
-
         if (itemList.size() == 0) {
             return "No items registered yet.";
-        } else if (itemList.get(i).getReviewList().size() == 0){
+        } else if (itemList.get(i).getReviewList().size() == 0) {
             return "No items were reviewed yet.";
+        }
 
-        } else {
             for ( i = 0; i < itemList.size(); i++) {
                 if (!itemList.get(i).getReviewList().isEmpty()) {
                     reviewText += "------------------------------------" + System.lineSeparator();
@@ -366,13 +365,22 @@ public class Controller {
                     }
                 }
             }
-        }
         return head + reviewText + "------------------------------------" + System.lineSeparator();
-    }
+        }
+
 
     public String printLeastReviewedItems() { // User story 3.7
 
-        int lowestReviewNumber = 0;
+        if (itemList.isEmpty()) return "No items registered yet.";
+
+        /*int lowestReviewNumber = itemList.get(0).getReviewList().size();
+        for (int i = 1; i < itemList.size(); i++) {
+            if (itemList.get(i).getReviewList().size() < lowestReviewNumber) {
+                lowestReviewNumber = itemList.get(i).getReviewList().size();
+
+            }
+        }*/
+       int lowestReviewNumber = 0;
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getReviewList().size() > 0) {
                 lowestReviewNumber = itemList.get(i).getReviewList().size();
@@ -380,6 +388,7 @@ public class Controller {
             }
         }
         if (itemList.isEmpty()) return "No items registered yet.";
+
 
         ArrayList<Item> leastReviewedItems = new ArrayList<>();
         int reviewCounter = 0;
@@ -393,7 +402,7 @@ public class Controller {
         for (int i = 0; i < itemList.size(); i++) {
 
             for (i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) { //> before
+                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
                     lowestReviewNumber = itemList.get(i).getReviewList().size();
                     reviewCounter += itemList.get(i).getReviewList().size();
                 }
