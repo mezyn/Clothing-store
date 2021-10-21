@@ -490,18 +490,18 @@ public class MenuClass {
             case 5 : getItemCommentsPrinted();// User Story 3.5
                 ReviewMenu();
                 break;
-            case 6 : printAllReviews(); // User Story 3.6
+            case 6 : System.out.print(facade.printAllReviews()); // User Story 3.6
                 ReviewMenu();
                 break;
-            case 7 : printMostReviewedItems();// User Story 3.7
+            case 7 : System.out.print(facade.printMostReviewedItems());// User Story 3.7
                 ReviewMenu();
                 break;
-            case 8 : printLeastReviewedItems();// User Story 3.7
+            case 8 : System.out.print(facade.printLeastReviewedItems());// User Story 3.7
                 ReviewMenu();
                 break;
-            case 9 : printBestReviewedItems() ;// User Story 3.8
+            case 9 : System.out.print(facade.printBestReviewedItems());// User Story 3.8
                 break;
-            default : printWorseReviewedItems(); // User Story 3.8
+            default : System.out.print(facade.printWorseReviewedItems()); // User Story 3.8
                 break;
         }
         UserInput.scanner.close();
@@ -528,16 +528,16 @@ public class MenuClass {
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : facade.getTotalProfit();
+            case 1 : System.out.println(facade.getTotalProfit());
                 transactionHistoryMenu();
                 break;
-            case 2 : facade.getTotalUnitsSold();
+            case 2 : System.out.print(facade.getTotalUnitsSold());
                 transactionHistoryMenu();
                 break;
-            case 3 : facade.getTotalTransactions();
+            case 3 : System.out.print(facade.getTotalTransactions());
                 transactionHistoryMenu();
                 break;
-            case 4 : facade.printAllTransactions();
+            case 4 : System.out.print(facade.printAllTransactions());
                 transactionHistoryMenu();
                 break;
             case 5 : printProfit();
@@ -549,7 +549,7 @@ public class MenuClass {
             case 7 : printItemTransactions();
                 transactionHistoryMenu();
                 break;
-            case 8 : facade.printMostProfitableItems();
+            case 8 : System.out.print(facade.printMostProfitableItems());
                 transactionHistoryMenu();
                 break;
             default : System.out.println("Please enter a valid option");
@@ -601,13 +601,13 @@ public class MenuClass {
                 case 6: printEmployee();
                     EmployeeMenu();
                     break;
-                case 7: facade.printAllEmployees();
+                case 7: System.out.print(facade.printAllEmployees());
                     EmployeeMenu();
                     break;
-                case 8: facade.getTotalNetSalary();
+                case 8: System.out.print(facade.getTotalNetSalary());
                     EmployeeMenu();
                     break;
-                case 9: facade.printSortedEmployees();
+                case 9: System.out.print(facade.printSortedEmployees());
                     EmployeeMenu();
                     break;
                 default : System.out.println("Please enter a valid option");
