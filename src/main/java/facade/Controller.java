@@ -288,9 +288,7 @@ public class Controller {
         if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
-            String printedOutput = "Review(s) for " + itemID + ": "
-                    + getItemName(itemID) + ". "
-                    + getItemPrice(itemID) + " SEK" + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint.toString() + System.lineSeparator();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
                 printedOutput += itemToPrint.getReviewList().get(i).toString()
                         + System.lineSeparator();
@@ -393,7 +391,7 @@ public class Controller {
         for (int i = 0; i < itemList.size(); i++) {
 
             for (i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) { //> before
+                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
                     lowestReviewNumber = itemList.get(i).getReviewList().size();
                     reviewCounter += itemList.get(i).getReviewList().size();
                 }
