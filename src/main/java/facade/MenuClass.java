@@ -135,162 +135,28 @@ public class MenuClass {
 
     public void getPrintedItemReview() { // User story 3.2
 
-        String itemID = UserInput.readLine("Enter the ID of Item: ");
-        int reviewNumber = UserInput.readInt("Enter an index of the review: ");
+         String itemID = UserInput.readLine("Enter the ID of Item: ");
+         int reviewNumber = UserInput.readInt("Enter an index of the review: ");
 
-        facade.getPrintedItemReview( itemID, reviewNumber);
+        System.out.println(facade.getPrintedItemReview( itemID, reviewNumber));
+
     }
 
     public void getPrintedReviews(){ //User story 3.3
         String itemID = UserInput.readLine("Enter ID: ");
-        facade.getPrintedReviews( itemID);
+        System.out.println(facade.getPrintedReviews(itemID));
     }
 
     public void getItemMeanGrade() { //User Story 3.4
         String itemID = UserInput.readLine("Enter ID: ");
-        facade.getItemMeanGrade(itemID);
+        System.out.println(facade.getItemMeanGrade(itemID));
     }
 
     public void getItemCommentsPrinted() { //User Story 3.5
         String itemID = UserInput.readLine("Enter the ID of Item: ");
 
-        facade.getItemCommentsPrinted(itemID);
+        System.out.println(facade.getItemCommentsPrinted(itemID));
     }
-
-
-
-/*
-    public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
-
-        System.out.println("Size of list: " + Item.getReviewList().size());
-        itemID = UserInput.readLine("Enter the ID of Item: ");
-
-        if (!facade.containsItem(itemID)) { // Check if item exists
-
-            System.out.println("Item " + itemID + " was not registered yet.");
-            itemID = UserInput.readLine("Enter a valid ID number: ");
-
-        }  else if (!Controller.containsReview(itemID)) { // checks if there is a review of item
-            System.out.println("Item " + Item.getItemName(itemID) + " has not been reviewed yet.");
-        }
-        else {
-
-            int index = UserInput.readInt("Enter an index of the review: ");
-
-            if (index < 1 || index > Item.getReviewList().size()){
-                System.out.println("Invalid review number. Choose between 1 and "
-                        + Item.getReviewList().size() + ".");
-            } else {
-                Review reviewItem = Item.getReviewList().get(index - 1);
-                System.out.println(reviewItem);
-            }
-
-
-        }
-
-        return "";
-    }*/
-
-    /*public String getPrintedReviews(String itemID) { //User story 3.3
-
-        itemID = UserInput.readLine("Enter ID: ");
-
-        if (!facade.containsItem(itemID)) {
-            return "Item " + itemID + " was not registered yet.";
-        }
-        else if (Item.getReviewList().size() > 0) {
-            String printedOutput =  "Review(s) for " + itemID + ": "
-                    + Controller.getItemName(itemID) + ". "
-                    + Controller.getItemPrice(itemID) + " SEK" + System.lineSeparator();
-            for (int i = 0; i < Item.getReviewList().size(); i++) {
-                    printedOutput += Item.getReviewList().get(i).toString();
-
-            }
-            return printedOutput;
-        } else  {
-            return "Item " + Item.getItemName() + " has not been reviewed yet.";
-        }
-    }*/
-
-    /*public String getPrintedReviews () { //User story 3.3
-        String itemID = UserInput.readLine("Enter the ID of Item: ");
-
-        if (!facade.containsItem(itemID)) {
-            System.out.println("Item <" + itemID + "> was not registered yet.");
-
-        } else if (!Controller.containsReview(itemID)) {
-            System.out.println("Review(s) for <" + itemID + ">: <"
-                    + Controller.getItemName(itemID) + ">. <"
-                    + Controller.getItemPrice(itemID) + "> SEK");
-            System.out.println("Item <" + Controller.getItemName(itemID) + "> has not been reviewed yet.");
-
-
-        } else if (Controller.containsReview(itemID)) {
-            System.out.println("Review(s) for <" + itemID + ">: <"
-                    + Controller.getItemName(itemID) + ">. " + "<"
-                    + Controller.getItemPrice(itemID) + "> SEK.");
-
-            for (int i = 0; i < Item.getReviews().size(); i++) {
-                if (item.getReviews().get(i).getID().equals(itemID)) {
-                    System.out.println(Item.getReviews().get(i).toString());
-
-                }
-            }
-        }
-    }*/
-
-
-    /*public double getItemMeanGrade(String itemID) { //User Story 3.4
-
-        itemID = UserInput.readLine("Enter ID of item: ");
-
-        double sumGrade = 0.0;
-        int counter = 0;
-        if (!Controller.containsReview(itemID)) {
-            System.out.println("Item " + itemID + "was not registered yet.");
-        } else if (Controller.findReview(itemID).getItemComment().isEmpty()) {
-            System.out.println("Item " + itemID + " has not been reviewed yet.");
-        } else {
-            for (int i = 0; i < Item.getReviewList().size(); i++) {
-                if (Item.getReviewList().get(i).getID().equals(itemID)) {
-                    sumGrade += Item.getReviewList().get(i).getItemGrade();
-                    counter += 1;
-                }
-            }
-        }
-        double meanGrade = Controller.changeDecimalToOne(double value)
-        return meanGrade;
-    }*/
-
-
-   /*public void getItemComments() { //User Story 3.5
-
-        String itemID = UserInput.readLine("Enter the ID of Item: ");
-
-        if (Controller.containsReview(itemID)) {
-            for (int i = 0; i < Item.reviewList.size(); i++) {
-                if (Item.getReviewList().get(i).equals(itemID)) {
-                    Controller.commentsList.add(Controller.getReviewList().get(i).getItemComment());
-
-                    System.out.print(Controller.getcommentsList());
-            for (String review : Controller.commentsList) {
-            System.out.println(reviewNumber);
-        }
-                }
-            }
-        }
-    }*/
-
-
-    /*public String printAllReviews() { //User Story 3.6
-
-        facade.printAllReviews();
-
-        return "";
-    }*/
-
-
-
 
 //_______________________________TransactionsHistory_____________________________________________
 
@@ -506,7 +372,7 @@ public class MenuClass {
             case 2 : getPrintedItemReview();// User Story 3.2
                 ReviewMenu();
                 break;
-            case 3 : getPrintedReviews (); // User Story 3.3
+            case 3 : getPrintedReviews(); // User Story 3.3
                 ReviewMenu();
                 break;
             case 4 : getItemMeanGrade(); // User Story 3.4
@@ -515,18 +381,24 @@ public class MenuClass {
             case 5 : getItemCommentsPrinted();// User Story 3.5
                 ReviewMenu();
                 break;
-            case 6 : printAllReviews(); // User Story 3.6
+            case 6 :
+                System.out.println(facade.printAllReviews()); // User Story 3.6
                 ReviewMenu();
                 break;
-            case 7 : printMostReviewedItems();// User Story 3.7
+            case 7 :
+                System.out.println(facade.printMostReviewedItems());// User Story 3.7
                 ReviewMenu();
                 break;
-            case 8 : printLeastReviewedItems();// User Story 3.7
+            case 8 : System.out.println(facade.printLeastReviewedItems());// User Story 3.7
                 ReviewMenu();
                 break;
-            case 9 : printBestReviewedItems() ;// User Story 3.8
+            case 9 : System.out.println(facade.printBestReviewedItems()) ;// User Story 3.8
+                ReviewMenu();
                 break;
-            default : printWorseReviewedItems(); // User Story 3.8
+            case 10 :System.out.println(facade.printWorseReviewedItems()); // User Story 3.8
+                ReviewMenu();
+
+                default : System.out.println("Please enter a valid option");
                 break;
         }
         UserInput.scanner.close();
@@ -553,16 +425,16 @@ public class MenuClass {
         switch (option) {
             case 0 : MainMenu();
                 break;
-            case 1 : facade.getTotalProfit();
+            case 1 : System.out.println(facade.getTotalProfit());
                 transactionHistoryMenu();
                 break;
-            case 2 : facade.getTotalUnitsSold();
+            case 2 : System.out.println(facade.getTotalUnitsSold());
                 transactionHistoryMenu();
                 break;
-            case 3 : facade.getTotalTransactions();
+            case 3 : System.out.println(facade.getTotalTransactions());
                 transactionHistoryMenu();
                 break;
-            case 4 : facade.printAllTransactions();
+            case 4 : System.out.println(facade.printAllTransactions());
                 transactionHistoryMenu();
                 break;
             case 5 : printProfit();
@@ -574,7 +446,7 @@ public class MenuClass {
             case 7 : printItemTransactions();
                 transactionHistoryMenu();
                 break;
-            case 8 : facade.printMostProfitableItems();
+            case 8 : System.out.println(facade.printMostProfitableItems());
                 transactionHistoryMenu();
                 break;
             default : System.out.println("Please enter a valid option");
@@ -626,13 +498,13 @@ public class MenuClass {
                 case 6: printEmployee();
                     EmployeeMenu();
                     break;
-                case 7: facade.printAllEmployees();
+                case 7: System.out.println(facade.printAllEmployees());
                     EmployeeMenu();
                     break;
-                case 8: facade.getTotalNetSalary();
+                case 8: System.out.println(facade.getTotalNetSalary());
                     EmployeeMenu();
                     break;
-                case 9: facade.printSortedEmployees();
+                case 9: System.out.println(facade.printSortedEmployees());
                     EmployeeMenu();
                     break;
                 default : System.out.println("Please enter a valid option");
