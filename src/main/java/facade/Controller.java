@@ -435,15 +435,19 @@ public class Controller {
             } else {
 
                 for (i = 0; i < itemList.size(); i++) {
+                    if (containsReview(itemList.get(i).getID())) {
                     if (itemList.get(i).getReviewList().size() < lowestReviewNumber
                             && itemList.get(i).getReviewList().size() > 0) {
 
                         lowestReviewNumber = itemList.get(i).getReviewList().size();
                     }
+                    }
                 }
                 for (i = 0; i < itemList.size(); i++) {
+                    if (containsReview(itemList.get(i).getID())) {
                     if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
                         leastReviewedItemsList.add(itemList.get(i).getID());
+                    }
 
 
                     }
@@ -492,7 +496,7 @@ public class Controller {
         return "Most reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + message;
     }
 
-    /*Most reviews: 0 review(s) each.*/
+
     public List<String> getMostReviewedItems() { // User story 3.7
 
         int reviewCounter = 0;
@@ -508,13 +512,17 @@ public class Controller {
                 System.out.println("No items were reviewed yet.");
             } else {
                 for (i = 0; i < itemList.size(); i++) {
+                    if (containsReview(itemList.get(i).getID())) {
                     if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
                         highestReviewNumber = itemList.get(i).getReviewList().size();
                     }
+                    }
                 }
                 for (i = 0; i < itemList.size(); i++) {
+                    if (containsReview(itemList.get(i).getID())) {
                     if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
                         mostReviewedItemsList.add(itemList.get(i).getID());
+                    }
                     }
                 }
             }
@@ -588,13 +596,16 @@ public class Controller {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview)
-                bestGradeReview = getItemMeanGrade(itemList.get(0).getID());
+            if (containsReview(itemList.get(i).getID())) {
+                if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview)
+                    bestGradeReview = getItemMeanGrade(itemList.get(0).getID());
+            }
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview)
-                bestGradeList.add(itemList.get(i).getID());
-
+            if (containsReview(itemList.get(i).getID())) {
+                if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview)
+                    bestGradeList.add(itemList.get(i).getID());
+            }
         }if (bestGradeReview == 0.0) {
             System.out.println ("No items were reviewed yet.");
         }
@@ -641,14 +652,18 @@ public class Controller {
             System.out.println("No items registered yet.");
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
-                    getItemMeanGrade(itemList.get(i).getID()) > 0)
+            if (containsReview(itemList.get(i).getID())) {
+                if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
+                        getItemMeanGrade(itemList.get(i).getID()) > 0)
 
-                worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
+                    worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
+            }
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
-                worstGradeList.add(itemList.get(i).getID());
+            if (containsReview(itemList.get(i).getID())) {
+                if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
+                    worstGradeList.add(itemList.get(i).getID());
+            }
 
         }if (worstGradedReview == 0.0) {
             System.out.println ("No items were reviewed yet.");
