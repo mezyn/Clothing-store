@@ -165,9 +165,8 @@ public class MenuClass {
     public String printItemTransactions() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
-        facade.printItemTransactions(itemID);
 
-        return "";
+        return facade.printItemTransactions(itemID);
     }
 
     // Print total profit for a specific item

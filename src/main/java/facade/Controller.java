@@ -33,18 +33,6 @@ public class Controller {
         return value;
     }
 
-/*Don't think we need it, but will leave for now
-    public double changeDecimalToOne(double value) { //for One decimal digit
-
-        value = value * Math.pow(10, decimalPoint);
-        value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);
-        String sValue = (String) String.format("%.1f", value);
-        Double newValue = Double.parseDouble(sValue);
-        return newValue;
-    }
-        */
-
     //-----------------------------------FOR ITEMS-----------------------------------
 
     ArrayList<Item> itemList = new ArrayList<>();
@@ -65,7 +53,6 @@ public class Controller {
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            //unitPrice = changeDecimal(unitPrice, 2);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -845,7 +832,7 @@ public class Controller {
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return ("All purchases made:\n" +
+            return ("All purchases made: \n" +
                     "Total profit: 0.00 SEK\n" +
                     "Total items sold: 0 units\n" +
                     "Total purchases made: 0 transactions\n" +
@@ -853,17 +840,17 @@ public class Controller {
                     "------------------------------------\n");
         } else {
 
-            String allTransactions = ("All purchases made: \n" +
-                    "Total profit: " + getTotalProfit() + " SEK\n" +
-                    "Total items sold: " + getTotalUnitsSold() + " units\n" +
-                    "Total purchases made: " + getTotalTransactions() + " transactions\n" +
-                    "------------------------------------\n");
+            String allTransactions = "All purchases made: " + System.lineSeparator() +
+                    "Total profit: " + getTotalProfit() + " SEK" + System.lineSeparator() +
+                    "Total items sold: " + getTotalUnitsSold() + " units" + System.lineSeparator() +
+                    "Total purchases made: " + getTotalTransactions() + " transactions" + System.lineSeparator() +
+                    "------------------------------------" + System.lineSeparator();
 
             for (Transaction transaction : transactionHistoryList) {
                 allTransactions += transaction + "\n";
             }
 
-            return (allTransactions + "------------------------------------\n");
+            return allTransactions + "------------------------------------" + System.lineSeparator();
         }
 
     }
