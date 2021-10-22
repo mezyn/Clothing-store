@@ -9,6 +9,7 @@ public class Controller {
 
     // -----------------------------COMMON METHODS----------------------------------
 
+
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
@@ -214,10 +215,10 @@ public class Controller {
 
         Item item = findItem(itemID);
 
-        if (itemList.isEmpty()) {
+        if (itemList.size() == 0) {
             return "Item " + itemID + " was not registered yet." ;
 
-        } else if (item.getReviewList().isEmpty()) {
+        } else if (item.getReviewList().size() == 0) {
             return "Item " + item.getItemName() + " has not been reviewed yet.";
 
         } else {
@@ -256,24 +257,23 @@ public class Controller {
 
         double sumGrade = 0.0;
         double meanGrade = 0.0;
-
-        if (!containsItem(itemID)) {
+        if (!containsReview(itemID)) {
             System.out.println("Item " + itemID + " was not registered yet.");
 
         } else if (item.getReviewList().isEmpty()) {
-            System.out.println("Item " + item.getItemName() + " has not been reviewed yet.");
 
             meanGrade = 0.0;
         }
-        /*else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
-            System.out.println("Item " + item.getItemName() + " has not been reviewed yet.");*/
+        else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
+            System.out.println("Item " + itemID + " has not been reviewed yet.");
 
-         else {
+        } else {
             for (int i = 0; i < item.getReviewList().size(); i++) {
                 sumGrade += item.getReviewList().get(i).getItemGrade();
             }
             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 1);
         }
+
         return meanGrade;
     }
 
@@ -341,7 +341,7 @@ public class Controller {
 
             for ( i = 0; i < itemList.size(); i++) {
                 if (!itemList.get(i).getReviewList().isEmpty()) {
-                    reviewText += hyphenLine() + System.lineSeparator();
+                    reviewText += HyphenLine() + System.lineSeparator();
                     reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
 
                     for (Review review : itemList.get(i).getReviewList()) {
@@ -350,13 +350,13 @@ public class Controller {
                     }
                 }
             }
-        return head + reviewText + hyphenLine() + System.lineSeparator();
+        return head + reviewText + HyphenLine() + System.lineSeparator();
     }
 
-
-    public String newLine (){
-        return System.lineSeparator();
+    public String HyphenLine (){
+        return "------------------------------------";
     }
+
 
     public String printLeastReviewedItems() { // User story 3.7
 
@@ -452,9 +452,7 @@ public class Controller {
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
         String message = "";
-        if (itemList.size() == 0) {
-            return "No items registered yet.";
-        }
+        if (itemList.size() == 0) return "No items registered yet.";
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -535,7 +533,7 @@ public class Controller {
         return true;
     }
 
-    /*public Review findReview(String itemID) { // not being used
+    public Review findReview(String itemID) {
         Item item = findItem(itemID);
 
         for (int i = 0; i < item.getReviewList().size(); i++) {
@@ -544,7 +542,7 @@ public class Controller {
             }
         }
         return null;
-    }*/
+    }
 
 
 
@@ -583,7 +581,7 @@ public class Controller {
         double bestGradeReview = 0.0;
         String toReturn = "";
 
-        if (itemList.isEmpty()) {
+        if (itemList.size()==0) {
             return "No items registered yet.";
         }
 
@@ -635,7 +633,7 @@ public class Controller {
             }
 
         } if (worstGradedReview == 0.0) {
-            System.out.println("No items were reviewed yet.");
+            System.out.println ("No items were reviewed yet.");
         }
         return worstGradeList;
     }
@@ -718,13 +716,15 @@ public class Controller {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
-            } else {
-                System.out.println("No transactions have been registered for item " + itemID + " yet.");
             }
-
+        }
+        if (sumUnitsSold == 0) {
+            System.out.println("No transactions have been registered for item " + itemID + " yet.");
         }
         return sumUnitsSold;
     }
+
+
 
 
     //to contain transaction for specific item ... (4.3)
@@ -770,14 +770,14 @@ public class Controller {
 */
 
 
-    /*public Transaction findItemTransactionHistory(String userID) { // Not in use
+    public Transaction findItemTransactionHistory(String userID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(userID)) {
                 return transactionHistoryList.get(i);
             }
         }
         return null;
-    }*/
+    }
 
 
 
@@ -805,24 +805,25 @@ public class Controller {
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return "All purchases made: " + System.lineSeparator() +
-                    "Total profit: 0.00 SEK" + System.lineSeparator() +
-                    "Total items sold: 0 units" + System.lineSeparator() +
-                    "Total purchases made: 0 transactions" + System.lineSeparator() +
-                    hyphenLine() + System.lineSeparator() + hyphenLine() + System.lineSeparator();
+            return ("All purchases made: \n" +
+                    "Total profit: 0.00 SEK\n" +
+                    "Total items sold: 0 units\n" +
+                    "Total purchases made: 0 transactions\n" +
+                    "------------------------------------\n" +
+                    "------------------------------------\n");
         } else {
 
             String allTransactions = "All purchases made: " + System.lineSeparator() +
                     "Total profit: " + getTotalProfit() + " SEK" + System.lineSeparator() +
                     "Total items sold: " + getTotalUnitsSold() + " units" + System.lineSeparator() +
                     "Total purchases made: " + getTotalTransactions() + " transactions" + System.lineSeparator() +
-                    hyphenLine() + System.lineSeparator();
+                    "------------------------------------" + System.lineSeparator();
 
             for (Transaction transaction : transactionHistoryList) {
-                allTransactions += transaction + System.lineSeparator();
+                allTransactions += transaction + "\n";
             }
 
-            return allTransactions + hyphenLine() + System.lineSeparator();
+            return allTransactions + "------------------------------------" + System.lineSeparator();
         }
 
     }
@@ -938,7 +939,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
+        Employee newManager = new Manager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -961,7 +962,7 @@ public class Controller {
 
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
+        Employee newDirector = new Director(employeeID, employeeName, grossSalary, degree, department);
         employeeList.add(newDirector);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -981,7 +982,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
+        Employee newIntern = new Intern(employeeID, employeeName, grossSalary, GPA);
         employeeList.add(newIntern);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -1125,8 +1126,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newGPA < 0 || newGPA > 10) {
             throw new Exception(newGPA + " outside range. Must be between 0-10.");
-        } else if (foundEmployee instanceof EmployeeIntern) {
-            EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
+        } else if (foundEmployee instanceof Intern) {
+            Intern foundIntern = (Intern) foundEmployee;
             foundIntern.setGPA(newGPA);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1139,8 +1140,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
             throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
-        } else if (foundEmployee instanceof EmployeeManager) {
-            EmployeeManager foundManager = (EmployeeManager) foundEmployee;
+        } else if (foundEmployee instanceof Manager) {
+            Manager foundManager = (Manager) foundEmployee;
             foundManager.setDegree(newDegree);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1153,8 +1154,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
-        } else if (foundEmployee instanceof EmployeeDirector) {
-            EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
+        } else if (foundEmployee instanceof Director) {
+            Director foundDirector = (Director) foundEmployee;
             foundDirector.setDepartment(newDepartment);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1182,8 +1183,8 @@ public class Controller {
             throw new Exception("No employees registered yet.");
         }
         for (int i = 0; i < getEmployeeList().size(); i++) {
-            if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
-                degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
+            if (getEmployeeList().get(i) instanceof Manager || getEmployeeList().get(i) instanceof Director) {
+                degree = ((Manager) getEmployeeList().get(i)).getDegree();
                 if (degree.equals("BSc")) {
                     if (degreeMap.containsKey("BSc")) {
                         degreeMap.put("BSc", degreeMap.get("BSc") + 1);
@@ -1257,11 +1258,6 @@ public class Controller {
         createEmployee(empID, tempName, tempGrossSalary, gpa);
 
         return empID + " promoted successfully to Intern.";
-    }
-
-    public String hyphenLine(){
-        return "------------------------------------";
-
     }
 
 } //Don't delete this!! It's the most outer bracket
