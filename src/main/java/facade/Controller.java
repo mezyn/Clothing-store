@@ -359,7 +359,7 @@ public class Controller {
     }
 
 
-    public String printLeastReviewedItems() { // User story 3.7
+    public String printLeastReviewedItems() { /// User story 3.7
 
         if (itemList.isEmpty()) {
             return "No items registered yet.";
