@@ -25,7 +25,7 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             pricePerUnit = UserInput.readDouble("Type unit price of item: ");
         }
-        facade.createItem(ID, name, pricePerUnit);
+        System.out.println(facade.createItem(ID, name, pricePerUnit));
 
     }
 
@@ -44,7 +44,7 @@ public class MenuClass {
             itemID = UserInput.readLine("Type new name for the item: ");
         }
 
-        facade.updateItemName(itemID,newName);;
+        System.out.println(facade.updateItemName(itemID,newName));
         }
 
 
@@ -60,8 +60,8 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             newPrice = UserInput.readDouble("Type new price for the item: ");
         }
-        facade.updateItemPrice(itemID, newPrice);
-;
+        System.out.println(facade.updateItemPrice(itemID, newPrice));
+
     }
 
     //2.5 - Remove items
@@ -73,7 +73,7 @@ public class MenuClass {
             itemID = UserInput.readLine("Type ID of item you would like to remove: ");
         }
 
-        facade.removeItem(itemID);
+        System.out.println(facade.removeItem(itemID));
 
     }
 
@@ -103,7 +103,7 @@ public class MenuClass {
             System.out.println("Invalid data for item.");
             itemID = UserInput.readLine("Type ID of item you want to purchase: ");
         }
-        facade.printItem(itemID);
+        System.out.println(facade.printItem(itemID));
     }
 
 
@@ -129,7 +129,7 @@ public class MenuClass {
             reviewGrade = UserInput.readInt("Grade values must be between 1 and 5.");
         }
 
-        String review = facade.reviewItem(itemID, reviewComment, reviewGrade);
+        System.out.println(facade.reviewItem(itemID, reviewComment, reviewGrade));
 
     }
 
@@ -162,29 +162,27 @@ public class MenuClass {
 
 
     // 4.3 - Print all transactions for a specific item
-    public String printItemTransactions() {
+    public void printItemTransactions() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
 
-        return facade.printItemTransactions(itemID);
+        System.out.println(facade.printItemTransactions(itemID));
     }
 
     // Print total profit for a specific item
     public double printProfit() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for profit to be printed:");
-        facade.getProfit(itemID);
 
-        return 0.0;
+        return facade.getProfit(itemID);
     }
 
     //Print total units sold for a specific item
     public int printUnitsSolds() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for units sold to be printed:");
-        facade.getUnitsSolds(itemID);
 
-        return 0;
+        return facade.getUnitsSolds(itemID);
     }
 
 
@@ -235,11 +233,11 @@ public class MenuClass {
 //____________________________________________ Employee ___________________________________________________
 
     public void createEmployee() throws Exception {
-        String employeeID = UserInput.readLine("Tye ID for employee:");
-        String employeeName = UserInput.readLine("Type name for employee:");
-        double grossSalary = UserInput.readDouble("Type gross salary for employee:");
+        String employeeID = UserInput.readLine("Type ID for employee: ");
+        String employeeName = UserInput.readLine("Type name for employee: ");
+        double grossSalary = UserInput.readDouble("Type gross salary for employee: ");
 
-        String employee = facade.createEmployee(employeeID, employeeName, grossSalary);
+        System.out.println(facade.createEmployee(employeeID, employeeName, grossSalary));
     }
 
     public void createEmployeeManager() throws Exception {
@@ -248,7 +246,7 @@ public class MenuClass {
         double grossSalary = UserInput.readDouble("Type gross salary for employee:");
         String degree = UserInput.readLine("Type degree for employee:");
 
-        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, degree);
+        System.out.println(facade.createEmployee(employeeID, employeeName, grossSalary, degree));
     }
 
     public void createEmployeeDirector() throws Exception {
@@ -258,7 +256,7 @@ public class MenuClass {
         String degree = UserInput.readLine("Type degree for employee:");
         String department = UserInput.readLine("Type department for employee:");
 
-        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, degree, department);
+        System.out.println(facade.createEmployee(employeeID, employeeName, grossSalary, degree, department));
     }
 
     public void createEmployeeIntern() throws Exception {
@@ -268,21 +266,20 @@ public class MenuClass {
         int GPA = UserInput.readInt("Type GPA for employee:");
 
 
-        String employee = facade.createEmployee(employeeID, employeeName, grossSalary, GPA);
+        System.out.println(facade.createEmployee(employeeID, employeeName, grossSalary, GPA));
     }
 
     public void removeEmployee() throws Exception {
         String empID = UserInput.readLine("Type ID of employee you would like to remove:");
-        facade.removeEmployee(empID);
+        System.out.println(facade.removeEmployee(empID));
 
     }
 
     public void printEmployee() throws Exception {
         String empID = UserInput.readLine("Type ID of employee you would like to print:");
-        facade.printEmployee(empID);
+        System.out.println(facade.printEmployee(empID));
 
     }
-
 
     public void itemOption() throws Exception {
 
