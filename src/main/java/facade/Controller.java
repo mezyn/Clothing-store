@@ -17,6 +17,10 @@ public class Controller {
 
 
 
+    public String ls (){ // System.lineSeparator()
+        return System.lineSeparator();
+    }
+
     public static double changeDecimal(double value, int decimalDigit) {
 
         if (decimalDigit == 1) {
@@ -33,7 +37,7 @@ public class Controller {
         return value;
     }
 
-
+    String dl = "------------------------------------";
     //-----------------------------------FOR ITEMS-----------------------------------
 
     ArrayList<Item> itemList = new ArrayList<>();
@@ -215,7 +219,7 @@ public class Controller {
 
         Item item = findItem(itemID);
 
-        if (itemList.size() == 0) {
+        if (itemList.isEmpty()) {
             return "Item " + itemID + " was not registered yet." ;
 
         } else if (item.getReviewList().size() == 0) {
@@ -239,15 +243,15 @@ public class Controller {
         if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
-            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + ls();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
                 printedOutput += itemToPrint.getReviewList().get(i).toString()
-                        + System.lineSeparator();
+                        + ls();
 
             }
             return printedOutput;
         } else {
-            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + ls();
             return printedOutput + "The item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
     }
@@ -257,15 +261,17 @@ public class Controller {
 
         double sumGrade = 0.0;
         double meanGrade = 0.0;
-        if (!containsReview(itemID)) {
+
+        if (!containsItem(itemID)) {
             System.out.println("Item " + itemID + " was not registered yet.");
 
         } else if (item.getReviewList().isEmpty()) {
+            System.out.println("Item " + item.getItemName() + " has not been reviewed yet.");
 
             meanGrade = 0.0;
-        }
+        /*}
         else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
-            System.out.println("Item " + itemID + " has not been reviewed yet.");
+            System.out.println("Item " + itemID + " has not been reviewed yet.");*/
 
         } else {
             for (int i = 0; i < item.getReviewList().size(); i++) {
@@ -273,7 +279,6 @@ public class Controller {
             }
             meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 1);
         }
-
         return meanGrade;
     }
 
@@ -320,14 +325,14 @@ public class Controller {
             }
         }
         for (String comments : commentsList)
-            commentToPrint += comments + System.lineSeparator();
+            commentToPrint += comments + ls();
 
         return commentToPrint;
     }
 
     public String printAllReviews() { // User Story 3.6
 
-        String head = "All registered reviews:" + System.lineSeparator();
+        String head = "All registered reviews:" + ls();
 
         String textItem = "Review(s) for ";
         String reviewText = "";
@@ -341,20 +346,16 @@ public class Controller {
 
             for ( i = 0; i < itemList.size(); i++) {
                 if (!itemList.get(i).getReviewList().isEmpty()) {
-                    reviewText += HyphenLine() + System.lineSeparator();
-                    reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
+                    reviewText += dl + ls();
+                    reviewText += textItem + itemList.get(i).toString() + ls();
 
                     for (Review review : itemList.get(i).getReviewList()) {
-                        reviewText += review.toString() + System.lineSeparator();
+                        reviewText += review.toString() + ls();
 
                     }
                 }
             }
-        return head + reviewText + HyphenLine() + System.lineSeparator();
-    }
-
-    public String HyphenLine (){
-        return "------------------------------------";
+        return head + reviewText + dl + ls();
     }
 
 
@@ -392,11 +393,11 @@ public class Controller {
                     }
                 }
                 for (Item item : leastReviewedItems) {
-                    itemDescription += item.toString() + System.lineSeparator();
+                    itemDescription += item.toString() + ls();
 
                 }
             }
-        return "Least reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + itemDescription;
+        return "Least reviews: " + reviewCounter + " review(s) each." + ls() + itemDescription;
     }
 
     public List<String> getLeastReviewedItems() { // User story 3.7
@@ -452,7 +453,9 @@ public class Controller {
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
         String message = "";
-        if (itemList.size() == 0) return "No items registered yet.";
+        if (itemList.size() == 0) {
+            return "No items registered yet.";
+        }
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -473,13 +476,13 @@ public class Controller {
                 }
                 if (mostReviewedItems.size() != 0) {
                     for (Item item : mostReviewedItems) {
-                        message += item.toString() + System.lineSeparator();
+                        message += item.toString() + ls();
 
                     }
                 }
             }
         }
-        return "Most reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + message;
+        return "Most reviews: " + reviewCounter + " review(s) each." + ls() + message;
     }
 
 
@@ -533,7 +536,7 @@ public class Controller {
         return true;
     }
 
-    public Review findReview(String itemID) {
+    /*public Review findReview(String itemID) { // Not in use
         Item item = findItem(itemID);
 
         for (int i = 0; i < item.getReviewList().size(); i++) {
@@ -542,7 +545,7 @@ public class Controller {
             }
         }
         return null;
-    }
+    }*/
 
 
 
@@ -577,7 +580,7 @@ public class Controller {
 
     public String printBestReviewedItems() { // User Story 3.8 Best
 
-        String title = "Items with best mean reviews:" + System.lineSeparator();
+        String title = "Items with best mean reviews:" + ls();
         double bestGradeReview = 0.0;
         String toReturn = "";
 
@@ -592,13 +595,13 @@ public class Controller {
         }
         for (int i = 0; i < itemList.size(); i++) {
             if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview) {
-                toReturn += itemList.get(i).toString() + System.lineSeparator();
+                toReturn += itemList.get(i).toString() + ls();
             }
 
         } if(bestGradeReview==0.0) {
             return "No items were reviewed yet.";
 
-        } else return title + "Grade: "+bestGradeReview + System.lineSeparator() + toReturn;
+        } else return title + "Grade: "+bestGradeReview + ls() + toReturn;
     }
 
 
@@ -640,7 +643,7 @@ public class Controller {
 
 
     public String printWorseReviewedItems() {  // User Story 3.8 Worst // Printer for worst
-        String title = "Items with worst mean reviews:" + System.lineSeparator();
+        String title = "Items with worst mean reviews:" + ls();
         String toReturn = "";
         double worstGradedReview = 0.0;
 
@@ -659,13 +662,13 @@ public class Controller {
 
         } for (int i = 0; i < itemList.size(); i++) {
             if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
-                toReturn += itemList.get(i).toString()+System.lineSeparator();
+                toReturn += itemList.get(i).toString()+ls();
 
         } if (worstGradedReview == 0.0) {
             return "No items were reviewed yet.";
         } else {
 
-            return title + "Grade: "+ worstGradedReview + System.lineSeparator() + toReturn;
+            return title + "Grade: "+ worstGradedReview + ls() + toReturn;
         }
     }
 
@@ -745,10 +748,10 @@ public class Controller {
         if (!containsItem(itemID)) {
             return "Item " + itemID + " was not registered yet.";
         } else if (!containsTransaction(itemID)) {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             return message + "No transactions have been registered for item " + itemID + " yet.";
         } else {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             for (int i = 0; i < transactionHistoryList.size(); i++) {
                 if (transactionHistoryList.get(i).getID().equals(itemID))
                 message += transactionHistoryList.get(i).toString() + "\n";
@@ -805,25 +808,24 @@ public class Controller {
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return ("All purchases made: \n" +
-                    "Total profit: 0.00 SEK\n" +
-                    "Total items sold: 0 units\n" +
-                    "Total purchases made: 0 transactions\n" +
-                    "------------------------------------\n" +
-                    "------------------------------------\n");
+            return "All purchases made: " + ls() +
+                    "Total profit: 0.00 SEK" + ls() +
+                    "Total items sold: 0 units" + ls() +
+                    "Total purchases made: 0 transactions" + ls() +
+                    dl + ls() + dl + ls();
         } else {
 
-            String allTransactions = "All purchases made: " + System.lineSeparator() +
-                    "Total profit: " + getTotalProfit() + " SEK" + System.lineSeparator() +
-                    "Total items sold: " + getTotalUnitsSold() + " units" + System.lineSeparator() +
-                    "Total purchases made: " + getTotalTransactions() + " transactions" + System.lineSeparator() +
-                    "------------------------------------" + System.lineSeparator();
+            String allTransactions = "All purchases made: " + ls() +
+                    "Total profit: " + getTotalProfit() + " SEK" + ls() +
+                    "Total items sold: " + getTotalUnitsSold() + " units" + ls() +
+                    "Total purchases made: " + getTotalTransactions() + " transactions" + ls() +
+                    dl + ls();
 
             for (Transaction transaction : transactionHistoryList) {
-                allTransactions += transaction + "\n";
+                allTransactions += transaction + ls();
             }
 
-            return allTransactions + "------------------------------------" + System.lineSeparator();
+            return allTransactions + dl + ls();
         }
 
     }
@@ -864,7 +866,7 @@ public class Controller {
 
 
     else {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             for (int i = 0; i < transactionHistoryList.size(); i++) {
                 if (transactionHistoryList.get(i).getID().equals(itemID))
                 message += transactionHistoryList.get(i).toString() + "\n";
@@ -890,13 +892,13 @@ public class Controller {
             for (int i = 0; i < itemList.size(); i++) {
                 if (containsTransaction(itemList.get(i).getID())) {
                     if (getProfit(itemList.get(i).getID()) == highestProfit)
-                        message = itemList.get(i) + System.lineSeparator();
+                        message = itemList.get(i) + ls();
                 }
             }
             DecimalFormat decimal2 = new DecimalFormat("###.00"); // And this to make the return result to end with .00
 
             return "Most profitable items: \n" +
-                    "Total profit: " + decimal2.format(highestProfit) + " SEK" + System.lineSeparator() + message;
+                    "Total profit: " + decimal2.format(highestProfit) + " SEK" + ls() + message;
             }
         }
 
@@ -1055,13 +1057,13 @@ public class Controller {
     //US 5.6
     public String printAllEmployees() throws Exception {
 
-        String output = "All registered employees:" + System.lineSeparator();
+        String output = "All registered employees:" + ls();
 
         for (int i = 0; i < employeeList.size(); i++) {
-            output += employeeList.get(i).toString() + System.lineSeparator();
+            output += employeeList.get(i).toString() + ls();
         }
 
-        if(output.equals("All registered employees:" + System.lineSeparator())){
+        if(output.equals("All registered employees:" + ls())){
             throw new Exception("No employees registered yet.");
         }
         return output;
@@ -1093,12 +1095,12 @@ public class Controller {
             }
         });
 
-        String outputString = "Employees sorted by gross salary (ascending order):" + System.lineSeparator();
+        String outputString = "Employees sorted by gross salary (ascending order):" + ls();
         for (int i = 0; i < employeeList.size(); i++) {
-            outputString += employeeList.get(i).toString() + System.lineSeparator();
+            outputString += employeeList.get(i).toString() + ls();
         }
 
-        if(outputString.equals("Employees sorted by gross salary (ascending order):" + System.lineSeparator())){
+        if(outputString.equals("Employees sorted by gross salary (ascending order):" + ls())){
             throw new Exception("No employees registered yet.");
         }
         return outputString;

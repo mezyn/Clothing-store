@@ -9,7 +9,7 @@ public class MenuClass {
 
         String ID = UserInput.readLine("Type ID for item: ");
         while(facade.containsItem(ID)) {
-            ID = UserInput.readLine("The ID is already taken." + System.lineSeparator() + "Type another ID for item: ");
+            ID = UserInput.readLine("The ID is already taken." + ls() + "Type another ID for item: ");
         }
         while (ID.isBlank()) {
             System.out.println("Invalid data for item.");
@@ -286,15 +286,15 @@ public class MenuClass {
 
     public void itemOption() throws Exception {
 
-        int option = UserInput.readInt("Item options menu:" + System.lineSeparator()+
-                "0. Return to Main Menu." + System.lineSeparator()+
-                "1. Create an Item." + System.lineSeparator()+
-                "2. Remove an Item." + System.lineSeparator()+
-                "3. Print all registered Items." + System.lineSeparator()+
-                "4. Buy an Item." + System.lineSeparator()+
-                "5. Update an item’s name." + System.lineSeparator()+
-                "6. Update an item’s price." + System.lineSeparator()+
-                "7. Print a specific Item." + System.lineSeparator()+
+        int option = UserInput.readInt("Item options menu:" + ls()+
+                "0. Return to Main Menu." + ls()+
+                "1. Create an Item." + ls()+
+                "2. Remove an Item." + ls()+
+                "3. Print all registered Items." + ls()+
+                "4. Buy an Item." + ls()+
+                "5. Update an item’s name." + ls()+
+                "6. Update an item’s price." + ls()+
+                "7. Print a specific Item." + ls()+
                 "Type an option number: ");
 
         while (option < 0 || option > 7) {
@@ -341,18 +341,18 @@ public class MenuClass {
     }
     public void ReviewMenu() throws Exception {
 
-        int option = UserInput.readInt("Reviews options menu:" + System.lineSeparator()+
-                "0. Return to Main Menu." + System.lineSeparator()+
-                "1. Create a review for an Item." + System.lineSeparator()+
-                "2. Print a specific review of an Item." + System.lineSeparator()+
-                "3. Print all reviews of an Item." + System.lineSeparator()+
-                "4. Print mean grade of an Item" + System.lineSeparator()+
-                "5. Print all comments of an Item." + System.lineSeparator()+
-                "6. Print all registered reviews." + System.lineSeparator()+
-                "7. Print item(s) with most reviews." + System.lineSeparator()+
-                "8. Print item(s) with least reviews." + System.lineSeparator()+
-                "9. Print item(s) with best mean review grade." + System.lineSeparator()+
-                "10. Print item(s) with worst mean review grade." + System.lineSeparator()+
+        int option = UserInput.readInt("Reviews options menu:" + ls()+
+                "0. Return to Main Menu." + ls()+
+                "1. Create a review for an Item." + ls()+
+                "2. Print a specific review of an Item." + ls()+
+                "3. Print all reviews of an Item." + ls()+
+                "4. Print mean grade of an Item" + ls()+
+                "5. Print all comments of an Item." + ls()+
+                "6. Print all registered reviews." + ls()+
+                "7. Print item(s) with most reviews." + ls()+
+                "8. Print item(s) with least reviews." + ls()+
+                "9. Print item(s) with best mean review grade." + ls()+
+                "10. Print item(s) with worst mean review grade." + ls()+
                 "Type an option number: ");
 
 
@@ -404,16 +404,16 @@ public class MenuClass {
     }
     public void transactionHistoryMenu() throws Exception {
 
-        int option = UserInput.readInt("Transaction History options menu:" + System.lineSeparator()+
-                "0. Return to Main Menu." + System.lineSeparator()+
-                "1. Print total profit from all item purchases" + System.lineSeparator()+
-                "2. Print total units sold from all item purchases" + System.lineSeparator()+
-                "3. Print the total number of item transactions made." + System.lineSeparator()+
-                "4. Print all transactions made." + System.lineSeparator()+
-                "5. Print the total profit of a specific item." + System.lineSeparator()+
-                "6. Print the number of units sold of a specific item." + System.lineSeparator()+
-                "7. Print all transactions of a specific item." + System.lineSeparator()+
-                "8. Print item with highest profit." + System.lineSeparator()+
+        int option = UserInput.readInt("Transaction History options menu:" + ls()+
+                "0. Return to Main Menu." + ls()+
+                "1. Print total profit from all item purchases" + ls()+
+                "2. Print total units sold from all item purchases" + ls()+
+                "3. Print the total number of item transactions made." + ls()+
+                "4. Print all transactions made." + ls()+
+                "5. Print the total profit of a specific item." + ls()+
+                "6. Print the number of units sold of a specific item." + ls()+
+                "7. Print all transactions of a specific item." + ls()+
+                "8. Print item with highest profit." + ls()+
                 "Type an option number:");
 
         while (option < 0 || option > 8) {
@@ -456,18 +456,18 @@ public class MenuClass {
     }
 
     public void EmployeeMenu() throws Exception {
-        int option = UserInput.readInt("Employee options menu:" +System.lineSeparator()+
-                "0. Return to Main Menu." + System.lineSeparator()+
-                "1. Create an employee (Regular Employee). " + System.lineSeparator()+
-                "2. Create an employee (Manager)." + System.lineSeparator()+
-                "3. Create an employee (Director)." + System.lineSeparator()+
-                "4. Create an employee (Intern)." + System.lineSeparator()+
-                "5. Remove an employee." + System.lineSeparator()+
-                "6. Print specific employee." + System.lineSeparator()+
-                "7. Print all registered employees." + System.lineSeparator()+
-                "8. Print the total expense with net salary." + System.lineSeparator()+
-                "9. Print all employees sorted by gross salary." + System.lineSeparator()+
-                "" + System.lineSeparator()+
+        int option = UserInput.readInt("Employee options menu:" +ls()+
+                "0. Return to Main Menu." + ls()+
+                "1. Create an employee (Regular Employee). " + ls()+
+                "2. Create an employee (Manager)." + ls()+
+                "3. Create an employee (Director)." + ls()+
+                "4. Create an employee (Intern)." + ls()+
+                "5. Remove an employee." + ls()+
+                "6. Print specific employee." + ls()+
+                "7. Print all registered employees." + ls()+
+                "8. Print the total expense with net salary." + ls()+
+                "9. Print all employees sorted by gross salary." + ls()+
+                "" + ls()+
                 "Type an option number: ");
 
         while (option < 0 || option > 7){
@@ -516,12 +516,12 @@ public class MenuClass {
     public void MainMenu() throws Exception {
 
         int option = UserInput.readInt(
-                "Main Menu: Please chose among the options below " + System.lineSeparator()+
-                        "0. Close System." + System.lineSeparator()+
-                        "1. Open Item Options." + System.lineSeparator()+
-                        "2. Open Review options." + System.lineSeparator()+
-                        "3. Open Transaction History Options." + System.lineSeparator()+
-                        "4. Open Employee options." + System.lineSeparator()+
+                "Main Menu: Please chose among the options below " + ls() +
+                        "0. Close System." + ls()+
+                        "1. Open Item Options." + ls()+
+                        "2. Open Review options." + ls()+
+                        "3. Open Transaction History Options." + ls()+
+                        "4. Open Employee options." + ls()+
                         "Type any Option Number:");
 
         while (option < 0 || option > 4) {
@@ -532,7 +532,7 @@ public class MenuClass {
         switch (option) {
             case 0:
                 System.out.println("Closed");
-                break;// create method, need help from TA with this / Carl
+                break;
             case 1:
                 itemOption();
                 break;
@@ -552,7 +552,9 @@ public class MenuClass {
         UserInput.scanner.close();
 
     }
-
+    public String ls (){ // System.lineSeparator()
+        return System.lineSeparator();
+    }
     public static void main(String[] args) throws Exception {
 
         MenuClass mainmenu = new MenuClass();
