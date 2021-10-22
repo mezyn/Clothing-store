@@ -2,12 +2,12 @@ package facade;
 
 import java.text.DecimalFormat;
 
-public class EmployeeDirector extends EmployeeManager {
+public class Director extends Manager {
 
     protected String department;
 
     //Constructor
-    public EmployeeDirector(String employeeID, String employeeName, double grossSalary, String degree, String department) {
+    public Director(String employeeID, String employeeName, double grossSalary, String degree, String department) {
         super(employeeID, employeeName, grossSalary, degree);
         this.department = department;
     }

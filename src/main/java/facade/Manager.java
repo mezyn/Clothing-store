@@ -2,11 +2,11 @@ package facade;
 
 import java.text.DecimalFormat;
 
-public class EmployeeManager extends Employee {
+public class Manager extends Employee {
 
     protected String degree;
 
-    public EmployeeManager (String employeeID, String employeeName, double grossSalary, String degree) {
+    public Manager(String employeeID, String employeeName, double grossSalary, String degree) {
         super(employeeID, employeeName, grossSalary);
         this.degree = degree;
     }

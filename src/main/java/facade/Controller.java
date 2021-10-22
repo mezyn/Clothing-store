@@ -1,6 +1,5 @@
 package facade;
 
-import javax.swing.text.Utilities;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -9,6 +8,7 @@ public class Controller {
 
 
     // -----------------------------COMMON METHODS----------------------------------
+
 
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
@@ -32,6 +32,7 @@ public class Controller {
 
         return value;
     }
+
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
@@ -257,7 +258,7 @@ public class Controller {
         double sumGrade = 0.0;
         double meanGrade = 0.0;
         if (!containsReview(itemID)) {
-            System.out.println("Item " + itemID + "was not registered yet.");
+            System.out.println("Item " + itemID + " was not registered yet.");
 
         } else if (item.getReviewList().isEmpty()) {
 
@@ -715,13 +716,15 @@ public class Controller {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
-            } else {
-                System.out.println("No transactions have been registered for item " + itemID + " yet.");
             }
-
+        }
+        if (sumUnitsSold == 0) {
+            System.out.println("No transactions have been registered for item " + itemID + " yet.");
         }
         return sumUnitsSold;
     }
+
+
 
 
     //to contain transaction for specific item ... (4.3)
@@ -936,7 +939,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
+        Employee newManager = new Manager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -959,7 +962,7 @@ public class Controller {
 
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
+        Employee newDirector = new Director(employeeID, employeeName, grossSalary, degree, department);
         employeeList.add(newDirector);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -979,7 +982,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
+        Employee newIntern = new Intern(employeeID, employeeName, grossSalary, GPA);
         employeeList.add(newIntern);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -1123,8 +1126,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newGPA < 0 || newGPA > 10) {
             throw new Exception(newGPA + " outside range. Must be between 0-10.");
-        } else if (foundEmployee instanceof EmployeeIntern) {
-            EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
+        } else if (foundEmployee instanceof Intern) {
+            Intern foundIntern = (Intern) foundEmployee;
             foundIntern.setGPA(newGPA);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1137,8 +1140,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
             throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
-        } else if (foundEmployee instanceof EmployeeManager) {
-            EmployeeManager foundManager = (EmployeeManager) foundEmployee;
+        } else if (foundEmployee instanceof Manager) {
+            Manager foundManager = (Manager) foundEmployee;
             foundManager.setDegree(newDegree);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1151,8 +1154,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
-        } else if (foundEmployee instanceof EmployeeDirector) {
-            EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
+        } else if (foundEmployee instanceof Director) {
+            Director foundDirector = (Director) foundEmployee;
             foundDirector.setDepartment(newDepartment);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1180,8 +1183,8 @@ public class Controller {
             throw new Exception("No employees registered yet.");
         }
         for (int i = 0; i < getEmployeeList().size(); i++) {
-            if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
-                degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
+            if (getEmployeeList().get(i) instanceof Manager || getEmployeeList().get(i) instanceof Director) {
+                degree = ((Manager) getEmployeeList().get(i)).getDegree();
                 if (degree.equals("BSc")) {
                     if (degreeMap.containsKey("BSc")) {
                         degreeMap.put("BSc", degreeMap.get("BSc") + 1);
