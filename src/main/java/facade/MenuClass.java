@@ -399,6 +399,7 @@ public class MenuClass {
         }
         UserInput.scanner.close();
     }
+
     public void transactionHistoryMenu() throws Exception {
 
         int option = UserInput.readInt("Transaction History options menu:\n" +
@@ -508,6 +509,7 @@ public class MenuClass {
 
 
         }
+        UserInput.scanner.close();
     }
 
     public void MainMenu() throws Exception {
