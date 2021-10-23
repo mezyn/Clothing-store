@@ -101,7 +101,7 @@ public class MenuClass {
         String itemID = UserInput.readLine("Type ID of item to be printed: ");
         while (itemID.isBlank() || !facade.containsItem(itemID)) {
             System.out.println("Invalid data for item.");
-            itemID = UserInput.readLine("Type ID of item you want to purchase: ");
+            itemID = UserInput.readLine("Type ID of item to be printed: ");
         }
         System.out.println(facade.printItem(itemID));
     }

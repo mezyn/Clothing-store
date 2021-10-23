@@ -9,17 +9,17 @@ public class Controller {
 
     // -----------------------------COMMON METHODS----------------------------------
 
-
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
 
-
-
     public String ls (){ // System.lineSeparator()
         return System.lineSeparator();
     }
+
+    String dl = "------------------------------------";
+
 
     public static double changeDecimal(double value, int decimalDigit) {
 
@@ -37,7 +37,7 @@ public class Controller {
         return value;
     }
 
-    String dl = "------------------------------------";
+
     //-----------------------------------FOR ITEMS-----------------------------------
 
     ArrayList<Item> itemList = new ArrayList<>();
