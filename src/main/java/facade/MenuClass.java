@@ -170,19 +170,19 @@ public class MenuClass {
     }
 
     // Print total profit for a specific item
-    public double printProfit() {
+    public void printProfit() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for profit to be printed:");
 
-        return facade.getProfit(itemID);
+        System.out.println(facade.getProfit(itemID));
     }
 
     //Print total units sold for a specific item
-    public int printUnitsSolds() {
+    public void printUnitsSolds() {
 
         String itemID = UserInput.readLine("Type the ID of the desired item for units sold to be printed:");
 
-        return facade.getUnitsSolds(itemID);
+        System.out.println(facade.getUnitsSolds(itemID));
     }
 
 
