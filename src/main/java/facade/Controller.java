@@ -139,8 +139,8 @@ public class Controller {
                 totalPrice = 4 * itemPrice + ((amount - 4) * (itemPrice * (1.0 - 0.3)));
             }
 
-            Transaction newTransaction = new Transaction(itemID, amount, totalPrice);
-            transactionHistoryList.add(newTransaction);
+            TransactionHistory newTransactionHistory = new TransactionHistory(itemID, amount, totalPrice);
+            transactionHistoryList.add(newTransactionHistory);
             return changeDecimal(totalPrice, 2);
         }
     }
@@ -675,9 +675,9 @@ public class Controller {
 
     // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction
-    ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
+    ArrayList<TransactionHistory> transactionHistoryList = new ArrayList<TransactionHistory>();
 
-    public ArrayList<Transaction> getTransactionHistoryList(){
+    public ArrayList<TransactionHistory> getTransactionHistoryList(){
         return transactionHistoryList;
     }
     public double getTotalProfit() {
@@ -773,7 +773,7 @@ public class Controller {
 */
 
 
-    public Transaction findItemTransactionHistory(String userID) {
+    public TransactionHistory findItemTransactionHistory(String userID) {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(userID)) {
                 return transactionHistoryList.get(i);
@@ -821,8 +821,8 @@ public class Controller {
                     "Total purchases made: " + getTotalTransactions() + " transactions" + ls() +
                     dl + ls();
 
-            for (Transaction transaction : transactionHistoryList) {
-                allTransactions += transaction + ls();
+            for (TransactionHistory transactionHistory : transactionHistoryList) {
+                allTransactions += transactionHistory + ls();
             }
 
             return allTransactions + dl + ls();
@@ -962,7 +962,6 @@ public class Controller {
         } else if (!department.equals("Business") && !department.equals("Human Resources") && !department.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
         }
-
 
         grossSalary = changeDecimal(grossSalary,2);
         Employee newDirector = new Director(employeeID, employeeName, grossSalary, degree, department);
