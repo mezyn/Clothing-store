@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 public class Director extends Manager {
 
-    protected String department;
+    private String department;
 
     public Director(String employeeID, String employeeName, double grossSalary, String degree, String department) {
         super(employeeID, employeeName, grossSalary, degree);
@@ -12,7 +12,7 @@ public class Director extends Manager {
     }
 
     @Override
-    protected double getNetSalary() {
+    public double getNetSalary() {
         double grossSalary = getGrossSalary();
         if (grossSalary < 30000) {
             return super.getNetSalary();
@@ -26,7 +26,7 @@ public class Director extends Manager {
     }
 
     @Override
-    protected double getGrossSalary(){
+    public double getGrossSalary(){
         double grossSalary = super.getGrossSalary();
         grossSalary = grossSalary + 5000;
         return grossSalary;

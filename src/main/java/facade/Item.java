@@ -8,7 +8,7 @@ public class Item {
 
 
     //attributes of Item class
-     private String ID;
+     private final String ID;
      private String name;
      private double pricePerUnit;
      private ArrayList<Review> reviewList= new ArrayList<Review>();

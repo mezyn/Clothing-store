@@ -1,17 +1,16 @@
 package facade;
 
 import java.text.DecimalFormat;
-import java.util.Comparator;
 
 public class Employee implements Comparable<Employee> {
 
-    //attributes of the Employee class
-    protected String employeeID;
+    protected final String employeeID;
     protected String employeeName;
     protected double grossSalary;
 
-    //We know that these methods are not in use, but will leave them here for possible future usage.
-    public Employee() {
+    // This constructor is needed to prevent creating employees with no employeeID.
+    public Employee(String employeeID) {
+        this.employeeID = employeeID;
     }
 
     //Constructor
@@ -23,32 +22,32 @@ public class Employee implements Comparable<Employee> {
 
     //Getters and setters
 
-    protected String getID() {
+    public String getID() {
         return employeeID;
     }
 
-    protected String getEmployeeName() {
+    public String getEmployeeName() {
         return employeeName;
     }
 
-    protected double getGrossSalary() {
+    public double getGrossSalary() {
         return grossSalary;
     }
 
-    protected double getRawSalary(){
+    public double getRawSalary(){
         return grossSalary;
     }
 
-    protected void setEmployeeName(String employeeName) {
+    public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
 
-    protected void setGrossSalary(double grossSalary) {
+    public void setGrossSalary(double grossSalary) {
         this.grossSalary = grossSalary;
     }
 
     //Net salary of regular employee
-    protected double getNetSalary() {
+    public double getNetSalary() {
         double netSalary = grossSalary - (grossSalary * 0.1);
         return netSalary;
     }

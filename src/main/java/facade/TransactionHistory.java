@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 public class TransactionHistory {
 
-    private String ID;
+    private final String ID;
     private int unitsSold;
     private double profit;
 

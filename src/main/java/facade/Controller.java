@@ -6,6 +6,26 @@ import java.util.*;
 
 public class Controller {
 
+    // -----------------------------ARRAYLISTS----------------------------------
+
+    ArrayList<Item> itemList = new ArrayList<>();
+
+    public ArrayList<Item> getItemList() {
+        return itemList;
+    }
+
+    ArrayList<TransactionHistory> transactionHistoryList = new ArrayList<TransactionHistory>();
+
+    public ArrayList<TransactionHistory> getTransactionHistoryList(){
+        return transactionHistoryList;
+    }
+
+    ArrayList<Employee> employeeList = new ArrayList<>();
+
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
 
     // -----------------------------COMMON METHODS----------------------------------
 
@@ -13,13 +33,6 @@ public class Controller {
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
-
-    public String ls (){ // System.lineSeparator()
-        return System.lineSeparator();
-    }
-
-    String dl = "------------------------------------";
-
 
     public static double changeDecimal(double value, int decimalDigit) {
 
@@ -37,14 +50,12 @@ public class Controller {
         return value;
     }
 
+    public String ls (){ // System.lineSeparator()
+        return System.lineSeparator();
+    }
 
     //-----------------------------------FOR ITEMS-----------------------------------
 
-    ArrayList<Item> itemList = new ArrayList<>();
-
-    public ArrayList<Item> getItemList() {
-        return itemList;
-    }
 
     //Create a new item and add it to itemList
     public String createItem(String itemID, String itemName, double unitPrice) {
@@ -163,7 +174,7 @@ public class Controller {
             String allItem = "All registered items:\n";
 
             for (Item item : itemList) {
-                //System.out.println(item);
+
                 allItem += item + "\n";
             }
             return allItem;
@@ -324,6 +335,8 @@ public class Controller {
 
         return commentToPrint;
     }
+
+    String dl = "------------------------------------";
 
     public String printAllReviews() { // User Story 3.6
 
@@ -657,17 +670,12 @@ public class Controller {
 
 
     // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
-    //creating a transaction
-    ArrayList<TransactionHistory> transactionHistoryList = new ArrayList<TransactionHistory>();
 
-    public ArrayList<TransactionHistory> getTransactionHistoryList(){
-        return transactionHistoryList;
-    }
     public double getTotalProfit() {
 
         double totalProfit = 0.0;
-        for (int i = 0; i < transactionHistoryList.size(); i++)
-            totalProfit += transactionHistoryList.get(i).getProfit();
+        for (int i = 0; i < getTransactionHistoryList().size(); i++)
+            totalProfit += getTransactionHistoryList().get(i).getProfit();
 
         totalProfit = changeDecimal(totalProfit, 2);
         return totalProfit;
@@ -676,8 +684,8 @@ public class Controller {
     public int getTotalUnitsSold() {
 
         int totalUnitsSold = 0;
-        for (int i=0; i<transactionHistoryList.size(); i++) {
-            totalUnitsSold += transactionHistoryList.get(i).getUnitsSold();
+        for (int i=0; i<getTransactionHistoryList().size(); i++) {
+            totalUnitsSold += getTransactionHistoryList().get(i).getUnitsSold();
         }
         return totalUnitsSold;
     }
@@ -686,9 +694,9 @@ public class Controller {
 
         double sumProfit = 0.0;
 
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-                sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
+        for (int i = 0; i < getTransactionHistoryList().size(); i++) {
+            if (getTransactionHistoryList().get(i).getID().equals(itemID)) {
+                sumProfit = sumProfit + getTransactionHistoryList().get(i).getProfit();
             }
         sumProfit = changeDecimal(sumProfit, 2);
 
@@ -699,9 +707,9 @@ public class Controller {
 
         int sumUnitsSold = 0;
 
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
-                sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
+        for (int i = 0; i < getTransactionHistoryList().size(); i++) {
+            if (getTransactionHistoryList().get(i).getID().equals(itemID)) {
+                sumUnitsSold = sumUnitsSold + getTransactionHistoryList().get(i).getUnitsSold();
             }
         }
         return sumUnitsSold;
@@ -713,8 +721,8 @@ public class Controller {
     //to contain transaction for specific item ... (4.3)
     public boolean containsTransaction (String itemID) {
 
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+        for (int i = 0; i < getTransactionHistoryList().size(); i++) {
+            if (getTransactionHistoryList().get(i).getID().equals(itemID)) {
                 return true;
             }
         }
@@ -732,9 +740,9 @@ public class Controller {
             return message + "No transactions have been registered for item " + itemID + " yet.";
         } else {
             String message = "Transactions for item: " + findItem(itemID) + ls();
-            for (int i = 0; i < transactionHistoryList.size(); i++) {
-                if (transactionHistoryList.get(i).getID().equals(itemID))
-                    message += transactionHistoryList.get(i).toString() + "\n";
+            for (int i = 0; i < getTransactionHistoryList().size(); i++) {
+                if (getTransactionHistoryList().get(i).getID().equals(itemID))
+                    message += getTransactionHistoryList().get(i).toString() + ls();
             }
             return message;
         }
@@ -744,7 +752,7 @@ public class Controller {
     //4.4  3. print total number of transactions
     public int getTotalTransactions() {
 
-        int totalTransactions = transactionHistoryList.size();
+        int totalTransactions = getTransactionHistoryList().size();
         return totalTransactions;
      }
 
@@ -752,7 +760,7 @@ public class Controller {
     //   4.5 - Print all transactions
     public String printAllTransactions() {
 
-        if (transactionHistoryList.size() == 0) {
+        if (getTransactionHistoryList().size() == 0) {
             return "All purchases made: " + ls() +
                     "Total profit: 0.00 SEK" + ls() +
                     "Total items sold: 0 units" + ls() +
@@ -766,7 +774,7 @@ public class Controller {
                     "Total purchases made: " + getTotalTransactions() + " transactions" + ls() +
                     dl + ls();
 
-            for (TransactionHistory transactionHistory : transactionHistoryList) {
+            for (TransactionHistory transactionHistory : getTransactionHistoryList()) {
                 allTransactions += transactionHistory + ls();
             }
 
@@ -779,7 +787,7 @@ public class Controller {
         String message = "";
         if (itemList.size() == 0) {
             return "No items registered yet.";
-        } else if (transactionHistoryList.size() == 0) {
+        } else if (getTransactionHistoryList().size() == 0) {
             return "No items were bought yet.";
         } else {
 
@@ -804,11 +812,6 @@ public class Controller {
 
     //-----------------------------------FOR Employee-----------------------------------
 
-    ArrayList<Employee> employeeList = new ArrayList<>();
-
-    public ArrayList<Employee> getEmployeeList() {
-        return employeeList;
-    }
 
     // Create Regular employee
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {

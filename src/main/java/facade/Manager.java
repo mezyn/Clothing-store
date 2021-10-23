@@ -13,7 +13,7 @@ public class Manager extends Employee {
 
 
     @Override
-    protected double getGrossSalary() {
+    public double getGrossSalary() {
 
         double grossSalary = super.grossSalary;
         if (degree.equals("BSc")) {
@@ -27,7 +27,7 @@ public class Manager extends Employee {
     }
 
     @Override
-    protected double getNetSalary() {
+    public double getNetSalary() {
         double netSalary = getGrossSalary() - (getGrossSalary() * 0.1);
         return netSalary;
     }

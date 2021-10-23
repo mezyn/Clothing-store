@@ -430,9 +430,9 @@ public class MenuClass {
         }
 
             switch (option) {
-                case 0: EmployeeMenu();
+                case 0:
                     MainMenu();
-                    break;// create method, need help from TA with this / Carl
+                    break;
                 case 1: createEmployee();
                     EmployeeMenu();
                     break;
@@ -486,7 +486,6 @@ public class MenuClass {
 
         switch (option) {
             case 0:
-                System.out.println("Closed");
                 break;
             case 1:
                 itemOption();
@@ -507,9 +506,11 @@ public class MenuClass {
         UserInput.scanner.close();
 
     }
+
     public String ls (){ // System.lineSeparator()
         return System.lineSeparator();
     }
+
     public static void main(String[] args) throws Exception {
 
         MenuClass mainmenu = new MenuClass();
