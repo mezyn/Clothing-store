@@ -40,6 +40,7 @@ public class Director extends Manager {
         return degree + " " + getEmployeeName() + "'s gross salary is " + grossSalary + " SEK per month. Dept: " + department;
     }
 
+    //We know that these methods are not in use, but will leave them here for possible future usage.
     public String getDepartment() {
         return this.department;
     }

@@ -22,8 +22,6 @@ public class Review {
     public double getItemGrade() { return this.grade; }
 
 
-
-
 }
 
 

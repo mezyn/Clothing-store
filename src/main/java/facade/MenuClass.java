@@ -31,7 +31,7 @@ public class MenuClass {
 
 
     //2.3 - Update item name and price
-    public void updateItemName() { //(String itemID, String newName)
+    public void updateItemName() {
 
         String itemID = UserInput.readLine("Type current ID of the item: ");
         while (itemID.isBlank() || !facade.containsItem(itemID)) {
@@ -185,50 +185,6 @@ public class MenuClass {
         System.out.println(facade.getUnitsSolds(itemID));
     }
 
-
-   /* public String printItemTransactions() {
-
-        String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed:");
-
-        if (!controller.containsItem(itemID)) {
-            System.out.println("Item < " + Controller.findItemName(itemID) + "> was not registered.");
-        } else if (!Controller.containsTransaction(itemID)) {
-            System.out.println("Transactions for item: <" + itemID + ">: <" + Controller.getItemName(itemID) + ">. <" + Controller.getUnitPrice(itemID) + "> SEK\n" + "No transactions have been registered for item <" + itemID + "> yet.\n");
-        } else {facade.printItemTransactions(itemID);
-        }
-        return "";
-
-         public String printItemTransactions(String itemID) {
-
-        if (!containsItem(itemID)) {
-            return "Item " + itemID + " was not registered yet.";
-        } else if (!containsTransaction(itemID)) {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
-            return message + "No transactions have been registered for item " + itemID + " yet.";
-        } else {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
-            for (int i = 0; i < transactionHistoryList.size(); i++) {
-                if (transactionHistoryList.get(i).getID().equals(itemID))
-                message += transactionHistoryList.get(i).toString() + "\n";
-            }
-            return message;
-        }
-    }
-    }*/
-    // 4.3 print transaction for specific item
-/*
-
-    public String printTransactionSpecificItem() {
-            String itemID = UserInput.readLine("Type the ID of the desired item for transaction to be printed");
-       if (facade.containsTransaction(itemID)) {
-            Item foundItem = facade.findItem(itemID);
-            System.out.println(foundItem);
-    } else {
-        System.out.println("Item <" + itemID + " > was not registered yet.");
-       }
-       return "";
-    }
-*/
 
 //____________________________________________ Employee ___________________________________________________
 

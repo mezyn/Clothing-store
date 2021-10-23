@@ -268,11 +268,6 @@ public class Controller {
         } else if (item.getReviewList().isEmpty()) {
             System.out.println("Item " + item.getItemName() + " has not been reviewed yet.");
 
-            meanGrade = 0.0;
-        /*}
-        else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
-            System.out.println("Item " + itemID + " has not been reviewed yet.");*/
-
         } else {
             for (int i = 0; i < item.getReviewList().size(); i++) {
                 sumGrade += item.getReviewList().get(i).getItemGrade();
@@ -536,18 +531,6 @@ public class Controller {
         return true;
     }
 
-    /*public Review findReview(String itemID) { // Not in use
-        Item item = findItem(itemID);
-
-        for (int i = 0; i < item.getReviewList().size(); i++) {
-            if (item.getReviewList().get(i).equals(itemID)) {
-                return item.getReviewList().get(i);
-            }
-        }
-        return null;
-    }*/
-
-
 
     public List<String> getBestReviewedItems() { // User Story 3.8 Best
 
@@ -707,11 +690,11 @@ public class Controller {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
             }
-        }
-        if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");//I don't think this statement is needed according to the user story instruction?
         sumProfit = changeDecimal(sumProfit, 2);
-        return sumProfit;
+
+    } return sumProfit;
     }
+
     public int getUnitsSolds(String itemID) { //should we change name to getUnitsSold?
 
         int sumUnitsSold = 0;
@@ -720,9 +703,6 @@ public class Controller {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
             }
-        }
-        if (sumUnitsSold == 0) {
-            System.out.println("No transactions have been registered for item " + itemID + " yet."); //this too
         }
         return sumUnitsSold;
     }
@@ -761,47 +741,12 @@ public class Controller {
     }
 
 
-    /*
-        //get specific item transactions
-    public static String getPurchasePrice(String itemID) {
-        for (int i = 0; i < transactionHistoryList.size(); i++);
-        if (transactionHistoryList.get(i).getID().equals(itemID)) {
-            return String.valueOf(transactionHistoryList.get(i).getItemPurchase());
-        }
-        return "Can't find";
-    }
-*/
-
-
-    public TransactionHistory findItemTransactionHistory(String userID) {
-        for (int i = 0; i < transactionHistoryList.size(); i++) {
-            if (transactionHistoryList.get(i).getID().equals(userID)) {
-                return transactionHistoryList.get(i);
-            }
-        }
-        return null;
-    }
-
-
-
     //4.4  3. print total number of transactions
     public int getTotalTransactions() {
 
         int totalTransactions = transactionHistoryList.size();
         return totalTransactions;
-        /*return totalTransactions;
-
-        if (totalTransactions == 0) {
-            "Total purchases made: 0 transactions");
-        } else {
-            for (int i = 0; i < totalTransactions; i++); {
-            System.out.println("Total purchases made: <" + totalTransactions +"> transactions\n");
-            }
-        }
-        return -1;
-   */ }
-
-
+     }
 
 
     //   4.5 - Print all transactions
@@ -827,53 +772,8 @@ public class Controller {
 
             return allTransactions + dl + ls();
         }
-
-    }
-    /*
-     } else if (itemList.size() == 0) {
-                    return "No items registered yet.";
-            } else if (transactionHistoryList.size() == 0) {
-                    return "No items ere bought yet.";
-
-     */
-    /*
-    public String printMostProfitableItems() {
-        Transaction highestProfit = null;
-        int sumOfProfit = 0;
-        for (Transaction currentTransaction : transactionHistoryList){
-            sumOfProfit += currentTransaction.getProfit();
-        }
-
-        if( !transactionHistoryList.isEmpty() ) {
-            highestProfit = transactionHistoryList.get(0);
-            for (int i = 1; i < transactionHistoryList.size(); i++) {
-                Transaction currentTransaction = transactionHistoryList.get(i);
-                if(currentTransaction.getProfit() > highestProfit.getProfit()) {
-                    highestProfit = currentTransaction;
-                }
-            }
-        return (highestProfit + "");
-        } else if (itemList.size() == 0) {
-                return "No items registered yet.";
-        } else if (transactionHistoryList.size() == 0) {
-                return "No items ere bought yet.";
-        } else {
-            System.out.println("Nothing");
-        }
-        return ("Most profitable items:\n" +
-                "Total profit: " + sumOfProfit + " SEK\n");
     }
 
-
-    else {
-            String message = "Transactions for item: " + findItem(itemID) + ls();
-            for (int i = 0; i < transactionHistoryList.size(); i++) {
-                if (transactionHistoryList.get(i).getID().equals(itemID))
-                message += transactionHistoryList.get(i).toString() + "\n";
-            }
-            return message;
-        }
-    */
     public String printMostProfitableItems() {
         double highestProfit = 0.0;
         String message = "";
@@ -990,7 +890,6 @@ public class Controller {
         return "Employee " + employeeID + " was registered successfully.";
     }
 
-    //I created this just in case, but might not needed?
     public Employee findEmployee(String employeeID) {
 
         for (int i = 0; i < employeeList.size(); i++) {
@@ -1000,14 +899,6 @@ public class Controller {
         } return null;
     }
 
-    public int findEmployeeIndex(String employeeID) {
-
-        for (int i = 0; i < employeeList.size(); i++) {
-            if (employeeList.get(i).getID().equals(employeeID)) {
-                return i;
-            }
-        } return -1;
-    }
 
     //US 5.5: Print a specific employee
     public String printEmployee(String employeeID) throws Exception {
@@ -1262,4 +1153,4 @@ public class Controller {
         return empID + " promoted successfully to Intern.";
     }
 
-} //Don't delete this!! It's the most outer bracket
+}

@@ -31,6 +31,8 @@ public class TransactionHistory {
 
     public int getUnitsSold() {return unitsSold;}
 
+    //We know that these methods are not in use, but will leave them here for possible future usage.
+
     public void setUnitsSold(int unitsSold) {this.unitsSold = unitsSold;}
 
     public void setProfit(double profit) {this.profit = profit;}

@@ -10,7 +10,7 @@ public class Employee implements Comparable<Employee> {
     protected String employeeName;
     protected double grossSalary;
 
-    //Default constructor - necessary?
+    //We know that these methods are not in use, but will leave them here for possible future usage.
     public Employee() {
     }
 
@@ -22,7 +22,6 @@ public class Employee implements Comparable<Employee> {
     }
 
     //Getters and setters
-
 
     protected String getID() {
         return employeeID;

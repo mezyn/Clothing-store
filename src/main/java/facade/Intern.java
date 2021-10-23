@@ -24,15 +24,16 @@ public class Intern extends Employee {
     }
 
     @Override
-    public double getNetSalary() {
+    protected double getNetSalary() {
         return getGrossSalary();
     }
 
-    public int getGPA() {
+    //We know that this method is not in use, but will leave it here for possible future usage.
+    protected int getGPA() {
         return GPA;
     }
 
-    public void setGPA(int newGPA) {
+    protected void setGPA(int newGPA) {
         this.GPA = newGPA;
     }
 
