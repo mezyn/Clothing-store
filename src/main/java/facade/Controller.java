@@ -240,7 +240,7 @@ public class Controller {
     public String getPrintedReviews(String itemID) { // User Story 3.3
 
         Item itemToPrint = findItem(itemID);
-        if (itemToPrint.equals(null)) {
+        if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
             String printedOutput = "Review(s) for " + itemToPrint + ls();
@@ -287,7 +287,7 @@ public class Controller {
         Item number = findItem(itemID);
         int reviewCounter = 0;
 
-        if (!number.equals(null)){
+        if (number != null){
             reviewCounter = number.getReviewList().size();
         }
         return reviewCounter;
@@ -298,7 +298,7 @@ public class Controller {
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<>();
 
-        if (!commentedItem.equals(null)) {
+        if (commentedItem != null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if (!commentedItem.getReviewList().isEmpty()) {
                     if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
@@ -316,7 +316,7 @@ public class Controller {
 
         ArrayList<String> commentsList = new ArrayList<>();
 
-        if (!commentedItem.equals(null)) {
+        if (commentedItem != null) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if (!commentedItem.getReviewList().isEmpty()) {
                     if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
@@ -344,17 +344,17 @@ public class Controller {
             return "No items were reviewed yet.";
         }
 
-            for ( i = 0; i < itemList.size(); i++) {
-                if (!itemList.get(i).getReviewList().isEmpty()) {
-                    reviewText += dl + ls();
-                    reviewText += textItem + itemList.get(i).toString() + ls();
+        for ( i = 0; i < itemList.size(); i++) {
+            if (!itemList.get(i).getReviewList().isEmpty()) {
+                reviewText += dl + ls();
+                reviewText += textItem + itemList.get(i).toString() + ls();
 
-                    for (Review review : itemList.get(i).getReviewList()) {
-                        reviewText += review.toString() + ls();
+                for (Review review : itemList.get(i).getReviewList()) {
+                    reviewText += review.toString() + ls();
 
-                    }
                 }
             }
+        }
         return head + reviewText + dl + ls();
     }
 
@@ -364,39 +364,39 @@ public class Controller {
         if (itemList.isEmpty()) {
             return "No items registered yet.";
         }
-           int lowestReviewNumber = 0;
+        int lowestReviewNumber = 0;
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i).getReviewList().size() > 0) {
+                lowestReviewNumber = itemList.get(i).getReviewList().size();
+                break;
+            }
+        }
+
+        ArrayList<Item> leastReviewedItems = new ArrayList<>();
+        int reviewCounter = 0;
+        String itemDescription = "";
+
+        if (lowestReviewNumber==0) {
+            return "No items were reviewed yet.";
+
+        } else {
             for (int i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() > 0) {
+
+                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
                     lowestReviewNumber = itemList.get(i).getReviewList().size();
-                    break;
+                    reviewCounter += itemList.get(i).getReviewList().size();
                 }
             }
-
-            ArrayList<Item> leastReviewedItems = new ArrayList<>();
-            int reviewCounter = 0;
-            String itemDescription = "";
-
-            if (lowestReviewNumber==0) {
-                return "No items were reviewed yet.";
-
-            } else {
             for (int i = 0; i < itemList.size(); i++) {
-
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
-                        lowestReviewNumber = itemList.get(i).getReviewList().size();
-                        reviewCounter += itemList.get(i).getReviewList().size();
-                    }
-                }
-                for (int i = 0; i < itemList.size(); i++) {
-                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
-                        leastReviewedItems.add(itemList.get(i));
-                    }
-                }
-                for (Item item : leastReviewedItems) {
-                    itemDescription += item.toString() + ls();
-
+                if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                    leastReviewedItems.add(itemList.get(i));
                 }
             }
+            for (Item item : leastReviewedItems) {
+                itemDescription += item.toString() + ls();
+
+            }
+        }
         return "Least reviews: " + reviewCounter + " review(s) each." + ls() + itemDescription;
     }
 
@@ -573,7 +573,7 @@ public class Controller {
         } if (bestGradeReview == 0.0) {
             System.out.println ("No items were reviewed yet.");
         }
-            return bestGradeList;
+        return bestGradeList;
     }
 
 
@@ -673,7 +673,7 @@ public class Controller {
     }
 
 
-// --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
+    // --------------------------------------- FOR TRANSACTION HISTORY ---------------------------------------
     //creating a transaction
     ArrayList<Transaction> transactionHistoryList = new ArrayList<Transaction>();
 
@@ -733,9 +733,9 @@ public class Controller {
     //to contain transaction for specific item ... (4.3)
     public boolean containsTransaction (String itemID) {
 
-    for (int i = 0; i < transactionHistoryList.size(); i++) {
-        if (transactionHistoryList.get(i).getID().equals(itemID)) {
-            return true;
+        for (int i = 0; i < transactionHistoryList.size(); i++) {
+            if (transactionHistoryList.get(i).getID().equals(itemID)) {
+                return true;
             }
         }
         return false;
@@ -754,7 +754,7 @@ public class Controller {
             String message = "Transactions for item: " + findItem(itemID) + ls();
             for (int i = 0; i < transactionHistoryList.size(); i++) {
                 if (transactionHistoryList.get(i).getID().equals(itemID))
-                message += transactionHistoryList.get(i).toString() + "\n";
+                    message += transactionHistoryList.get(i).toString() + "\n";
             }
             return message;
         }
@@ -829,13 +829,13 @@ public class Controller {
         }
 
     }
-/*
- } else if (itemList.size() == 0) {
-                return "No items registered yet.";
-        } else if (transactionHistoryList.size() == 0) {
-                return "No items ere bought yet.";
+    /*
+     } else if (itemList.size() == 0) {
+                    return "No items registered yet.";
+            } else if (transactionHistoryList.size() == 0) {
+                    return "No items ere bought yet.";
 
- */
+     */
     /*
     public String printMostProfitableItems() {
         Transaction highestProfit = null;
@@ -899,8 +899,8 @@ public class Controller {
 
             return "Most profitable items: \n" +
                     "Total profit: " + decimal2.format(highestProfit) + " SEK" + ls() + message;
-            }
         }
+    }
 
     //-----------------------------------FOR Employee-----------------------------------
 
@@ -946,7 +946,7 @@ public class Controller {
         employeeList.add(newManager);
 
         return "Employee " + employeeID + " was registered successfully.";
-        }
+    }
 
     //createEmployeeDirector
     public String createEmployee(String employeeID, String employeeName, double grossSalary, String degree, String department) throws Exception {
@@ -1019,7 +1019,7 @@ public class Controller {
                 outputMessage = employeeList.get(i).toString();
             }
         }
-        if (findEmployee(employeeID).equals(null)) {
+        if (findEmployee(employeeID) == null) {
             throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         return outputMessage;
@@ -1027,12 +1027,12 @@ public class Controller {
 
     public double getNetSalary(String employeeID) throws Exception {
 
-        if (findEmployee(employeeID).equals(null)) {
+        if (findEmployee(employeeID) == null) {
             throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         double outputSalary = 0.0;
         for (int i = 0; i < employeeList.size(); i++) {
-           if (employeeList.get(i).getID().equals(employeeID)) {
+            if (employeeList.get(i).getID().equals(employeeID)) {
                 outputSalary = employeeList.get(i).getNetSalary();
             }
         }
@@ -1040,9 +1040,9 @@ public class Controller {
     }
 
     // US 5.4
-        public String removeEmployee(String empID) throws Exception {
+    public String removeEmployee(String empID) throws Exception {
 
-        if (findEmployee(empID).equals(null)) {
+        if (findEmployee(empID) == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
@@ -1110,7 +1110,7 @@ public class Controller {
     public String updateEmployeeName(String empID, String newName) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newName.isBlank()) {
             throw new Exception("Name cannot be blank.");
@@ -1125,7 +1125,7 @@ public class Controller {
     public String updateInternGPA(String empID, int newGPA) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newGPA < 0 || newGPA > 10) {
             throw new Exception(newGPA + " outside range. Must be between 0-10.");
@@ -1139,7 +1139,7 @@ public class Controller {
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
             throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
@@ -1153,7 +1153,7 @@ public class Controller {
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
@@ -1167,7 +1167,7 @@ public class Controller {
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newSalary < 0 || newSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
@@ -1209,15 +1209,15 @@ public class Controller {
                 }
             }
         }
-            return degreeMap;
-        }
+        return degreeMap;
+    }
 
 
     public String promoteToManager(String empID, String newDegree) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
 
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
@@ -1233,7 +1233,7 @@ public class Controller {
     public String promoteToDirector(String empID, String newDegree, String newDepartment) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
@@ -1249,7 +1249,7 @@ public class Controller {
     public String promoteToIntern(String empID, int gpa) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee.equals(null)) {
+        if (foundEmployee == null) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (gpa < 0 || gpa > 10) {
             throw new Exception(gpa + " outside range. Must be between 0-10.");
