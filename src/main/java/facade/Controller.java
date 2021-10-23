@@ -240,7 +240,7 @@ public class Controller {
     public String getPrintedReviews(String itemID) { // User Story 3.3
 
         Item itemToPrint = findItem(itemID);
-        if (itemToPrint == null) {
+        if (itemToPrint.equals(null)) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
             String printedOutput = "Review(s) for " + itemToPrint + ls();
@@ -287,7 +287,7 @@ public class Controller {
         Item number = findItem(itemID);
         int reviewCounter = 0;
 
-        if (number != null){
+        if (!number.equals(null)){
             reviewCounter = number.getReviewList().size();
         }
         return reviewCounter;
@@ -298,7 +298,7 @@ public class Controller {
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<>();
 
-        if (commentedItem != null) {
+        if (!commentedItem.equals(null)) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if (!commentedItem.getReviewList().isEmpty()) {
                     if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
@@ -316,7 +316,7 @@ public class Controller {
 
         ArrayList<String> commentsList = new ArrayList<>();
 
-        if (commentedItem != null) {
+        if (!commentedItem.equals(null)) {
             for (int i = 0; i < commentedItem.getReviewList().size(); i++) {
                 if (!commentedItem.getReviewList().isEmpty()) {
                     if (!commentedItem.getReviewList().get(i).getItemComment().trim().equals(""))
@@ -1019,7 +1019,7 @@ public class Controller {
                 outputMessage = employeeList.get(i).toString();
             }
         }
-        if (findEmployee(employeeID) == null) {
+        if (findEmployee(employeeID).equals(null)) {
             throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         return outputMessage;
@@ -1027,7 +1027,7 @@ public class Controller {
 
     public double getNetSalary(String employeeID) throws Exception {
 
-        if (findEmployee(employeeID) == null) {
+        if (findEmployee(employeeID).equals(null)) {
             throw new Exception("Employee " + employeeID + " was not registered yet.");
         }
         double outputSalary = 0.0;
@@ -1042,7 +1042,7 @@ public class Controller {
     // US 5.4
         public String removeEmployee(String empID) throws Exception {
 
-        if (findEmployee(empID) == null) {
+        if (findEmployee(empID).equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
 
@@ -1110,7 +1110,7 @@ public class Controller {
     public String updateEmployeeName(String empID, String newName) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newName.isBlank()) {
             throw new Exception("Name cannot be blank.");
@@ -1125,7 +1125,7 @@ public class Controller {
     public String updateInternGPA(String empID, int newGPA) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newGPA < 0 || newGPA > 10) {
             throw new Exception(newGPA + " outside range. Must be between 0-10.");
@@ -1139,7 +1139,7 @@ public class Controller {
     public String updateManagerDegree(String empID, String newDegree) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
             throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
@@ -1153,7 +1153,7 @@ public class Controller {
     public String updateDirectorDept(String empID, String newDepartment) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
@@ -1167,7 +1167,7 @@ public class Controller {
     public String updateGrossSalary(String empID, double newSalary) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newSalary < 0 || newSalary == 0.0) {
             throw new Exception("Salary must be greater than zero.");
@@ -1217,7 +1217,7 @@ public class Controller {
 
         Employee foundEmployee = findEmployee(empID);
 
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
@@ -1233,7 +1233,7 @@ public class Controller {
     public String promoteToDirector(String empID, String newDegree, String newDepartment) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         }
         String tempName = foundEmployee.getEmployeeName();
@@ -1249,7 +1249,7 @@ public class Controller {
     public String promoteToIntern(String empID, int gpa) throws Exception {
 
         Employee foundEmployee = findEmployee(empID);
-        if (foundEmployee == null) {
+        if (foundEmployee.equals(null)) {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (gpa < 0 || gpa > 10) {
             throw new Exception(gpa + " outside range. Must be between 0-10.");
