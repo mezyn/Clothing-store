@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 public class Intern extends Employee {
 
-    int GPA;
+    private int GPA;
 
     public Intern(String employeeID, String employeeName, double grossSalary, int GPA) {
         super(employeeID, employeeName, grossSalary);

@@ -6,7 +6,6 @@ public class Director extends Manager {
 
     protected String department;
 
-    //Constructor
     public Director(String employeeID, String employeeName, double grossSalary, String degree, String department) {
         super(employeeID, employeeName, grossSalary, degree);
         this.department = department;

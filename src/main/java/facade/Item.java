@@ -8,7 +8,7 @@ public class Item {
 
 
     //attributes of Item class
-     private String ID; //I'll put this as String for now + only have getter(?)
+     private String ID;
      private String name;
      private double pricePerUnit;
      private ArrayList<Review> reviewList= new ArrayList<Review>();
@@ -27,7 +27,6 @@ public class Item {
         this.reviewList.add(review);
 
     }
-
 
 
     @Override

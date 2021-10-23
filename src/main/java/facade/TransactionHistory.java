@@ -2,14 +2,14 @@ package facade;
 
 import java.text.DecimalFormat;
 
-public class Transaction {
+public class TransactionHistory {
 
     private String ID;
     private int unitsSold;
     private double profit;
 
 
-    public Transaction(String ID, int unitsSold, double profit){
+    public TransactionHistory(String ID, int unitsSold, double profit){
 
         this.ID = ID;
         this.unitsSold = unitsSold;

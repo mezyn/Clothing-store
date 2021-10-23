@@ -36,10 +36,10 @@ public class Employee implements Comparable<Employee> {
         return grossSalary;
     }
 
-    //Is it really necessary??
     protected double getRawSalary(){
         return grossSalary;
     }
+
     protected void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
