@@ -132,9 +132,9 @@ public class Epic3RegularTests {
     public void shouldPrintReviewsFromItem(){
         String itemID1 = "ID1";
         String expectedPrintedReviews = "Review(s) for ID1: Black T-shirt. 150.99 SEK" + TestResources.EOL +
-                        "Grade: 4.Good material for the price." + TestResources.EOL +
-                        "Grade: 5." + TestResources.EOL +
-                        "Grade: 4.Great item but could be better." + TestResources.EOL;
+                "Grade: 4.Good material for the price." + TestResources.EOL +
+                "Grade: 5." + TestResources.EOL +
+                "Grade: 4.Great item but could be better." + TestResources.EOL;
         String actualPrintedReviews = facade.getPrintedReviews(itemID1);
 
         assertEquals(expectedPrintedReviews, actualPrintedReviews);
@@ -191,7 +191,6 @@ public class Epic3RegularTests {
         expectedLeast.add("ID3");
 
         List<String> actualLeastReviewed = facade.getLeastReviewedItems();
-
 
         assertEquals(expectedLeast, actualLeastReviewed);
 

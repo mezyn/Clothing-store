@@ -2,11 +2,11 @@ package facade;
 
 import java.text.DecimalFormat;
 
-public class EmployeeIntern extends Employee {
+public class Intern extends Employee {
 
     int GPA;
 
-    public EmployeeIntern(String employeeID, String employeeName, double grossSalary, int GPA) {
+    public Intern(String employeeID, String employeeName, double grossSalary, int GPA) {
         super(employeeID, employeeName, grossSalary);
         this.GPA = GPA;
     }
@@ -28,9 +28,6 @@ public class EmployeeIntern extends Employee {
         return getGrossSalary();
     }
 
-    public int getGPA(){
-        return this.GPA;
-    }
     public void setGPA(int newGPA) {
         this.GPA = newGPA;
     }

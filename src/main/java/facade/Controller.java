@@ -1,6 +1,5 @@
 package facade;
 
-import javax.swing.text.Utilities;
 import java.text.DecimalFormat;
 import java.util.*;
 
@@ -10,12 +9,17 @@ public class Controller {
 
     // -----------------------------COMMON METHODS----------------------------------
 
+
     //To change the number of decimal digits
     //How to use: 'value' is your original number input with all decimal digits,
     //and 'decimalPoint' is the number of decimal digits you would like to have.
     // e.g. if you write 'changeDecimal(199.999, 1) you'll get 199.9
 
 
+
+    public String ls (){ // System.lineSeparator()
+        return System.lineSeparator();
+    }
 
     public static double changeDecimal(double value, int decimalDigit) {
 
@@ -33,18 +37,7 @@ public class Controller {
         return value;
     }
 
-/*Don't think we need it, but will leave for now
-    public double changeDecimalToOne(double value) { //for One decimal digit
-
-        value = value * Math.pow(10, decimalPoint);
-        value = Math.floor(value);
-        value = value / Math.pow(10, decimalPoint);
-        String sValue = (String) String.format("%.1f", value);
-        Double newValue = Double.parseDouble(sValue);
-        return newValue;
-    }
-        */
-
+    String dl = "------------------------------------";
     //-----------------------------------FOR ITEMS-----------------------------------
 
     ArrayList<Item> itemList = new ArrayList<>();
@@ -65,7 +58,6 @@ public class Controller {
         } else if (unitPrice == 0 || unitPrice < 0) {
             return "Invalid data for item.";
         } else {
-            //unitPrice = changeDecimal(unitPrice, 2);
             Item item = new Item(itemID, itemName, unitPrice);
             itemList.add(item);
             return "Item " + itemID + " was registered successfully.";
@@ -180,38 +172,6 @@ public class Controller {
     }
 
 
-    // ----------------------------------------------------------------------------------------
-
-
-    public String getItemName(String itemID) { // In Use
-        //Before
-        /* String itemName = findItemName(itemID).getItemName();
-        return itemName;*/
-
-        //after
-        return findItemName(itemID).getItemName();
-    }
-
-    //I'll use this to do the mean grade - Mijin
-    public Item findItemName(String itemName) { //IN Use
-
-        for (Item item : itemList) {
-            if (item.getID().equals(itemName)) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    public String getItemPrice(String itemID) { //In use
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getID().equals(itemID)) {
-                return String.valueOf(itemList.get(i).getItemPrice()); //
-            }
-        }
-        return null;
-
-    }
 
 // -------------------------------------- FOR REVIEWS ---------------------------------------------------
 
@@ -220,30 +180,29 @@ public class Controller {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
+
         } else if (!containsItem(ID)) {
-            return "Item ID1 not found.";
-            //"Item " + ID + " was not registered yet.";
+            return "Item " + ID + " was not registered yet.";
 
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
+
         } else {
             Item foundItem = findItem(ID);
-            //item.getReviewList().add(review);
             Review review = new Review(reviewComment, reviewGrade);
             foundItem.registerReview(review);
 
             return "Your item review was registered successfully.";
         }
     }
-// Second reviewItem
+    // Second reviewItem
 
     public String reviewItem(String ID, int reviewGrade) {
 
         if (ID.isEmpty()) {
             return "ID needed to review item: ";
         } else if (!containsItem(ID)) {
-            return "Item ID1 not found.";
-            //"Item " + ID + " was not registered yet.";
+            return "Item " + ID + " was not registered yet.";
 
         } else if (reviewGrade < 1.0 || reviewGrade > 5.0) {
             return "Grade values must be between 1 and 5.";
@@ -254,19 +213,14 @@ public class Controller {
             return "Your item review was registered successfully.";
         }
     }
-    /*item.getReviewList().add(review);
-            Review review = new Review(ID, reviewComment, reviewGrade);
-            reviewList.add(review);
-            return "Your item review was registered successfully."; //Testing issue
-        }*/
 
 
     public String getPrintedItemReview(String itemID, int reviewNumber) { // User story 3.2
 
         Item item = findItem(itemID);
 
-        if (item == null) {
-            return "Item " + itemID + " was not registered yet.";
+        if (itemList.isEmpty()) {
+            return "Item " + itemID + " was not registered yet." ;
 
         } else if (item.getReviewList().size() == 0) {
             return "Item " + item.getItemName() + " has not been reviewed yet.";
@@ -289,20 +243,57 @@ public class Controller {
         if (itemToPrint == null) {
             return "Item " + itemID + " was not registered yet.";
         } else if (itemToPrint.getReviewList().size() > 0) {
-            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + ls();
             for (int i = 0; i < itemToPrint.getReviewList().size(); i++) {
                 printedOutput += itemToPrint.getReviewList().get(i).toString()
-                        + System.lineSeparator();
+                        + ls();
 
             }
             return printedOutput;
         } else {
-            String printedOutput = "Review(s) for " + itemToPrint + System.lineSeparator();
+            String printedOutput = "Review(s) for " + itemToPrint + ls();
             return printedOutput + "The item " + itemToPrint.getItemName() + " has not been reviewed yet.";
         }
     }
 
-    public List<String> getItemComments(String itemID) { //User Story 3.5 | PART 1#
+    public double getItemMeanGrade(String itemID) { //User Story 3.4
+        Item item = findItem(itemID);
+
+        double sumGrade = 0.0;
+        double meanGrade = 0.0;
+
+        if (!containsItem(itemID)) {
+            System.out.println("Item " + itemID + " was not registered yet.");
+
+        } else if (item.getReviewList().isEmpty()) {
+            System.out.println("Item " + item.getItemName() + " has not been reviewed yet.");
+
+            meanGrade = 0.0;
+        /*}
+        else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
+            System.out.println("Item " + itemID + " has not been reviewed yet.");*/
+
+        } else {
+            for (int i = 0; i < item.getReviewList().size(); i++) {
+                sumGrade += item.getReviewList().get(i).getItemGrade();
+            }
+            meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 1);
+        }
+        return meanGrade;
+    }
+
+    public int getNumberOfReviews(String itemID) {
+
+        Item number = findItem(itemID);
+        int reviewCounter = 0;
+
+        if (number != null){
+            reviewCounter = number.getReviewList().size();
+        }
+        return reviewCounter;
+    }
+
+    public List<String> getItemComments(String itemID) { //User Story 3.5
 
         Item commentedItem = findItem(itemID);
         ArrayList<String> commentsList = new ArrayList<>();
@@ -317,8 +308,6 @@ public class Controller {
         }
         return commentsList;
     }
-
-
 
     public String getItemCommentsPrinted(String itemID) { // User Story 3.5
 
@@ -336,14 +325,14 @@ public class Controller {
             }
         }
         for (String comments : commentsList)
-            commentToPrint += comments + System.lineSeparator();
+            commentToPrint += comments + ls();
 
         return commentToPrint;
     }
 
     public String printAllReviews() { // User Story 3.6
 
-        String head = "All registered reviews:" + System.lineSeparator();
+        String head = "All registered reviews:" + ls();
 
         String textItem = "Review(s) for ";
         String reviewText = "";
@@ -357,75 +346,65 @@ public class Controller {
 
             for ( i = 0; i < itemList.size(); i++) {
                 if (!itemList.get(i).getReviewList().isEmpty()) {
-                    reviewText += "------------------------------------" + System.lineSeparator();
-                    reviewText += textItem + itemList.get(i).toString() + System.lineSeparator();
+                    reviewText += dl + ls();
+                    reviewText += textItem + itemList.get(i).toString() + ls();
+
                     for (Review review : itemList.get(i).getReviewList()) {
-                        reviewText += review.toString() + System.lineSeparator();
+                        reviewText += review.toString() + ls();
 
                     }
                 }
             }
-        return head + reviewText + "------------------------------------" + System.lineSeparator();
+        return head + reviewText + dl + ls();
+    }
+
+
+    public String printLeastReviewedItems() { /// User story 3.7
+
+        if (itemList.isEmpty()) {
+            return "No items registered yet.";
         }
-
-
-    public String printLeastReviewedItems() { // User story 3.7
-
-        if (itemList.isEmpty()) return "No items registered yet.";
-
-        /*int lowestReviewNumber = itemList.get(0).getReviewList().size();
-        for (int i = 1; i < itemList.size(); i++) {
-            if (itemList.get(i).getReviewList().size() < lowestReviewNumber) {
-                lowestReviewNumber = itemList.get(i).getReviewList().size();
-
-            }
-        }*/
-       int lowestReviewNumber = 0;
-        for (int i = 0; i < itemList.size(); i++) {
-            if (itemList.get(i).getReviewList().size() > 0) {
-                lowestReviewNumber = itemList.get(i).getReviewList().size();
-                break;
-            }
-        }
-        if (itemList.isEmpty()) return "No items registered yet.";
-
-
-        ArrayList<Item> leastReviewedItems = new ArrayList<>();
-        int reviewCounter = 0;
-        String itemDescription = "";
-
-        if(lowestReviewNumber==0) {
-            return "No items were reviewed yet.";
-        }
-
-        else{
-        for (int i = 0; i < itemList.size(); i++) {
-
-            for (i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
+           int lowestReviewNumber = 0;
+            for (int i = 0; i < itemList.size(); i++) {
+                if (itemList.get(i).getReviewList().size() > 0) {
                     lowestReviewNumber = itemList.get(i).getReviewList().size();
-                    reviewCounter += itemList.get(i).getReviewList().size();
+                    break;
                 }
             }
-            for (i = 0; i < itemList.size(); i++) {
-                if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
-                    leastReviewedItems.add(itemList.get(i));
-                }
-            }
-            for (Item item : leastReviewedItems) {
-                itemDescription += item.toString() + System.lineSeparator();
 
+            ArrayList<Item> leastReviewedItems = new ArrayList<>();
+            int reviewCounter = 0;
+            String itemDescription = "";
+
+            if (lowestReviewNumber==0) {
+                return "No items were reviewed yet.";
+
+            } else {
+            for (int i = 0; i < itemList.size(); i++) {
+
+                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber && itemList.get(i).getReviewList().size() > 0) {
+                        lowestReviewNumber = itemList.get(i).getReviewList().size();
+                        reviewCounter += itemList.get(i).getReviewList().size();
+                    }
+                }
+                for (int i = 0; i < itemList.size(); i++) {
+                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                        leastReviewedItems.add(itemList.get(i));
+                    }
+                }
+                for (Item item : leastReviewedItems) {
+                    itemDescription += item.toString() + ls();
+
+                }
             }
-        }
-        }
-        return "Least reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + itemDescription;
+        return "Least reviews: " + reviewCounter + " review(s) each." + ls() + itemDescription;
     }
 
     public List<String> getLeastReviewedItems() { // User story 3.7
 
-
         int reviewCounter = 0;
         int lowestReviewNumber = 0;
+
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i).getReviewList().size() > 0) {
                 lowestReviewNumber = itemList.get(i).getReviewList().size();
@@ -439,26 +418,26 @@ public class Controller {
 
             if (itemList.size() == 0) {
                 System.out.println("No items registered yet.");
+
             } else if (reviewCounter == 0) {
                 System.out.println("No items were reviewed yet.");
-            } else {
 
+            } else {
                 for (i = 0; i < itemList.size(); i++) {
                     if (containsReview(itemList.get(i).getID())) {
-                    if (itemList.get(i).getReviewList().size() < lowestReviewNumber
-                            && itemList.get(i).getReviewList().size() > 0) {
+                        if (itemList.get(i).getReviewList().size() < lowestReviewNumber
+                                && itemList.get(i).getReviewList().size() > 0) {
 
-                        lowestReviewNumber = itemList.get(i).getReviewList().size();
-                    }
+                            lowestReviewNumber = itemList.get(i).getReviewList().size();
+                        }
                     }
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (containsReview(itemList.get(i).getID())) {
-                    if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
-                        leastReviewedItemsList.add(itemList.get(i).getID());
-                    }
+                        if (itemList.get(i).getReviewList().size() == lowestReviewNumber) {
+                            leastReviewedItemsList.add(itemList.get(i).getID());
 
-
+                        }
                     }
                 }
             }
@@ -474,7 +453,9 @@ public class Controller {
         ArrayList<Item> mostReviewedItems = new ArrayList<>();
 
         String message = "";
-        if (itemList.size() == 0) return "No items registered yet.";
+        if (itemList.size() == 0) {
+            return "No items registered yet.";
+        }
 
         for (int i = 0; i < itemList.size(); i++) {
             reviewCounter += itemList.get(i).getReviewList().size();
@@ -495,14 +476,13 @@ public class Controller {
                 }
                 if (mostReviewedItems.size() != 0) {
                     for (Item item : mostReviewedItems) {
-                        message += item.toString() + System.lineSeparator();
+                        message += item.toString() + ls();
 
                     }
                 }
             }
         }
-
-        return "Most reviews: " + reviewCounter + " review(s) each." + System.lineSeparator() + message;
+        return "Most reviews: " + reviewCounter + " review(s) each." + ls() + message;
     }
 
 
@@ -517,21 +497,23 @@ public class Controller {
 
             if (itemList.size() == 0) {
                 System.out.println("No items registered yet.");
+
             } else if (reviewCounter == 0) {
                 System.out.println("No items were reviewed yet.");
+
             } else {
                 for (i = 0; i < itemList.size(); i++) {
                     if (containsReview(itemList.get(i).getID())) {
-                    if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
-                        highestReviewNumber = itemList.get(i).getReviewList().size();
-                    }
+                        if (itemList.get(i).getReviewList().size() > highestReviewNumber) {
+                            highestReviewNumber = itemList.get(i).getReviewList().size();
+                        }
                     }
                 }
                 for (i = 0; i < itemList.size(); i++) {
                     if (containsReview(itemList.get(i).getID())) {
-                    if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
-                        mostReviewedItemsList.add(itemList.get(i).getID());
-                    }
+                        if (itemList.get(i).getReviewList().size() == highestReviewNumber) {
+                            mostReviewedItemsList.add(itemList.get(i).getID());
+                        }
                     }
                 }
             }
@@ -543,8 +525,8 @@ public class Controller {
 
         for (int i = 0; i < getItemList().size(); i++) {
             if (getItemList().get(i).getID().equals(itemID)) {
-                int nrOfreviews = getItemList().get(i).getReviewList().size();
-                if (nrOfreviews == 0) {
+                int AmountOfReviews = getItemList().get(i).getReviewList().size();
+                if (AmountOfReviews == 0) {
                     return false;
                 } else {
                     return true;
@@ -554,7 +536,7 @@ public class Controller {
         return true;
     }
 
-    public Review findReview(String itemID) {
+    /*public Review findReview(String itemID) { // Not in use
         Item item = findItem(itemID);
 
         for (int i = 0; i < item.getReviewList().size(); i++) {
@@ -563,38 +545,9 @@ public class Controller {
             }
         }
         return null;
-    }
+    }*/
 
-    public double getItemMeanGrade(String itemID) { //User Story 3.4
-        Item item = findItem(itemID);
 
-        double sumGrade = 0.0;
-        double meanGrade = 0.0;
-        if (!containsReview(itemID)) {
-            System.out.println("Item " + itemID + "was not registered yet.");
-        } else if (item.getReviewList().isEmpty()) meanGrade = 0.0;
-        else if (findReview(itemID) != null && findReview(itemID).getItemComment().trim().equals("")) {
-            System.out.println("Item " + itemID + " has not been reviewed yet.");
-        } else {
-            for (int i = 0; i < item.getReviewList().size(); i++) {
-                sumGrade += item.getReviewList().get(i).getItemGrade();
-            }
-            meanGrade = changeDecimal(sumGrade / item.getReviewList().size(), 1);
-        }
-
-        return meanGrade;
-    }
-
-    public int getNumberOfReviews(String itemID) {
-
-        Item number = findItem(itemID);
-        int reviewCounter = 0;
-        if (number != null){
-            reviewCounter = number.getReviewList().size();
-        }
-
-        return reviewCounter;
-    }
 
     public List<String> getBestReviewedItems() { // User Story 3.8 Best
 
@@ -606,16 +559,18 @@ public class Controller {
         }
         for (int i = 0; i < itemList.size(); i++) {
             if (containsReview(itemList.get(i).getID())) {
-                if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview)
+                if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview) {
                     bestGradeReview = getItemMeanGrade(itemList.get(0).getID());
+                }
             }
-        }
-        for (int i = 0; i < itemList.size(); i++) {
+
+        } for (int i = 0; i < itemList.size(); i++) {
             if (containsReview(itemList.get(i).getID())) {
-                if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview)
+                if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview) {
                     bestGradeList.add(itemList.get(i).getID());
+                }
             }
-        }if (bestGradeReview == 0.0) {
+        } if (bestGradeReview == 0.0) {
             System.out.println ("No items were reviewed yet.");
         }
             return bestGradeList;
@@ -625,23 +580,28 @@ public class Controller {
 
     public String printBestReviewedItems() { // User Story 3.8 Best
 
-        String title = "Items with best mean reviews:" + System.lineSeparator();
+        String title = "Items with best mean reviews:" + ls();
         double bestGradeReview = 0.0;
         String toReturn = "";
 
         if (itemList.size()==0) {
             return "No items registered yet.";
         }
+
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview)
+            if (getItemMeanGrade(itemList.get(i).getID()) > bestGradeReview) {
                 bestGradeReview = getItemMeanGrade(itemList.get(0).getID());
+            }
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview)
-                toReturn += itemList.get(i).toString()+System.lineSeparator();
-        }
-        if(bestGradeReview==0.0) return "No items were reviewed yet.";
-        else return title + "Grade: "+bestGradeReview + System.lineSeparator() + toReturn;
+            if (getItemMeanGrade(itemList.get(i).getID()) == bestGradeReview) {
+                toReturn += itemList.get(i).toString() + ls();
+            }
+
+        } if(bestGradeReview==0.0) {
+            return "No items were reviewed yet.";
+
+        } else return title + "Grade: "+bestGradeReview + ls() + toReturn;
     }
 
 
@@ -663,18 +623,19 @@ public class Controller {
         for (int i = 0; i < itemList.size(); i++) {
             if (containsReview(itemList.get(i).getID())) {
                 if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
-                        getItemMeanGrade(itemList.get(i).getID()) > 0)
+                        getItemMeanGrade(itemList.get(i).getID()) > 0) {
 
                     worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
+                }
             }
-        }
-        for (int i = 0; i < itemList.size(); i++) {
+
+        } for (int i = 0; i < itemList.size(); i++) {
             if (containsReview(itemList.get(i).getID())) {
                 if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
                     worstGradeList.add(itemList.get(i).getID());
             }
 
-        }if (worstGradedReview == 0.0) {
+        } if (worstGradedReview == 0.0) {
             System.out.println ("No items were reviewed yet.");
         }
         return worstGradeList;
@@ -682,7 +643,7 @@ public class Controller {
 
 
     public String printWorseReviewedItems() {  // User Story 3.8 Worst // Printer for worst
-        String title = "Items with worst mean reviews:" + System.lineSeparator();
+        String title = "Items with worst mean reviews:" + ls();
         String toReturn = "";
         double worstGradedReview = 0.0;
 
@@ -695,19 +656,19 @@ public class Controller {
             return "No items registered yet.";
         }
         for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview &&
-                    getItemMeanGrade(itemList.get(i).getID()) > 0)
+            if (getItemMeanGrade(itemList.get(i).getID()) < worstGradedReview && getItemMeanGrade(itemList.get(i).getID()) > 0)
 
                 worstGradedReview = getItemMeanGrade(itemList.get(0).getID());
-        }
-        for (int i = 0; i < itemList.size(); i++) {
-            if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
-                toReturn += itemList.get(i).toString()+System.lineSeparator();
 
-        }if (worstGradedReview == 0.0) {
+        } for (int i = 0; i < itemList.size(); i++) {
+            if (getItemMeanGrade(itemList.get(i).getID()) == worstGradedReview)
+                toReturn += itemList.get(i).toString()+ls();
+
+        } if (worstGradedReview == 0.0) {
             return "No items were reviewed yet.";
-        }else{
-            return title + "Grade: "+ worstGradedReview + System.lineSeparator() + toReturn;
+        } else {
+
+            return title + "Grade: "+ worstGradedReview + ls() + toReturn;
         }
     }
 
@@ -758,13 +719,15 @@ public class Controller {
         for (int i = 0; i < transactionHistoryList.size(); i++) {
             if (transactionHistoryList.get(i).getID().equals(itemID)) {
                 sumUnitsSold = sumUnitsSold + transactionHistoryList.get(i).getUnitsSold();
-            } else {
-                System.out.println("No transactions have been registered for item " + itemID + " yet.");
             }
-
+        }
+        if (sumUnitsSold == 0) {
+            System.out.println("No transactions have been registered for item " + itemID + " yet.");
         }
         return sumUnitsSold;
     }
+
+
 
 
     //to contain transaction for specific item ... (4.3)
@@ -785,10 +748,10 @@ public class Controller {
         if (!containsItem(itemID)) {
             return "Item " + itemID + " was not registered yet.";
         } else if (!containsTransaction(itemID)) {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             return message + "No transactions have been registered for item " + itemID + " yet.";
         } else {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             for (int i = 0; i < transactionHistoryList.size(); i++) {
                 if (transactionHistoryList.get(i).getID().equals(itemID))
                 message += transactionHistoryList.get(i).toString() + "\n";
@@ -845,25 +808,24 @@ public class Controller {
     public String printAllTransactions() {
 
         if (transactionHistoryList.size() == 0) {
-            return ("All purchases made:\n" +
-                    "Total profit: 0.00 SEK\n" +
-                    "Total items sold: 0 units\n" +
-                    "Total purchases made: 0 transactions\n" +
-                    "------------------------------------\n" +
-                    "------------------------------------\n");
+            return "All purchases made: " + ls() +
+                    "Total profit: 0.00 SEK" + ls() +
+                    "Total items sold: 0 units" + ls() +
+                    "Total purchases made: 0 transactions" + ls() +
+                    dl + ls() + dl + ls();
         } else {
 
-            String allTransactions = ("All purchases made: \n" +
-                    "Total profit: " + getTotalProfit() + " SEK\n" +
-                    "Total items sold: " + getTotalUnitsSold() + " units\n" +
-                    "Total purchases made: " + getTotalTransactions() + " transactions\n" +
-                    "------------------------------------\n");
+            String allTransactions = "All purchases made: " + ls() +
+                    "Total profit: " + getTotalProfit() + " SEK" + ls() +
+                    "Total items sold: " + getTotalUnitsSold() + " units" + ls() +
+                    "Total purchases made: " + getTotalTransactions() + " transactions" + ls() +
+                    dl + ls();
 
             for (Transaction transaction : transactionHistoryList) {
-                allTransactions += transaction + "\n";
+                allTransactions += transaction + ls();
             }
 
-            return (allTransactions + "------------------------------------\n");
+            return allTransactions + dl + ls();
         }
 
     }
@@ -904,7 +866,7 @@ public class Controller {
 
 
     else {
-            String message = "Transactions for item: " + findItem(itemID) + System.lineSeparator();
+            String message = "Transactions for item: " + findItem(itemID) + ls();
             for (int i = 0; i < transactionHistoryList.size(); i++) {
                 if (transactionHistoryList.get(i).getID().equals(itemID))
                 message += transactionHistoryList.get(i).toString() + "\n";
@@ -930,13 +892,13 @@ public class Controller {
             for (int i = 0; i < itemList.size(); i++) {
                 if (containsTransaction(itemList.get(i).getID())) {
                     if (getProfit(itemList.get(i).getID()) == highestProfit)
-                        message = itemList.get(i) + System.lineSeparator();
+                        message = itemList.get(i) + ls();
                 }
             }
             DecimalFormat decimal2 = new DecimalFormat("###.00"); // And this to make the return result to end with .00
 
             return "Most profitable items: \n" +
-                    "Total profit: " + decimal2.format(highestProfit) + " SEK" + System.lineSeparator() + message;
+                    "Total profit: " + decimal2.format(highestProfit) + " SEK" + ls() + message;
             }
         }
 
@@ -947,6 +909,7 @@ public class Controller {
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
+
     // Create Regular employee
     public String createEmployee(String employeeID, String employeeName, double grossSalary) throws Exception {
 
@@ -979,7 +942,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newManager = new EmployeeManager(employeeID, employeeName, grossSalary, degree);
+        Employee newManager = new Manager(employeeID, employeeName, grossSalary, degree);
         employeeList.add(newManager);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -1002,7 +965,7 @@ public class Controller {
 
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newDirector = new EmployeeDirector(employeeID, employeeName, grossSalary, degree, department);
+        Employee newDirector = new Director(employeeID, employeeName, grossSalary, degree, department);
         employeeList.add(newDirector);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -1022,7 +985,7 @@ public class Controller {
         }
 
         grossSalary = changeDecimal(grossSalary,2);
-        Employee newIntern = new EmployeeIntern(employeeID, employeeName, grossSalary, GPA);
+        Employee newIntern = new Intern(employeeID, employeeName, grossSalary, GPA);
         employeeList.add(newIntern);
 
         return "Employee " + employeeID + " was registered successfully.";
@@ -1095,13 +1058,13 @@ public class Controller {
     //US 5.6
     public String printAllEmployees() throws Exception {
 
-        String output = "All registered employees:" + System.lineSeparator();
+        String output = "All registered employees:" + ls();
 
         for (int i = 0; i < employeeList.size(); i++) {
-            output += employeeList.get(i).toString() + System.lineSeparator();
+            output += employeeList.get(i).toString() + ls();
         }
 
-        if(output.equals("All registered employees:" + System.lineSeparator())){
+        if(output.equals("All registered employees:" + ls())){
             throw new Exception("No employees registered yet.");
         }
         return output;
@@ -1133,12 +1096,12 @@ public class Controller {
             }
         });
 
-        String outputString = "Employees sorted by gross salary (ascending order):" + System.lineSeparator();
+        String outputString = "Employees sorted by gross salary (ascending order):" + ls();
         for (int i = 0; i < employeeList.size(); i++) {
-            outputString += employeeList.get(i).toString() + System.lineSeparator();
+            outputString += employeeList.get(i).toString() + ls();
         }
 
-        if(outputString.equals("Employees sorted by gross salary (ascending order):" + System.lineSeparator())){
+        if(outputString.equals("Employees sorted by gross salary (ascending order):" + ls())){
             throw new Exception("No employees registered yet.");
         }
         return outputString;
@@ -1166,8 +1129,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (newGPA < 0 || newGPA > 10) {
             throw new Exception(newGPA + " outside range. Must be between 0-10.");
-        } else if (foundEmployee instanceof EmployeeIntern) {
-            EmployeeIntern foundIntern = (EmployeeIntern) foundEmployee;
+        } else if (foundEmployee instanceof Intern) {
+            Intern foundIntern = (Intern) foundEmployee;
             foundIntern.setGPA(newGPA);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1180,8 +1143,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDegree.equals("BSc") && !newDegree.equals("MSc") && !newDegree.equals("PhD")) {
             throw new Exception("Degree must be one of the options: BSc, MSc or PhD.");
-        } else if (foundEmployee instanceof EmployeeManager) {
-            EmployeeManager foundManager = (EmployeeManager) foundEmployee;
+        } else if (foundEmployee instanceof Manager) {
+            Manager foundManager = (Manager) foundEmployee;
             foundManager.setDegree(newDegree);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1194,8 +1157,8 @@ public class Controller {
             throw new Exception("Employee " + empID + " was not registered yet.");
         } else if (!newDepartment.equals("Business") && !newDepartment.equals("Human Resources") && !newDepartment.equals("Technical")) {
             throw new Exception("Department must be one of the options: Business, Human Resources or Technical.");
-        } else if (foundEmployee instanceof EmployeeDirector) {
-            EmployeeDirector foundDirector = (EmployeeDirector) foundEmployee;
+        } else if (foundEmployee instanceof Director) {
+            Director foundDirector = (Director) foundEmployee;
             foundDirector.setDepartment(newDepartment);
         }
         return "Employee " + empID + " was updated successfully";
@@ -1223,8 +1186,8 @@ public class Controller {
             throw new Exception("No employees registered yet.");
         }
         for (int i = 0; i < getEmployeeList().size(); i++) {
-            if (getEmployeeList().get(i) instanceof EmployeeManager || getEmployeeList().get(i) instanceof EmployeeDirector) {
-                degree = ((EmployeeManager) getEmployeeList().get(i)).getDegree();
+            if (getEmployeeList().get(i) instanceof Manager || getEmployeeList().get(i) instanceof Director) {
+                degree = ((Manager) getEmployeeList().get(i)).getDegree();
                 if (degree.equals("BSc")) {
                     if (degreeMap.containsKey("BSc")) {
                         degreeMap.put("BSc", degreeMap.get("BSc") + 1);
