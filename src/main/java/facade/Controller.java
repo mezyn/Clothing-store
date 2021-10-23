@@ -708,7 +708,7 @@ public class Controller {
                 sumProfit = sumProfit + transactionHistoryList.get(i).getProfit();
             }
         }
-        if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");
+        if(sumProfit==0.0) System.out.println("No transactions have been registered for item " + itemID + " yet.");//I don't think this statement is needed according to the user story instruction?
         sumProfit = changeDecimal(sumProfit, 2);
         return sumProfit;
     }
@@ -722,7 +722,7 @@ public class Controller {
             }
         }
         if (sumUnitsSold == 0) {
-            System.out.println("No transactions have been registered for item " + itemID + " yet.");
+            System.out.println("No transactions have been registered for item " + itemID + " yet."); //this too
         }
         return sumUnitsSold;
     }
